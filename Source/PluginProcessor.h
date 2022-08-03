@@ -9,6 +9,8 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "SinTSound.h"
+#include "SinTVoice.h"
 
 //==============================================================================
 /**
@@ -57,6 +59,8 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
 private:
+    juce::Synthesiser sinT;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SinTAudioProcessor)
 };
