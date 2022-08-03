@@ -32,7 +32,7 @@ private:
     {
         [](float x)
         {
-            return std::sin(x);
+            return std::sin(x); // Sine
             // return x / juce::MathConstants<float>::pi; // Saw
             // return x < 0.0f ? -1.0f : 1.0f; // Square
         }       
