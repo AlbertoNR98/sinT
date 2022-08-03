@@ -25,6 +25,9 @@ public:
     void renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples) override;
 
 private:
+    juce::ADSR adsr;
+    juce::ADSR::Parameters adsrParams;
+
     juce::dsp::Oscillator<float> osc1
     {
         [](float x)
@@ -35,5 +38,5 @@ private:
         }       
     };
     juce::dsp::Gain<float> gainOsc1;
-    bool isPrepared{ false };
+    bool isPrepared { false };  // Flag para controlar el renderizado
 };

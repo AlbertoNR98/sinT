@@ -17,11 +17,12 @@ bool SinTVoice::canPlaySound(juce::SynthesiserSound* sound)
 void SinTVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* sound, int currentPitchWheelPosition)
 {
     osc1.setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber));
+    adsr.noteOn();
 }
 
 void SinTVoice::stopNote(float velocity, bool allowTailOff)
 {
-
+    adsr.noteOff();
 }
 
 void SinTVoice::controllerMoved(int controllerNumber, int newControllerValue)
@@ -44,6 +45,15 @@ void SinTVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int output
     osc1.prepare(spec);
     gainOsc1.prepare(spec);
 
+    adsr.setSampleRate(sampleRate);
+
+    // Valores de prueba -> Sustituir por APVTS
+    adsrParams.attack = 0.8f;
+    adsrParams.decay = 0.8f;
+    adsrParams.sustain = 1.0f;
+    adsrParams.release = 1.5f;
+    adsr.setParameters(adsrParams);
+
     gainOsc1.setGainLinear(0.4f);
 
     isPrepared = true;
@@ -57,4 +67,6 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
 
     osc1.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
     gainOsc1.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+    
+    adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
 }
