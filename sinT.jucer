@@ -14,6 +14,9 @@
       <FILE id="qSEDtP" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="sHdl7c" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="KUXjOd" name="SinTSound.h" compile="0" resource="0" file="Source/SinTSound.h"/>
+      <FILE id="xuQkUi" name="SinTVoice.cpp" compile="1" resource="0" file="Source/SinTVoice.cpp"/>
+      <FILE id="IsDquP" name="SinTVoice.h" compile="0" resource="0" file="Source/SinTVoice.h"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
