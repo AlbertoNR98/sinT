@@ -96,6 +96,14 @@ void SinTAudioProcessor::changeProgramName (int index, const juce::String& newNa
 void SinTAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     sinT.setCurrentPlaybackSampleRate(sampleRate);
+
+    for (int i = 0; i < sinT.getNumVoices(); i++)
+    {
+        if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(i)))
+        {
+            voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
+        }
+    }
 }
 
 void SinTAudioProcessor::releaseResources()

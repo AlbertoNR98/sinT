@@ -34,7 +34,15 @@ void SinTVoice::pitchWheelMoved(int newPitchWheelValue)
 
 }
 
+void SinTVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels)
+{
+    juce::dsp::ProcessSpec spec;
+    spec.sampleRate = sampleRate;
+    spec.maximumBlockSize = samplesPerBlock;
+    spec.numChannels = outputChannels;
+}
+
 void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 {
-
+    juce::dsp::AudioBlock<float> audioBlock{ outputBuffer };
 }
