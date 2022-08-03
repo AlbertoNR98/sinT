@@ -166,7 +166,8 @@ bool SinTAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* SinTAudioProcessor::createEditor()
 {
-    return new SinTAudioProcessorEditor (*this);
+    // return new juce::GenericAudioProcessorEditor(*this); // Editor de test
+    return new SinTAudioProcessorEditor (*this); // Editor original
 }
 
 //==============================================================================
