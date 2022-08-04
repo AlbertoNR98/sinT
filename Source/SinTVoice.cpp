@@ -23,6 +23,8 @@ void SinTVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserS
 void SinTVoice::stopNote(float velocity, bool allowTailOff)
 {
     adsr.noteOff();
+    if (!allowTailOff || !adsr.isActive())
+        clearCurrentNote();
 }
 
 void SinTVoice::controllerMoved(int controllerNumber, int newControllerValue)
@@ -63,10 +65,16 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
 {
     jassert(isPrepared);
 
-    juce::dsp::AudioBlock<float> audioBlock{ outputBuffer };
+    if (!isVoiceActive()) return; 
+
+    auto audioBlock = juce::dsp::AudioBlock<float>(outputBuffer).getSubBlock(startSample, numSamples);
 
     osc1.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
     gainOsc1.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
-    
+
     adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
+    
+    for(int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
+        if (!adsr.isActive())
+            clearCurrentNote();
 }

@@ -192,7 +192,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     // Selector forma de onda oscilador 1
     layout.add(std::make_unique<juce::AudioParameterChoice>("OSC1", "Oscillator1", juce::StringArray{ "Sine", "Saw", "Square" }, 0));
 
-    //ADSR
+    // ADSR
     layout.add(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float> {0.1f, 1.0f, }, 0.1f));
     layout.add(std::make_unique<juce::AudioParameterFloat>("DECAY", "Decay", juce::NormalisableRange<float> {0.1f, 1.0f, }, 0.1f));
     layout.add(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", juce::NormalisableRange<float> {0.1f, 1.0f, }, 0.1f));
