@@ -151,7 +151,13 @@ void SinTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
     {
         if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(i)))
         {
-            // Procesa la voz si es del tipo SinTVoice -> TO - DO
+            // ADSR
+            auto& attack = *apvts.getRawParameterValue("ATTACK");
+            auto& decay = *apvts.getRawParameterValue("DECAY");
+            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
+            auto& release = *apvts.getRawParameterValue("RELEASE");
+
+            voice->updateADSR(attack.load(), decay.load(), sustain.load(), release.load());
         }
     }
 

@@ -48,14 +48,6 @@ void SinTVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int output
     gainOsc1.prepare(spec);
 
     adsr.setSampleRate(sampleRate);
-
-    // Valores de prueba -> Sustituir por APVTS
-    adsrParams.attack = 0.8f;
-    adsrParams.decay = 0.8f;
-    adsrParams.sustain = 1.0f;
-    adsrParams.release = 1.5f;
-    adsr.setParameters(adsrParams);
-
     gainOsc1.setGainLinear(0.4f);
 
     isPrepared = true;
@@ -77,4 +69,14 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
     for(int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
         if (!adsr.isActive())
             clearCurrentNote();
+}
+
+void SinTVoice::updateADSR(const float attack, const float decay, const float sustain, const float release)
+{
+    adsrParams.attack = attack;
+    adsrParams.decay = decay;
+    adsrParams.sustain = sustain;
+    adsrParams.release = release;
+
+    adsr.setParameters(adsrParams);
 }
