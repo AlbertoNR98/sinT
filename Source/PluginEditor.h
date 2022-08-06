@@ -25,6 +25,8 @@ public:
     void resized() override;
 
 private:
+    void setSliderVisualParams(juce::Slider& slider);
+
     juce::ComboBox osc1Selector;
 
     juce::Slider attackSlider;
