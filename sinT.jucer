@@ -29,6 +29,10 @@
         <FILE id="NKTL7Z" name="ADSRComponent.cpp" compile="1" resource="0"
               file="Source/GUI/ADSRComponent.cpp"/>
         <FILE id="tatXnk" name="ADSRComponent.h" compile="0" resource="0" file="Source/GUI/ADSRComponent.h"/>
+        <FILE id="NHWwiw" name="OscillatorComponent.cpp" compile="1" resource="0"
+              file="Source/GUI/OscillatorComponent.cpp"/>
+        <FILE id="KbJBe1" name="OscillatorComponent.h" compile="0" resource="0"
+              file="Source/GUI/OscillatorComponent.h"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>
