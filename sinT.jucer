@@ -20,6 +20,10 @@
       <GROUP id="{F00686E0-508E-43CB-AE07-B2AA896F079F}" name="Data">
         <FILE id="Vc2F7G" name="ADSRData.cpp" compile="1" resource="0" file="Source/Data/ADSRData.cpp"/>
         <FILE id="iXQzcX" name="ADSRData.h" compile="0" resource="0" file="Source/Data/ADSRData.h"/>
+        <FILE id="fiBSNQ" name="OscillatorData.cpp" compile="1" resource="0"
+              file="Source/Data/OscillatorData.cpp"/>
+        <FILE id="evzS20" name="OscillatorData.h" compile="0" resource="0"
+              file="Source/Data/OscillatorData.h"/>
       </GROUP>
       <GROUP id="{6B4C42CC-A6E5-0991-D2E8-C1E26CB890A8}" name="GUI">
         <FILE id="NKTL7Z" name="ADSRComponent.cpp" compile="1" resource="0"
