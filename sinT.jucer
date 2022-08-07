@@ -17,6 +17,15 @@
       <FILE id="KUXjOd" name="SinTSound.h" compile="0" resource="0" file="Source/SinTSound.h"/>
       <FILE id="xuQkUi" name="SinTVoice.cpp" compile="1" resource="0" file="Source/SinTVoice.cpp"/>
       <FILE id="IsDquP" name="SinTVoice.h" compile="0" resource="0" file="Source/SinTVoice.h"/>
+      <GROUP id="{F00686E0-508E-43CB-AE07-B2AA896F079F}" name="Data">
+        <FILE id="Vc2F7G" name="ADSRData.cpp" compile="1" resource="0" file="Source/Data/ADSRData.cpp"/>
+        <FILE id="iXQzcX" name="ADSRData.h" compile="0" resource="0" file="Source/Data/ADSRData.h"/>
+      </GROUP>
+      <GROUP id="{6B4C42CC-A6E5-0991-D2E8-C1E26CB890A8}" name="GUI">
+        <FILE id="NKTL7Z" name="ADSRComponent.cpp" compile="1" resource="0"
+              file="Source/GUI/ADSRComponent.cpp"/>
+        <FILE id="tatXnk" name="ADSRComponent.h" compile="0" resource="0" file="Source/GUI/ADSRComponent.h"/>
+      </GROUP>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
