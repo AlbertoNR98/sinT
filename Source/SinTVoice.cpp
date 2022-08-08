@@ -45,10 +45,8 @@ void SinTVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int output
     spec.numChannels = outputChannels;
 
     osc1.prepareToPlay(spec);
-    gainOsc1.prepare(spec);
 
     adsr.setSampleRate(sampleRate);
-    gainOsc1.setGainLinear(0.4f);
 
     isPrepared = true;
 }
@@ -62,7 +60,6 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
     auto audioBlock = juce::dsp::AudioBlock<float>(outputBuffer).getSubBlock(startSample, numSamples);
 
     osc1.getNextAudioBlock(audioBlock);
-    gainOsc1.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
 
     adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
     

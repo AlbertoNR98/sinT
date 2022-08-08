@@ -33,7 +33,6 @@ private:
     ADSRData adsr;
 
     OscillatorData osc1;
-    juce::dsp::Gain<float> gainOsc1;
 
     bool isPrepared { false };  // Flag para controlar el renderizado
 };

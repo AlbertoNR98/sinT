@@ -159,10 +159,12 @@ void SinTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
 
             // OSC1
             auto& osc1WaveSelect = *apvts.getRawParameterValue("OSC1WF");
+            auto& osc1Gain = *apvts.getRawParameterValue("OSC1GAIN");
 
             // Procesamiento
             voice->update(attack.load(), decay.load(), sustain.load(), release.load());
             voice->getOscillator1().setWaveform(osc1WaveSelect);
+            voice->getOscillator1().setGain(osc1Gain);
         }
     }
 
@@ -202,6 +204,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
 
     // Oscilador 1
     layout.add(std::make_unique<juce::AudioParameterChoice>("OSC1WF", "Oscillator1Waveform", juce::StringArray { "Sine", "Saw", "Square" }, 0));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("OSC1GAIN", "Oscillator1Gain", juce::NormalisableRange<float> {-40.0f, 0.2f, 0.1f}, 0.1f, "dB"));
 
     // ADSR
     layout.add(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float> {0.1f, 1.0f, }, 0.5f));

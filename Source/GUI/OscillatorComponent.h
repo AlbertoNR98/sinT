@@ -19,16 +19,20 @@
 class OscillatorComponent  : public juce::Component
 {
 public:
-    OscillatorComponent(juce::AudioProcessorValueTreeState& apvts, juce::String waveformSelectorId);
+    OscillatorComponent(juce::AudioProcessorValueTreeState& apvts, juce::String waveformSelectorId, juce::String oscGainId);
     ~OscillatorComponent() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
-    juce::ComboBox osc1WaveSelector;
+    juce::ComboBox oscWaveSelector;
 
-    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> osc1WaveSelectorAttachment;
+    juce::Slider oscGainSlider;
+
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscWaveSelectorAttachment;
+
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> oscGainAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OscillatorComponent)
 };

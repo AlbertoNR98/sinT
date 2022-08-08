@@ -21,9 +21,11 @@ class OscillatorData : public juce::dsp::Oscillator<float>
 public:
     void prepareToPlay(juce::dsp::ProcessSpec& spec);
     void setWaveform(const int selectWaveform);
+    void setGain(const float oscGainDecibels);
     void setWaveFreq(const int midiNoteNumber);
     void getNextAudioBlock(juce::dsp::AudioBlock<float>& audioBlock);
 
 private:
+    juce::dsp::Gain<float> oscGain;
 
 };
