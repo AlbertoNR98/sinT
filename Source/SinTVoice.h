@@ -28,11 +28,13 @@ public:
 
     void update(const float attack, const float decay, const float sustain, const float release);
     OscillatorData& getOscillator1() { return osc1; };
+    OscillatorData& getOscillator2() { return osc2; };
 
 private:
     ADSRData adsr;
 
     OscillatorData osc1;
+    OscillatorData osc2;
 
     bool isPrepared { false };  // Flag para controlar el renderizado
 };

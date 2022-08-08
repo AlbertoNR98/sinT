@@ -17,6 +17,7 @@ bool SinTVoice::canPlaySound(juce::SynthesiserSound* sound)
 void SinTVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* sound, int currentPitchWheelPosition)
 {
     osc1.setWaveFreq(midiNoteNumber);
+    osc2.setWaveFreq(midiNoteNumber);
     adsr.noteOn();
 }
 
@@ -45,6 +46,7 @@ void SinTVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int output
     spec.numChannels = outputChannels;
 
     osc1.prepareToPlay(spec);
+    osc2.prepareToPlay(spec);
 
     adsr.setSampleRate(sampleRate);
 
@@ -60,6 +62,7 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
     auto audioBlock = juce::dsp::AudioBlock<float>(outputBuffer).getSubBlock(startSample, numSamples);
 
     osc1.getNextAudioBlock(audioBlock);
+    osc2.getNextAudioBlock(audioBlock);
 
     adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
     
