@@ -12,7 +12,7 @@
 
 #include <JuceHeader.h>
 #include "SinTSound.h"
-#include "Data/ADSRDAta.h"
+#include "Data/ADSRData.h"
 #include "Data/OscillatorData.h"
 
 class SinTVoice : public juce::SynthesiserVoice
