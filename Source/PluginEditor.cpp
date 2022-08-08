@@ -11,7 +11,11 @@
 
 //==============================================================================
 SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p), osc1Component(audioProcessor.apvts, "OSC1WF", "OSC1GAIN"), osc2Component(audioProcessor.apvts, "OSC2WF", "OSC2GAIN"), adsrComponent(audioProcessor.apvts)
+    : AudioProcessorEditor (&p), 
+      audioProcessor (p), 
+      osc1Component(audioProcessor.apvts, "OSC1WF", "OSC1GAIN"), 
+      osc2Component(audioProcessor.apvts, "OSC2WF", "OSC2GAIN"), 
+      adsrComponent(audioProcessor.apvts)
 {
     setSize (600, 400); // Cambiar
     
