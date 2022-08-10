@@ -168,15 +168,17 @@ void SinTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
             auto& osc2Pitch = *apvts.getRawParameterValue("OSC2PITCH");
 
             // Procesamiento
-            voice->getOscillator1().setWaveform(osc1WaveSelect);
-            voice->getOscillator1().setGain(osc1Gain);
-            voice->getOscillator1().setPitch(osc1Pitch);
+            auto& osc1 = voice->getOscillator1();
+            osc1.setWaveform(osc1WaveSelect);
+            osc1.setGain(osc1Gain);
+            osc1.setPitch(osc1Pitch);
 
-            voice->getOscillator2().setWaveform(osc2WaveSelect);
-            voice->getOscillator2().setGain(osc2Gain);
-            voice->getOscillator2().setPitch(osc2Pitch);
+            auto& osc2 = voice->getOscillator2();
+            osc2.setWaveform(osc2WaveSelect);
+            osc2.setGain(osc2Gain);
+            osc2.setPitch(osc2Pitch);
 
-            voice->update(attack.load(), decay.load(), sustain.load(), release.load());
+            voice->updateADSR(attack.load(), decay.load(), sustain.load(), release.load());
 
         }
     }

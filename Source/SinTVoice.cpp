@@ -71,7 +71,7 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
             clearCurrentNote();
 }
 
-void SinTVoice::update(const float attack, const float decay, const float sustain, const float release)
+void SinTVoice::updateADSR(const float attack, const float decay, const float sustain, const float release)
 {
-    adsr.updateADSR(attack, decay, sustain, release);
+    adsr.update(attack, decay, sustain, release);
 }

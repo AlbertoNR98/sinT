@@ -9,7 +9,7 @@
 
 #include "ADSRData.h"
 
-void ADSRData::updateADSR(const float attack, const float decay, const float sustain, const float release)
+void ADSRData::update(const float attack, const float decay, const float sustain, const float release)
 {
     adsrParams.attack = attack;
     adsrParams.decay = decay;
