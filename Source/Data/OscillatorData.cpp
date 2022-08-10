@@ -39,9 +39,16 @@ void OscillatorData::setGain(const float oscGainDecibels)
     oscGain.setGainDecibels(oscGainDecibels);
 }
 
+void OscillatorData::setPitch(const int newOscPitch)
+{
+    oscPitch = newOscPitch;
+    setFrequency(juce::MidiMessage::getMidiNoteInHertz(lastMidiNote + oscPitch));
+}
+
 void OscillatorData::setWaveFreq(const int midiNoteNumber)
 {
-    setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber));
+    setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber + oscPitch));
+    lastMidiNote = midiNoteNumber;
 }
 
 void OscillatorData::getNextAudioBlock(juce::dsp::AudioBlock<float>& audioBlock)

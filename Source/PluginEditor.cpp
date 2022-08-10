@@ -13,8 +13,8 @@
 SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
     : AudioProcessorEditor (&p), 
       audioProcessor (p), 
-      osc1Component(audioProcessor.apvts, "OSC1WF", "OSC1GAIN"), 
-      osc2Component(audioProcessor.apvts, "OSC2WF", "OSC2GAIN"), 
+      osc1Component(audioProcessor.apvts, "OSC1WF", "OSC1GAIN", "OSC1PITCH"),
+      osc2Component(audioProcessor.apvts, "OSC2WF", "OSC2GAIN", "OSC2PITCH"),
       adsrComponent(audioProcessor.apvts)
 {
     setSize (600, 400); // Cambiar

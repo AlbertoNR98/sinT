@@ -22,10 +22,13 @@ public:
     void prepareToPlay(juce::dsp::ProcessSpec& spec);
     void setWaveform(const int selectWaveform);
     void setGain(const float oscGainDecibels);
+    void setPitch(const int newOscPitch);
     void setWaveFreq(const int midiNoteNumber);
     void getNextAudioBlock(juce::dsp::AudioBlock<float>& audioBlock);
 
 private:
     juce::dsp::Gain<float> oscGain;
+    int oscPitch{ 0 };
+    int lastMidiNote{ 0 };
 
 };

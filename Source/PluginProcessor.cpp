@@ -160,18 +160,24 @@ void SinTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
             // OSC1
             auto& osc1WaveSelect = *apvts.getRawParameterValue("OSC1WF");
             auto& osc1Gain = *apvts.getRawParameterValue("OSC1GAIN");
+            auto& osc1Pitch = *apvts.getRawParameterValue("OSC1PITCH");
 
             // OSC2
             auto& osc2WaveSelect = *apvts.getRawParameterValue("OSC2WF");
             auto& osc2Gain = *apvts.getRawParameterValue("OSC2GAIN");
+            auto& osc2Pitch = *apvts.getRawParameterValue("OSC2PITCH");
 
             // Procesamiento
-            voice->update(attack.load(), decay.load(), sustain.load(), release.load());
             voice->getOscillator1().setWaveform(osc1WaveSelect);
             voice->getOscillator1().setGain(osc1Gain);
+            voice->getOscillator1().setPitch(osc1Pitch);
 
             voice->getOscillator2().setWaveform(osc2WaveSelect);
             voice->getOscillator2().setGain(osc2Gain);
+            voice->getOscillator2().setPitch(osc2Pitch);
+
+            voice->update(attack.load(), decay.load(), sustain.load(), release.load());
+
         }
     }
 
@@ -212,16 +218,18 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     // Oscilador 1
     layout.add(std::make_unique<juce::AudioParameterChoice>("OSC1WF", "Oscillator1Waveform", juce::StringArray { "Sine", "Saw", "Square" }, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>("OSC1GAIN", "Oscillator1Gain", juce::NormalisableRange<float> {-48.0f, 6.0f, 0.1f}, 0.0f, "dB"));
+    layout.add(std::make_unique<juce::AudioParameterInt>("OSC1PITCH", "Oscillator1Pitch", -48, 48, 0));
 
     // Oscilador 2
     layout.add(std::make_unique<juce::AudioParameterChoice>("OSC2WF", "Oscillator2Waveform", juce::StringArray{ "Sine", "Saw", "Square" }, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>("OSC2GAIN", "Oscillator2Gain", juce::NormalisableRange<float> {-48.0f, 6.0f, 0.1f}, 0.0f, "dB"));
+    layout.add(std::make_unique<juce::AudioParameterInt>("OSC2PITCH", "Oscillator2Pitch", -48, 48, 0));
 
     // ADSR
-    layout.add(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float> {0.1f, 1.0f, }, 0.5f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("DECAY", "Decay", juce::NormalisableRange<float> {0.1f, 1.0f, }, 0.5f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", juce::NormalisableRange<float> {0.1f, 1.0f, }, 0.5f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float> {0.1f, 3.0f, }, 1.5f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float> {0.1f, 1.0f, }, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("DECAY", "Decay", juce::NormalisableRange<float> {0.1f, 1.0f, }, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", juce::NormalisableRange<float> {0.1f, 1.0f, }, 1.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float> {0.1f, 3.0f, }, 0.5f));
 
     return layout;
 }
