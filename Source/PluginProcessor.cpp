@@ -231,14 +231,14 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>("OSC1GAINDB", "Oscillator1Gain", juce::NormalisableRange<float> {-48.0f, 6.0f, 0.1f}, 0.0f, "dB"));
     layout.add(std::make_unique<juce::AudioParameterInt>("OSC1PITCH", "Oscillator1Pitch", -48, 48, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>("OSC1FMFREQ", "Oscillator1FMFreq", juce::NormalisableRange<float> {0.0f, 20000.0f, 1.0f, 0.3f}, 0.0f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("OSC1FMDEPTH", "Oscillator1FMDepth", juce::NormalisableRange<float> {0.0f, 20000.0f, 1.0f, 0.3f}, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("OSC1FMDEPTH", "Oscillator1FMDepth", juce::NormalisableRange<float> {0.0f, 100.0f, 0.1f}, 0.0f));
 
     // Oscilador 2
     layout.add(std::make_unique<juce::AudioParameterChoice>("OSC2WF", "Oscillator2Waveform", juce::StringArray{ "Sine", "Saw", "Square" }, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>("OSC2GAINDB", "Oscillator2Gain", juce::NormalisableRange<float> {-48.0f, 6.0f, 0.1f}, 0.0f, "dB"));
     layout.add(std::make_unique<juce::AudioParameterInt>("OSC2PITCH", "Oscillator2Pitch", -48, 48, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>("OSC2FMFREQ", "Oscillator2FMFreq", juce::NormalisableRange<float> {0.0f, 20000.0f, 1.0f, 0.3f}, 0.0f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("OSC2FMDEPTH", "Oscillator2FMDepth", juce::NormalisableRange<float> {0.0f, 20000.0f, 1.0f, 0.3f}, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("OSC2FMDEPTH", "Oscillator2FMDepth", juce::NormalisableRange<float> {0.0f, 100.0f, 0.1f}, 0.0f));
 
     // ADSR
     layout.add(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float> {0.1f, 1.0f, }, 0.0f));
