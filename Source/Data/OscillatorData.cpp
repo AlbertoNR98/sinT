@@ -14,7 +14,6 @@ void OscillatorData::prepareToPlay(juce::dsp::ProcessSpec& spec)
     prepare(spec);
     fmOperator.prepare(spec);
     oscGain.prepare(spec);
-    
 }
 
 void OscillatorData::setWaveform(const int selectWaveform)
@@ -53,24 +52,6 @@ void OscillatorData::setWaveFreq(const int midiNoteNumber)
     lastMidiNote = midiNoteNumber;
 }
 
-void OscillatorData::getNextAudioBlock(juce::dsp::AudioBlock<float>& audioBlock)
-{
-    processFmOperator(audioBlock);
-    process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
-    oscGain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
-}
-
-void OscillatorData::processFmOperator(juce::dsp::AudioBlock<float>& audioBlock)
-{
-    for (int channel = 0; channel < audioBlock.getNumChannels(); ++channel)
-    {
-        for (int sample = 0; sample < audioBlock.getNumSamples(); ++sample)
-        {
-            fmModulationValue = fmOperator.processSample(audioBlock.getSample(channel, sample)) * fmDepth;
-        }
-    }
-}
-
 void OscillatorData::setFm(const float fmFreq, const float fmDepth)
 {
     fmOperator.setFrequency(fmFreq);
@@ -84,4 +65,18 @@ void OscillatorData::setFm(const float fmFreq, const float fmDepth)
     {
         setFrequency(currentOscFreq * -1.0f);
     }
+}
+
+void OscillatorData::setOscParameters(const int selectWaveform, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth)
+{
+    setWaveform(selectWaveform);
+    setGain(oscGainDecibels);
+    setPitch(oscPitch);
+    setFm(fmFreq, fmDepth);
+}
+
+float OscillatorData::renderNextSample(float inputSample)
+{
+    fmModulationValue = fmOperator.processSample(inputSample) * fmDepth;
+    return oscGain.processSample(processSample(inputSample));
 }
