@@ -172,6 +172,8 @@ void SinTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
             auto& osc2FmDepth = *apvts.getRawParameterValue("OSC2FMDEPTH");
 
             // Procesamiento
+            auto& adsr = voice->getADSR();
+
             auto& osc1 = voice->getOscillator1();
             osc1.setWaveform(osc1WaveSelect);
             osc1.setGain(osc1Gain);
@@ -184,8 +186,7 @@ void SinTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
             osc2.setPitch(osc2Pitch);
             osc2.setFm(osc2FmFreq, osc2FmDepth);
 
-            voice->updateADSR(attack.load(), decay.load(), sustain.load(), release.load());
-
+            adsr.update(attack.load(), decay.load(), sustain.load(), release.load());
         }
     }
 

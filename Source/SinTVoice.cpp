@@ -48,6 +48,9 @@ void SinTVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int output
     osc1.prepareToPlay(spec);
     osc2.prepareToPlay(spec);
 
+    voiceGain.prepare(spec);
+    voiceGain.setGainDecibels(0.0f);
+
     adsr.setSampleRate(sampleRate);
 
     isPrepared = true;
@@ -64,14 +67,11 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
     osc1.getNextAudioBlock(audioBlock);
     osc2.getNextAudioBlock(audioBlock);
 
+    voiceGain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+    
     adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
     
     for(int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
         if (!adsr.isActive())
             clearCurrentNote();
-}
-
-void SinTVoice::updateADSR(const float attack, const float decay, const float sustain, const float release)
-{
-    adsr.update(attack, decay, sustain, release);
 }
