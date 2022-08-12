@@ -15,6 +15,8 @@
 #include "Data/ADSRData.h"
 #include "Data/OscillatorData.h"
 
+constexpr auto numVoiceChannels{ 2 };
+
 class SinTVoice : public juce::SynthesiserVoice
 {
 public:
@@ -26,17 +28,16 @@ public:
     void prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels);
     void renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples) override;
 
-    OscillatorData& getOscillator1() { return osc1; };
-    OscillatorData& getOscillator2() { return osc2; };
+    std::array<OscillatorData, numVoiceChannels>& getOscillator1() { return osc1; };
+    std::array<OscillatorData, numVoiceChannels>& getOscillator2() { return osc2; };
     ADSRData& getADSR() { return adsr; };
 
 private:
     ADSRData adsr;
-
-    OscillatorData osc1;
-    OscillatorData osc2;
+    std::array<OscillatorData, numVoiceChannels> osc1;
+    std::array<OscillatorData, numVoiceChannels> osc2;
 
     juce::dsp::Gain<float> voiceGain;
 
-    bool isPrepared { false };  // Flag para controlar el renderizado
+    bool voicePrepared { false };  // Flag para controlar el renderizado
 };

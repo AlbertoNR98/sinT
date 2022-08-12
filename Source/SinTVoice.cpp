@@ -16,14 +16,19 @@ bool SinTVoice::canPlaySound(juce::SynthesiserSound* sound)
 
 void SinTVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* sound, int currentPitchWheelPosition)
 {
-    osc1.setWaveFreq(midiNoteNumber);
-    osc2.setWaveFreq(midiNoteNumber);
+    for (int channel = 0; channel < numVoiceChannels; channel++)
+    {
+        osc1[channel].setWaveFreq(midiNoteNumber);
+        osc2[channel].setWaveFreq(midiNoteNumber);
+    }
+
     adsr.noteOn();
 }
 
 void SinTVoice::stopNote(float velocity, bool allowTailOff)
 {
     adsr.noteOff();
+
     if (!allowTailOff || !adsr.isActive())
         clearCurrentNote();
 }
@@ -45,33 +50,44 @@ void SinTVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int output
     spec.maximumBlockSize = samplesPerBlock;
     spec.numChannels = outputChannels;
 
-    osc1.prepareToPlay(spec);
-    osc2.prepareToPlay(spec);
+    adsr.setSampleRate(sampleRate);
+
+    for (int channel = 0; channel < numVoiceChannels; channel++)
+    {
+        osc1[channel].prepareToPlay(spec);
+        osc2[channel].prepareToPlay(spec);
+    }
 
     voiceGain.prepare(spec);
     voiceGain.setGainDecibels(0.0f);
 
-    adsr.setSampleRate(sampleRate);
-
-    isPrepared = true;
+    voicePrepared = true;
 }
 
 void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 {
-    jassert(isPrepared);
+    jassert(voicePrepared);
 
     if (!isVoiceActive()) return; 
 
     auto audioBlock = juce::dsp::AudioBlock<float>(outputBuffer).getSubBlock(startSample, numSamples);
 
-    osc1.getNextAudioBlock(audioBlock);
-    osc2.getNextAudioBlock(audioBlock);
+    for (int channel = 0; channel < audioBlock.getNumChannels(); ++channel)
+    {
+        for (int sampleIndex = 0; sampleIndex < audioBlock.getNumSamples(); ++sampleIndex)
+        {
+            auto sampleUnprocessed = audioBlock.getSample(channel, sampleIndex);
+            auto sampleProcessed = osc1[channel].processSample(sampleUnprocessed) + osc1[channel].processSample(sampleUnprocessed);
+            audioBlock.addSample(channel, sampleIndex, sampleProcessed);
+        }
+    }
 
     voiceGain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
-    
     adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
     
-    for(int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
-        if (!adsr.isActive())
-            clearCurrentNote();
+    for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
+    {
+        if (!adsr.isActive()) clearCurrentNote();
+    }
+        
 }
