@@ -152,45 +152,7 @@ void SinTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    for (int i = 0; i < sinT.getNumVoices(); ++i)
-    {
-        if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(i)))
-        {
-            // ADSR
-            auto& attack = *apvts.getRawParameterValue("ATTACK");
-            auto& decay = *apvts.getRawParameterValue("DECAY");
-            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
-            auto& release = *apvts.getRawParameterValue("RELEASE");
-
-            // OSC1
-            auto& osc1WaveSelect = *apvts.getRawParameterValue("OSC1WF");
-            auto& osc1GainDecibels = *apvts.getRawParameterValue("OSC1GAINDB");
-            auto& osc1Pitch = *apvts.getRawParameterValue("OSC1PITCH");
-            auto& osc1FmFreq = *apvts.getRawParameterValue("OSC1FMFREQ");
-            auto& osc1FmDepth = *apvts.getRawParameterValue("OSC1FMDEPTH");
-
-            // OSC2
-            auto& osc2WaveSelect = *apvts.getRawParameterValue("OSC2WF");
-            auto& osc2GainDecibels = *apvts.getRawParameterValue("OSC2GAINDB");
-            auto& osc2Pitch = *apvts.getRawParameterValue("OSC2PITCH");
-            auto& osc2FmFreq = *apvts.getRawParameterValue("OSC2FMFREQ");
-            auto& osc2FmDepth = *apvts.getRawParameterValue("OSC2FMDEPTH");
-
-            // Procesamiento
-            auto& adsr = voice->getADSR();
-
-            auto& osc1 = voice->getOscillator1();
-            auto& osc2 = voice->getOscillator2();
-            
-            for(int channel = 0; channel < getTotalNumOutputChannels(); channel++)
-            {
-                osc1[channel].setOscParameters(osc1WaveSelect, osc1GainDecibels, osc1Pitch, osc1FmFreq, osc1FmDepth);
-                osc2[channel].setOscParameters(osc2WaveSelect, osc2GainDecibels, osc2Pitch, osc2FmFreq, osc2FmDepth);
-            }
-
-            adsr.update(attack.load(), decay.load(), sustain.load(), release.load());
-        }
-    }
+    setSinTParameters();
 
     sinT.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }
@@ -247,6 +209,49 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float> {0.1f, 3.0f, }, 0.5f));
 
     return layout;
+}
+
+void SinTAudioProcessor::setSinTParameters()
+{
+    for (int i = 0; i < sinT.getNumVoices(); ++i)
+    {
+        if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(i)))
+        {
+            // ADSR
+            auto& attack = *apvts.getRawParameterValue("ATTACK");
+            auto& decay = *apvts.getRawParameterValue("DECAY");
+            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
+            auto& release = *apvts.getRawParameterValue("RELEASE");
+
+            // OSC1
+            auto& osc1WaveSelect = *apvts.getRawParameterValue("OSC1WF");
+            auto& osc1GainDecibels = *apvts.getRawParameterValue("OSC1GAINDB");
+            auto& osc1Pitch = *apvts.getRawParameterValue("OSC1PITCH");
+            auto& osc1FmFreq = *apvts.getRawParameterValue("OSC1FMFREQ");
+            auto& osc1FmDepth = *apvts.getRawParameterValue("OSC1FMDEPTH");
+
+            // OSC2
+            auto& osc2WaveSelect = *apvts.getRawParameterValue("OSC2WF");
+            auto& osc2GainDecibels = *apvts.getRawParameterValue("OSC2GAINDB");
+            auto& osc2Pitch = *apvts.getRawParameterValue("OSC2PITCH");
+            auto& osc2FmFreq = *apvts.getRawParameterValue("OSC2FMFREQ");
+            auto& osc2FmDepth = *apvts.getRawParameterValue("OSC2FMDEPTH");
+
+            // Procesamiento
+            auto& adsr = voice->getADSR();
+
+            auto& osc1 = voice->getOscillator1();
+            auto& osc2 = voice->getOscillator2();
+
+            for (int channel = 0; channel < getTotalNumOutputChannels(); channel++)
+            {
+                osc1[channel].setOscParameters(osc1WaveSelect, osc1GainDecibels, osc1Pitch, osc1FmFreq, osc1FmDepth);
+                osc2[channel].setOscParameters(osc2WaveSelect, osc2GainDecibels, osc2Pitch, osc2FmFreq, osc2FmDepth);
+            }
+
+            adsr.update(attack.load(), decay.load(), sustain.load(), release.load());
+        }
+    }
 }
 
 //==============================================================================

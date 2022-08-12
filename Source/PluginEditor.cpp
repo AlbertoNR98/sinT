@@ -40,4 +40,3 @@ void SinTAudioProcessorEditor::resized()
     osc2Component.setBounds(0, getHeight() / 2, getWidth() / 2, getHeight() / 2);
     adsrComponent.setBounds(getWidth() / 2, 0, getWidth() / 2, getHeight());
 }
-

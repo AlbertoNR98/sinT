@@ -63,6 +63,7 @@ public:
     juce::AudioProcessorValueTreeState apvts {*this, nullptr, "Parameters", createParameterLayout()};
 
 private:
+    void setSinTParameters();
     juce::Synthesiser sinT;
 
     //==============================================================================
