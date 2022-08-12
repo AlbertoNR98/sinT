@@ -77,7 +77,7 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
         for (int sampleIndex = 0; sampleIndex < audioBlock.getNumSamples(); ++sampleIndex)
         {
             auto sampleUnprocessed = audioBlock.getSample(channel, sampleIndex);
-            auto sampleProcessed = osc1[channel].processSample(sampleUnprocessed) + osc1[channel].processSample(sampleUnprocessed);
+            auto sampleProcessed = osc1[channel].renderNextSample(sampleUnprocessed) + osc2[channel].renderNextSample(sampleUnprocessed);
             audioBlock.addSample(channel, sampleIndex, sampleProcessed);
         }
     }
