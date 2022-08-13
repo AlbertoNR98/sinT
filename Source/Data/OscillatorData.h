@@ -12,9 +12,9 @@
 
 #include <JuceHeader.h>
 
-constexpr auto SINE_WF = 0;
-constexpr auto SAW_WF = 1;
-constexpr auto SQUARE_WF = 2;
+constexpr int SINE_WF{ 0 };
+constexpr int SAW_WF{ 1 };
+constexpr int SQUARE_WF{ 2 };
 
 class OscillatorData : public juce::dsp::Oscillator<float>
 {

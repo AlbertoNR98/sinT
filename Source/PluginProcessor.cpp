@@ -23,7 +23,8 @@ SinTAudioProcessor::SinTAudioProcessor()
 #endif
 {
     sinT.addSound(new SinTSound());
-    sinT.addVoice(new SinTVoice());
+
+    for(int i = 0; i < numVoices; i++) sinT.addVoice(new SinTVoice());
 }
 
 SinTAudioProcessor::~SinTAudioProcessor()
@@ -102,7 +103,7 @@ void SinTAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     spec.maximumBlockSize = samplesPerBlock;
     spec.numChannels = getTotalNumOutputChannels();
 
-    for (int i = 0; i < sinT.getNumVoices(); ++i)
+    for (int i = 0; i < sinT.getNumVoices(); i++)
     {
         if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(i)))
         {
@@ -213,7 +214,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
 
 void SinTAudioProcessor::setSinTParameters()
 {
-    for (int i = 0; i < sinT.getNumVoices(); ++i)
+    for (int i = 0; i < sinT.getNumVoices(); i++)
     {
         if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(i)))
         {
