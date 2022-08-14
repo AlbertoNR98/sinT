@@ -28,6 +28,8 @@ public:
     void setOscParameters(const int selectWaveform, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth);
     float renderNextSample(float inputSample);
 
+    void clearAll();
+
 private:
     juce::dsp::Gain<float> oscGain;
     int oscPitch{ 0 };

@@ -11,6 +11,8 @@
 
 void OscillatorData::prepareToPlay(juce::dsp::ProcessSpec& spec)
 {
+    clearAll();
+
     prepare(spec);
     fmOperator.prepare(spec);
     oscGain.prepare(spec);
@@ -79,4 +81,11 @@ float OscillatorData::renderNextSample(float inputSample)
 {
     fmModulationValue = fmOperator.processSample(inputSample) * fmDepth;
     return oscGain.processSample(processSample(inputSample));
+}
+
+void OscillatorData::clearAll()
+{
+    reset();
+    fmOperator.reset();
+    oscGain.reset();
 }

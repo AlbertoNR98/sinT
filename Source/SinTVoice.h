@@ -28,6 +28,8 @@ public:
     void prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels);
     void renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples) override;
 
+    void clearAll();
+
     std::array<OscillatorData, numVoiceChannels>& getOscillator1() { return osc1; };
     std::array<OscillatorData, numVoiceChannels>& getOscillator2() { return osc2; };
     ADSRData& getADSR() { return adsr; };
@@ -37,6 +39,7 @@ private:
     std::array<OscillatorData, numVoiceChannels> osc1;
     std::array<OscillatorData, numVoiceChannels> osc2;
 
+    juce::AudioBuffer<float> voiceBuffer; // Buffer auxiliar que contiene las muestras asociadas a la voz actual
     juce::dsp::Gain<float> voiceGain;
 
     bool voicePrepared { false };  // Flag para controlar el renderizado

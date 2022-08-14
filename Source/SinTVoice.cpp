@@ -45,6 +45,8 @@ void SinTVoice::pitchWheelMoved(int newPitchWheelValue)
 
 void SinTVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels)
 {
+    clearAll();
+
     juce::dsp::ProcessSpec spec;
     spec.sampleRate = sampleRate;
     spec.maximumBlockSize = samplesPerBlock;
@@ -70,24 +72,32 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
 
     if (!isVoiceActive()) return; 
 
-    auto audioBlock = juce::dsp::AudioBlock<float>(outputBuffer).getSubBlock(startSample, numSamples);
+    voiceBuffer.setSize(outputBuffer.getNumChannels(), numSamples, false, false, true);
+    voiceBuffer.clear();
 
-    for (int channel = 0; channel < audioBlock.getNumChannels(); ++channel)
+    for (int channel = 0; channel < voiceBuffer.getNumChannels(); ++channel)
     {
-        for (int sampleIndex = 0; sampleIndex < audioBlock.getNumSamples(); ++sampleIndex)
+        for (int sampleIndex = 0; sampleIndex < voiceBuffer.getNumSamples(); ++sampleIndex)
         {
-            auto sampleUnprocessed = audioBlock.getSample(channel, sampleIndex);
-            auto sampleProcessed = osc1[channel].renderNextSample(sampleUnprocessed) + osc2[channel].renderNextSample(sampleUnprocessed);
-            audioBlock.addSample(channel, sampleIndex, sampleProcessed);
+            float sampleUnprocessed = voiceBuffer.getSample(channel, sampleIndex);
+            float sampleProcessed = osc1[channel].renderNextSample(sampleUnprocessed) + osc2[channel].renderNextSample(sampleUnprocessed);
+            voiceBuffer.setSample(channel, sampleIndex, sampleProcessed);
         }
     }
-
-    voiceGain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
-    adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
+    
+    voiceGain.process(juce::dsp::ProcessContextReplacing<float>(juce::dsp::AudioBlock<float>{ voiceBuffer }));
+    adsr.applyEnvelopeToBuffer(voiceBuffer, 0, voiceBuffer.getNumSamples());
     
     for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
     {
+        outputBuffer.addFrom(channel, startSample, voiceBuffer, channel, 0, numSamples);
+
         if (!adsr.isActive()) clearCurrentNote();
-    }
-        
+    }   
+}
+
+void SinTVoice::clearAll()
+{
+    voiceGain.reset();
+    adsr.reset();
 }
