@@ -61,7 +61,7 @@ void SinTVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int output
     }
 
     voiceGain.prepare(spec);
-    voiceGain.setGainDecibels(0.0f);
+    voiceGain.setGainLinear(0.1f);
 
     voicePrepared = true;
 }
@@ -84,8 +84,8 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
             voiceBuffer.setSample(channel, sampleIndex, sampleProcessed);
         }
     }
-    
-    voiceGain.process(juce::dsp::ProcessContextReplacing<float>(juce::dsp::AudioBlock<float>{ voiceBuffer }));
+   
+    voiceGain.process(juce::dsp::ProcessContextReplacing<float>(juce::dsp::AudioBlock<float>{voiceBuffer}));
     adsr.applyEnvelopeToBuffer(voiceBuffer, 0, voiceBuffer.getNumSamples());
     
     for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
