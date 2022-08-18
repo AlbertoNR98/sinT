@@ -12,9 +12,9 @@
 
 #include <JuceHeader.h>
 
-constexpr int SINE_WF{ 0 };
-constexpr int SAW_WF{ 1 };
-constexpr int SQUARE_WF{ 2 };
+static constexpr int SINE_WF{ 0 };
+static constexpr int SAW_WF{ 1 };
+static constexpr int SQUARE_WF{ 2 };
 
 class OscillatorData : public juce::dsp::Oscillator<float>
 {
@@ -25,10 +25,10 @@ public:
     void setPitch(const int newOscPitch);
     void setWaveFreq(const int midiNoteNumber);
     void setFm(const float fmFreq, const float fmDepth);
-    void setOscParameters(const int selectWaveform, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth);
+    void setParameters(const int selectWaveform, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth);
     float renderNextSample(float inputSample);
 
-    void clearAll();
+    void resetAll();
 
 private:
     juce::dsp::Gain<float> oscGain;

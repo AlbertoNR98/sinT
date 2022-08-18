@@ -11,7 +11,7 @@
 
 void OscillatorData::prepareToPlay(juce::dsp::ProcessSpec& spec)
 {
-    clearAll();
+    resetAll();
 
     prepare(spec);
     fmOperator.prepare(spec);
@@ -69,7 +69,7 @@ void OscillatorData::setFm(const float fmFreq, const float fmDepth)
     }
 }
 
-void OscillatorData::setOscParameters(const int selectWaveform, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth)
+void OscillatorData::setParameters(const int selectWaveform, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth)
 {
     setWaveform(selectWaveform);
     setGain(oscGainDecibels);
@@ -83,7 +83,7 @@ float OscillatorData::renderNextSample(float inputSample)
     return oscGain.processSample(processSample(inputSample));
 }
 
-void OscillatorData::clearAll()
+void OscillatorData::resetAll()
 {
     reset();
     fmOperator.reset();
