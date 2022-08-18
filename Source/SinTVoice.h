@@ -14,8 +14,9 @@
 #include "SinTSound.h"
 #include "Data/ADSRData.h"
 #include "Data/OscillatorData.h"
+#include "Data/FilterData.h"
 
-constexpr auto numVoiceChannels{ 2 };
+constexpr int numVoiceChannels{ 2 };
 
 class SinTVoice : public juce::SynthesiserVoice
 {
@@ -27,20 +28,20 @@ public:
     void pitchWheelMoved(int newPitchWheelValue) override;
     void prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels);
     void renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples) override;
+    void setModParameters(const int filterMode, const float filterCutoffFreq, const float filterResonance);
 
-    void clearAll();
+    void resetAll();
 
     std::array<OscillatorData, numVoiceChannels>& getOscillator1() { return osc1; };
     std::array<OscillatorData, numVoiceChannels>& getOscillator2() { return osc2; };
     ADSRData& getADSR() { return adsr; };
 
 private:
-    ADSRData adsr;
     std::array<OscillatorData, numVoiceChannels> osc1;
     std::array<OscillatorData, numVoiceChannels> osc2;
+    ADSRData adsr;
+    std::array<FilterData, numVoiceChannels> filter;
 
     juce::AudioBuffer<float> voiceBuffer; // Buffer auxiliar que contiene las muestras asociadas a la voz actual
     juce::dsp::Gain<float> voiceGain;
-
-    bool voicePrepared { false };  // Flag para controlar el renderizado
 };

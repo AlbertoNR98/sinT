@@ -15,13 +15,15 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
       audioProcessor (p), 
       osc1Component(audioProcessor.apvts, "OSC1WF", "OSC1GAINDB", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH"),
       osc2Component(audioProcessor.apvts, "OSC2WF", "OSC2GAINDB", "OSC2PITCH", "OSC2FMFREQ", "OSC2FMDEPTH"),
-      adsrComponent(audioProcessor.apvts)
+      adsrComponent(audioProcessor.apvts),
+      filterComponent(audioProcessor.apvts, "FILTERMODE", "FILTERCUTOFFFREQ", "FILTERRESONANCE")
 {
-    setSize (600, 400); // Cambiar
+    setSize (800, 600); // Cambiar
     
     addAndMakeVisible(osc1Component);
     addAndMakeVisible(osc2Component);
     addAndMakeVisible(adsrComponent);
+    addAndMakeVisible(filterComponent);
 }
 
 SinTAudioProcessorEditor::~SinTAudioProcessorEditor()
@@ -38,5 +40,6 @@ void SinTAudioProcessorEditor::resized()
 {
     osc1Component.setBounds(0, 0, getWidth() / 2, getHeight() / 2);
     osc2Component.setBounds(0, getHeight() / 2, getWidth() / 2, getHeight() / 2);
-    adsrComponent.setBounds(getWidth() / 2, 0, getWidth() / 2, getHeight());
+    adsrComponent.setBounds(getWidth() / 2, 0, getWidth() / 2, getHeight() / 2);
+    filterComponent.setBounds(getWidth() / 2, getHeight() / 2, getWidth() / 2, getHeight() / 2);
 }

@@ -209,14 +209,25 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", juce::NormalisableRange<float> {0.1f, 1.0f, }, 1.0f));
     layout.add(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float> {0.1f, 3.0f, }, 0.5f));
 
+    // Filtro
+    layout.add(std::make_unique<juce::AudioParameterChoice>("FILTERMODE", "FilterMode", juce::StringArray{ "LPF", "BPF", "HPF" }, 0));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERCUTOFFFREQ", "FilterCutoffFreq", juce::NormalisableRange<float> {20.0f, 20000.0f, 0.1f, 0.6f}, 20000.0f, "Hz"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERRESONANCE", "FilterResonance", juce::NormalisableRange<float> {0.1f, 2.0f, 0.1f}, 0.1f, ""));
+
     return layout;
 }
 
 void SinTAudioProcessor::setSinTParameters()
 {
-    for (int i = 0; i < sinT.getNumVoices(); i++)
+    setVoiceParameters();
+    setFilterParameters();
+}
+
+void SinTAudioProcessor::setVoiceParameters()
+{
+    for (int indexVoice = 0; indexVoice < sinT.getNumVoices(); indexVoice++)
     {
-        if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(i)))
+        if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(indexVoice)))
         {
             // ADSR
             auto& attack = *apvts.getRawParameterValue("ATTACK");
@@ -239,18 +250,33 @@ void SinTAudioProcessor::setSinTParameters()
             auto& osc2FmDepth = *apvts.getRawParameterValue("OSC2FMDEPTH");
 
             // Procesamiento
-            auto& adsr = voice->getADSR();
-
             auto& osc1 = voice->getOscillator1();
             auto& osc2 = voice->getOscillator2();
 
+            auto& adsr = voice->getADSR();
+
             for (int channel = 0; channel < getTotalNumOutputChannels(); channel++)
             {
-                osc1[channel].setOscParameters(osc1WaveSelect, osc1GainDecibels, osc1Pitch, osc1FmFreq, osc1FmDepth);
-                osc2[channel].setOscParameters(osc2WaveSelect, osc2GainDecibels, osc2Pitch, osc2FmFreq, osc2FmDepth);
+                osc1[channel].setParameters(osc1WaveSelect, osc1GainDecibels, osc1Pitch, osc1FmFreq, osc1FmDepth);
+                osc2[channel].setParameters(osc2WaveSelect, osc2GainDecibels, osc2Pitch, osc2FmFreq, osc2FmDepth);
             }
 
             adsr.update(attack.load(), decay.load(), sustain.load(), release.load());
+        }
+    }
+}
+
+void SinTAudioProcessor::setFilterParameters()
+{
+    auto& filterMode = *apvts.getRawParameterValue("FILTERMODE");
+    auto& filterCutoffFreq = *apvts.getRawParameterValue("FILTERCUTOFFFREQ");
+    auto& filterResonance = *apvts.getRawParameterValue("FILTERRESONANCE");
+
+    for (int indexVoice = 0; indexVoice < sinT.getNumVoices(); indexVoice++)
+    {
+        if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(indexVoice)))
+        {
+            voice->setModParameters(filterMode, filterCutoffFreq, filterResonance);
         }
     }
 }

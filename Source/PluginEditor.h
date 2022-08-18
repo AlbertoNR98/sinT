@@ -12,6 +12,7 @@
 #include "PluginProcessor.h"
 #include "GUI/ADSRComponent.h"
 #include "GUI/OscillatorComponent.h"
+#include "GUI/FilterComponent.h"
 
 //==============================================================================
 /**
@@ -29,9 +30,10 @@ public:
 private:
     SinTAudioProcessor& audioProcessor;
     
-    ADSRComponent adsrComponent;
     OscillatorComponent osc1Component;
     OscillatorComponent osc2Component;
+    ADSRComponent adsrComponent;
+    FilterComponent filterComponent;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SinTAudioProcessorEditor)
 };

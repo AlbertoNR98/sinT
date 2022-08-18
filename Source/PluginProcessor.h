@@ -66,6 +66,8 @@ private:
     static constexpr int numVoices{ 6 };
 
     void setSinTParameters();
+    void setVoiceParameters();
+    void setFilterParameters();
 
     juce::Synthesiser sinT;
 
