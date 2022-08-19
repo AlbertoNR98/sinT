@@ -220,7 +220,11 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterChoice>("FILTERMODE", "FilterMode", juce::StringArray{ "LPF", "BPF", "HPF" }, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERCUTOFFFREQ", "FilterCutoffFreq", juce::NormalisableRange<float> {20.0f, 20000.0f, 0.1f, 0.6f}, 20000.0f, "Hz"));
     layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERRESONANCE", "FilterResonance", juce::NormalisableRange<float> {0.1f, 2.0f, 0.1f}, 0.1f, ""));
-
+    
+    //LFO
+    layout.add(std::make_unique<juce::AudioParameterFloat>("LFOFREQ", "LFOFreq", juce::NormalisableRange<float> { 0.0f, 20.0f, 0.1f }, 0.0f, "Hz"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("LFODEPTH", "LFODepth", juce::NormalisableRange<float> { 0.0f, 10000.0f, 0.1f, 0.3f }, 0.0f, ""));
+    
     return layout;
 }
 
@@ -289,10 +293,14 @@ void SinTAudioProcessor::setFilterParameters()
     auto& filterCutoffFreq = *apvts.getRawParameterValue("FILTERCUTOFFFREQ");
     auto& filterResonance = *apvts.getRawParameterValue("FILTERRESONANCE");
 
+    auto& lfoFreq = *apvts.getRawParameterValue("LFOFREQ");
+    auto& lfoDepth = *apvts.getRawParameterValue("LFODEPTH");
+
     for (int indexVoice = 0; indexVoice < sinT.getNumVoices(); indexVoice++)
     {
         if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(indexVoice)))
         {
+            // TO-DO -> Integrar LFO
             voice->setModParameters(filterMode, filterCutoffFreq, filterResonance, filterAdsrDepth);
         }
     }

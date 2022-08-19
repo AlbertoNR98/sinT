@@ -35,6 +35,9 @@
               file="Source/GUI/FilterComponent.cpp"/>
         <FILE id="TWJwPe" name="FilterComponent.h" compile="0" resource="0"
               file="Source/GUI/FilterComponent.h"/>
+        <FILE id="l2OlEp" name="LFOComponent.cpp" compile="1" resource="0"
+              file="Source/GUI/LFOComponent.cpp"/>
+        <FILE id="tmUq0M" name="LFOComponent.h" compile="0" resource="0" file="Source/GUI/LFOComponent.h"/>
         <FILE id="NHWwiw" name="OscillatorComponent.cpp" compile="1" resource="0"
               file="Source/GUI/OscillatorComponent.cpp"/>
         <FILE id="KbJBe1" name="OscillatorComponent.h" compile="0" resource="0"

@@ -13,6 +13,7 @@
 #include "GUI/ADSRComponent.h"
 #include "GUI/OscillatorComponent.h"
 #include "GUI/FilterComponent.h"
+#include "GUI/LFOComponent.h"
 
 //==============================================================================
 /**
@@ -35,6 +36,7 @@ private:
     ADSRComponent ampAdsrComponent;
     ADSRComponent filterAdsrComponent;
     FilterComponent filterComponent;
-
+    LFOComponent lfoComponent;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SinTAudioProcessorEditor)
 };
