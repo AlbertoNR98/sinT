@@ -24,7 +24,7 @@ public:
     void setGain(const float oscGainDecibels);
     void setPitch(const int newOscPitch);
     void setWaveFreq(const int midiNoteNumber);
-    void setFm(const float fmFreq, const float fmDepth);
+    void setFmSynthesis(const float fmFreq, const float fmDepth);
     void setParameters(const int selectWaveform, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth);
     float renderNextSample(float inputSample);
 
