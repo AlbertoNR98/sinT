@@ -19,7 +19,7 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
       filterAdsrComponent(audioProcessor.apvts, "FILTERADSRATTACK", "FILTERADSRDECAY", "FILTERADSRSUSTAIN", "FILTERADSRRELEASE"),
       filterComponent(audioProcessor.apvts, "FILTERMODE", "FILTERCUTOFFFREQ", "FILTERRESONANCE")
 {
-    setSize (800, 600); // Cambiar
+    setSize (1200, 600); // Cambiar
     
     addAndMakeVisible(osc1Component);
     addAndMakeVisible(osc2Component);
@@ -40,9 +40,9 @@ void SinTAudioProcessorEditor::paint (juce::Graphics& g)
 
 void SinTAudioProcessorEditor::resized()
 {
-    osc1Component.setBounds(0, 0, getWidth() / 2, getHeight() / 2);
-    osc2Component.setBounds(0, getHeight() / 2, getWidth() / 2, getHeight() / 2);
-    ampAdsrComponent.setBounds(getWidth() / 2, 0, getWidth() / 2, getHeight() / 2);
-    filterAdsrComponent.setBounds(0, 0, 0, 0);  // TO-DO
-    filterComponent.setBounds(getWidth() / 2, getHeight() / 2, getWidth() / 2, getHeight() / 2);
+    osc1Component.setBounds(0, 0, getWidth() / 3, getHeight() / 2);
+    osc2Component.setBounds(0, getHeight() / 2, getWidth() / 3, getHeight() / 2);
+    ampAdsrComponent.setBounds(getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);
+    filterAdsrComponent.setBounds(2 * getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);
+    filterComponent.setBounds(2 * getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
 }
