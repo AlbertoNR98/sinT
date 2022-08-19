@@ -11,15 +11,15 @@
 #include "ADSRComponent.h"
 
 //==============================================================================
-ADSRComponent::ADSRComponent(juce::AudioProcessorValueTreeState& apvts)
+ADSRComponent::ADSRComponent(juce::AudioProcessorValueTreeState& apvts, juce::String attackId, juce::String decayId, juce::String sustainId, juce::String releaseId)
 {
     //Attachments
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     
-    attackAttachment = std::make_unique<SliderAttachment>(apvts, "ATTACK", attackSlider);
-    decayAttachment = std::make_unique<SliderAttachment>(apvts, "DECAY", decaySlider);
-    sustainAttachment = std::make_unique<SliderAttachment>(apvts, "SUSTAIN", sustainSlider);
-    releaseAttachment = std::make_unique<SliderAttachment>(apvts, "RELEASE", releaseSlider);
+    attackAttachment = std::make_unique<SliderAttachment>(apvts, attackId, attackSlider);
+    decayAttachment = std::make_unique<SliderAttachment>(apvts, decayId, decaySlider);
+    sustainAttachment = std::make_unique<SliderAttachment>(apvts, sustainId, sustainSlider);
+    releaseAttachment = std::make_unique<SliderAttachment>(apvts, releaseId, releaseSlider);
 
     // Estilo de sliders ADSR
     setSliderVisualParams(attackSlider);

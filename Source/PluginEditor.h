@@ -32,7 +32,8 @@ private:
     
     OscillatorComponent osc1Component;
     OscillatorComponent osc2Component;
-    ADSRComponent adsrComponent;
+    ADSRComponent ampAdsrComponent;
+    ADSRComponent filterAdsrComponent;
     FilterComponent filterComponent;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SinTAudioProcessorEditor)
