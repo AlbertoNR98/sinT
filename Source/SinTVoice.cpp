@@ -22,14 +22,16 @@ void SinTVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserS
         osc2[channel].setWaveFreq(midiNoteNumber);
     }
 
-    adsr.noteOn();
+    ampAdsr.noteOn();
+    filterAdsr.noteOn();
 }
 
 void SinTVoice::stopNote(float velocity, bool allowTailOff)
 {
-    adsr.noteOff();
+    ampAdsr.noteOff();
+    filterAdsr.noteOff();
 
-    if (!allowTailOff || !adsr.isActive())
+    if (!allowTailOff || !ampAdsr.isActive())
         clearCurrentNote();
 }
 
@@ -43,16 +45,12 @@ void SinTVoice::pitchWheelMoved(int newPitchWheelValue)
 
 }
 
-void SinTVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels)
+void SinTVoice::prepareToPlay(juce::dsp::ProcessSpec& spec)
 {
     resetAll();
 
-    juce::dsp::ProcessSpec spec;
-    spec.sampleRate = sampleRate;
-    spec.maximumBlockSize = samplesPerBlock;
-    spec.numChannels = outputChannels;
-
-    adsr.setSampleRate(sampleRate);
+    ampAdsr.setSampleRate(spec.sampleRate);
+    filterAdsr.setSampleRate(spec.sampleRate);
 
     for (int channel = 0; channel < numVoiceChannels; channel++)
     {
@@ -70,6 +68,11 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
     if (!isVoiceActive()) return; 
 
     voiceBuffer.setSize(outputBuffer.getNumChannels(), numSamples, false, false, true);
+    
+    // Procesamiento de Filter ADSR
+    filterAdsr.applyEnvelopeToBuffer(voiceBuffer, 0, voiceBuffer.getNumSamples());
+    filterAdsrOutput = filterAdsr.getNextSample();
+
     voiceBuffer.clear();
 
     // Procesamiento de voz
@@ -87,7 +90,7 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
     voiceGain.process(juce::dsp::ProcessContextReplacing<float>(juce::dsp::AudioBlock<float>{voiceBuffer}));
     
     // Procesamiento de AMP ADSR
-    adsr.applyEnvelopeToBuffer(voiceBuffer, 0, voiceBuffer.getNumSamples());
+    ampAdsr.applyEnvelopeToBuffer(voiceBuffer, 0, voiceBuffer.getNumSamples());
     
     // Procesamiento de filtro
     for (int channel = 0; channel < voiceBuffer.getNumChannels(); ++channel)
@@ -105,21 +108,24 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
     {
         outputBuffer.addFrom(channel, startSample, voiceBuffer, channel, 0, numSamples);
 
-        if (!adsr.isActive()) clearCurrentNote();
+        if (!ampAdsr.isActive()) clearCurrentNote();
     }   
 }
 
-void SinTVoice::setModParameters(const int filterMode, const float filterCutoffFreq, const float filterResonance)
+void SinTVoice::setModParameters(const int filterMode, const float filterCutoffFreq, const float filterResonance, const float filterAdsrDepth)
 {
-    //TO-DO -> MOD ADSR
+    float cutoffFreqMod = (filterAdsrDepth * filterAdsrOutput) + filterCutoffFreq;
+    cutoffFreqMod = std::clamp<float>(cutoffFreqMod, 20.0f, 20000.0f);
+
     for (int channel = 0; channel < numVoiceChannels; ++channel)
     {
-        filter[channel].setParameters(filterMode, filterCutoffFreq, filterResonance);
+        filter[channel].setParameters(filterMode, cutoffFreqMod, filterResonance);
     }
 }
 
 void SinTVoice::resetAll()
 {
     voiceGain.reset();
-    adsr.reset();
+    ampAdsr.reset();
+    filterAdsr.reset();
 }

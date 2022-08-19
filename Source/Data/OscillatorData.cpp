@@ -54,7 +54,7 @@ void OscillatorData::setWaveFreq(const int midiNoteNumber)
     lastMidiNote = midiNoteNumber;
 }
 
-void OscillatorData::setFm(const float fmFreq, const float fmDepth)
+void OscillatorData::setFmSynthesis(const float fmFreq, const float fmDepth)
 {
     fmOperator.setFrequency(fmFreq);
     this->fmDepth = fmDepth;
@@ -74,7 +74,7 @@ void OscillatorData::setParameters(const int selectWaveform, const float oscGain
     setWaveform(selectWaveform);
     setGain(oscGainDecibels);
     setPitch(oscPitch);
-    setFm(fmFreq, fmDepth);
+    setFmSynthesis(fmFreq, fmDepth);
 }
 
 float OscillatorData::renderNextSample(float inputSample)

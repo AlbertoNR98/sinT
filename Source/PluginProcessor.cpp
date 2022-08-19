@@ -107,7 +107,7 @@ void SinTAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     {
         if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(i)))
         {
-            voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
+            voice->prepareToPlay(spec);
         }
     }
 }
@@ -203,11 +203,18 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>("OSC2FMFREQ", "Oscillator2FMFreq", juce::NormalisableRange<float> {0.0f, 20000.0f, 1.0f, 0.3f}, 0.0f));
     layout.add(std::make_unique<juce::AudioParameterFloat>("OSC2FMDEPTH", "Oscillator2FMDepth", juce::NormalisableRange<float> {0.0f, 100.0f, 0.1f}, 0.0f));
 
-    // ADSR
-    layout.add(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float> {0.1f, 1.0f, }, 0.0f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("DECAY", "Decay", juce::NormalisableRange<float> {0.1f, 1.0f, }, 0.0f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", juce::NormalisableRange<float> {0.1f, 1.0f, }, 1.0f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float> {0.1f, 3.0f, }, 0.5f));
+    // Amp ADSR
+    layout.add(std::make_unique<juce::AudioParameterFloat>("AMPADSRATTACK", "AmpADSRAttack", juce::NormalisableRange<float> {0.1f, 1.0f, 0.01f}, 0.01f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("AMPADSRDECAY", "AmpADSRDecay", juce::NormalisableRange<float> {0.1f, 1.0f, 0.1f}, 0.1f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("AMPADSRSUSTAIN", "AmpADSRSustain", juce::NormalisableRange<float> {0.1f, 1.0f, 0.1f}, 1.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("AMPADSRRELEASE", "AmpADSRRelease", juce::NormalisableRange<float> {0.1f, 3.0f, 0.1f}, 0.5f));
+
+    // Filter ADSR
+    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERADSRDEPTH", "FilterADSRDepth", juce::NormalisableRange<float> {0.0f, 10000.0f, 0.1f, 0.3f}, 10000.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERADSRATTACK", "FilterADSRAttack", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.01f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERADSRDECAY", "FilterADSRDecay", juce::NormalisableRange<float> {0.0f, 1.0f, 0.1f}, 0.1f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERADSRSUSTAIN", "FilterADSRSustain", juce::NormalisableRange<float> {0.0f, 1.0f, 0.1f}, 1.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERADSRRELEASE", "FilterADSRRelease", juce::NormalisableRange<float> {0.0f, 3.0f, 0.1f}, 0.1f));
 
     // Filtro
     layout.add(std::make_unique<juce::AudioParameterChoice>("FILTERMODE", "FilterMode", juce::StringArray{ "LPF", "BPF", "HPF" }, 0));
@@ -229,11 +236,17 @@ void SinTAudioProcessor::setVoiceParameters()
     {
         if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(indexVoice)))
         {
-            // ADSR
-            auto& attack = *apvts.getRawParameterValue("ATTACK");
-            auto& decay = *apvts.getRawParameterValue("DECAY");
-            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
-            auto& release = *apvts.getRawParameterValue("RELEASE");
+            // Amp ADSR
+            auto& ampAdsrAttack = *apvts.getRawParameterValue("AMPADSRATTACK");
+            auto& ampAdsrDecay = *apvts.getRawParameterValue("AMPADSRDECAY");
+            auto& ampAdsrSustain = *apvts.getRawParameterValue("AMPADSRSUSTAIN");
+            auto& ampAdsrRelease = *apvts.getRawParameterValue("AMPADSRRELEASE");
+
+            // Filter ADSR
+            auto& filterAdsrAttack = *apvts.getRawParameterValue("FILTERADSRATTACK");
+            auto& filterAdsrDecay = *apvts.getRawParameterValue("FILTERADSRDECAY");
+            auto& filterAdsrSustain = *apvts.getRawParameterValue("FILTERADSRSUSTAIN");
+            auto& filterAdsrRelease = *apvts.getRawParameterValue("FILTERADSRELEASE");
 
             // OSC1
             auto& osc1WaveSelect = *apvts.getRawParameterValue("OSC1WF");
@@ -253,7 +266,8 @@ void SinTAudioProcessor::setVoiceParameters()
             auto& osc1 = voice->getOscillator1();
             auto& osc2 = voice->getOscillator2();
 
-            auto& adsr = voice->getADSR();
+            auto& ampAdsr = voice->getAmpADSR();
+            auto& filterAdsr = voice->getFilterADSR();
 
             for (int channel = 0; channel < getTotalNumOutputChannels(); channel++)
             {
@@ -261,13 +275,16 @@ void SinTAudioProcessor::setVoiceParameters()
                 osc2[channel].setParameters(osc2WaveSelect, osc2GainDecibels, osc2Pitch, osc2FmFreq, osc2FmDepth);
             }
 
-            adsr.update(attack.load(), decay.load(), sustain.load(), release.load());
+            ampAdsr.update(ampAdsrAttack.load(), ampAdsrDecay.load(), ampAdsrSustain.load(), ampAdsrRelease.load());
+            filterAdsr.update(filterAdsrAttack.load(), filterAdsrDecay.load(), filterAdsrSustain.load(), filterAdsrRelease.load());
         }
     }
 }
 
 void SinTAudioProcessor::setFilterParameters()
 {
+    auto& filterAdsrDepth = *apvts.getRawParameterValue("FILTERADSRDEPTH");
+
     auto& filterMode = *apvts.getRawParameterValue("FILTERMODE");
     auto& filterCutoffFreq = *apvts.getRawParameterValue("FILTERCUTOFFFREQ");
     auto& filterResonance = *apvts.getRawParameterValue("FILTERRESONANCE");
@@ -276,7 +293,7 @@ void SinTAudioProcessor::setFilterParameters()
     {
         if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(indexVoice)))
         {
-            voice->setModParameters(filterMode, filterCutoffFreq, filterResonance);
+            voice->setModParameters(filterMode, filterCutoffFreq, filterResonance, filterAdsrDepth);
         }
     }
 }
