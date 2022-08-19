@@ -246,7 +246,7 @@ void SinTAudioProcessor::setVoiceParameters()
             auto& filterAdsrAttack = *apvts.getRawParameterValue("FILTERADSRATTACK");
             auto& filterAdsrDecay = *apvts.getRawParameterValue("FILTERADSRDECAY");
             auto& filterAdsrSustain = *apvts.getRawParameterValue("FILTERADSRSUSTAIN");
-            auto& filterAdsrRelease = *apvts.getRawParameterValue("FILTERADSRELEASE");
+            auto& filterAdsrRelease = *apvts.getRawParameterValue("FILTERADSRRELEASE");
 
             // OSC1
             auto& osc1WaveSelect = *apvts.getRawParameterValue("OSC1WF");
