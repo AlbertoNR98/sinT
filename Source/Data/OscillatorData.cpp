@@ -58,6 +58,8 @@ void OscillatorData::setFmSynthesis(const float fmFreq, const float fmDepth)
 {
     fmOperator.setFrequency(fmFreq);
     this->fmDepth = fmDepth;
+    if (fmFreq == 0.0f) fmModulationValue = 0.0f;
+    
     auto currentOscFreq = juce::MidiMessage::getMidiNoteInHertz(lastMidiNote + oscPitch) + fmModulationValue;
     if (currentOscFreq >= 0)
     {
