@@ -22,6 +22,10 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
 {
     setSize (1200, 600); // Cambiar
     
+    mainGainSlider.setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);
+    addAndMakeVisible(mainGainSlider);
+    mainGainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "MAINGAIN", mainGainSlider);
+
     addAndMakeVisible(osc1Component);
     addAndMakeVisible(osc2Component);
     addAndMakeVisible(ampAdsrComponent);
@@ -42,7 +46,8 @@ void SinTAudioProcessorEditor::paint (juce::Graphics& g)
 
 void SinTAudioProcessorEditor::resized()
 {
-    osc1Component.setBounds(0, 0, getWidth() / 3, getHeight() / 2);
+    mainGainSlider.setBounds(0, 0, getWidth() / 3, 30);
+    osc1Component.setBounds(0, 30, getWidth() / 3, (getHeight() / 2) - 30);
     osc2Component.setBounds(0, getHeight() / 2, getWidth() / 3, getHeight() / 2);
     ampAdsrComponent.setBounds(getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);
     filterAdsrComponent.setBounds(2 * getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);

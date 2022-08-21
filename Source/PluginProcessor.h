@@ -70,6 +70,7 @@ private:
     void setFilterParameters();
 
     juce::Synthesiser sinT;
+    juce::dsp::Gain<float> mainGain;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SinTAudioProcessor)

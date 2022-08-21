@@ -154,8 +154,13 @@ void SinTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
         buffer.clear (i, 0, buffer.getNumSamples());
 
     setSinTParameters();
-
+    
     sinT.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+
+    // Procesamiento de ganancia general
+    auto& mainGainValue = *apvts.getRawParameterValue("MAINGAIN");
+    mainGain.setGainDecibels(mainGainValue);
+    mainGain.process(juce::dsp::ProcessContextReplacing<float>(juce::dsp::AudioBlock<float>{buffer}));
 }
 
 //==============================================================================
@@ -188,6 +193,9 @@ void SinTAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createParameterLayout()
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
+
+    // Ganancia general
+    layout.add(std::make_unique<juce::AudioParameterFloat>("MAINGAIN", "MainGain", juce::NormalisableRange<float> {-48.0f, 6.0f, 0.1f}, 0.0f, "dB"));
 
     // Oscilador 1
     layout.add(std::make_unique<juce::AudioParameterChoice>("OSC1WF", "Oscillator1Waveform", juce::StringArray { "Sine", "Saw", "Square" }, 0));

@@ -31,6 +31,9 @@ public:
 private:
     SinTAudioProcessor& audioProcessor;
     
+    juce::Slider mainGainSlider;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mainGainAttachment;
+
     OscillatorComponent osc1Component;
     OscillatorComponent osc2Component;
     ADSRComponent ampAdsrComponent;
