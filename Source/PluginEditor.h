@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "GUI/GainComponent.h"
 #include "GUI/ADSRComponent.h"
 #include "GUI/OscillatorComponent.h"
 #include "GUI/FilterComponent.h"
@@ -30,10 +31,8 @@ public:
 
 private:
     SinTAudioProcessor& audioProcessor;
-    
-    juce::Slider mainGainSlider;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mainGainAttachment;
 
+    GainComponent mainGainComponent;
     OscillatorComponent osc1Component;
     OscillatorComponent osc2Component;
     ADSRComponent ampAdsrComponent;
