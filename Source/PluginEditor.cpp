@@ -21,7 +21,7 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
       filterComponent(audioProcessor.apvts, "FILTERMODE", "FILTERCUTOFFFREQ", "FILTERRESONANCE"),
       lfoComponent(audioProcessor.apvts, "LFOFREQ", "LFODEPTH")
 {
-    setSize (1200, 600); // Cambiar
+    setSize (1200, 544); // 600 - 32 (barra RPi OS) - 24 (barra plugin)
 
     addAndMakeVisible(mainGainComponent);
     addAndMakeVisible(osc1Component);
