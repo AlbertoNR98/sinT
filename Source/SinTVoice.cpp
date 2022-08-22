@@ -112,7 +112,7 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
     }   
 }
 
-void SinTVoice::setModParameters(const int filterMode, const float filterCutoffFreq, const float filterResonance, const float filterAdsrDepth)
+void SinTVoice::setFilterModulationParameters(const int filterMode, const float filterCutoffFreq, const float filterResonance, const float filterAdsrDepth)
 {
     float cutoffFreqMod = (filterAdsrDepth * filterAdsrOutput) + filterCutoffFreq;
     cutoffFreqMod = std::clamp<float>(cutoffFreqMod, 20.0f, 20000.0f);

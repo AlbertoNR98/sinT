@@ -28,7 +28,7 @@ public:
     void pitchWheelMoved(int newPitchWheelValue) override;
     void prepareToPlay(juce::dsp::ProcessSpec& spec);
     void renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples) override;
-    void setModParameters(const int filterMode, const float filterCutoffFreq, const float filterResonance, const float filterAdsrDepth);
+    void setFilterModulationParameters(const int filterMode, const float filterCutoffFreq, const float filterResonance, const float filterAdsrDepth);
 
     std::array<OscillatorData, numVoiceChannels>& getOscillator1() { return osc1; };
     std::array<OscillatorData, numVoiceChannels>& getOscillator2() { return osc2; };

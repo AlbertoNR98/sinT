@@ -309,7 +309,7 @@ void SinTAudioProcessor::setFilterParameters()
         if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(indexVoice)))
         {
             // TO-DO -> Integrar LFO
-            voice->setModParameters(filterMode, filterCutoffFreq, filterResonance, filterAdsrDepth);
+            voice->setFilterModulationParameters(filterMode, filterCutoffFreq, filterResonance, filterAdsrDepth);
         }
     }
 }
