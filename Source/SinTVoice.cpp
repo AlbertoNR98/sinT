@@ -56,6 +56,8 @@ void SinTVoice::prepareToPlay(juce::dsp::ProcessSpec& spec)
     {
         osc1[channel].prepareToPlay(spec);
         osc2[channel].prepareToPlay(spec);
+        lfo[channel].prepare(spec);
+        lfo[channel].initialise([](float x) {return std::sin(x); });
         filter[channel].prepare(spec);
     }
 
@@ -92,12 +94,13 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
     // Procesamiento de AMP ADSR
     ampAdsr.applyEnvelopeToBuffer(voiceBuffer, 0, voiceBuffer.getNumSamples());
     
-    // Procesamiento de filtro
+    // Procesamiento de filtro y de LFO
     for (int channel = 0; channel < voiceBuffer.getNumChannels(); ++channel)
     {
         for (int sampleIndex = 0; sampleIndex < voiceBuffer.getNumSamples(); ++sampleIndex)
         {
             float sampleUnprocessed = voiceBuffer.getSample(channel, sampleIndex);
+            lfoOutput[channel] = lfo[channel].processSample(sampleUnprocessed);
             float sampleProcessed = filter[channel].renderNextSample(channel, sampleUnprocessed);
             voiceBuffer.setSample(channel, sampleIndex, sampleProcessed);
         }
@@ -112,14 +115,19 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
     }   
 }
 
-void SinTVoice::setFilterModulationParameters(const int filterMode, const float filterCutoffFreq, const float filterResonance, const float filterAdsrDepth)
+void SinTVoice::setFilterModulationParameters(const int filterMode, const float filterCutoffFreq, const float filterResonance, const float filterAdsrDepth, const float lfoFreq, const float lfoDepth)
 {
-    float cutoffFreqMod = (filterAdsrDepth * filterAdsrOutput) + filterCutoffFreq;
-    cutoffFreqMod = std::clamp<float>(cutoffFreqMod, 20.0f, 20000.0f);
+    // Frecuencia de corte modulada por filter ADSR
+    float cutoffFreqAdsrMod = (filterAdsrDepth * filterAdsrOutput) + filterCutoffFreq;
 
     for (int channel = 0; channel < numVoiceChannels; ++channel)
     {
-        filter[channel].setParameters(filterMode, cutoffFreqMod, filterResonance);
+        // Frecuencia de corte modulada por filter ADSR y LFO
+        lfo[channel].setFrequency(lfoFreq);
+        float cutoffFreqAdsrLfoMod = (lfoDepth * lfoOutput[channel]) + cutoffFreqAdsrMod;
+        cutoffFreqAdsrLfoMod = std::clamp<float>(cutoffFreqAdsrLfoMod, 20.0f, 20000.0f);
+        
+        filter[channel].setParameters(filterMode, cutoffFreqAdsrLfoMod, filterResonance);
     }
 }
 
