@@ -30,6 +30,10 @@
               file="Source/Data/OscillatorData.h"/>
       </GROUP>
       <GROUP id="{4BE66EC9-BE7E-1A14-06EC-BEE4F8CD766F}" name="FX">
+        <FILE id="p8WFhr" name="DistortionData.cpp" compile="1" resource="0"
+              file="Source/FX/DistortionData.cpp"/>
+        <FILE id="CFKEFC" name="DistortionData.h" compile="0" resource="0"
+              file="Source/FX/DistortionData.h"/>
         <FILE id="Nhqzfs" name="ReverbData.cpp" compile="1" resource="0" file="Source/FX/ReverbData.cpp"/>
         <FILE id="puyVXr" name="ReverbData.h" compile="0" resource="0" file="Source/FX/ReverbData.h"/>
       </GROUP>
@@ -37,6 +41,10 @@
         <FILE id="NKTL7Z" name="ADSRComponent.cpp" compile="1" resource="0"
               file="Source/GUI/ADSRComponent.cpp"/>
         <FILE id="tatXnk" name="ADSRComponent.h" compile="0" resource="0" file="Source/GUI/ADSRComponent.h"/>
+        <FILE id="sDb7Zs" name="DistortionComponent.cpp" compile="1" resource="0"
+              file="Source/GUI/DistortionComponent.cpp"/>
+        <FILE id="UM3eN7" name="DistortionComponent.h" compile="0" resource="0"
+              file="Source/GUI/DistortionComponent.h"/>
         <FILE id="XMuq48" name="FilterComponent.cpp" compile="1" resource="0"
               file="Source/GUI/FilterComponent.cpp"/>
         <FILE id="TWJwPe" name="FilterComponent.h" compile="0" resource="0"

@@ -242,13 +242,19 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>("LFODEPTH", "LFODepth", juce::NormalisableRange<float> { 0.0f, 10000.0f, 0.1f, 0.3f }, 0.0f, ""));
 
     //FX
+    //DISTORSION
+    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONDRIVE", "DistortionDrive", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.001f }, 1.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONBLEND", "DistortionBlend", juce::NormalisableRange<float> { 0.0f, 3000.0f, 0.001f }, 1.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONRANGE", "DistortionRange", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.001f }, 1.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONVOLUME", "DistortionVolume", juce::NormalisableRange<float> { 0.0f, 3.0f, 0.001f }, 1.0f, ""));
+
     //REVERB
-    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBROOMSIZE", "ReverbRoomSize", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.1f }, 0.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBWIDTH", "ReverbWidth", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.1f }, 1.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBDAMPING", "ReverbDamping", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.1f }, 0.5f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBROOMSIZE", "ReverbRoomSize", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f }, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBWIDTH", "ReverbWidth", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f }, 1.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBDAMPING", "ReverbDamping", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f }, 0.5f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBFREEZEMODE", "ReverbFreezeMode", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.1f }, 0.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBDRYLEVEL", "ReverbDryLevel", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.1f }, 1.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBWETLEVEL", "ReverbWetLevel", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.1f }, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBDRYLEVEL", "ReverbDryLevel", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f }, 1.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBWETLEVEL", "ReverbWetLevel", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f }, 0.0f, ""));
     
     return layout;
 }
@@ -333,6 +339,13 @@ void SinTAudioProcessor::setFilterParameters()
 
 void SinTAudioProcessor::setFXParameters()
 {
+    // Distorsion
+    auto& distortionDrive = *apvts.getRawParameterValue("DISTORTIONDRIVE");
+    auto& distortionBlend = *apvts.getRawParameterValue("DISTORTIONBLEND");
+    auto& distortionRange = *apvts.getRawParameterValue("DISTORTIONRANGE");
+    auto& distortionVolume = *apvts.getRawParameterValue("DISTORTIONVOLUME");
+
+    // Reverb
     auto& reverbRoomSize = *apvts.getRawParameterValue("REVERBROOMSIZE");
     auto& reverbWidth = *apvts.getRawParameterValue("REVERBWIDTH");
     auto& reverbDamping = *apvts.getRawParameterValue("REVERBDAMPING");
@@ -340,7 +353,8 @@ void SinTAudioProcessor::setFXParameters()
     auto& reverbDryLevel = *apvts.getRawParameterValue("REVERBDRYLEVEL");
     auto& reverbWetLevel = *apvts.getRawParameterValue("REVERBWETLEVEL");
 
-    fxProcessor.setParameters(reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel);
+    fxProcessor.setDistortionParameters(distortionDrive, distortionBlend, distortionRange, distortionVolume);
+    fxProcessor.setReverbParameters(reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel);
 }
 
 //==============================================================================

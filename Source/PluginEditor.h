@@ -15,6 +15,7 @@
 #include "GUI/OscillatorComponent.h"
 #include "GUI/FilterComponent.h"
 #include "GUI/LFOComponent.h"
+#include "GUI/DistortionComponent.h"
 #include "GUI/ReverbComponent.h"
 
 //==============================================================================
@@ -40,6 +41,7 @@ private:
     ADSRComponent filterAdsrComponent;
     FilterComponent filterComponent;
     LFOComponent lfoComponent;
+    DistortionComponent distortionComponent;
     ReverbComponent reverbComponent;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SinTAudioProcessorEditor)

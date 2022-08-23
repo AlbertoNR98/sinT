@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "FX/DistortionData.h"
 #include "FX/ReverbData.h"
 
 class FXProcessor
@@ -19,8 +20,8 @@ public:
     void prepareToPlay(juce::dsp::ProcessSpec& spec);
 
     void setDefaultParameters();
-    void setParameters(float reverbRoomSize, float reverbWidth, float reverbDamping, float reverbFreezeMode, float reverbDryLevel, float reverbWetLevel);
 
+    void setDistortionParameters(float drive, float range, float blend, float volume);
     void setReverbParameters(float roomSize, float width, float damping, float freezeMode, float dryLevel, float wetLevel);
 
     void renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock);
@@ -28,5 +29,6 @@ public:
     void resetAll();
 
 private:
+    DistortionData distortion;
     ReverbData reverb;
 };

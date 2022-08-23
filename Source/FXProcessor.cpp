@@ -17,12 +17,13 @@ void FXProcessor::prepareToPlay(juce::dsp::ProcessSpec& spec)
 
 void FXProcessor::setDefaultParameters()
 {
+    distortion.setDefaultParameters();
     reverb.setDefaultParameters();
 }
 
-void FXProcessor::setParameters(float reverbRoomSize, float reverbWidth, float reverbDamping, float reverbFreezeMode, float reverbDryLevel, float reverbWetLevel)
+void FXProcessor::setDistortionParameters(float drive, float range, float blend, float volume)
 {
-    setReverbParameters(reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel);
+    distortion.setParameters(drive, range, blend, volume);
 }
 
 void FXProcessor::setReverbParameters(float roomSize, float width, float damping, float freezeMode, float dryLevel, float wetLevel)
@@ -32,6 +33,7 @@ void FXProcessor::setReverbParameters(float roomSize, float width, float damping
 
 void FXProcessor::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
 {
+    distortion.renderNextBlock(audioBlock);
     reverb.renderNextBlock(audioBlock);
 }
 
