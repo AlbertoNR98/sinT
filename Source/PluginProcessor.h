@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "SinTSound.h"
 #include "SinTVoice.h"
+#include "FXProcessor.h"
 
 //==============================================================================
 /**
@@ -68,8 +69,10 @@ private:
     void setSinTParameters();
     void setVoiceParameters();
     void setFilterParameters();
+    void setFXParameters();
 
     juce::Synthesiser sinT;
+    FXProcessor fxProcessor;
     juce::dsp::Gain<float> mainGain;
 
     //==============================================================================

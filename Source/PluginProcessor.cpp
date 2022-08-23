@@ -110,6 +110,8 @@ void SinTAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
             voice->prepareToPlay(spec);
         }
     }
+
+    fxProcessor.prepareToPlay(spec);
 }
 
 void SinTAudioProcessor::releaseResources()
@@ -153,14 +155,20 @@ void SinTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
+    // Establece parametros
     setSinTParameters();
     
+    // Procesamiento del buffer de muestras
     sinT.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 
-    // Procesamiento de ganancia general
+    // Procesamiento de efectos
+    juce::dsp::AudioBlock<float> audioBlock{ buffer };
+    fxProcessor.renderNextBlock(audioBlock);
+
+    // Procesamiento de ganancia de salida
     auto& mainGainValue = *apvts.getRawParameterValue("MAINGAIN");
     mainGain.setGainDecibels(mainGainValue);
-    mainGain.process(juce::dsp::ProcessContextReplacing<float>(juce::dsp::AudioBlock<float>{buffer}));
+    mainGain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
 }
 
 //==============================================================================
@@ -232,6 +240,15 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     //LFO
     layout.add(std::make_unique<juce::AudioParameterFloat>("LFOFREQ", "LFOFreq", juce::NormalisableRange<float> { 0.0f, 20.0f, 0.1f }, 0.0f, "Hz"));
     layout.add(std::make_unique<juce::AudioParameterFloat>("LFODEPTH", "LFODepth", juce::NormalisableRange<float> { 0.0f, 10000.0f, 0.1f, 0.3f }, 0.0f, ""));
+
+    //FX
+    //REVERB
+    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBROOMSIZE", "ReverbRoomSize", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.1f }, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBWIDTH", "ReverbWidth", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.1f }, 1.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBDAMPING", "ReverbDamping", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.1f }, 0.5f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBFREEZEMODE", "ReverbFreezeMode", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.1f }, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBDRYLEVEL", "ReverbDryLevel", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.1f }, 1.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBWETLEVEL", "ReverbWetLevel", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.1f }, 0.0f, ""));
     
     return layout;
 }
@@ -240,6 +257,7 @@ void SinTAudioProcessor::setSinTParameters()
 {
     setVoiceParameters();
     setFilterParameters();
+    setFXParameters();
 }
 
 void SinTAudioProcessor::setVoiceParameters()
@@ -311,6 +329,18 @@ void SinTAudioProcessor::setFilterParameters()
             voice->setFilterModulationParameters(filterMode, filterCutoffFreq, filterResonance, filterAdsrDepth, lfoFreq, lfoDepth);
         }
     }
+}
+
+void SinTAudioProcessor::setFXParameters()
+{
+    auto& reverbRoomSize = *apvts.getRawParameterValue("REVERBROOMSIZE");
+    auto& reverbWidth = *apvts.getRawParameterValue("REVERBWIDTH");
+    auto& reverbDamping = *apvts.getRawParameterValue("REVERBDAMPING");
+    auto& reverbFreezeMode = *apvts.getRawParameterValue("REVERBFREEZEMODE");
+    auto& reverbDryLevel = *apvts.getRawParameterValue("REVERBDRYLEVEL");
+    auto& reverbWetLevel = *apvts.getRawParameterValue("REVERBWETLEVEL");
+
+    fxProcessor.setParameters(reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel);
 }
 
 //==============================================================================
