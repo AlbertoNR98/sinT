@@ -243,9 +243,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
 
     //FX
     //DISTORSION
-    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONDRIVE", "DistortionDrive", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.001f }, 1.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONBLEND", "DistortionBlend", juce::NormalisableRange<float> { 0.0f, 3000.0f, 0.001f }, 1.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONRANGE", "DistortionRange", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.001f }, 1.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONDRIVE", "DistortionDrive", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.001f }, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONRANGE", "DistortionRange", juce::NormalisableRange<float> { 0.0f, 1000.0f, 0.1f }, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONBLEND", "DistortionBlend", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.001f }, 0.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONVOLUME", "DistortionVolume", juce::NormalisableRange<float> { 0.0f, 3.0f, 0.001f }, 1.0f, ""));
 
     //REVERB
@@ -341,8 +341,8 @@ void SinTAudioProcessor::setFXParameters()
 {
     // Distorsion
     auto& distortionDrive = *apvts.getRawParameterValue("DISTORTIONDRIVE");
-    auto& distortionBlend = *apvts.getRawParameterValue("DISTORTIONBLEND");
     auto& distortionRange = *apvts.getRawParameterValue("DISTORTIONRANGE");
+    auto& distortionBlend = *apvts.getRawParameterValue("DISTORTIONBLEND");
     auto& distortionVolume = *apvts.getRawParameterValue("DISTORTIONVOLUME");
 
     // Reverb
@@ -353,7 +353,7 @@ void SinTAudioProcessor::setFXParameters()
     auto& reverbDryLevel = *apvts.getRawParameterValue("REVERBDRYLEVEL");
     auto& reverbWetLevel = *apvts.getRawParameterValue("REVERBWETLEVEL");
 
-    fxProcessor.setDistortionParameters(distortionDrive, distortionBlend, distortionRange, distortionVolume);
+    fxProcessor.setDistortionParameters(distortionDrive, distortionRange, distortionBlend, distortionVolume);
     fxProcessor.setReverbParameters(reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel);
 }
 
