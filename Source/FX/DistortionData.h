@@ -17,8 +17,8 @@ class DistortionData
 public:
     void setDefaultParameters();
     void setParameters(float drive, float range, float blend, float volume);
-    bool isEnabled() { return enabled; }
-    void setEnabled(bool enableValue) { enabled = enableValue; }
+    bool isBypassed() { return !enabled; }
+    void setBypassed(bool bypassValue) { enabled = !bypassValue; }
 
     void renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock);
     

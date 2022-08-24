@@ -28,7 +28,7 @@ void DistortionData::setParameters(float drive, float range, float blend, float 
 
 void DistortionData::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
 {
-    if (!enabled)
+    if (isBypassed())
         return;
 
     for (int channel = 0; channel < audioBlock.getNumChannels(); ++channel)
