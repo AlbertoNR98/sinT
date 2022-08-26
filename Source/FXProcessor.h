@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "FX/DelayData.h"
 #include "FX/DistortionData.h"
 #include "FX/ReverbData.h"
 
