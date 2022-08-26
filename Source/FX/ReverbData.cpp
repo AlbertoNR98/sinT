@@ -11,6 +11,7 @@
 
 void ReverbData::prepareToPlay(juce::dsp::ProcessSpec& spec)
 {
+    resetAll();
     reverb.prepare(spec);
 }
 
@@ -44,7 +45,7 @@ void ReverbData::setParameters(float reverbRoomSize, float reverbWidth, float re
 
 void ReverbData::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
 {
-    if(!isBypassed()) reverb.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+    if(! isBypassed()) reverb.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
 }
 
 void ReverbData::resetAll()
