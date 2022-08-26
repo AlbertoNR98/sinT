@@ -21,9 +21,9 @@ void FXProcessor::setDefaultParameters()
     reverb.setDefaultParameters();
 }
 
-void FXProcessor::setDistortionParameters(float drive, float range, float blend, float volume)
+void FXProcessor::setDistortionParameters(float drive, float range, float blend)
 {
-    distortion.setParameters(drive, range, blend, volume);
+    distortion.setParameters(drive, range, blend);
 }
 
 void FXProcessor::setReverbParameters(float roomSize, float width, float damping, float freezeMode, float dryLevel, float wetLevel)

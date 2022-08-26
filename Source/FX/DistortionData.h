@@ -16,7 +16,7 @@ class DistortionData
 {
 public:
     void setDefaultParameters();
-    void setParameters(float drive, float range, float blend, float volume);
+    void setParameters(float drive, float range, float blend);
     bool isBypassed() { return !enabled; }
     void setBypassed(bool bypassValue) { enabled = !bypassValue; }
 
@@ -28,6 +28,5 @@ private:
     float drive;
     float range;
     float blend;
-    float volume;
     bool enabled = true;
 };

@@ -244,9 +244,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     //FX
     //DISTORSION
     layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONDRIVE", "DistortionDrive", juce::NormalisableRange<float> {0.0f, 1.0f, 0.001f}, 0.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONRANGE", "DistortionRange", juce::NormalisableRange<float> {0.0f, 1000.0f, 0.1f}, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONRANGE", "DistortionRange", juce::NormalisableRange<float> {0.0f, 500.0f, 0.1f}, 0.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONBLEND", "DistortionBlend", juce::NormalisableRange<float> {0.0f, 1.0f, 0.001f}, 0.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONVOLUME", "DistortionVolume", juce::NormalisableRange<float> {0.0f, 3.0f, 0.001f}, 1.0f, ""));
 
     //REVERB
     layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBROOMSIZE", "ReverbRoomSize", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
@@ -343,7 +342,6 @@ void SinTAudioProcessor::setFXParameters()
     auto& distortionDrive = *apvts.getRawParameterValue("DISTORTIONDRIVE");
     auto& distortionRange = *apvts.getRawParameterValue("DISTORTIONRANGE");
     auto& distortionBlend = *apvts.getRawParameterValue("DISTORTIONBLEND");
-    auto& distortionVolume = *apvts.getRawParameterValue("DISTORTIONVOLUME");
 
     // Reverb
     auto& reverbRoomSize = *apvts.getRawParameterValue("REVERBROOMSIZE");
@@ -353,7 +351,7 @@ void SinTAudioProcessor::setFXParameters()
     auto& reverbDryLevel = *apvts.getRawParameterValue("REVERBDRYLEVEL");
     auto& reverbWetLevel = *apvts.getRawParameterValue("REVERBWETLEVEL");
 
-    fxProcessor.setDistortionParameters(distortionDrive, distortionRange, distortionBlend, distortionVolume);
+    fxProcessor.setDistortionParameters(distortionDrive, distortionRange, distortionBlend);
     fxProcessor.setReverbParameters(reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel);
 }
 

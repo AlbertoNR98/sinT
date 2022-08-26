@@ -20,7 +20,7 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
       filterAdsrComponent(audioProcessor.apvts, "FILTERADSRATTACK", "FILTERADSRDECAY", "FILTERADSRSUSTAIN", "FILTERADSRRELEASE"),
       filterComponent(audioProcessor.apvts, "FILTERMODE", "FILTERCUTOFFFREQ", "FILTERRESONANCE"),
       lfoComponent(audioProcessor.apvts, "LFOFREQ", "LFODEPTH"),
-      distortionComponent(audioProcessor.apvts, "DISTORTIONDRIVE", "DISTORTIONRANGE", "DISTORTIONBLEND", "DISTORTIONVOLUME"),
+      distortionComponent(audioProcessor.apvts, "DISTORTIONDRIVE", "DISTORTIONRANGE", "DISTORTIONBLEND"),
       reverbComponent(audioProcessor.apvts, "REVERBROOMSIZE", "REVERBWIDTH", "REVERBDAMPING", "REVERBFREEZEMODE", "REVERBDRYLEVEL", "REVERBWETLEVEL")
 {
     setSize (1200, 544); // 600 - 32 (barra RPi OS) - 24 (barra plugin)

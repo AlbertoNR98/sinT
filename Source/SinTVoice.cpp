@@ -87,9 +87,6 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
             voiceBuffer.setSample(channel, sampleIndex, sampleProcessed);
         }
     }
-   
-    // Procesamiento de ganancia
-    voiceGain.process(juce::dsp::ProcessContextReplacing<float>(juce::dsp::AudioBlock<float>{voiceBuffer}));
     
     // Procesamiento de AMP ADSR
     ampAdsr.applyEnvelopeToBuffer(voiceBuffer, 0, voiceBuffer.getNumSamples());
@@ -105,6 +102,9 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
             voiceBuffer.setSample(channel, sampleIndex, sampleProcessed);
         }
     }
+
+    // Procesamiento de ganancia
+    voiceGain.process(juce::dsp::ProcessContextReplacing<float>(juce::dsp::AudioBlock<float>{voiceBuffer}));
 
     // Agrega al buffer de salida
     for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
