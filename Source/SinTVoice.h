@@ -15,7 +15,6 @@
 #include "Data/ADSRData.h"
 #include "Data/OscillatorData.h"
 #include "Data/FilterData.h"
-#include "FX/DelayData.h"
 
 constexpr int numVoiceChannels{ 2 };
 
@@ -53,6 +52,4 @@ private:
 
     juce::AudioBuffer<float> voiceBuffer; // Buffer auxiliar que contiene las muestras asociadas a la voz actual
     juce::dsp::Gain<float> voiceGain;
-
-    DelayData delay;
 };

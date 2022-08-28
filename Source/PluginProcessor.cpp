@@ -248,6 +248,10 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONRANGE", "DistortionRange", juce::NormalisableRange<float> {0.0f, 500.0f, 0.1f}, 0.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONBLEND", "DistortionBlend", juce::NormalisableRange<float> {0.0f, 1.0f, 0.001f}, 0.0f, ""));
 
+    //DELAY
+    layout.add(std::make_unique<juce::AudioParameterFloat>("DELAYTIMEMS", "DelayTimeMs", juce::NormalisableRange<float> {0.0f, 1000.0f, 1.0f}, 0.0f, "ms"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("DELAYFEEDBACK", "DelayFeedback", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
+
     //REVERB
     layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBROOMSIZE", "ReverbRoomSize", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBWIDTH", "ReverbWidth", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 1.0f, ""));
@@ -319,12 +323,13 @@ void SinTAudioProcessor::setVoiceParameters()
 
 void SinTAudioProcessor::setFilterParameters()
 {
+    // Filtro
     auto& filterAdsrDepth = *apvts.getRawParameterValue("FILTERADSRDEPTH");
-
     auto& filterMode = *apvts.getRawParameterValue("FILTERMODE");
     auto& filterCutoffFreq = *apvts.getRawParameterValue("FILTERCUTOFFFREQ");
     auto& filterResonance = *apvts.getRawParameterValue("FILTERRESONANCE");
 
+    // LFO
     auto& lfoFreq = *apvts.getRawParameterValue("LFOFREQ");
     auto& lfoDepth = *apvts.getRawParameterValue("LFODEPTH");
 
@@ -344,6 +349,10 @@ void SinTAudioProcessor::setFXParameters()
     auto& distortionRange = *apvts.getRawParameterValue("DISTORTIONRANGE");
     auto& distortionBlend = *apvts.getRawParameterValue("DISTORTIONBLEND");
 
+    // Delay
+    auto& delayTimeMs = *apvts.getRawParameterValue("DELAYTIMEMS");
+    auto& delayFeedback = *apvts.getRawParameterValue("DELAYFEEDBACK");
+
     // Reverb
     auto& reverbRoomSize = *apvts.getRawParameterValue("REVERBROOMSIZE");
     auto& reverbWidth = *apvts.getRawParameterValue("REVERBWIDTH");
@@ -353,6 +362,7 @@ void SinTAudioProcessor::setFXParameters()
     auto& reverbWetLevel = *apvts.getRawParameterValue("REVERBWETLEVEL");
 
     fxProcessor.setDistortionParameters(distortionDrive, distortionRange, distortionBlend);
+    fxProcessor.setDelayParameters(delayTimeMs, delayFeedback);
     fxProcessor.setReverbParameters(reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel);
 }
 

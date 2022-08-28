@@ -37,7 +37,6 @@ ReverbComponent::ReverbComponent(juce::AudioProcessorValueTreeState& apvts, juce
     freezeModeAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, freezeModeId, freezeModeSlider);
     dryLevelAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, dryLevelId, dryLevelSlider);
     wetLevelAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, wetLevelId, wetLevelSlider);
-
 }
 
 ReverbComponent::~ReverbComponent()

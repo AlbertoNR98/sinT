@@ -18,12 +18,18 @@
 class DelayComponent  : public juce::Component
 {
 public:
-    DelayComponent();
+    DelayComponent(juce::AudioProcessorValueTreeState& apvts, juce::String timeMsId, juce::String feedbackId);
     ~DelayComponent() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
+    juce::Slider timeMsSlider;
+    juce::Slider feedbackSlider;
+
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> timeMsAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> feedbackAttachment;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayComponent)
 };

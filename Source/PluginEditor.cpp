@@ -21,6 +21,7 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
       filterComponent(audioProcessor.apvts, "FILTERMODE", "FILTERCUTOFFFREQ", "FILTERRESONANCE"),
       lfoComponent(audioProcessor.apvts, "LFOFREQ", "LFODEPTH"),
       distortionComponent(audioProcessor.apvts, "DISTORTIONDRIVE", "DISTORTIONRANGE", "DISTORTIONBLEND"),
+      delayComponent(audioProcessor.apvts, "DELAYTIMEMS", "DELAYFEEDBACK"),
       reverbComponent(audioProcessor.apvts, "REVERBROOMSIZE", "REVERBWIDTH", "REVERBDAMPING", "REVERBFREEZEMODE", "REVERBDRYLEVEL", "REVERBWETLEVEL")
 {
     setSize (1200, 544); // 600 - 32 (barra RPi OS) - 24 (barra plugin)
@@ -31,7 +32,8 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
     addAndMakeVisible(ampAdsrComponent);
     //addAndMakeVisible(filterAdsrComponent);
     addAndMakeVisible(filterComponent);
-    addAndMakeVisible(distortionComponent);
+    //addAndMakeVisible(distortionComponent);
+    addAndMakeVisible(delayComponent);
     //addAndMakeVisible(lfoComponent);
     addAndMakeVisible(reverbComponent);
 }
@@ -56,6 +58,7 @@ void SinTAudioProcessorEditor::resized()
     reverbComponent.setBounds(2 * getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);
     filterComponent.setBounds(2 * getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
     //lfoComponent.setBounds(getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
-    distortionComponent.setBounds(getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
+    //distortionComponent.setBounds(getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
+    delayComponent.setBounds(getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
     //reverbComponent.setBounds(getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
 }

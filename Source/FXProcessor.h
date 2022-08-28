@@ -23,10 +23,10 @@ public:
     void setDefaultParameters();
 
     void setDistortionParameters(float drive, float range, float blend);
+    void setDelayParameters(float timeMs, float feedback);
     void setReverbParameters(float roomSize, float width, float damping, float freezeMode, float dryLevel, float wetLevel);
 
-    void renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock);
-    
+    //void renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock);
     void renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples);
 
     void resetAll();

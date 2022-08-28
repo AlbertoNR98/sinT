@@ -17,6 +17,7 @@ class DelayData : public juce::dsp::DelayLine<float>
 public:
     void prepareToPlay(juce::dsp::ProcessSpec& spec);
     void setDefaultParameters();
+    void setParameters(float timeMs, float feedback);
     bool isBypassed() { return !enabled; };
     void setBypassed(bool bypassValue) { enabled = !bypassValue; };
 
@@ -24,15 +25,19 @@ public:
     void setDelayInMiliseconds(float delayInMiliseconds);
     void setMaxDelayInMiliseconds(float maxDelayInMiliseconds);
 
-    void renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock);
     void renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples);
 
     void resetAll();
 
 private:
     juce::dsp::DelayLine<float, juce::dsp::DelayLineInterpolationTypes::Linear> delay;
-    juce::AudioBuffer<float> delayBuffer;
+    
+    float timeMs;
+    float feedback;
+
     float maxDelayInMiliseconds{ 1000.0f };
     double sampleRate{ 44100.0f };
     bool enabled = true;
+
+    juce::dsp::Gain<float> delayGain;
 };
