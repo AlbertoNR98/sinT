@@ -249,7 +249,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONBLEND", "DistortionBlend", juce::NormalisableRange<float> {0.0f, 1.0f, 0.001f}, 0.0f, ""));
 
     //DELAY
-    layout.add(std::make_unique<juce::AudioParameterFloat>("DELAYTIMEMS", "DelayTimeMs", juce::NormalisableRange<float> {0.0f, 1000.0f, 1.0f}, 0.0f, "ms"));
+    layout.add(std::make_unique<juce::AudioParameterInt>("DELAYTIMEMS", "DelayTimeMs", 0, 1000, 0, "ms"));
     layout.add(std::make_unique<juce::AudioParameterFloat>("DELAYFEEDBACK", "DelayFeedback", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
 
     //REVERB
