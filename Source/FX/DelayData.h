@@ -25,11 +25,13 @@ public:
     void setMaxDelayInMiliseconds(float maxDelayInMiliseconds);
 
     void renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock);
+    void renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples);
 
     void resetAll();
 
 private:
     juce::dsp::DelayLine<float, juce::dsp::DelayLineInterpolationTypes::Linear> delay;
+    juce::AudioBuffer<float> delayBuffer;
     float maxDelayInMiliseconds{ 1000.0f };
     double sampleRate{ 44100.0f };
     bool enabled = true;

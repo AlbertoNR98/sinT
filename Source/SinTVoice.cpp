@@ -61,6 +61,8 @@ void SinTVoice::prepareToPlay(juce::dsp::ProcessSpec& spec)
         filter[channel].prepare(spec);
     }
 
+    delay.prepareToPlay(spec);
+
     voiceGain.prepare(spec);
     voiceGain.setGainLinear(0.1f);
 }
@@ -106,6 +108,8 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
     // Procesamiento de ganancia
     voiceGain.process(juce::dsp::ProcessContextReplacing<float>(juce::dsp::AudioBlock<float>{voiceBuffer}));
 
+    delay.renderNextBlock(outputBuffer, 0, outputBuffer.getNumSamples());
+
     // Agrega al buffer de salida
     for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
     {
@@ -136,4 +140,5 @@ void SinTVoice::resetAll()
     voiceGain.reset();
     ampAdsr.reset();
     filterAdsr.reset();
+    delay.resetAll();
 }
