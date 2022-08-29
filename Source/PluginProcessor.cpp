@@ -163,8 +163,7 @@ void SinTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
 
     // Procesamiento de efectos
     juce::dsp::AudioBlock<float> audioBlock{ buffer };
-    //fxProcessor.renderNextBlock(audioBlock);
-    fxProcessor.renderNextBlock(buffer, 0, buffer.getNumSamples());
+    fxProcessor.renderNextBlock(audioBlock);
 
     // Procesamiento de ganancia de salida
     auto& mainGainValue = *apvts.getRawParameterValue("MAINGAIN");

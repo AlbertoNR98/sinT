@@ -25,7 +25,7 @@ public:
     void setDelayInMiliseconds(float delayInMiliseconds);
     void setMaxDelayInMiliseconds(float maxDelayInMiliseconds);
 
-    void renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples);
+    void renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock);
 
     void resetAll();
 

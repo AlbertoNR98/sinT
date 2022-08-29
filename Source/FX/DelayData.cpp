@@ -46,26 +46,24 @@ void DelayData::setMaxDelayInMiliseconds(float maxDelayInMiliseconds)
     delay.setMaximumDelayInSamples((maxDelayInMiliseconds / 1000.f) * sampleRate);
 }
 
-void DelayData::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
+void DelayData::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
 {
     if (isBypassed() || timeMs.getCurrentValue() == 0.0f || feedback.getCurrentValue() == 0.0f)
     {
         resetAll();
         return;
-    } 
+    }
 
-    for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
+    for (int channel = 0; channel < audioBlock.getNumChannels(); ++channel)
     {
-        auto* inputSampleReadPointer = outputBuffer.getReadPointer(channel);
-        auto* outputSampleWritePointer = outputBuffer.getWritePointer(channel);
-
-        for (int sampleIndex = 0; sampleIndex < outputBuffer.getNumSamples(); ++sampleIndex)
+        for (int sampleIndex = 0; sampleIndex < audioBlock.getNumSamples(); ++sampleIndex)
         {
             setDelayInMiliseconds(timeMs.getNextValue());
             float delayedSample = delay.popSample(channel);
-            float inputDelayBuffer = inputSampleReadPointer[sampleIndex] + (feedback.getNextValue() * delayedSample);
+            float inputSample = audioBlock.getSample(channel, sampleIndex);
+            float inputDelayBuffer = inputSample + (feedback.getNextValue() * delayedSample);
             delay.pushSample(channel, inputDelayBuffer);
-            outputSampleWritePointer[sampleIndex] = delayGain.processSample(inputSampleReadPointer[sampleIndex] + delayedSample);
+            audioBlock.setSample(channel, sampleIndex, (inputSample + delayedSample) * delayGain.processSample(inputSample + delayedSample));
         }
     }
 }

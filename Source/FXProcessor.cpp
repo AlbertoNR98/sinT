@@ -38,11 +38,10 @@ void FXProcessor::setReverbParameters(float roomSize, float width, float damping
     reverb.setParameters(roomSize, width, damping, freezeMode, dryLevel, wetLevel);
 }
 
-void FXProcessor::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
+void FXProcessor::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
 {
-    juce::dsp::AudioBlock<float> audioBlock{ outputBuffer };
     distortion.renderNextBlock(audioBlock);
-    delay.renderNextBlock(outputBuffer, startSample, numSamples);
+    delay.renderNextBlock(audioBlock);
     reverb.renderNextBlock(audioBlock);
 }
 
