@@ -15,7 +15,7 @@ void DelayData::prepareToPlay(juce::dsp::ProcessSpec& spec)
     sampleRate = spec.sampleRate;
     delay.prepare(spec);
     delayGain.prepare(spec);
-    delayGain.setGainLinear(0.1f);
+    delayGain.setGainLinear(1.0f);
     setDefaultParameters();
 }
 
@@ -23,15 +23,12 @@ void DelayData::setParameters(float timeMs, float feedback)
 {
     this->timeMs = timeMs;
     this->feedback = feedback;
-    setDelayInMiliseconds(this->timeMs);
+    setDelayInMiliseconds(this->timeMs.getCurrentValue());
 }
 
 void DelayData::setDefaultParameters()
 {
-    delayGain.setGainDecibels(0.0);
-    maxDelayInMiliseconds = 1000.0;
-    delay.setDelay(sampleRate / 2);
-    delay.setMaximumDelayInSamples(sampleRate * 4);
+    delay.setMaximumDelayInSamples(2 * sampleRate * (maxDelayInMiliseconds / 1000.0f));
 }
 
 float DelayData::getDelayInMiliseconds()
@@ -51,20 +48,24 @@ void DelayData::setMaxDelayInMiliseconds(float maxDelayInMiliseconds)
 
 void DelayData::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 {
-    if (isBypassed() || timeMs == 0.0f || feedback == 0.0f)
+    if (isBypassed() || timeMs.getCurrentValue() == 0.0f || feedback.getCurrentValue() == 0.0f)
+    {
+        resetAll();
         return;
+    } 
 
     for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
     {
-        auto* inputSamplePointer = outputBuffer.getReadPointer(channel);
-        auto* outputSamplePointer = outputBuffer.getWritePointer(channel);
+        auto* inputSampleReadPointer = outputBuffer.getReadPointer(channel);
+        auto* outputSampleWritePointer = outputBuffer.getWritePointer(channel);
 
         for (int sampleIndex = 0; sampleIndex < outputBuffer.getNumSamples(); ++sampleIndex)
         {
+            setDelayInMiliseconds(timeMs.getNextValue());
             float delayedSample = delay.popSample(channel);
-            float inputDelayBuffer = inputSamplePointer[sampleIndex] + (feedback * delayedSample);
+            float inputDelayBuffer = inputSampleReadPointer[sampleIndex] + (feedback.getNextValue() * delayedSample);
             delay.pushSample(channel, inputDelayBuffer);
-            outputSamplePointer[sampleIndex] = inputSamplePointer[sampleIndex] + delayedSample;
+            outputSampleWritePointer[sampleIndex] = delayGain.processSample(inputSampleReadPointer[sampleIndex] + delayedSample);
         }
     }
 }
