@@ -14,8 +14,7 @@ void DelayData::prepareToPlay(juce::dsp::ProcessSpec& spec)
     resetAll();
     sampleRate = spec.sampleRate;
     delay.prepare(spec);
-    delayGain.prepare(spec);
-    delayGain.setGainLinear(1.0f);
+
     setDefaultParameters();
 }
 
@@ -23,7 +22,7 @@ void DelayData::setParameters(float timeMs, float feedback)
 {
     this->timeMs = timeMs;
     this->feedback = feedback;
-    setDelayInMiliseconds(this->timeMs.getCurrentValue());
+    setDelayInMiliseconds(this->timeMs);
 }
 
 void DelayData::setDefaultParameters()
@@ -48,7 +47,7 @@ void DelayData::setMaxDelayInMiliseconds(float maxDelayInMiliseconds)
 
 void DelayData::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
 {
-    if (isBypassed() || timeMs.getCurrentValue() == 0.0f || feedback.getCurrentValue() == 0.0f)
+    if (isBypassed() || timeMs == 0.0f || feedback == 0.0f)
     {
         resetAll();
         return;
@@ -58,12 +57,11 @@ void DelayData::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
     {
         for (int sampleIndex = 0; sampleIndex < audioBlock.getNumSamples(); ++sampleIndex)
         {
-            setDelayInMiliseconds(timeMs.getNextValue());
             float delayedSample = delay.popSample(channel);
             float inputSample = audioBlock.getSample(channel, sampleIndex);
-            float inputDelayBuffer = inputSample + (feedback.getNextValue() * delayedSample);
+            float inputDelayBuffer = inputSample + (feedback * delayedSample);
             delay.pushSample(channel, inputDelayBuffer);
-            audioBlock.setSample(channel, sampleIndex, (inputSample + delayedSample) * delayGain.processSample(inputSample + delayedSample));
+            audioBlock.setSample(channel, sampleIndex, inputDelayBuffer);
         }
     }
 }

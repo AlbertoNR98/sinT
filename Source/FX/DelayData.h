@@ -32,12 +32,10 @@ public:
 private:
     juce::dsp::DelayLine<float, juce::dsp::DelayLineInterpolationTypes::Linear> delay;
     
-    juce::SmoothedValue<float> timeMs{0.0};
-    juce::SmoothedValue<float> feedback{0.0};
+    float timeMs{0.0};
+    float feedback{0.0};
 
     float maxDelayInMiliseconds{ 1000.0f };
     double sampleRate{ 44100.0f };
     bool enabled = true;
-
-    juce::dsp::Gain<float> delayGain;
 };
