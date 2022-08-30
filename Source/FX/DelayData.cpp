@@ -27,12 +27,7 @@ void DelayData::setParameters(float timeMs, float feedback)
 
 void DelayData::setDefaultParameters()
 {
-    delay.setMaximumDelayInSamples(2 * sampleRate * (maxDelayInMiliseconds / 1000.0f));
-}
-
-float DelayData::getDelayInMiliseconds()
-{
-    return delay.getDelay() / (sampleRate * 1000);
+    delay.setMaximumDelayInSamples(sampleRate * std::ceil(maxDelayInMiliseconds / 1000.0f));
 }
 
 void DelayData::setDelayInMiliseconds(float delayInMiliseconds)

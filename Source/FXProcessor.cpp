@@ -50,4 +50,3 @@ void FXProcessor::resetAll()
     delay.resetAll();
     reverb.resetAll();
 }
-

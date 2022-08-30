@@ -21,7 +21,6 @@ public:
     bool isBypassed() { return !enabled; };
     void setBypassed(bool bypassValue) { enabled = !bypassValue; };
 
-    float getDelayInMiliseconds();
     void setDelayInMiliseconds(float delayInMiliseconds);
     void setMaxDelayInMiliseconds(float maxDelayInMiliseconds);
 
@@ -37,5 +36,6 @@ private:
 
     float maxDelayInMiliseconds{ 1000.0f };
     double sampleRate{ 44100.0f };
+
     bool enabled = true;
 };
