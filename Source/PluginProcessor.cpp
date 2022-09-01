@@ -98,7 +98,7 @@ void SinTAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     sinT.setCurrentPlaybackSampleRate(sampleRate);
 
-    juce::dsp::ProcessSpec spec;
+    juce::dsp::ProcessSpec spec{};
     spec.sampleRate = sampleRate;
     spec.maximumBlockSize = samplesPerBlock;
     spec.numChannels = getTotalNumOutputChannels();
@@ -112,6 +112,7 @@ void SinTAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     }
 
     fxProcessor.prepareToPlay(spec);
+    mainGainMeter.prepareToPlay(spec);
 }
 
 void SinTAudioProcessor::releaseResources()
@@ -165,10 +166,13 @@ void SinTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
     juce::dsp::AudioBlock<float> audioBlock{ buffer };
     fxProcessor.renderNextBlock(audioBlock);
 
-    // Procesamiento de ganancia de salida
+    // Procesamiento de slider de ganancia de salida
     auto& mainGainValue = *apvts.getRawParameterValue("MAINGAIN");
     mainGain.setGainDecibels(mainGainValue);
     mainGain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+
+    // Procesamiento de medidor de ganancia de salida
+    mainGainMeter.renderNextBlock(buffer);
 }
 
 //==============================================================================
@@ -179,7 +183,7 @@ bool SinTAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* SinTAudioProcessor::createEditor()
 {
-    // return new juce::GenericAudioProcessorEditor(*this); // Editor de test
+    //return new juce::GenericAudioProcessorEditor(*this); // Editor de test
     return new SinTAudioProcessorEditor (*this); // Editor original
 }
 
@@ -203,7 +207,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
 
     // Ganancia general
-    layout.add(std::make_unique<juce::AudioParameterFloat>("MAINGAIN", "MainGain", juce::NormalisableRange<float> {-48.0f, 12.0f, 0.1f}, 0.0f, "dB"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("MAINGAIN", "MainGain", juce::NormalisableRange<float> {-60.0f, 12.0f, 0.1f}, 0.0f, "dB"));
 
     // Oscilador 1
     layout.add(std::make_unique<juce::AudioParameterChoice>("OSC1WF", "Oscillator1Waveform", juce::StringArray { "Sine", "Saw", "Square" }, 0));
@@ -220,7 +224,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>("OSC2FMDEPTH", "Oscillator2FMDepth", juce::NormalisableRange<float> {0.0f, 100.0f, 0.1f}, 0.0f));
 
     // Amp ADSR
-    layout.add(std::make_unique<juce::AudioParameterFloat>("AMPADSRATTACK", "AmpADSRAttack", juce::NormalisableRange<float> {0.01f, 16.0f, 0.01f}, 0.01f, "s"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("AMPADSRATTACK", "AmpADSRAttack", juce::NormalisableRange<float> {0.0f, 16.0f, 0.01f}, 0.01f, "s"));
     layout.add(std::make_unique<juce::AudioParameterFloat>("AMPADSRDECAY", "AmpADSRDecay", juce::NormalisableRange<float> {0.0f, 16.0f, 0.5f}, 2.25f, "s"));
     layout.add(std::make_unique<juce::AudioParameterFloat>("AMPADSRSUSTAIN", "AmpADSRSustain", juce::NormalisableRange<float> {0.0f, 1.0f, 0.05f}, 1.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("AMPADSRRELEASE", "AmpADSRRelease", juce::NormalisableRange<float> {0.01f, 16.0f, 0.01f}, 0.1f, "s"));
@@ -237,21 +241,21 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERCUTOFFFREQ", "FilterCutoffFreq", juce::NormalisableRange<float> {20.0f, 20000.0f, 0.1f, 0.6f}, 20000.0f, "Hz"));
     layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERRESONANCE", "FilterResonance", juce::NormalisableRange<float> {0.1f, 2.0f, 0.05f}, 0.1f, ""));
     
-    //LFO
+    // LFO
     layout.add(std::make_unique<juce::AudioParameterFloat>("LFOFREQ", "LFOFreq", juce::NormalisableRange<float> {0.0f, 20.0f, 0.1f}, 0.0f, "Hz"));
     layout.add(std::make_unique<juce::AudioParameterFloat>("LFODEPTH", "LFODepth", juce::NormalisableRange<float> {0.0f, 10000.0f, 1.0f, 0.3f}, 0.0f, ""));
 
-    //FX
-    //DISTORSION
+    // FX
+    // Distorsion
     layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONDRIVE", "DistortionDrive", juce::NormalisableRange<float> {0.0f, 1.0f, 0.001f}, 0.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONRANGE", "DistortionRange", juce::NormalisableRange<float> {0.0f, 500.0f, 0.1f}, 0.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONBLEND", "DistortionBlend", juce::NormalisableRange<float> {0.0f, 1.0f, 0.001f}, 0.0f, ""));
 
-    //DELAY
+    // Delay
     layout.add(std::make_unique<juce::AudioParameterFloat>("DELAYTIMEMS", "DelayTimeMs", juce::NormalisableRange<float> {0.0f, 1000.0f, 0.1f}, 0.0f, "ms"));
     layout.add(std::make_unique<juce::AudioParameterFloat>("DELAYFEEDBACK", "DelayFeedback", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
 
-    //REVERB
+    // Reverb
     layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBROOMSIZE", "ReverbRoomSize", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBWIDTH", "ReverbWidth", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 1.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBDAMPING", "ReverbDamping", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.5f, ""));

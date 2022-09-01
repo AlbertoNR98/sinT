@@ -12,6 +12,7 @@
 #include "SinTSound.h"
 #include "SinTVoice.h"
 #include "FXProcessor.h"
+#include "Data/MeterData.h"
 
 //==============================================================================
 /**
@@ -60,6 +61,10 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     //==============================================================================
+    float getMainGainMeterRmsChannelValue(const int channel) const { return mainGainMeter.getRmsChannelValue(channel); }
+    std::pair<float, float> getMainGainMeterRmsValues() const { return mainGainMeter.getRmsValues(); }
+
+    //==============================================================================
     static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     juce::AudioProcessorValueTreeState apvts {*this, nullptr, "Parameters", createParameterLayout()};
 
@@ -73,6 +78,7 @@ private:
 
     juce::Synthesiser sinT;
     FXProcessor fxProcessor;
+    MeterData mainGainMeter;
     juce::dsp::Gain<float> mainGain;
 
     //==============================================================================

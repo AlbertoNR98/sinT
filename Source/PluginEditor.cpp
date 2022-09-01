@@ -22,20 +22,25 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
       lfoComponent(audioProcessor.apvts, "LFOFREQ", "LFODEPTH"),
       distortionComponent(audioProcessor.apvts, "DISTORTIONDRIVE", "DISTORTIONRANGE", "DISTORTIONBLEND"),
       delayComponent(audioProcessor.apvts, "DELAYTIMEMS", "DELAYFEEDBACK"),
-      reverbComponent(audioProcessor.apvts, "REVERBROOMSIZE", "REVERBWIDTH", "REVERBDAMPING", "REVERBFREEZEMODE", "REVERBDRYLEVEL", "REVERBWETLEVEL")
+      reverbComponent(audioProcessor.apvts, "REVERBROOMSIZE", "REVERBWIDTH", "REVERBDAMPING", "REVERBFREEZEMODE", "REVERBDRYLEVEL", "REVERBWETLEVEL"),
+      meterComponent([&]()->std::pair<float, float> { return audioProcessor.getMainGainMeterRmsValues(); })
 {
-    setSize (1200, 544); // 600 - 32 (barra RPi OS) - 24 (barra plugin)
+    // Nota: Al constructor de meterComponent se le pasa una funcion lambda que devuelve los valores de RMS utilizando la funcion realizada para ello en audioProcessor. 
+    // MeterComponent apunta a dicha funcion.
 
     addAndMakeVisible(mainGainComponent);
     addAndMakeVisible(osc1Component);
     addAndMakeVisible(osc2Component);
     addAndMakeVisible(ampAdsrComponent);
     //addAndMakeVisible(filterAdsrComponent);
-    addAndMakeVisible(filterComponent);
+    //addAndMakeVisible(filterComponent);
     //addAndMakeVisible(distortionComponent);
     addAndMakeVisible(delayComponent);
     //addAndMakeVisible(lfoComponent);
     addAndMakeVisible(reverbComponent);
+    addAndMakeVisible(meterComponent);
+
+    setSize(1200, 544); // 600 - 32 (barra RPi OS) - 24 (barra plugin)
 }
 
 SinTAudioProcessorEditor::~SinTAudioProcessorEditor()
@@ -55,10 +60,11 @@ void SinTAudioProcessorEditor::resized()
     osc2Component.setBounds(0, getHeight() / 2, getWidth() / 3, getHeight() / 2);
     ampAdsrComponent.setBounds(getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);
     //filterAdsrComponent.setBounds(2 * getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);
-    reverbComponent.setBounds(2 * getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);
-    filterComponent.setBounds(2 * getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
+    //filterComponent.setBounds(2 * getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
     //lfoComponent.setBounds(getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
     //distortionComponent.setBounds(getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
     delayComponent.setBounds(getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
     //reverbComponent.setBounds(getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
+    reverbComponent.setBounds(2 * getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);
+    meterComponent.setBounds(2 * getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
 }

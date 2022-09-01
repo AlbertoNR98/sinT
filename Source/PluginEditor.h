@@ -18,6 +18,7 @@
 #include "GUI/DistortionComponent.h"
 #include "GUI/DelayComponent.h"
 #include "GUI/ReverbComponent.h"
+#include "GUI/MeterComponent.h"
 
 //==============================================================================
 /**
@@ -45,6 +46,8 @@ private:
     DistortionComponent distortionComponent;
     DelayComponent delayComponent;
     ReverbComponent reverbComponent;
+
+    MeterComponent meterComponent;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SinTAudioProcessorEditor)
 };

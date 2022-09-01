@@ -24,6 +24,8 @@
         <FILE id="iXQzcX" name="ADSRData.h" compile="0" resource="0" file="Source/Data/ADSRData.h"/>
         <FILE id="QxRqvT" name="FilterData.cpp" compile="1" resource="0" file="Source/Data/FilterData.cpp"/>
         <FILE id="kBtj2t" name="FilterData.h" compile="0" resource="0" file="Source/Data/FilterData.h"/>
+        <FILE id="abDvAt" name="MeterData.cpp" compile="1" resource="0" file="Source/Data/MeterData.cpp"/>
+        <FILE id="i9uvZ5" name="MeterData.h" compile="0" resource="0" file="Source/Data/MeterData.h"/>
         <FILE id="fiBSNQ" name="OscillatorData.cpp" compile="1" resource="0"
               file="Source/Data/OscillatorData.cpp"/>
         <FILE id="evzS20" name="OscillatorData.h" compile="0" resource="0"
@@ -61,6 +63,10 @@
         <FILE id="l2OlEp" name="LFOComponent.cpp" compile="1" resource="0"
               file="Source/GUI/LFOComponent.cpp"/>
         <FILE id="tmUq0M" name="LFOComponent.h" compile="0" resource="0" file="Source/GUI/LFOComponent.h"/>
+        <FILE id="VVqjOb" name="MeterComponent.cpp" compile="1" resource="0"
+              file="Source/GUI/MeterComponent.cpp"/>
+        <FILE id="ct6A8R" name="MeterComponent.h" compile="0" resource="0"
+              file="Source/GUI/MeterComponent.h"/>
         <FILE id="NHWwiw" name="OscillatorComponent.cpp" compile="1" resource="0"
               file="Source/GUI/OscillatorComponent.cpp"/>
         <FILE id="KbJBe1" name="OscillatorComponent.h" compile="0" resource="0"
