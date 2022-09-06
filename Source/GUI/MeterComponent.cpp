@@ -13,7 +13,8 @@
 //==============================================================================
 MeterComponent::MeterComponent(std::function<std::pair<float, float>()>&& getRmsFunction) : getRmsValues(std::move(getRmsFunction))
 {
-    // getRmsValues apunta a la funcion referenciada (getRmsFunction la referencia en PluginEditor)
+    // getRmsValues contiene a la funcion referenciada (getRmsFunction la referencia en PluginEditor)
+    // std::move transfiere el cuerpo de la funcion a la que referencia getRmsFunction hacia getRmsValues
     startTimerHz(30);
 }
 
@@ -53,9 +54,9 @@ void MeterComponent::resized()
 
     leftGradient = juce::ColourGradient{
         juce::Colours::green,
-        rmsMeterLeftChannel.getBottomRight(),
-        juce::Colours::red,
         rmsMeterLeftChannel.getBottomLeft(),
+        juce::Colours::red,
+        rmsMeterLeftChannel.getBottomRight(),
         false
     };
 
@@ -63,9 +64,9 @@ void MeterComponent::resized()
 
     rightGradient = juce::ColourGradient{
         juce::Colours::green,
-        rmsMeterRightChannel.getBottomRight(),
-        juce::Colours::red,
         rmsMeterRightChannel.getBottomLeft(),
+        juce::Colours::red,
+        rmsMeterRightChannel.getBottomRight(),
         false
     };
 
