@@ -45,12 +45,14 @@ void OscillatorData::setGain(const float oscGainDecibels)
 void OscillatorData::setPitch(const int newOscPitch)
 {
     oscPitch = newOscPitch;
-    setFrequency(juce::MidiMessage::getMidiNoteInHertz(lastMidiNote + oscPitch) + fmModulationValue);
+    //setFrequency(juce::MidiMessage::getMidiNoteInHertz(lastMidiNote + oscPitch) + fmModulationValue, true);   // Sin portamento
+    setFrequency(juce::MidiMessage::getMidiNoteInHertz(lastMidiNote + oscPitch) + fmModulationValue);   // Con portamento
 }
 
 void OscillatorData::setWaveFreq(const int midiNoteNumber)
 {
-    setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber + oscPitch) + fmModulationValue);
+    //setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber + oscPitch) + fmModulationValue, true); // Sin portamento
+    setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber + oscPitch) + fmModulationValue); // Con portamento
     lastMidiNote = midiNoteNumber;
 }
 
