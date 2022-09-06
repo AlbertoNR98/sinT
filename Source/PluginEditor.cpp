@@ -21,6 +21,7 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
       filterComponent(audioProcessor.apvts, "FILTERMODE", "FILTERCUTOFFFREQ", "FILTERRESONANCE"),
       lfoComponent(audioProcessor.apvts, "LFOFREQ", "LFODEPTH"),
       distortionComponent(audioProcessor.apvts, "DISTORTIONDRIVE", "DISTORTIONRANGE", "DISTORTIONBLEND"),
+      chorusComponent(audioProcessor.apvts, "CHORUSRATE", "CHORUSDEPTH", "CHORUSCENTREDELAY", "CHORUSFEEDBACK", "CHORUSMIX"),
       delayComponent(audioProcessor.apvts, "DELAYTIMEMS", "DELAYFEEDBACK"),
       reverbComponent(audioProcessor.apvts, "REVERBROOMSIZE", "REVERBWIDTH", "REVERBDAMPING", "REVERBFREEZEMODE", "REVERBDRYLEVEL", "REVERBWETLEVEL"),
       meterComponent([&]()->std::pair<float, float> { return audioProcessor.getMainGainMeterRmsValues(); })
@@ -35,6 +36,7 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
     //addAndMakeVisible(filterAdsrComponent);
     //addAndMakeVisible(filterComponent);
     //addAndMakeVisible(distortionComponent);
+    addAndMakeVisible(chorusComponent);
     addAndMakeVisible(delayComponent);
     //addAndMakeVisible(lfoComponent);
     addAndMakeVisible(reverbComponent);
@@ -65,6 +67,7 @@ void SinTAudioProcessorEditor::resized()
     //distortionComponent.setBounds(getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
     delayComponent.setBounds(getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
     //reverbComponent.setBounds(getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
-    reverbComponent.setBounds(2 * getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);
+    //reverbComponent.setBounds(2 * getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);
+    chorusComponent.setBounds(2 * getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);
     meterComponent.setBounds(2 * getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
 }

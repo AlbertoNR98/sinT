@@ -12,6 +12,7 @@
 
 #include <JuceHeader.h>
 #include "FX/DistortionData.h"
+#include "FX/ChorusData.h"
 #include "FX/DelayData.h"
 #include "FX/ReverbData.h"
 
@@ -23,6 +24,7 @@ public:
     void setDefaultParameters();
 
     void setDistortionParameters(float drive, float range, float blend);
+    void setChorusParameters(float rate, float depth, float centreDelay, float feedback, float mix);
     void setDelayParameters(float timeMs, float feedback);
     void setReverbParameters(float roomSize, float width, float damping, float freezeMode, float dryLevel, float wetLevel);
 
@@ -32,6 +34,7 @@ public:
 
 private:
     DistortionData distortion;
+    ChorusData chorus;
     DelayData delay;
     ReverbData reverb;
 };

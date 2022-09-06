@@ -16,6 +16,7 @@
 #include "GUI/FilterComponent.h"
 #include "GUI/LFOComponent.h"
 #include "GUI/DistortionComponent.h"
+#include "GUI/ChorusComponent.h"
 #include "GUI/DelayComponent.h"
 #include "GUI/ReverbComponent.h"
 #include "GUI/MeterComponent.h"
@@ -44,6 +45,7 @@ private:
     FilterComponent filterComponent;
     LFOComponent lfoComponent;
     DistortionComponent distortionComponent;
+    ChorusComponent chorusComponent;
     DelayComponent delayComponent;
     ReverbComponent reverbComponent;
 

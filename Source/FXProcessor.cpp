@@ -11,14 +11,16 @@
 
 void FXProcessor::prepareToPlay(juce::dsp::ProcessSpec& spec)
 {
-    reverb.prepareToPlay(spec);
+    chorus.prepareToPlay(spec);
     delay.prepareToPlay(spec);
+    reverb.prepareToPlay(spec);
     setDefaultParameters();
 }
 
 void FXProcessor::setDefaultParameters()
 {
     distortion.setDefaultParameters();
+    chorus.setDefaultParameters();
     delay.setDefaultParameters();
     reverb.setDefaultParameters();
 }
@@ -26,6 +28,11 @@ void FXProcessor::setDefaultParameters()
 void FXProcessor::setDistortionParameters(float drive, float range, float blend)
 {
     distortion.setParameters(drive, range, blend);
+}
+
+void FXProcessor::setChorusParameters(float rate, float depth, float centreDelay, float feedback, float mix)
+{
+    chorus.setParameters(rate, depth, centreDelay, feedback, mix);
 }
 
 void FXProcessor::setDelayParameters(float timeMs, float feedback)
@@ -41,6 +48,7 @@ void FXProcessor::setReverbParameters(float roomSize, float width, float damping
 void FXProcessor::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
 {
     distortion.renderNextBlock(audioBlock);
+    chorus.renderNextBlock(audioBlock);
     delay.renderNextBlock(audioBlock);
     reverb.renderNextBlock(audioBlock);
 }

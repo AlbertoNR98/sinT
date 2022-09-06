@@ -32,6 +32,8 @@
               file="Source/Data/OscillatorData.h"/>
       </GROUP>
       <GROUP id="{4BE66EC9-BE7E-1A14-06EC-BEE4F8CD766F}" name="FX">
+        <FILE id="nIZCQg" name="ChorusData.cpp" compile="1" resource="0" file="Source/FX/ChorusData.cpp"/>
+        <FILE id="b1j4X8" name="ChorusData.h" compile="0" resource="0" file="Source/FX/ChorusData.h"/>
         <FILE id="VhnRtq" name="DelayData.cpp" compile="1" resource="0" file="Source/FX/DelayData.cpp"/>
         <FILE id="lRyz1Y" name="DelayData.h" compile="0" resource="0" file="Source/FX/DelayData.h"/>
         <FILE id="p8WFhr" name="DistortionData.cpp" compile="1" resource="0"
@@ -45,6 +47,10 @@
         <FILE id="NKTL7Z" name="ADSRComponent.cpp" compile="1" resource="0"
               file="Source/GUI/ADSRComponent.cpp"/>
         <FILE id="tatXnk" name="ADSRComponent.h" compile="0" resource="0" file="Source/GUI/ADSRComponent.h"/>
+        <FILE id="LM6gYV" name="ChorusComponent.cpp" compile="1" resource="0"
+              file="Source/GUI/ChorusComponent.cpp"/>
+        <FILE id="U1wMgm" name="ChorusComponent.h" compile="0" resource="0"
+              file="Source/GUI/ChorusComponent.h"/>
         <FILE id="zrRO3t" name="DelayComponent.cpp" compile="1" resource="0"
               file="Source/GUI/DelayComponent.cpp"/>
         <FILE id="P6Ywqs" name="DelayComponent.h" compile="0" resource="0"
