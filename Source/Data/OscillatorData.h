@@ -27,7 +27,7 @@ public:
     void setGain(const float oscGainDecibels);
     void setPitch(const int newOscPitch);
     void setPitchWheel(const int newPitchWheel);
-    void setWaveFreq(const int midiNoteNumber);
+    void setWaveFreq(const int midiNoteNumber, const int currentPitchWheelPosition);
     void setFmSynthesis(const float fmFreq, const float fmDepth);
     void setParameters(const int selectWaveform, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth);
     float renderNextSample(float inputSample);
@@ -37,7 +37,7 @@ public:
 private:
     juce::dsp::Gain<float> oscGain;
     int oscPitch{ 0 };
-    float lastPitchWheel{ 1.0 };
+    int lastPitchWheel{ 8192 };
     int lastMidiNote{ 0 };
 
     juce::dsp::Oscillator<float> fmOperator { [](float x) {return std::sin(x); } };

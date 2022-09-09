@@ -45,31 +45,30 @@ void OscillatorData::setGain(const float oscGainDecibels)
 void OscillatorData::setPitch(const int newOscPitch)
 {
     oscPitch = newOscPitch;
-    setFrequency(lastPitchWheel * (juce::MidiMessage::getMidiNoteInHertz(lastMidiNote + oscPitch) + fmModulationValue), true);   // Sin portamento
-    //setFrequency(lastPitchWheel * (juce::MidiMessage::getMidiNoteInHertz(lastMidiNote + oscPitch) + fmModulationValue));   // Con portamento
+    auto pitchWheelRatio = juce::jmap(static_cast<float>(lastPitchWheel), 0.0f, 16383.0f, FREQ_LRATIO, FREQ_HRATIO);
+    setFrequency(pitchWheelRatio * (juce::MidiMessage::getMidiNoteInHertz(lastMidiNote + oscPitch) + fmModulationValue), true);   // Sin portamento
+    //setFrequency(pitchWheelRatio * (juce::MidiMessage::getMidiNoteInHertz(lastMidiNote + oscPitch) + fmModulationValue));   // Con portamento
 }
 
 void OscillatorData::setPitchWheel(const int newPitchWheel)
 {
-    if (newPitchWheel == 8192)  // Valor medio 
-    {
-        lastPitchWheel = 1.0f;
-        return;
-    }
-
     // Map entre los valores que devuelve la rueda y el factor de relacion entre frecuencia e intervalo.
     // La rueda sube/baja un tono. Con una frecuencia f, la nueva frecuencia ira de 1/2(2^12) * f a 2(2^12) * f
-    lastPitchWheel = juce::jmap(static_cast<float>(newPitchWheel), 0.0f, 16383.0f, FREQ_LRATIO, FREQ_HRATIO);
-    setFrequency(lastPitchWheel * (juce::MidiMessage::getMidiNoteInHertz(lastMidiNote + oscPitch) + fmModulationValue), true);   // Sin portamento
-    //setFrequency(lastPitchWheel * (juce::MidiMessage::getMidiNoteInHertz(lastMidiNote + oscPitch) + fmModulationValue));   // Con portamento
+    lastPitchWheel = newPitchWheel;
 }
 
 
-void OscillatorData::setWaveFreq(const int midiNoteNumber)
+void OscillatorData::setWaveFreq(const int midiNoteNumber, const int currentPitchWheelPosition)
 {
-    setFrequency(lastPitchWheel * (juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber + oscPitch) + fmModulationValue), true); // Sin portamento
-    //setFrequency(lastPitchWheel * (juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber + oscPitch) + fmModulationValue)); // Con portamento
+    lastPitchWheel = currentPitchWheelPosition;
+
+    auto pitchWheelRatio = juce::jmap(static_cast<float>(lastPitchWheel), 0.0f, 16383.0f, FREQ_LRATIO, FREQ_HRATIO);
+    setFrequency(pitchWheelRatio * (juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber + oscPitch) + fmModulationValue), true); // Sin portamento
+    //setFrequency(pitchWheelRatio * (juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber + oscPitch) + fmModulationValue)); // Con portamento
+
     lastMidiNote = midiNoteNumber;
+
+    //DBG(lastPitchWheel);
 }
 
 void OscillatorData::setFmSynthesis(const float fmFreq, const float fmDepth)

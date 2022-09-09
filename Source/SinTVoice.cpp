@@ -18,8 +18,8 @@ void SinTVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserS
 {
     for (int channel = 0; channel < numVoiceChannels; channel++)
     {
-        osc1[channel].setWaveFreq(midiNoteNumber);
-        osc2[channel].setWaveFreq(midiNoteNumber);
+        osc1[channel].setWaveFreq(midiNoteNumber, currentPitchWheelPosition);
+        osc2[channel].setWaveFreq(midiNoteNumber, currentPitchWheelPosition);
     }
 
     ampAdsr.noteOn();
@@ -37,7 +37,6 @@ void SinTVoice::stopNote(float velocity, bool allowTailOff)
 
 void SinTVoice::controllerMoved(int controllerNumber, int newControllerValue)
 {
-
 }
 
 void SinTVoice::pitchWheelMoved(int newPitchWheelValue)
@@ -71,7 +70,15 @@ void SinTVoice::prepareToPlay(juce::dsp::ProcessSpec& spec)
 
 void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 {
-    if (!isVoiceActive()) return; 
+    if (!isVoiceActive())
+    {
+        for (int channel = 0; channel < numVoiceChannels; channel++)
+        {
+            osc1[channel].setPitchWheel(8192);  // Valor intermedio (ratio 1)
+            osc2[channel].setPitchWheel(8192);
+        }
+        return;
+    }
 
     voiceBuffer.setSize(outputBuffer.getNumChannels(), numSamples, false, false, true);
     
