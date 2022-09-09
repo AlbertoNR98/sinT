@@ -16,6 +16,9 @@ static constexpr int SINE_WF{ 0 };
 static constexpr int SAW_WF{ 1 };
 static constexpr int SQUARE_WF{ 2 };
 
+static constexpr float FREQ_LRATIO{ 0.890898718 };  // 1/2^(2/12)
+static constexpr float FREQ_HRATIO{ 1.122462048 };  // 2^(2/12)
+
 class OscillatorData : public juce::dsp::Oscillator<float>
 {
 public:
@@ -23,6 +26,7 @@ public:
     void setWaveform(const int selectWaveform);
     void setGain(const float oscGainDecibels);
     void setPitch(const int newOscPitch);
+    void setPitchWheel(const int newPitchWheel);
     void setWaveFreq(const int midiNoteNumber);
     void setFmSynthesis(const float fmFreq, const float fmDepth);
     void setParameters(const int selectWaveform, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth);
@@ -33,6 +37,7 @@ public:
 private:
     juce::dsp::Gain<float> oscGain;
     int oscPitch{ 0 };
+    float lastPitchWheel{ 1.0 };
     int lastMidiNote{ 0 };
 
     juce::dsp::Oscillator<float> fmOperator { [](float x) {return std::sin(x); } };

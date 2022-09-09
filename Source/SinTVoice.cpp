@@ -42,7 +42,11 @@ void SinTVoice::controllerMoved(int controllerNumber, int newControllerValue)
 
 void SinTVoice::pitchWheelMoved(int newPitchWheelValue)
 {
-
+    for (int channel = 0; channel < numVoiceChannels; channel++)
+    {
+        osc1[channel].setPitchWheel(newPitchWheelValue);
+        osc2[channel].setPitchWheel(newPitchWheelValue);
+    }
 }
 
 void SinTVoice::prepareToPlay(juce::dsp::ProcessSpec& spec)
