@@ -13,7 +13,7 @@
 SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
     : AudioProcessorEditor (&p), 
       audioProcessor (p), 
-      mainGainComponent(audioProcessor.apvts, "MAINGAIN"),
+      mainControlComponent(audioProcessor.apvts, "MAINGAIN", "PORTAMENTO"),
       osc1Component(audioProcessor.apvts, "OSC1WF", "OSC1GAINDB", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH"),
       osc2Component(audioProcessor.apvts, "OSC2WF", "OSC2GAINDB", "OSC2PITCH", "OSC2FMFREQ", "OSC2FMDEPTH"),
       ampAdsrComponent(audioProcessor.apvts, "AMPADSRATTACK", "AMPADSRDECAY", "AMPADSRSUSTAIN", "AMPADSRRELEASE"),
@@ -29,7 +29,7 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
     // Nota: Al constructor de meterComponent se le pasa una funcion lambda que devuelve los valores de RMS utilizando la funcion realizada para ello en audioProcessor. 
     // MeterComponent apunta a dicha funcion.
 
-    addAndMakeVisible(mainGainComponent);
+    addAndMakeVisible(mainControlComponent);
     addAndMakeVisible(osc1Component);
     addAndMakeVisible(osc2Component);
     addAndMakeVisible(ampAdsrComponent);
@@ -59,7 +59,7 @@ void SinTAudioProcessorEditor::paint (juce::Graphics& g)
 void SinTAudioProcessorEditor::resized()
 {
     /*
-    mainGainComponent.setBounds(0, 0, getWidth() / 3, 30);
+    mainControlComponent.setBounds(0, 0, getWidth() / 3, 30);
     osc1Component.setBounds(0, 30, getWidth() / 3, (getHeight() / 2) - 30);
     osc2Component.setBounds(0, getHeight() / 2, getWidth() / 3, getHeight() / 2);
     ampAdsrComponent.setBounds(getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);
@@ -86,6 +86,6 @@ void SinTAudioProcessorEditor::resized()
 
     filterComponent.setBounds(0, 2 * getHeight() / 3, getWidth() / 4, getHeight() / 3);
     filterAdsrComponent.setBounds(getWidth() / 4, 2 * getHeight() / 3, getWidth() / 4, getHeight() / 3);
-    mainGainComponent.setBounds(2 * getWidth() / 4, 2 * getHeight() / 3, getWidth() / 4, getHeight() / 3);
+    mainControlComponent.setBounds(2 * getWidth() / 4, 2 * getHeight() / 3, getWidth() / 4, getHeight() / 3);
     meterComponent.setBounds(3 * getWidth() / 4, 2 * getHeight() / 3, getWidth() / 4, getHeight() / 3);
 }

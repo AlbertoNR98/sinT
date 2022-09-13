@@ -206,8 +206,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
 
-    // Ganancia general
+    // Controles generales
     layout.add(std::make_unique<juce::AudioParameterFloat>("MAINGAIN", "MainGain", juce::NormalisableRange<float> {-60.0f, 12.0f, 0.1f}, 0.0f, "dB"));
+    layout.add(std::make_unique<juce::AudioParameterBool>("PORTAMENTO", "Portamento", false));
 
     // Oscilador 1
     layout.add(std::make_unique<juce::AudioParameterChoice>("OSC1WF", "Oscillator1Waveform", juce::StringArray { "Sine", "Saw", "Square" }, 0));
@@ -286,6 +287,9 @@ void SinTAudioProcessor::setVoiceParameters()
     {
         if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(indexVoice)))
         {
+            // Portamento
+            auto& portamento = *apvts.getRawParameterValue("PORTAMENTO");
+
             // Amp ADSR
             auto& ampAdsrAttack = *apvts.getRawParameterValue("AMPADSRATTACK");
             auto& ampAdsrDecay = *apvts.getRawParameterValue("AMPADSRDECAY");
@@ -321,8 +325,8 @@ void SinTAudioProcessor::setVoiceParameters()
 
             for (int channel = 0; channel < getTotalNumOutputChannels(); channel++)
             {
-                osc1[channel].setParameters(osc1WaveSelect, osc1GainDecibels, osc1Pitch, osc1FmFreq, osc1FmDepth);
-                osc2[channel].setParameters(osc2WaveSelect, osc2GainDecibels, osc2Pitch, osc2FmFreq, osc2FmDepth);
+                osc1[channel].setParameters(osc1WaveSelect, portamento, osc1GainDecibels, osc1Pitch, osc1FmFreq, osc1FmDepth);
+                osc2[channel].setParameters(osc2WaveSelect, portamento, osc2GainDecibels, osc2Pitch, osc2FmFreq, osc2FmDepth);
             }
 
             ampAdsr.update(ampAdsrAttack.load(), ampAdsrDecay.load(), ampAdsrSustain.load(), ampAdsrRelease.load());

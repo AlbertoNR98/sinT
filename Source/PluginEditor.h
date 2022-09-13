@@ -10,7 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
-#include "GUI/GainComponent.h"
+#include "GUI/MainControlComponent.h"
 #include "GUI/ADSRComponent.h"
 #include "GUI/OscillatorComponent.h"
 #include "GUI/FilterComponent.h"
@@ -37,7 +37,7 @@ public:
 private:
     SinTAudioProcessor& audioProcessor;
 
-    GainComponent mainGainComponent;
+    MainControlComponent mainControlComponent;
     OscillatorComponent osc1Component;
     OscillatorComponent osc2Component;
     ADSRComponent ampAdsrComponent;

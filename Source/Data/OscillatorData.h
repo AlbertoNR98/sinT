@@ -29,7 +29,7 @@ public:
     void setPitchWheel(const int newPitchWheel);
     void setWaveFreq(const int midiNoteNumber, const int currentPitchWheelPosition);
     void setFmSynthesis(const float fmFreq, const float fmDepth);
-    void setParameters(const int selectWaveform, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth);
+    void setParameters(const int selectWaveform, const bool portamento, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth);
     float renderNextSample(float inputSample);
 
     void resetAll();
@@ -37,10 +37,12 @@ public:
 private:
     juce::dsp::Gain<float> oscGain;
     int oscPitch{ 0 };
+    bool portamento{ false };
     int lastPitchWheel{ 8192 };
     int lastMidiNote{ 0 };
 
     juce::dsp::Oscillator<float> fmOperator { [](float x) {return std::sin(x); } };
     float fmModulationValue{ 0.0f };
+    float fmFreq{ 0.0f };
     float fmDepth{ 0.0f };
 };

@@ -72,11 +72,8 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
 {
     if (!isVoiceActive())
     {
-        for (int channel = 0; channel < numVoiceChannels; channel++)
-        {
-            osc1[channel].setPitchWheel(8192);  // Valor intermedio (ratio 1)
-            osc2[channel].setPitchWheel(8192);
-        }
+        resetAll();
+
         return;
     }
 
@@ -144,6 +141,13 @@ void SinTVoice::setFilterModulationParameters(const int filterMode, const float 
 
 void SinTVoice::resetAll()
 {
+    // Reset de pitch wheel
+    for (int channel = 0; channel < numVoiceChannels; channel++)
+    {
+        osc1[channel].setPitchWheel(8192);  // Valor intermedio (ratio 1)
+        osc2[channel].setPitchWheel(8192);
+    }
+
     voiceGain.reset();
     ampAdsr.reset();
     filterAdsr.reset();
