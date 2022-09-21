@@ -59,9 +59,9 @@ void SinTVoice::prepareToPlay(juce::dsp::ProcessSpec& spec)
     {
         osc1[channel].prepareToPlay(spec);
         osc2[channel].prepareToPlay(spec);
+        filter[channel].prepareToPlay(spec);
         lfo[channel].prepare(spec);
         lfo[channel].initialise([](float x) {return std::sin(x); });
-        filter[channel].prepare(spec);
     }
 
     voiceGain.prepare(spec);
@@ -78,7 +78,7 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
     }
 
     voiceBuffer.setSize(outputBuffer.getNumChannels(), numSamples, false, false, true);
-    
+
     // Procesamiento de Filter ADSR
     filterAdsr.applyEnvelopeToBuffer(voiceBuffer, 0, voiceBuffer.getNumSamples());
     filterAdsrOutput = filterAdsr.getNextSample();
@@ -96,6 +96,9 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
         }
     }
     
+    // Procesamiento de ganancia
+    voiceGain.process(juce::dsp::ProcessContextReplacing<float>(juce::dsp::AudioBlock<float>{voiceBuffer}));
+
     // Procesamiento de AMP ADSR
     ampAdsr.applyEnvelopeToBuffer(voiceBuffer, 0, voiceBuffer.getNumSamples());
     
@@ -110,9 +113,6 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
             voiceBuffer.setSample(channel, sampleIndex, sampleProcessed);
         }
     }
-
-    // Procesamiento de ganancia
-    voiceGain.process(juce::dsp::ProcessContextReplacing<float>(juce::dsp::AudioBlock<float>{voiceBuffer}));
 
     // Agrega al buffer de salida
     for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
@@ -131,7 +131,7 @@ void SinTVoice::setFilterModulationParameters(const int filterMode, const float 
     for (int channel = 0; channel < numVoiceChannels; ++channel)
     {
         // Frecuencia de corte modulada por filter ADSR y LFO
-        lfo[channel].setFrequency(lfoFreq);
+        lfo[channel].setFrequency(lfoFreq, true);
         float cutoffFreqAdsrLfoMod = (lfoDepth * lfoOutput[channel]) + cutoffFreqAdsrMod;
         cutoffFreqAdsrLfoMod = std::clamp<float>(cutoffFreqAdsrLfoMod, 20.0f, 20000.0f);
         
@@ -142,7 +142,7 @@ void SinTVoice::setFilterModulationParameters(const int filterMode, const float 
 void SinTVoice::resetAll()
 {
     // Reset de pitch wheel
-    for (int channel = 0; channel < numVoiceChannels; channel++)
+    for (int channel = 0; channel < numVoiceChannels; ++channel)
     {
         osc1[channel].setPitchWheel(8192);  // Valor intermedio (ratio 1)
         osc2[channel].setPitchWheel(8192);

@@ -33,12 +33,12 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
     addAndMakeVisible(osc1Component);
     addAndMakeVisible(osc2Component);
     addAndMakeVisible(ampAdsrComponent);
-    //addAndMakeVisible(filterAdsrComponent);
-    //addAndMakeVisible(filterComponent);
+    addAndMakeVisible(filterAdsrComponent);
+    addAndMakeVisible(filterComponent);
     addAndMakeVisible(distortionComponent);
     addAndMakeVisible(chorusComponent);
-    //addAndMakeVisible(delayComponent);
-    //addAndMakeVisible(lfoComponent);
+    addAndMakeVisible(delayComponent);
+    addAndMakeVisible(lfoComponent);
     addAndMakeVisible(reverbComponent);
     addAndMakeVisible(meterComponent);
 

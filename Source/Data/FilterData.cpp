@@ -16,15 +16,14 @@ FilterData::FilterData()
 
 void FilterData::prepareToPlay(juce::dsp::ProcessSpec& spec)
 {
-    reset();
     prepare(spec);
 }
 
 void FilterData::setParameters(const int filterMode, const float cutoffFreq, const float filterResonance)
 {
-    setMode(filterMode);
     setCutoffFrequency(cutoffFreq);
     setResonance(filterResonance);
+    setMode(filterMode);
 }
 
 void FilterData::renderNextBlock(juce::AudioBuffer<float>& buffer)
