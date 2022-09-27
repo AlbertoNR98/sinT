@@ -34,7 +34,7 @@ void DistortionData::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
         {
             float cleanSample = audioBlock.getSample(channel, sampleIndex);
             float distortedSample = cleanSample * drive * range;
-            distortedSample = (((2.0f / juce::float_Pi) * atan(distortedSample)) * blend) + (cleanSample * (1.0f - blend));
+            distortedSample = (((2.0f / juce::MathConstants<float>::pi) * atan(distortedSample)) * blend) + (cleanSample * (1.0f - blend));
             audioBlock.setSample(channel, sampleIndex, distortedSample);
         }
     }
