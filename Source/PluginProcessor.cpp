@@ -193,12 +193,23 @@ void SinTAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+
+    // Guarda el estado de APVTS en un bloque de memoria
+    juce::MemoryOutputStream mos(destData, true);
+    apvts.state.writeToStream(mos);
 }
 
 void SinTAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+
+    auto tree = juce::ValueTree::readFromData(data, sizeInBytes);
+    if (tree.isValid())
+    {
+        apvts.replaceState(tree);
+        setSinTParameters();
+    }
 }
 
 //==============================================================================
@@ -240,7 +251,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     // Filtro
     layout.add(std::make_unique<juce::AudioParameterChoice>("FILTERMODE", "FilterMode", juce::StringArray{ "LPF", "BPF", "HPF" }, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERCUTOFFFREQ", "FilterCutoffFreq", juce::NormalisableRange<float> {20.0f, 20000.0f, 0.01f, 0.5f}, 20000.0f, "Hz"));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERRESONANCE", "FilterResonance", juce::NormalisableRange<float> {0.3f, 20.0f, 0.01f, 0.5}, 1.0f / juce::MathConstants<double>::sqrt2, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERRESONANCE", "FilterResonance", juce::NormalisableRange<float> {0.3f, 20.0f, 0.01f, 0.5}, 1.0f / juce::MathConstants<float>::sqrt2, ""));
     
     // LFO
     layout.add(std::make_unique<juce::AudioParameterFloat>("LFOFREQ", "LFOFreq", juce::NormalisableRange<float> {0.0f, 20.0f, 0.1f}, 0.0f, "Hz"));
