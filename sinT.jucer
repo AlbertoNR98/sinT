@@ -45,44 +45,44 @@
       </GROUP>
       <GROUP id="{6B4C42CC-A6E5-0991-D2E8-C1E26CB890A8}" name="GUI">
         <GROUP id="{83A64210-9666-8E6F-54CC-782EA2432656}" name="Components">
-          <FILE id="NKTL7Z" name="ADSRComponent.cpp" compile="1" resource="0"
-                file="Source/GUI/ADSRComponent.cpp"/>
-          <FILE id="tatXnk" name="ADSRComponent.h" compile="0" resource="0" file="Source/GUI/ADSRComponent.h"/>
-          <FILE id="LM6gYV" name="ChorusComponent.cpp" compile="1" resource="0"
-                file="Source/GUI/ChorusComponent.cpp"/>
-          <FILE id="U1wMgm" name="ChorusComponent.h" compile="0" resource="0"
-                file="Source/GUI/ChorusComponent.h"/>
-          <FILE id="zrRO3t" name="DelayComponent.cpp" compile="1" resource="0"
-                file="Source/GUI/DelayComponent.cpp"/>
-          <FILE id="P6Ywqs" name="DelayComponent.h" compile="0" resource="0"
-                file="Source/GUI/DelayComponent.h"/>
-          <FILE id="sDb7Zs" name="DistortionComponent.cpp" compile="1" resource="0"
-                file="Source/GUI/DistortionComponent.cpp"/>
-          <FILE id="UM3eN7" name="DistortionComponent.h" compile="0" resource="0"
-                file="Source/GUI/DistortionComponent.h"/>
-          <FILE id="XMuq48" name="FilterComponent.cpp" compile="1" resource="0"
-                file="Source/GUI/FilterComponent.cpp"/>
-          <FILE id="TWJwPe" name="FilterComponent.h" compile="0" resource="0"
-                file="Source/GUI/FilterComponent.h"/>
-          <FILE id="KUsgng" name="MainControlComponent.cpp" compile="1" resource="0"
-                file="Source/GUI/MainControlComponent.cpp"/>
-          <FILE id="XGfX54" name="MainControlComponent.h" compile="0" resource="0"
-                file="Source/GUI/MainControlComponent.h"/>
-          <FILE id="l2OlEp" name="LFOComponent.cpp" compile="1" resource="0"
-                file="Source/GUI/LFOComponent.cpp"/>
-          <FILE id="tmUq0M" name="LFOComponent.h" compile="0" resource="0" file="Source/GUI/LFOComponent.h"/>
-          <FILE id="VVqjOb" name="MeterComponent.cpp" compile="1" resource="0"
-                file="Source/GUI/MeterComponent.cpp"/>
-          <FILE id="ct6A8R" name="MeterComponent.h" compile="0" resource="0"
-                file="Source/GUI/MeterComponent.h"/>
-          <FILE id="NHWwiw" name="OscillatorComponent.cpp" compile="1" resource="0"
-                file="Source/GUI/OscillatorComponent.cpp"/>
-          <FILE id="KbJBe1" name="OscillatorComponent.h" compile="0" resource="0"
-                file="Source/GUI/OscillatorComponent.h"/>
-          <FILE id="QB9Tto" name="ReverbComponent.cpp" compile="1" resource="0"
-                file="Source/GUI/ReverbComponent.cpp"/>
-          <FILE id="wa2dvn" name="ReverbComponent.h" compile="0" resource="0"
-                file="Source/GUI/ReverbComponent.h"/>
+          <FILE id="kQK1Ag" name="ADSRComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/ADSRComponent.cpp"/>
+          <FILE id="q6mx8L" name="ADSRComponent.h" compile="0" resource="0" file="Source/GUI/Components/ADSRComponent.h"/>
+          <FILE id="qhcG8x" name="ChorusComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/ChorusComponent.cpp"/>
+          <FILE id="jZoHZf" name="ChorusComponent.h" compile="0" resource="0"
+                file="Source/GUI/Components/ChorusComponent.h"/>
+          <FILE id="IYHLLi" name="DelayComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/DelayComponent.cpp"/>
+          <FILE id="OlmNfb" name="DelayComponent.h" compile="0" resource="0"
+                file="Source/GUI/Components/DelayComponent.h"/>
+          <FILE id="q6jz91" name="DistortionComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/DistortionComponent.cpp"/>
+          <FILE id="EwTkvc" name="DistortionComponent.h" compile="0" resource="0"
+                file="Source/GUI/Components/DistortionComponent.h"/>
+          <FILE id="kUD79I" name="FilterComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/FilterComponent.cpp"/>
+          <FILE id="BwkJhT" name="FilterComponent.h" compile="0" resource="0"
+                file="Source/GUI/Components/FilterComponent.h"/>
+          <FILE id="N0DkN3" name="LFOComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/LFOComponent.cpp"/>
+          <FILE id="Yj1QhT" name="LFOComponent.h" compile="0" resource="0" file="Source/GUI/Components/LFOComponent.h"/>
+          <FILE id="YVjneB" name="MainControlComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/MainControlComponent.cpp"/>
+          <FILE id="RHMg5q" name="MainControlComponent.h" compile="0" resource="0"
+                file="Source/GUI/Components/MainControlComponent.h"/>
+          <FILE id="J1PH7C" name="MeterComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/MeterComponent.cpp"/>
+          <FILE id="rtXAb4" name="MeterComponent.h" compile="0" resource="0"
+                file="Source/GUI/Components/MeterComponent.h"/>
+          <FILE id="Me9pEw" name="OscillatorComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/OscillatorComponent.cpp"/>
+          <FILE id="KtIvA2" name="OscillatorComponent.h" compile="0" resource="0"
+                file="Source/GUI/Components/OscillatorComponent.h"/>
+          <FILE id="tGwhq2" name="ReverbComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/ReverbComponent.cpp"/>
+          <FILE id="rfrzXP" name="ReverbComponent.h" compile="0" resource="0"
+                file="Source/GUI/Components/ReverbComponent.h"/>
         </GROUP>
         <GROUP id="{C2DC3711-FC35-785F-A6EA-261550ED4961}" name="Views"/>
       </GROUP>

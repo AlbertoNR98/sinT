@@ -10,16 +10,16 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
-#include "GUI/MainControlComponent.h"
-#include "GUI/ADSRComponent.h"
-#include "GUI/OscillatorComponent.h"
-#include "GUI/FilterComponent.h"
-#include "GUI/LFOComponent.h"
-#include "GUI/DistortionComponent.h"
-#include "GUI/ChorusComponent.h"
-#include "GUI/DelayComponent.h"
-#include "GUI/ReverbComponent.h"
-#include "GUI/MeterComponent.h"
+#include "GUI/Components/MainControlComponent.h"
+#include "GUI/Components/ADSRComponent.h"
+#include "GUI/Components/OscillatorComponent.h"
+#include "GUI/Components/FilterComponent.h"
+#include "GUI/Components/LFOComponent.h"
+#include "GUI/Components/DistortionComponent.h"
+#include "GUI/Components/ChorusComponent.h"
+#include "GUI/Components/DelayComponent.h"
+#include "GUI/Components/ReverbComponent.h"
+#include "GUI/Components/MeterComponent.h"
 
 //==============================================================================
 /**
