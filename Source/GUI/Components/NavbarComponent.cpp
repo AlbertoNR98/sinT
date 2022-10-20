@@ -16,7 +16,8 @@ NavbarComponent::NavbarComponent(SinTAudioProcessor& audioProcessor, ContainerCo
     containerComponent(c), 
     showSidePanel("Sidepanel", "Show Sidepanel"), 
     settingsButton("Settings", juce::Colours::transparentBlack, juce::Colours::transparentBlack, juce::Colours::transparentBlack),
-    gainMeterComponent([&]()->std::pair<float, float> { return audioProcessor.getMainGainMeterRmsValues(); })
+    gainMeter([&]()->std::pair<float, float> { return audioProcessor.getMainGainMeterRmsValues(); }),
+    mainControl(audioProcessor.apvts, "MAINGAIN", "PORTAMENTO")
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -43,6 +44,9 @@ NavbarComponent::NavbarComponent(SinTAudioProcessor& audioProcessor, ContainerCo
 
     addAndMakeVisible(showSidePanel);
     addAndMakeVisible(settingsButton);
+    addAndMakeVisible(gainMeter);
+    addAndMakeVisible(mainControl);
+
     showSidePanel.addListener(this);
     settingsButton.addListener(this);
 }
@@ -83,8 +87,11 @@ void NavbarComponent::resized()
     // components that your component contains..
     auto sidePanelButtonBound = getLocalBounds().removeFromTop(30).removeFromLeft(150);
     auto settingsButtonBound = getLocalBounds().removeFromTop(30).removeFromRight(150);
+    auto gainMeterBound = 0;    // TO-DO
     showSidePanel.setBounds(sidePanelButtonBound);
     settingsButton.setBounds(settingsButtonBound);
+    //gainMeter.setBounds(300, 0, getWidth() / 4, getHeight());  //TO-DO -> Corregir MeterComponent para que se adapte bien al Navbar
+    mainControl.setBounds(300, 0, getWidth() / 4, getHeight());
 }
 
 void NavbarComponent::buttonClicked(juce::Button* btn)

@@ -28,7 +28,9 @@ MainControlComponent::~MainControlComponent()
 
 void MainControlComponent::paint (juce::Graphics& g)
 {
-    g.fillAll (juce::Colours::black);
+    //g.fillAll (juce::Colours::black);
+    //g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
+    g.fillAll(juce::Colours::blueviolet);
 }
 
 void MainControlComponent::resized()

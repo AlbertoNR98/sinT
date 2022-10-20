@@ -14,7 +14,9 @@
 
 #include "../Source/PluginProcessor.h"
 #include "ContainerComponent.h"
+
 #include "MeterComponent.h"
+#include "MainControlComponent.h"
 
 //==============================================================================
 /*
@@ -41,7 +43,8 @@ public:
 private:
     juce::TextButton showSidePanel;
     juce::ShapeButton settingsButton;
-    MeterComponent gainMeterComponent;
+    MeterComponent gainMeter;
+    MainControlComponent mainControl;
 
     ContainerComponent& containerComponent;
 

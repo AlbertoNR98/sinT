@@ -29,8 +29,8 @@ void MeterComponent::paint (juce::Graphics& g)
 
     const auto bounds = getLocalBounds();
 
-    rmsMeterLeftChannel.setBounds(0, 0, bounds.getWidth(), 50);
-    rmsMeterRightChannel.setBounds(0, 100, bounds.getWidth(), 50);
+    rmsMeterLeftChannel.setBounds(0, 0, bounds.getWidth(), bounds.getHeight() / 2);
+    rmsMeterRightChannel.setBounds(0, (bounds.getHeight() / 2), bounds.getWidth(), bounds.getHeight() / 2);
 
     g.setColour(juce::Colours::grey);
     g.fillRoundedRectangle(rmsMeterLeftChannel, 5.0f);
@@ -49,8 +49,8 @@ void MeterComponent::resized()
 {
     const auto bounds = getLocalBounds();
 
-    rmsMeterLeftChannel.setBounds(0, 0, bounds.getWidth(), 50);
-    rmsMeterRightChannel.setBounds(0, 100, bounds.getWidth(), 50);
+    rmsMeterLeftChannel.setBounds(0, 0, bounds.getWidth(), bounds.getHeight() / 2);
+    rmsMeterRightChannel.setBounds(0, bounds.getHeight() / 2, bounds.getWidth(), bounds.getHeight());
 
     leftGradient = juce::ColourGradient{
         juce::Colours::green,
