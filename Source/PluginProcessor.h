@@ -12,7 +12,7 @@
 #include "SinTSound.h"
 #include "SinTVoice.h"
 #include "FXProcessor.h"
-#include "Data/MeterData.h"
+#include "Data/Core/MeterData.h"
 
 //==============================================================================
 /**

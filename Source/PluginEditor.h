@@ -10,6 +10,11 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "GUI/Components/MainComponent.h"
+
+
+
+
 #include "GUI/Components/MainControlComponent.h"
 #include "GUI/Components/ADSRComponent.h"
 #include "GUI/Components/OscillatorComponent.h"
@@ -37,6 +42,9 @@ public:
 private:
     SinTAudioProcessor& audioProcessor;
 
+
+
+    /*
     MainControlComponent mainControlComponent;
     OscillatorComponent osc1Component;
     OscillatorComponent osc2Component;
@@ -50,6 +58,11 @@ private:
     ReverbComponent reverbComponent;
 
     MeterComponent meterComponent;
+    */
+
+
+
+    MainComponent mainComponent;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SinTAudioProcessorEditor)
 };

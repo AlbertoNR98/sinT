@@ -73,6 +73,9 @@
           <FILE id="N0DkN3" name="LFOComponent.cpp" compile="1" resource="0"
                 file="Source/GUI/Components/LFOComponent.cpp"/>
           <FILE id="Yj1QhT" name="LFOComponent.h" compile="0" resource="0" file="Source/GUI/Components/LFOComponent.h"/>
+          <FILE id="SUwRhR" name="MainComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/MainComponent.cpp"/>
+          <FILE id="Ca5wqD" name="MainComponent.h" compile="0" resource="0" file="Source/GUI/Components/MainComponent.h"/>
           <FILE id="YVjneB" name="MainControlComponent.cpp" compile="1" resource="0"
                 file="Source/GUI/Components/MainControlComponent.cpp"/>
           <FILE id="RHMg5q" name="MainControlComponent.h" compile="0" resource="0"

@@ -10,9 +10,11 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p),
+SinTAudioProcessorEditor::SinTAudioProcessorEditor(SinTAudioProcessor& p)
+    : AudioProcessorEditor(&p), audioProcessor(p),
 
+    mainComponent(audioProcessor)
+    /*
       mainControlComponent(audioProcessor.apvts, "MAINGAIN", "PORTAMENTO"),
       osc1Component(audioProcessor.apvts, "OSC1WF", "OSC1GAINDB", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH"),
       osc2Component(audioProcessor.apvts, "OSC2WF", "OSC2GAINDB", "OSC2PITCH", "OSC2FMFREQ", "OSC2FMDEPTH"),
@@ -25,10 +27,12 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
       delayComponent(audioProcessor.apvts, "DELAYTIMEMS", "DELAYFEEDBACK"),
       reverbComponent(audioProcessor.apvts, "REVERBROOMSIZE", "REVERBWIDTH", "REVERBDAMPING", "REVERBFREEZEMODE", "REVERBDRYLEVEL", "REVERBWETLEVEL"),
       meterComponent([&]()->std::pair<float, float> { return audioProcessor.getMainGainMeterRmsValues(); })
+    */
 {
     // Nota: Al constructor de meterComponent se le pasa una funcion lambda que devuelve los valores de RMS utilizando la funcion realizada para ello en audioProcessor. 
     // MeterComponent apunta a dicha funcion.
 
+    /*
     addAndMakeVisible(mainControlComponent);
     addAndMakeVisible(osc1Component);
     addAndMakeVisible(osc2Component);
@@ -41,6 +45,16 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor (SinTAudioProcessor& p)
     addAndMakeVisible(lfoComponent);
     addAndMakeVisible(reverbComponent);
     addAndMakeVisible(meterComponent);
+    */
+
+
+
+
+
+    addAndMakeVisible(mainComponent);
+
+    setResizable(true, false);
+    setResizeLimits(600, 400, 1920, 1080);
 
     setSize(1200, 544); // 600 - 32 (barra RPi OS) - 24 (barra plugin)
     //setSize(1400, 600);
@@ -72,8 +86,9 @@ void SinTAudioProcessorEditor::resized()
     //reverbComponent.setBounds(2 * getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);
     chorusComponent.setBounds(2 * getWidth() / 3, 0, getWidth() / 3, getHeight() / 2);
     meterComponent.setBounds(2 * getWidth() / 3, getHeight() / 2, getWidth() / 3, getHeight() / 2);
-    */
+    
 
+    
     osc1Component.setBounds(0, 0, getWidth() / 4, getHeight() / 3);
     osc2Component.setBounds(getWidth() / 4, 0, getWidth() / 4, getHeight() / 3);
     lfoComponent.setBounds(2 * getWidth() / 4, 0, getWidth() / 4, getHeight() / 3);
@@ -88,4 +103,7 @@ void SinTAudioProcessorEditor::resized()
     filterAdsrComponent.setBounds(getWidth() / 4, 2 * getHeight() / 3, getWidth() / 4, getHeight() / 3);
     mainControlComponent.setBounds(2 * getWidth() / 4, 2 * getHeight() / 3, getWidth() / 4, getHeight() / 3);
     meterComponent.setBounds(3 * getWidth() / 4, 2 * getHeight() / 3, getWidth() / 4, getHeight() / 3);
+    */
+
+    mainComponent.setBounds(0, 0, getWidth(), getHeight());
 }

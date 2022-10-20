@@ -12,9 +12,9 @@
 
 #include <JuceHeader.h>
 #include "SinTSound.h"
-#include "Data/ADSRData.h"
-#include "Data/OscillatorData.h"
-#include "Data/FilterData.h"
+#include "Data/Core/ADSRData.h"
+#include "Data/Core/OscillatorData.h"
+#include "Data/Core/FilterData.h"
 
 constexpr int numVoiceChannels{ 2 };
 

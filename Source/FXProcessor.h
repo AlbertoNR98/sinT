@@ -11,10 +11,10 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "FX/DistortionData.h"
-#include "FX/ChorusData.h"
-#include "FX/DelayData.h"
-#include "FX/ReverbData.h"
+#include "Data/FX/DistortionData.h"
+#include "Data/FX/ChorusData.h"
+#include "Data/FX/DelayData.h"
+#include "Data/FX/ReverbData.h"
 
 class FXProcessor
 {

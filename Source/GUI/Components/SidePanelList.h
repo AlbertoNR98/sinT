@@ -15,7 +15,7 @@
 //==============================================================================
 /*
 */
-class SidePanelList  : public juce::Component
+class SidePanelList  : public juce::Component, juce::ListBoxModel
 {
 public:
     SidePanelList();
@@ -24,6 +24,16 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
 
+    void paintListBoxItem(int rowNumber, juce::Graphics& g, int width, int height, bool rowIsSelected) override;
+    int getNumRows() override;
+    void addEntry(const juce::String& entry);
+    void selectedRowsChanged(int row) override;
+    void setEntrySelectionCallback(std::function<void(int)> callback);
+
 private:
+    juce::ListBox m_entries;
+    juce::StringArray m_sidePanelEntries;
+    std::function<void(int)> m_callback;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SidePanelList)
 };
