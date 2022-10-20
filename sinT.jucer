@@ -52,6 +52,10 @@
                 file="Source/GUI/Components/ChorusComponent.cpp"/>
           <FILE id="jZoHZf" name="ChorusComponent.h" compile="0" resource="0"
                 file="Source/GUI/Components/ChorusComponent.h"/>
+          <FILE id="YIHJbW" name="ContainerComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/ContainerComponent.cpp"/>
+          <FILE id="DCaJ4m" name="ContainerComponent.h" compile="0" resource="0"
+                file="Source/GUI/Components/ContainerComponent.h"/>
           <FILE id="IYHLLi" name="DelayComponent.cpp" compile="1" resource="0"
                 file="Source/GUI/Components/DelayComponent.cpp"/>
           <FILE id="OlmNfb" name="DelayComponent.h" compile="0" resource="0"
@@ -75,6 +79,10 @@
                 file="Source/GUI/Components/MeterComponent.cpp"/>
           <FILE id="rtXAb4" name="MeterComponent.h" compile="0" resource="0"
                 file="Source/GUI/Components/MeterComponent.h"/>
+          <FILE id="xfbQaa" name="NavbarComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/NavbarComponent.cpp"/>
+          <FILE id="PuklKM" name="NavbarComponent.h" compile="0" resource="0"
+                file="Source/GUI/Components/NavbarComponent.h"/>
           <FILE id="Me9pEw" name="OscillatorComponent.cpp" compile="1" resource="0"
                 file="Source/GUI/Components/OscillatorComponent.cpp"/>
           <FILE id="KtIvA2" name="OscillatorComponent.h" compile="0" resource="0"
@@ -83,8 +91,18 @@
                 file="Source/GUI/Components/ReverbComponent.cpp"/>
           <FILE id="rfrzXP" name="ReverbComponent.h" compile="0" resource="0"
                 file="Source/GUI/Components/ReverbComponent.h"/>
+          <FILE id="f1sSdf" name="SidePanelHeader.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/SidePanelHeader.cpp"/>
+          <FILE id="e5rg8F" name="SidePanelHeader.h" compile="0" resource="0"
+                file="Source/GUI/Components/SidePanelHeader.h"/>
+          <FILE id="b27OAV" name="SidePanelList.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/SidePanelList.cpp"/>
+          <FILE id="Eo995D" name="SidePanelList.h" compile="0" resource="0" file="Source/GUI/Components/SidePanelList.h"/>
         </GROUP>
-        <GROUP id="{C2DC3711-FC35-785F-A6EA-261550ED4961}" name="Views"/>
+        <GROUP id="{C2DC3711-FC35-785F-A6EA-261550ED4961}" name="Views">
+          <FILE id="h7c4NM" name="HomeView.cpp" compile="1" resource="0" file="Source/GUI/Views/HomeView.cpp"/>
+          <FILE id="fnSar4" name="HomeView.h" compile="0" resource="0" file="Source/GUI/Views/HomeView.h"/>
+        </GROUP>
       </GROUP>
     </GROUP>
   </MAINGROUP>
