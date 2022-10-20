@@ -107,6 +107,8 @@
         <GROUP id="{C2DC3711-FC35-785F-A6EA-261550ED4961}" name="Views">
           <FILE id="h7c4NM" name="HomeView.cpp" compile="1" resource="0" file="Source/GUI/Views/HomeView.cpp"/>
           <FILE id="fnSar4" name="HomeView.h" compile="0" resource="0" file="Source/GUI/Views/HomeView.h"/>
+          <FILE id="wa7Rlq" name="OscView.cpp" compile="1" resource="0" file="Source/GUI/Views/OscView.cpp"/>
+          <FILE id="sUC0iH" name="OscView.h" compile="0" resource="0" file="Source/GUI/Views/OscView.h"/>
         </GROUP>
       </GROUP>
     </GROUP>

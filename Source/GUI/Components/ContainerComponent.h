@@ -16,13 +16,14 @@
 #include "SidePanelList.h"
 
 #include "../Views/HomeView.h"
+#include "../Views/OscView.h"
 //#include "../Views/OscView.h" -> TO-DO
 //#include "../Views/FilterView.h"  -> TO-DO
 
 //==============================================================================
 /*
 */
-class ContainerComponent  : public juce::Component, public juce::Button::Listener
+class ContainerComponent  : public juce::Component
 {
 public:
     ContainerComponent(juce::AudioProcessorValueTreeState& apvts);
@@ -31,15 +32,13 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
 
-    void buttonClicked(juce::Button*) override;
-
     //void setView(juce::Component*);
     void setView(juce::Component&);
     void clearCurrentView();
 
     juce::SidePanel& getSidePanel() { return m_sidePanel; }
-    void setShowingSidePanel(bool s) { m_showingSidePanel = s; }
-    bool isShowingSidePanel() { return m_showingSidePanel; }
+    void setShowingSidePanel(bool s) { showingSidePanel = s; }
+    bool isShowingSidePanel() { return showingSidePanel; }
 
     HomeView& getHomeView() { return homeView; }
 
@@ -48,17 +47,16 @@ private:
     void settingsButtonClicked();
     void listEntryClicked(int index);
 
-    juce::TextButton m_invokeSidePanel;
     juce::Label m_sidePanelStatus;
 
-    bool m_showingSidePanel = true; // Variables -> Hacer get
-    int m_sidePanelWidth = 150;
-    juce::SidePanel m_sidePanel{ "", m_sidePanelWidth, true, nullptr, false };
+    bool showingSidePanel = true; // Variables -> Hacer get
+    int sidePanelWidth = 150;
+    juce::SidePanel m_sidePanel{ "", sidePanelWidth, true, nullptr, false };
 
     //Nuevo 2
     //OscView oscView;
     HomeView homeView;
-    //OscView oscView;
+    OscView oscView;
     //FilterView filterView;
 
     juce::Component* comp = &homeView;

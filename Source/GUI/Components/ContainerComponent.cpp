@@ -15,7 +15,9 @@
 // Probar a implementar lo anterior haciendo uso del APVTS. De esta forma, pueden utilizarse punteros de Views (que se pueden crear de forma dinámica) y liberar memoria cuando no se vea -> El estado de los sliders se obtendrá del APVTS, por lo que no hará falta guardarlo en otro sitio.
 // NOTA: Ver clase SinTContent (basada en clases DemoContent y CodeContent, del proyecto DemoRunner) -> No está implementada del todo pero la idea era más o menos esa.
 //==============================================================================
-ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts) : m_invokeSidePanel("Sidepanel", "Show Sidepanel")
+
+ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts) :
+    oscView(apvts, "OSC1WF", "OSC1GAINDB", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH", "OSC2WF", "OSC2GAINDB", "OSC2PITCH", "OSC2FMFREQ", "OSC2FMDEPTH")
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -24,7 +26,7 @@ ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts
     //addChildComponent(homeView);
     addAndMakeVisible(homeView);
 
-    //addChildComponent(oscView);
+    addChildComponent(oscView);
     //addChildComponent(filterView);
 
     //addAndMakeVisible(m_invokeSidePanel);
@@ -33,8 +35,6 @@ ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts
 
     m_sidePanelStatus.setText("status", juce::dontSendNotification);
     setSize(600, 400);
-
-    m_invokeSidePanel.addListener(this);
 
     auto sidePanelList = new SidePanelList;
     sidePanelList->addEntry("OSC");
@@ -54,7 +54,6 @@ ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts
 
 ContainerComponent::~ContainerComponent()
 {
-    m_invokeSidePanel.removeListener(this);
 }
 
 void ContainerComponent::paint (juce::Graphics& g)
@@ -65,9 +64,9 @@ void ContainerComponent::paint (juce::Graphics& g)
        You should replace everything in this method with your own
        drawing code..
     */
-    if (m_showingSidePanel)
+    if (showingSidePanel)
     {
-        comp->setBounds(m_sidePanelWidth, 0, getWidth() - m_sidePanelWidth, getHeight());
+        comp->setBounds(sidePanelWidth, 0, getWidth() - sidePanelWidth, getHeight());
     }
     else
     {
@@ -92,9 +91,9 @@ void ContainerComponent::resized()
     // This method is where you should set the bounds of any child
     // components that your component contains..
         //m_sidePanel.setBounds(0, getHeight() / 8, getWidth(), getHeight() - (getHeight() / 8)); -> No funciona
-    if (m_showingSidePanel)
+    if (showingSidePanel)
     {
-        comp->setBounds(m_sidePanelWidth, 0, getWidth() - m_sidePanelWidth, getHeight());
+        comp->setBounds(sidePanelWidth, 0, getWidth() - sidePanelWidth, getHeight());
     }
     else
     {
@@ -109,29 +108,12 @@ void ContainerComponent::resized()
 
     auto buttonBound = localBounds.removeFromTop(30).removeFromRight(150);
     auto statusLabelBound = localBounds.removeFromTop(30).removeFromRight(150).reduced(5);
-    m_invokeSidePanel.setBounds(buttonBound);
     m_sidePanelStatus.setBounds(statusLabelBound);
 
     m_sidePanel.setColour(juce::SidePanel::ColourIds::backgroundColour, juce::Colours::orange);
     m_sidePanel.setColour(juce::SidePanel::ColourIds::titleTextColour, juce::Colours::deepskyblue);
 
     m_sidePanel.showOrHide(true);
-}
-
-void ContainerComponent::buttonClicked(juce::Button* btn)
-{
-    if (btn == &m_invokeSidePanel)
-    {
-        if (m_showingSidePanel)
-        {
-            m_sidePanel.showOrHide(false);
-        }
-        else
-        {
-            m_sidePanel.showOrHide(true);
-        }
-        m_showingSidePanel = !m_showingSidePanel;
-    }
 }
 
 void ContainerComponent::setView(juce::Component& newComponent)
@@ -189,7 +171,7 @@ void ContainerComponent::listEntryClicked(int index)
         //m_sidePanelStatus.setText("OSC clicked", juce::dontSendNotification);
         //clearCurrentView();
         clearCurrentView();
-        //setView(oscView);   // Usar punteros -> Viene mejor para poder destruirlos cuando no se usen
+        setView(oscView);   // Usar punteros -> Viene mejor para poder destruirlos cuando no se usen
         break;
     case 1:
         //oscView->setVisible(false);
