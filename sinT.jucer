@@ -20,28 +20,30 @@
       <FILE id="KKMNJy" name="FXProcessor.cpp" compile="1" resource="0" file="Source/FXProcessor.cpp"/>
       <FILE id="cbar15" name="FXProcessor.h" compile="0" resource="0" file="Source/FXProcessor.h"/>
       <GROUP id="{F00686E0-508E-43CB-AE07-B2AA896F079F}" name="Data">
-        <FILE id="Vc2F7G" name="ADSRData.cpp" compile="1" resource="0" file="Source/Data/ADSRData.cpp"/>
-        <FILE id="iXQzcX" name="ADSRData.h" compile="0" resource="0" file="Source/Data/ADSRData.h"/>
-        <FILE id="QxRqvT" name="FilterData.cpp" compile="1" resource="0" file="Source/Data/FilterData.cpp"/>
-        <FILE id="kBtj2t" name="FilterData.h" compile="0" resource="0" file="Source/Data/FilterData.h"/>
-        <FILE id="abDvAt" name="MeterData.cpp" compile="1" resource="0" file="Source/Data/MeterData.cpp"/>
-        <FILE id="i9uvZ5" name="MeterData.h" compile="0" resource="0" file="Source/Data/MeterData.h"/>
-        <FILE id="fiBSNQ" name="OscillatorData.cpp" compile="1" resource="0"
-              file="Source/Data/OscillatorData.cpp"/>
-        <FILE id="evzS20" name="OscillatorData.h" compile="0" resource="0"
-              file="Source/Data/OscillatorData.h"/>
-      </GROUP>
-      <GROUP id="{4BE66EC9-BE7E-1A14-06EC-BEE4F8CD766F}" name="FX">
-        <FILE id="nIZCQg" name="ChorusData.cpp" compile="1" resource="0" file="Source/FX/ChorusData.cpp"/>
-        <FILE id="b1j4X8" name="ChorusData.h" compile="0" resource="0" file="Source/FX/ChorusData.h"/>
-        <FILE id="VhnRtq" name="DelayData.cpp" compile="1" resource="0" file="Source/FX/DelayData.cpp"/>
-        <FILE id="lRyz1Y" name="DelayData.h" compile="0" resource="0" file="Source/FX/DelayData.h"/>
-        <FILE id="p8WFhr" name="DistortionData.cpp" compile="1" resource="0"
-              file="Source/FX/DistortionData.cpp"/>
-        <FILE id="CFKEFC" name="DistortionData.h" compile="0" resource="0"
-              file="Source/FX/DistortionData.h"/>
-        <FILE id="Nhqzfs" name="ReverbData.cpp" compile="1" resource="0" file="Source/FX/ReverbData.cpp"/>
-        <FILE id="puyVXr" name="ReverbData.h" compile="0" resource="0" file="Source/FX/ReverbData.h"/>
+        <GROUP id="{7235A284-2DE4-2D90-F913-C259C89FC0A4}" name="Core">
+          <FILE id="tHnz5b" name="ADSRData.cpp" compile="1" resource="0" file="Source/Data/Core/ADSRData.cpp"/>
+          <FILE id="iCVfTQ" name="ADSRData.h" compile="0" resource="0" file="Source/Data/Core/ADSRData.h"/>
+          <FILE id="EiXgU9" name="FilterData.cpp" compile="1" resource="0" file="Source/Data/Core/FilterData.cpp"/>
+          <FILE id="wUaeWQ" name="FilterData.h" compile="0" resource="0" file="Source/Data/Core/FilterData.h"/>
+          <FILE id="X9IhdB" name="MeterData.cpp" compile="1" resource="0" file="Source/Data/Core/MeterData.cpp"/>
+          <FILE id="BWPYEZ" name="MeterData.h" compile="0" resource="0" file="Source/Data/Core/MeterData.h"/>
+          <FILE id="DmSzEc" name="OscillatorData.cpp" compile="1" resource="0"
+                file="Source/Data/Core/OscillatorData.cpp"/>
+          <FILE id="CpSsm5" name="OscillatorData.h" compile="0" resource="0"
+                file="Source/Data/Core/OscillatorData.h"/>
+        </GROUP>
+        <GROUP id="{4BE66EC9-BE7E-1A14-06EC-BEE4F8CD766F}" name="FX">
+          <FILE id="f6l1JM" name="ChorusData.cpp" compile="1" resource="0" file="Source/Data/FX/ChorusData.cpp"/>
+          <FILE id="rCmLpw" name="ChorusData.h" compile="0" resource="0" file="Source/Data/FX/ChorusData.h"/>
+          <FILE id="dlOxB2" name="DelayData.cpp" compile="1" resource="0" file="Source/Data/FX/DelayData.cpp"/>
+          <FILE id="GSyIIb" name="DelayData.h" compile="0" resource="0" file="Source/Data/FX/DelayData.h"/>
+          <FILE id="JJQeeJ" name="DistortionData.cpp" compile="1" resource="0"
+                file="Source/Data/FX/DistortionData.cpp"/>
+          <FILE id="sNYlmT" name="DistortionData.h" compile="0" resource="0"
+                file="Source/Data/FX/DistortionData.h"/>
+          <FILE id="dhKFkO" name="ReverbData.cpp" compile="1" resource="0" file="Source/Data/FX/ReverbData.cpp"/>
+          <FILE id="VYCqH8" name="ReverbData.h" compile="0" resource="0" file="Source/Data/FX/ReverbData.h"/>
+        </GROUP>
       </GROUP>
       <GROUP id="{6B4C42CC-A6E5-0991-D2E8-C1E26CB890A8}" name="GUI">
         <GROUP id="{83A64210-9666-8E6F-54CC-782EA2432656}" name="Components">
