@@ -53,11 +53,15 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor(SinTAudioProcessor& p)
 
     addAndMakeVisible(mainComponent);
 
+    /*
     setResizable(true, false);
     setResizeLimits(600, 400, 1920, 1080);
+    */
 
-    setSize(1200, 544); // 600 - 32 (barra RPi OS) - 24 (barra plugin)
+    setSize(1024, 544); // 600 - 32 (barra RPi OS) - 24 (barra plugin)
     //setSize(1400, 600);
+
+    setResizable(false, false);
 }
 
 SinTAudioProcessorEditor::~SinTAudioProcessorEditor()
