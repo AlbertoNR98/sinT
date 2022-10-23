@@ -54,6 +54,7 @@ ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts
 
 ContainerComponent::~ContainerComponent()
 {
+    //delete comp;
 }
 
 void ContainerComponent::paint (juce::Graphics& g)
@@ -168,7 +169,7 @@ void ContainerComponent::listEntryClicked(int index)
     switch (index)
     {
     case 0:
-        //m_sidePanelStatus.setText("OSC clicked", juce::dontSendNotification);
+        m_sidePanelStatus.setText("OSC clicked", juce::dontSendNotification);
         //clearCurrentView();
         clearCurrentView();
         setView(oscView);   // Usar punteros -> Viene mejor para poder destruirlos cuando no se usen
