@@ -15,8 +15,8 @@
 #include "../Source/PluginProcessor.h"
 #include "ContainerComponent.h"
 
-#include "MeterComponent.h"
-#include "MainControlComponent.h"
+#include "../MeterComponent.h"
+#include "../MainControlComponent.h"
 
 //==============================================================================
 /*

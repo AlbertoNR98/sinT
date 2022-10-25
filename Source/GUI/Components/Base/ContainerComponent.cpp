@@ -13,27 +13,19 @@
 
 // Actualmente, se usan variables para las View, ya que se requiere que no se reseteen los valores de los sliders una vez dejan de verse.
 // Probar a implementar lo anterior haciendo uso del APVTS. De esta forma, pueden utilizarse punteros de Views (que se pueden crear de forma dinámica) y liberar memoria cuando no se vea -> El estado de los sliders se obtendrá del APVTS, por lo que no hará falta guardarlo en otro sitio.
-// NOTA: Ver clase SinTContent (basada en clases DemoContent y CodeContent, del proyecto DemoRunner) -> No está implementada del todo pero la idea era más o menos esa.
+// NOTA: Ver clase SinTContent -> No esta implementada del todo pero la idea era mas o menos esa.
 //==============================================================================
 
 ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts) :
-    oscView(apvts, "OSC1WF", "OSC1GAINDB", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH", "OSC2WF", "OSC2GAINDB", "OSC2PITCH", "OSC2FMFREQ", "OSC2FMDEPTH")
+    valueTree(apvts)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
-    //oscView = new OscView();
+    contentComponent.reset(new HomeView());
 
-    //addChildComponent(homeView);
-    addAndMakeVisible(homeView);
+    addAndMakeVisible(contentComponent.get());
+    addAndMakeVisible(sidePanel);
 
-    addChildComponent(oscView);
-    //addChildComponent(filterView);
-
-    //addAndMakeVisible(m_invokeSidePanel);
-    addAndMakeVisible(m_sidePanelStatus);
-    addAndMakeVisible(m_sidePanel);
-
-    m_sidePanelStatus.setText("status", juce::dontSendNotification);
     setSize(600, 400);
 
     auto sidePanelList = new SidePanelList;
@@ -42,19 +34,18 @@ ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts
     sidePanelList->addEntry("ADSR");
     sidePanelList->addEntry("FX");
     sidePanelList->setEntrySelectionCallback([&](int index) { listEntryClicked(index); });
-    m_sidePanel.setContent(sidePanelList);
+    sidePanel.setContent(sidePanelList);
 
     auto sidePanelHeader = new SidePanelHeader("Side Panel");
     sidePanelHeader->setHomeButtonClicked([&]() { homeButtonClicked(); });
     sidePanelHeader->setSettingButtonClicked([&]() { settingsButtonClicked(); });
-    //m_sidePanel.setTitleBarComponent(sidePanelHeader, true);
-    m_sidePanel.setTitleBarComponent(sidePanelHeader, false);
-    m_sidePanel.setShadowWidth(0);
+    //sidePanel.setTitleBarComponent(sidePanelHeader, true);
+    sidePanel.setTitleBarComponent(sidePanelHeader, false);
+    sidePanel.setShadowWidth(0);
 }
 
 ContainerComponent::~ContainerComponent()
 {
-    //delete comp;
 }
 
 void ContainerComponent::paint (juce::Graphics& g)
@@ -65,21 +56,19 @@ void ContainerComponent::paint (juce::Graphics& g)
        You should replace everything in this method with your own
        drawing code..
     */
+
     if (showingSidePanel)
     {
-        comp->setBounds(sidePanelWidth, 0, getWidth() - sidePanelWidth, getHeight());
+        contentComponent->setBounds(sidePanelWidth, 0, getWidth() - sidePanelWidth, getHeight());
     }
     else
     {
-        comp->setBounds(0, 0, getWidth(), getHeight());
+        contentComponent->setBounds(0, 0, getWidth(), getHeight());
     }
 
     //g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
-    g.fillAll(juce::Colours::cadetblue);
-    //g.fillAll(juce::Colours::deeppink);
-    //g.fillAll(juce::Colours::black);
-    g.setColour(juce::Colours::grey);
-    //g.drawRect(getLocalBounds(), 1);   // draw an outline around the component
+    //g.fillAll(juce::Colours::cadetblue);
+    g.fillAll(juce::Colours::black);
 
     g.setColour(juce::Colours::white);
     g.setFont(14.0f);
@@ -91,14 +80,16 @@ void ContainerComponent::resized()
 {
     // This method is where you should set the bounds of any child
     // components that your component contains..
-        //m_sidePanel.setBounds(0, getHeight() / 8, getWidth(), getHeight() - (getHeight() / 8)); -> No funciona
+
     if (showingSidePanel)
     {
-        comp->setBounds(sidePanelWidth, 0, getWidth() - sidePanelWidth, getHeight());
+        sidePanel.showOrHide(true);
+        contentComponent->setBounds(sidePanelWidth, 0, getWidth() - sidePanelWidth, getHeight());
     }
     else
     {
-        comp->setBounds(0, 0, getWidth(), getHeight());
+        sidePanel.showOrHide(false);
+        contentComponent->setBounds(0, 0, getWidth(), getHeight());
     }
 
     auto localBounds = getLocalBounds();
@@ -107,90 +98,65 @@ void ContainerComponent::resized()
     if (localBounds.getWidth() / 2 - 50 > 5)
         localBounds.removeFromLeft(localBounds.getWidth() / 2 - 50);
 
-    auto buttonBound = localBounds.removeFromTop(30).removeFromRight(150);
-    auto statusLabelBound = localBounds.removeFromTop(30).removeFromRight(150).reduced(5);
-    m_sidePanelStatus.setBounds(statusLabelBound);
+    //auto statusLabelBound = localBounds.removeFromTop(30).removeFromRight(150).reduced(5);
+    //sidePanelStatus.setBounds(statusLabelBound);
 
-    m_sidePanel.setColour(juce::SidePanel::ColourIds::backgroundColour, juce::Colours::orange);
-    m_sidePanel.setColour(juce::SidePanel::ColourIds::titleTextColour, juce::Colours::deepskyblue);
-
-    m_sidePanel.showOrHide(true);
+    sidePanel.setColour(juce::SidePanel::ColourIds::backgroundColour, juce::Colours::orange);
+    sidePanel.setColour(juce::SidePanel::ColourIds::titleTextColour, juce::Colours::deepskyblue);
 }
 
-void ContainerComponent::setView(juce::Component& newComponent)
+void ContainerComponent::setView(const int selectedView)
 {
-    //comp.reset(newComponent);
-    //clearCurrentView();
-    comp = &newComponent;
-
-    if (comp != nullptr)
+    switch (selectedView)
     {
-        addAndMakeVisible(comp);
-        //comp->setVisible(true);
-        //comp->setBounds(getLocalBounds());
-        //comp->setBounds(250, 0, getWidth() - 250, getHeight());
+        case OSC_VIEW:
+            contentComponent.reset(new OscView(valueTree, "OSC1WF", "OSC1GAINDB", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH", "OSC2WF", "OSC2GAINDB", "OSC2PITCH", "OSC2FMFREQ", "OSC2FMDEPTH"));
+            break;
+        case FILTER_VIEW:
+            break;
+        case ADSR_VIEW:
+            break;
+        case FX_VIEW:
+            break;
+        case HOME_VIEW:
+            contentComponent.reset(new HomeView());
+            break;
+        default:
+            contentComponent.reset(new HomeView());
     }
-}
 
-/*
-void ContainerComponent::setView(juce::Component& newComponent)
-{
-    newComponent.setVisible(true);
-    newComponent.setBounds(250, 0, getWidth() - 250, getHeight());
-}
-*/
-
-void ContainerComponent::clearCurrentView()
-{
-    /*
-    sinTContent->setComponent(nullptr);
-    demoChangedCallback(false);
-    */
-    //setView(nullptr);
-    comp->setVisible(false);
+    addAndMakeVisible(contentComponent.get());
 }
 
 void ContainerComponent::homeButtonClicked()
 {
-    clearCurrentView();
-    setView(homeView);
-    m_sidePanelStatus.setText("Home Button clicked", juce::dontSendNotification);
+    if (contentComponent != nullptr)
+        setView(HOME_VIEW);
 }
 
 void ContainerComponent::settingsButtonClicked()
 {
-    m_sidePanelStatus.setText("Settings Button clicked", juce::dontSendNotification);
+    if (contentComponent != nullptr)
+        setView(HOME_VIEW);
 }
 
 void ContainerComponent::listEntryClicked(int index)
 {
-    //m_sidePanelStatus.setText(juce::String("Entry ") + juce::String(index + 1) + " Clicked", juce::dontSendNotification);
-
     switch (index)
     {
-    case 0:
-        m_sidePanelStatus.setText("OSC clicked", juce::dontSendNotification);
-        //clearCurrentView();
-        clearCurrentView();
-        setView(oscView);   // Usar punteros -> Viene mejor para poder destruirlos cuando no se usen
-        break;
-    case 1:
-        //oscView->setVisible(false);
-        //clearCurrentView();
-        clearCurrentView();
-        //setView(filterView);
-        //m_sidePanelStatus.setText("Filter clicked", juce::dontSendNotification);
-        break;
-    case 2:
-        //m_sidePanelStatus.setText("ADSR clicked", juce::dontSendNotification);
-        clearCurrentView();
-        break;
-    case 3:
-        //m_sidePanelStatus.setText("FX clicked", juce::dontSendNotification);
-        clearCurrentView();
-        break;
-    default:
-        clearCurrentView();
-        setView(homeView);
+        case OSC_VIEW:
+            setView(OSC_VIEW);
+            break;
+        case FILTER_VIEW:
+            setView(FILTER_VIEW);
+            break;
+        case ADSR_VIEW:
+            setView(ADSR_VIEW);
+            break;
+        case FX_VIEW:
+            setView(FX_VIEW);
+            break;
+        default:
+            setView(HOME_VIEW);
     }
 }

@@ -33,8 +33,8 @@ void MainComponent::paint (juce::Graphics& g)
        drawing code..
     */
 
-    g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
-
+    //g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
+    g.fillAll(juce::Colours::black);
 }
 
 void MainComponent::resized()

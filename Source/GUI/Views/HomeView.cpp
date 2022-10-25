@@ -32,17 +32,14 @@ void HomeView::paint (juce::Graphics& g)
        drawing code..
     */
 
-    /*
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
+    
+    //g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background    
 
-    g.setColour (juce::Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-    */
-
-    g.fillAll(juce::Colours::cadetblue);
+    //g.fillAll(juce::Colours::cadetblue);
+    g.fillAll(juce::Colours::black);
     g.setColour (juce::Colours::white);
-    g.setFont (14.0f);
-    g.drawText ("HomeView", getLocalBounds(),
+    g.setFont (140.0f);
+    g.drawText ("sinT", getLocalBounds(),
                 juce::Justification::centred, true);   // draw some placeholder text
 }
 

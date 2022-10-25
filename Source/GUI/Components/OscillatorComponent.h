@@ -19,13 +19,15 @@
 class OscillatorComponent  : public juce::Component
 {
 public:
-    OscillatorComponent(juce::AudioProcessorValueTreeState& apvts, juce::String waveformSelectorId, juce::String oscGainId, juce::String oscPitchId, juce::String fmFreqId, juce::String fmDepthId);
+    OscillatorComponent(juce::String name, juce::AudioProcessorValueTreeState& apvts, juce::String waveformSelectorId, juce::String oscGainId, juce::String oscPitchId, juce::String fmFreqId, juce::String fmDepthId);
     ~OscillatorComponent() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
+    juce::String oscName;
+
     juce::ComboBox oscWaveSelector;
 
     juce::Slider oscGainSlider;

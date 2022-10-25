@@ -111,8 +111,7 @@ void NavbarComponent::buttonClicked(juce::Button* btn)
 
     if (btn == &settingsButton)
     {
-        containerComponent.clearCurrentView();
-        containerComponent.setView(containerComponent.getHomeView());   // Sustituir por SettingsView
+        containerComponent.setView(HOME_VIEW);   // Sustituir por SettingsView
     }
 }
 
