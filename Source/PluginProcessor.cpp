@@ -222,6 +222,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterBool>("PORTAMENTO", "Portamento", false));
 
     // Oscilador 1
+    layout.add(std::make_unique<juce::AudioParameterBool>("OSC1BYPASSED", "Oscillator1Bypassed", false));
     layout.add(std::make_unique<juce::AudioParameterChoice>("OSC1WF", "Oscillator1Waveform", juce::StringArray { "Sine", "Saw", "Square" }, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>("OSC1GAINDB", "Oscillator1Gain", juce::NormalisableRange<float> {-48.0f, 6.0f, 0.1f}, 0.0f, "dB"));
     layout.add(std::make_unique<juce::AudioParameterInt>("OSC1PITCH", "Oscillator1Pitch", -48, 48, 0));
@@ -229,6 +230,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>("OSC1FMDEPTH", "Oscillator1FMDepth", juce::NormalisableRange<float> {0.0f, 100.0f, 0.1f}, 0.0f));
 
     // Oscilador 2
+    layout.add(std::make_unique<juce::AudioParameterBool>("OSC2BYPASSED", "Oscillator2Bypassed", false));
     layout.add(std::make_unique<juce::AudioParameterChoice>("OSC2WF", "Oscillator2Waveform", juce::StringArray{ "Sine", "Saw", "Square" }, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>("OSC2GAINDB", "Oscillator2Gain", juce::NormalisableRange<float> {-48.0f, 6.0f, 0.1f}, 0.0f, "dB"));
     layout.add(std::make_unique<juce::AudioParameterInt>("OSC2PITCH", "Oscillator2Pitch", -48, 48, 0));
@@ -314,6 +316,7 @@ void SinTAudioProcessor::setVoiceParameters()
             auto& filterAdsrRelease = *apvts.getRawParameterValue("FILTERADSRRELEASE");
 
             // OSC1
+            auto& osc1Bypassed = *apvts.getRawParameterValue("OSC1BYPASSED");
             auto& osc1WaveSelect = *apvts.getRawParameterValue("OSC1WF");
             auto& osc1GainDecibels = *apvts.getRawParameterValue("OSC1GAINDB");
             auto& osc1Pitch = *apvts.getRawParameterValue("OSC1PITCH");
@@ -321,6 +324,7 @@ void SinTAudioProcessor::setVoiceParameters()
             auto& osc1FmDepth = *apvts.getRawParameterValue("OSC1FMDEPTH");
 
             // OSC2
+            auto& osc2Bypassed = *apvts.getRawParameterValue("OSC2BYPASSED");
             auto& osc2WaveSelect = *apvts.getRawParameterValue("OSC2WF");
             auto& osc2GainDecibels = *apvts.getRawParameterValue("OSC2GAINDB");
             auto& osc2Pitch = *apvts.getRawParameterValue("OSC2PITCH");
@@ -336,8 +340,8 @@ void SinTAudioProcessor::setVoiceParameters()
 
             for (int channel = 0; channel < getTotalNumOutputChannels(); channel++)
             {
-                osc1[channel].setParameters(osc1WaveSelect, portamento, osc1GainDecibels, osc1Pitch, osc1FmFreq, osc1FmDepth);
-                osc2[channel].setParameters(osc2WaveSelect, portamento, osc2GainDecibels, osc2Pitch, osc2FmFreq, osc2FmDepth);
+                osc1[channel].setParameters(osc1Bypassed, osc1WaveSelect, portamento, osc1GainDecibels, osc1Pitch, osc1FmFreq, osc1FmDepth);
+                osc2[channel].setParameters(osc2Bypassed, osc2WaveSelect, portamento, osc2GainDecibels, osc2Pitch, osc2FmFreq, osc2FmDepth);
             }
 
             ampAdsr.update(ampAdsrAttack.load(), ampAdsrDecay.load(), ampAdsrSustain.load(), ampAdsrRelease.load());

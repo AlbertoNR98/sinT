@@ -23,18 +23,21 @@ class OscillatorData : public juce::dsp::Oscillator<float>
 {
 public:
     void prepareToPlay(juce::dsp::ProcessSpec& spec);
+    void setBypassed(const bool oscBypassed);
+    bool isBypassed() { return bypassed; };
     void setWaveform(const int selectWaveform);
     void setGain(const float oscGainDecibels);
     void setPitch(const int newOscPitch);
     void setPitchWheel(const int newPitchWheel);
     void setWaveFreq(const int midiNoteNumber, const int currentPitchWheelPosition);
     void setFmSynthesis(const float fmFreq, const float fmDepth);
-    void setParameters(const int selectWaveform, const bool portamento, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth);
+    void setParameters(const bool bypassed, const int selectWaveform, const bool portamento, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth);
     float renderNextSample(float inputSample);
 
     void resetAll();
 
 private:
+    bool bypassed{ false };
     juce::dsp::Gain<float> oscGain;
     int oscPitch{ 0 };
     bool portamento{ false };

@@ -110,7 +110,7 @@ void ContainerComponent::setView(const int selectedView)
     switch (selectedView)
     {
         case OSC_VIEW:
-            contentComponent.reset(new OscView(valueTree, "OSC1WF", "OSC1GAINDB", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH", "OSC2WF", "OSC2GAINDB", "OSC2PITCH", "OSC2FMFREQ", "OSC2FMDEPTH"));
+            contentComponent.reset(new OscView(valueTree, "OSC1BYPASSED", "OSC1WF", "OSC1GAINDB", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH", "OSC2BYPASSED", "OSC2WF", "OSC2GAINDB", "OSC2PITCH", "OSC2FMFREQ", "OSC2FMDEPTH"));
             break;
         case FILTER_VIEW:
             break;

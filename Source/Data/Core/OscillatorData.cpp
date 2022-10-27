@@ -18,6 +18,11 @@ void OscillatorData::prepareToPlay(juce::dsp::ProcessSpec& spec)
     oscGain.prepare(spec);
 }
 
+void OscillatorData::setBypassed(const bool oscBypassed)
+{
+    bypassed = oscBypassed;
+}
+
 void OscillatorData::setWaveform(const int selectWaveform)
 {
     switch (selectWaveform)
@@ -100,8 +105,9 @@ void OscillatorData::setFmSynthesis(const float fmFreq, const float fmDepth)
     }
 }
 
-void OscillatorData::setParameters(const int selectWaveform, const bool portamento, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth)
+void OscillatorData::setParameters(const bool bypassed, const int selectWaveform, const bool portamento, const float oscGainDecibels, const int oscPitch, const float fmFreq, const float fmDepth)
 {
+    setBypassed(bypassed);
     this->portamento = portamento;
     setWaveform(selectWaveform);
     setGain(oscGainDecibels);
@@ -111,6 +117,8 @@ void OscillatorData::setParameters(const int selectWaveform, const bool portamen
 
 float OscillatorData::renderNextSample(float inputSample)
 {
+    if (isBypassed()) return 0.0f;
+
     if (this->fmFreq != 0.0)
     {
         fmModulationValue = fmOperator.processSample(inputSample) * fmDepth;

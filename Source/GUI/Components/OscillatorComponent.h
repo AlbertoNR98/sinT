@@ -19,7 +19,7 @@
 class OscillatorComponent  : public juce::Component
 {
 public:
-    OscillatorComponent(juce::String name, juce::AudioProcessorValueTreeState& apvts, juce::String waveformSelectorId, juce::String oscGainId, juce::String oscPitchId, juce::String fmFreqId, juce::String fmDepthId);
+    OscillatorComponent(juce::String name, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String waveformSelectorId, juce::String oscGainId, juce::String oscPitchId, juce::String fmFreqId, juce::String fmDepthId);
     ~OscillatorComponent() override;
 
     void paint (juce::Graphics&) override;
@@ -28,12 +28,16 @@ public:
 private:
     juce::String oscName;
 
+    juce::ToggleButton oscBypassedButton;
+
     juce::ComboBox oscWaveSelector;
 
     juce::Slider oscGainSlider;
     juce::Slider oscPitchSlider;
     juce::Slider fmFreqSlider;
     juce::Slider fmDepthSlider;
+
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> oscBypassedButtonAttachment;
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscWaveSelectorAttachment;
 
