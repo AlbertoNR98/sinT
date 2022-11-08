@@ -40,9 +40,9 @@ void FXProcessor::setDelayParameters(bool bypassed, float timeMs, float feedback
     delay.setParameters(bypassed, timeMs, feedback);
 }
 
-void FXProcessor::setReverbParameters(float roomSize, float width, float damping, float freezeMode, float dryLevel, float wetLevel)
+void FXProcessor::setReverbParameters(bool bypassed, float roomSize, float width, float damping, float freezeMode, float dryLevel, float wetLevel)
 {
-    reverb.setParameters(roomSize, width, damping, freezeMode, dryLevel, wetLevel);
+    reverb.setParameters(bypassed, roomSize, width, damping, freezeMode, dryLevel, wetLevel);
 }
 
 void FXProcessor::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)

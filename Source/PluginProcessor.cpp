@@ -281,6 +281,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>("DELAYFEEDBACK", "DelayFeedback", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
 
     // Reverb
+    layout.add(std::make_unique<juce::AudioParameterBool>("REVERBBYPASSED", "ReverbBypassed", false));
     layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBROOMSIZE", "ReverbRoomSize", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBWIDTH", "ReverbWidth", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 1.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBDAMPING", "ReverbDamping", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.5f, ""));
@@ -398,6 +399,7 @@ void SinTAudioProcessor::setFXParameters()
     auto& delayFeedback = *apvts.getRawParameterValue("DELAYFEEDBACK");
 
     // Reverb
+    auto& reverbBypassed = *apvts.getRawParameterValue("REVERBBYPASSED");
     auto& reverbRoomSize = *apvts.getRawParameterValue("REVERBROOMSIZE");
     auto& reverbWidth = *apvts.getRawParameterValue("REVERBWIDTH");
     auto& reverbDamping = *apvts.getRawParameterValue("REVERBDAMPING");
@@ -408,7 +410,7 @@ void SinTAudioProcessor::setFXParameters()
     fxProcessor.setDistortionParameters(distortionBypassed, distortionDrive, distortionRange, distortionBlend);
     fxProcessor.setChorusParameters(chorusBypassed, chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
     fxProcessor.setDelayParameters(delayBypassed, delayTimeMs, delayFeedback);
-    fxProcessor.setReverbParameters(reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel);
+    fxProcessor.setReverbParameters(reverbBypassed, reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel);
 }
 
 //==============================================================================

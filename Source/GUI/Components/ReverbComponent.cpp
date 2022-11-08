@@ -11,8 +11,10 @@
 #include "ReverbComponent.h"
 
 //==============================================================================
-ReverbComponent::ReverbComponent(juce::AudioProcessorValueTreeState& apvts, juce::String roomSizeId, juce::String widthId, juce::String dampingId, juce::String freezeModeId, juce::String dryLevelId, juce::String wetLevelId)
+ReverbComponent::ReverbComponent(juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String roomSizeId, juce::String widthId, juce::String dampingId, juce::String freezeModeId, juce::String dryLevelId, juce::String wetLevelId)
 {
+    addAndMakeVisible(bypassedButton);
+
     roomSizeSlider.setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);
     addAndMakeVisible(roomSizeSlider);
 
@@ -31,6 +33,7 @@ ReverbComponent::ReverbComponent(juce::AudioProcessorValueTreeState& apvts, juce
     wetLevelSlider.setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);
     addAndMakeVisible(wetLevelSlider);
 
+    bypassedButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(apvts, bypassedId, bypassedButton);
     roomSizeAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, roomSizeId, roomSizeSlider);
     widthAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, widthId, widthSlider);
     dampingAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, dampingId, dampingSlider);
@@ -45,12 +48,21 @@ ReverbComponent::~ReverbComponent()
 
 void ReverbComponent::paint (juce::Graphics& g)
 {
-    g.fillAll (juce::Colours::black);
+    g.setColour(juce::Colours::wheat);
+
+    auto localBounds = getLocalBounds();
+    g.drawRoundedRectangle(localBounds.toFloat().reduced(5.0f), 5.0f, 2.0f);
+
+    auto textBounds = juce::Rectangle<int>(localBounds.getWidth(), localBounds.getHeight() / 6);
+    textBounds.setPosition(localBounds.getPosition());
+    g.setFont(24.f);
+    g.drawFittedText("Reverb", textBounds, juce::Justification::centred, true);
 }
 
 void ReverbComponent::resized()
 {
-    roomSizeSlider.setBounds(0, 0, 300, 30);
+    bypassedButton.setBounds(0, 0, 50, 50);
+    roomSizeSlider.setBounds(0, 50, 300, 30);
     widthSlider.setBounds(0, roomSizeSlider.getBottom(), 300, 30);
     dampingSlider.setBounds(0, widthSlider.getBottom(), 300, 30);
     freezeModeSlider.setBounds(0, dampingSlider.getBottom(), 300, 30);

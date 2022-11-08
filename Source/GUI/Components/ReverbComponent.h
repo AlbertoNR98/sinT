@@ -19,13 +19,15 @@
 class ReverbComponent  : public juce::Component
 {
 public:
-    ReverbComponent(juce::AudioProcessorValueTreeState& apvts, juce::String roomSizeId, juce::String widthId, juce::String dampingId, juce::String freezeModeId, juce::String dryLevelId, juce::String wetLevelId);
+    ReverbComponent(juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String roomSizeId, juce::String widthId, juce::String dampingId, juce::String freezeModeId, juce::String dryLevelId, juce::String wetLevelId);
     ~ReverbComponent() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
+    juce::ToggleButton bypassedButton;
+
     juce::Slider roomSizeSlider;
     juce::Slider widthSlider;
     juce::Slider dampingSlider;
@@ -33,6 +35,7 @@ private:
     juce::Slider dryLevelSlider;
     juce::Slider wetLevelSlider;
 
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> bypassedButtonAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> roomSizeAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> widthAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> dampingAttachment;

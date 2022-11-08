@@ -17,6 +17,8 @@ void ReverbData::prepareToPlay(juce::dsp::ProcessSpec& spec)
 
 void ReverbData::setDefaultParameters()
 {
+    setBypassed(false);
+
     juce::Reverb::Parameters reverbParameters;
 
     reverbParameters.roomSize = 0.5f;
@@ -29,8 +31,10 @@ void ReverbData::setDefaultParameters()
     reverb.setParameters(reverbParameters);
 }
 
-void ReverbData::setParameters(float reverbRoomSize, float reverbWidth, float reverbDamping, float reverbFreezeMode, float reverbDryLevel, float reverbWetLevel)
+void ReverbData::setParameters(bool reverbBypassed, float reverbRoomSize, float reverbWidth, float reverbDamping, float reverbFreezeMode, float reverbDryLevel, float reverbWetLevel)
 {
+    setBypassed(reverbBypassed);
+
     juce::Reverb::Parameters reverbParameters;
 
     reverbParameters.roomSize = reverbRoomSize;
