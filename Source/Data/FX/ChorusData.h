@@ -17,9 +17,9 @@ class ChorusData : public juce::dsp::Chorus<float>
 public:
     void prepareToPlay(juce::dsp::ProcessSpec& spec);
     void setDefaultParameters();
-    void setParameters(float chorusRate, float chorusDepth, float chorusCentreDelay, float chorusFeedback, float chorusMix);
-    bool isBypassed() { return !enabled; }
-    void setBypassed(bool bypassValue) { enabled = !bypassValue; }
+    void setParameters(bool bypassed, float chorusRate, float chorusDepth, float chorusCentreDelay, float chorusFeedback, float chorusMix);
+    bool isBypassed() { return bypassed; }
+    void setBypassed(bool bypassValue) { bypassed = bypassValue; }
 
     void renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock);
 
@@ -28,6 +28,6 @@ public:
 private:
     juce::dsp::Chorus<float> chorus;
     
-    bool enabled = true;
+    bool bypassed = true;
 
 };

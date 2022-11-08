@@ -268,6 +268,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONBLEND", "DistortionBlend", juce::NormalisableRange<float> {0.0f, 1.0f, 0.001f}, 0.0f, ""));
 
     // Chorus
+    layout.add(std::make_unique<juce::AudioParameterBool>("CHORUSBYPASSED", "ChorusBypassed", false));
     layout.add(std::make_unique<juce::AudioParameterFloat>("CHORUSRATE", "ChorusRate", juce::NormalisableRange<float> {0.0f, 100.0f, 0.1f}, 1.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("CHORUSDEPTH", "ChorusDepth", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.25f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("CHORUSCENTREDELAY", "ChorusCentreDelay", juce::NormalisableRange<float> {1.0f, 100.0f, 0.1f}, 7.0f, "ms"));
@@ -383,6 +384,7 @@ void SinTAudioProcessor::setFXParameters()
     auto& distortionBlend = *apvts.getRawParameterValue("DISTORTIONBLEND");
 
     // Chorus
+    auto& chorusBypassed = *apvts.getRawParameterValue("CHORUSBYPASSED");
     auto& chorusRate = *apvts.getRawParameterValue("CHORUSRATE");
     auto& chorusDepth = *apvts.getRawParameterValue("CHORUSDEPTH");
     auto& chorusCentreDelay = *apvts.getRawParameterValue("CHORUSCENTREDELAY");
@@ -402,7 +404,7 @@ void SinTAudioProcessor::setFXParameters()
     auto& reverbWetLevel = *apvts.getRawParameterValue("REVERBWETLEVEL");
 
     fxProcessor.setDistortionParameters(distortionBypassed, distortionDrive, distortionRange, distortionBlend);
-    fxProcessor.setChorusParameters(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
+    fxProcessor.setChorusParameters(chorusBypassed, chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
     fxProcessor.setDelayParameters(delayTimeMs, delayFeedback);
     fxProcessor.setReverbParameters(reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel);
 }

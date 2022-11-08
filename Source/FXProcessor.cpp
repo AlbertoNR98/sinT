@@ -30,9 +30,9 @@ void FXProcessor::setDistortionParameters(bool bypassed, float drive, float rang
     distortion.setParameters(bypassed, drive, range, blend);
 }
 
-void FXProcessor::setChorusParameters(float rate, float depth, float centreDelay, float feedback, float mix)
+void FXProcessor::setChorusParameters(bool bypassed, float rate, float depth, float centreDelay, float feedback, float mix)
 {
-    chorus.setParameters(rate, depth, centreDelay, feedback, mix);
+    chorus.setParameters(bypassed, rate, depth, centreDelay, feedback, mix);
 }
 
 void FXProcessor::setDelayParameters(float timeMs, float feedback)

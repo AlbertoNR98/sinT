@@ -18,8 +18,8 @@ public:
     void prepareToPlay(juce::dsp::ProcessSpec& spec);
     void setDefaultParameters();
     void setParameters(float timeMs, float feedback);
-    bool isBypassed() { return !enabled; };
-    void setBypassed(bool bypassValue) { enabled = !bypassValue; };
+    bool isBypassed() { return !bypassed; };
+    void setBypassed(bool bypassValue) { bypassed = !bypassValue; };
 
     void setDelayInMiliseconds(float delayInMiliseconds);
     void setMaxDelayInMiliseconds(float maxDelayInMiliseconds);
@@ -37,5 +37,5 @@ private:
     float maxDelayInMiliseconds{ 1000.0f };
     double sampleRate{ 44100.0f };
 
-    bool enabled = true;
+    bool bypassed = true;
 };

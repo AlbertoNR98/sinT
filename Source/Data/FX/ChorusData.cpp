@@ -17,6 +17,7 @@ void ChorusData::prepareToPlay(juce::dsp::ProcessSpec& spec)
 
 void ChorusData::setDefaultParameters()
 {
+    setBypassed(false);
     chorus.setRate(1.0f);
     chorus.setDepth(0.25f);
     chorus.setCentreDelay(7.0f);
@@ -24,8 +25,9 @@ void ChorusData::setDefaultParameters()
     chorus.setMix(0.0f);
 }
 
-void ChorusData::setParameters(float chorusRate, float chorusDepth, float chorusCentreDelay, float chorusFeedback, float chorusMix)
+void ChorusData::setParameters(bool bypassed, float chorusRate, float chorusDepth, float chorusCentreDelay, float chorusFeedback, float chorusMix)
 {
+    setBypassed(bypassed);
     chorus.setRate(chorusRate);
     chorus.setDepth(chorusDepth);
     chorus.setCentreDelay(chorusCentreDelay);

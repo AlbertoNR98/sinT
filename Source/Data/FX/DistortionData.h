@@ -18,7 +18,7 @@ public:
     void setDefaultParameters();
     void setParameters(bool bypassed, float drive, float range, float blend);
     bool isBypassed() { return bypassed; }
-    void setBypassed(bool bypassValue) { bypassed = !bypassValue; }
+    void setBypassed(bool bypassValue) { bypassed = bypassValue; }
 
     void renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock);
     
