@@ -11,13 +11,15 @@
 
 void DistortionData::setDefaultParameters()
 {
+    setBypassed(false);
     this->drive = 0.0f;
     this->range = 0.0f;
     this->blend = 0.0f;
 }
 
-void DistortionData::setParameters(float drive, float range, float blend)
+void DistortionData::setParameters(bool bypassed, float drive, float range, float blend)
 {
+    setBypassed(bypassed);
     this->drive = drive;
     this->range = range;
     this->blend = blend;

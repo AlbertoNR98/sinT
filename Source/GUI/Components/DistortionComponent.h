@@ -19,17 +19,19 @@
 class DistortionComponent  : public juce::Component
 {
 public:
-    DistortionComponent(juce::AudioProcessorValueTreeState& apvts, juce::String driveId, juce::String rangeId, juce::String blendId);
+    DistortionComponent(juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String driveId, juce::String rangeId, juce::String blendId);
     ~DistortionComponent() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
+    juce::ToggleButton bypassedButton;
     juce::Slider driveSlider;
     juce::Slider rangeSlider;
     juce::Slider blendSlider;
 
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> distortionBypassedButtonAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> driveAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> rangeAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> blendAttachment;

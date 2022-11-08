@@ -251,10 +251,10 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERADSRRELEASE", "FilterADSRRelease", juce::NormalisableRange<float> {0.0f, 16.0f, 0.01f}, 0.0f, "s"));
 
     // Filtro
+    layout.add(std::make_unique<juce::AudioParameterBool>("FILTERBYPASSED", "FilterBypassed", false));
     layout.add(std::make_unique<juce::AudioParameterChoice>("FILTERMODE", "FilterMode", juce::StringArray{ "LPF", "BPF", "HPF" }, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERCUTOFFFREQ", "FilterCutoffFreq", juce::NormalisableRange<float> {20.0f, 20000.0f, 0.01f, 0.5f}, 20000.0f, "Hz"));
     layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERRESONANCE", "FilterResonance", juce::NormalisableRange<float> {0.3f, 20.0f, 0.01f, 0.5}, 1.0f / juce::MathConstants<float>::sqrt2, ""));
-    layout.add(std::make_unique<juce::AudioParameterBool>("FILTERBYPASSED", "FilterBypassed", false));
 
     // LFO
     layout.add(std::make_unique<juce::AudioParameterFloat>("LFOFREQ", "LFOFreq", juce::NormalisableRange<float> {0.0f, 20.0f, 0.1f}, 0.0f, "Hz"));
@@ -262,6 +262,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
 
     // FX
     // Distorsion
+    layout.add(std::make_unique<juce::AudioParameterBool>("DISTORTIONBYPASSED", "DistortionBypassed", false));
     layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONDRIVE", "DistortionDrive", juce::NormalisableRange<float> {0.0f, 1.0f, 0.001f}, 0.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONRANGE", "DistortionRange", juce::NormalisableRange<float> {0.0f, 500.0f, 0.1f}, 0.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONBLEND", "DistortionBlend", juce::NormalisableRange<float> {0.0f, 1.0f, 0.001f}, 0.0f, ""));
@@ -376,6 +377,7 @@ void SinTAudioProcessor::setFilterParameters()
 void SinTAudioProcessor::setFXParameters()
 {
     // Distorsion
+    auto& distortionBypassed = *apvts.getRawParameterValue("DISTORTIONBYPASSED");
     auto& distortionDrive = *apvts.getRawParameterValue("DISTORTIONDRIVE");
     auto& distortionRange = *apvts.getRawParameterValue("DISTORTIONRANGE");
     auto& distortionBlend = *apvts.getRawParameterValue("DISTORTIONBLEND");
@@ -399,7 +401,7 @@ void SinTAudioProcessor::setFXParameters()
     auto& reverbDryLevel = *apvts.getRawParameterValue("REVERBDRYLEVEL");
     auto& reverbWetLevel = *apvts.getRawParameterValue("REVERBWETLEVEL");
 
-    fxProcessor.setDistortionParameters(distortionDrive, distortionRange, distortionBlend);
+    fxProcessor.setDistortionParameters(distortionBypassed, distortionDrive, distortionRange, distortionBlend);
     fxProcessor.setChorusParameters(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
     fxProcessor.setDelayParameters(delayTimeMs, delayFeedback);
     fxProcessor.setReverbParameters(reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel);
