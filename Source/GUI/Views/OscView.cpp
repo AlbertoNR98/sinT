@@ -50,7 +50,9 @@ void OscView::paint (juce::Graphics& g)
                 juce::Justification::centred, true);   // draw some placeholder text
     */
 
-    g.fillAll(juce::Colours::cadetblue);
+    //g.fillAll(juce::Colours::cadetblue);
+
+    g.fillAll(ColorPalette::darkgray);
 
     g.setColour(juce::Colours::wheat);
     g.setFont(44.0f);

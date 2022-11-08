@@ -254,7 +254,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterChoice>("FILTERMODE", "FilterMode", juce::StringArray{ "LPF", "BPF", "HPF" }, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERCUTOFFFREQ", "FilterCutoffFreq", juce::NormalisableRange<float> {20.0f, 20000.0f, 0.01f, 0.5f}, 20000.0f, "Hz"));
     layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERRESONANCE", "FilterResonance", juce::NormalisableRange<float> {0.3f, 20.0f, 0.01f, 0.5}, 1.0f / juce::MathConstants<float>::sqrt2, ""));
-    
+    layout.add(std::make_unique<juce::AudioParameterBool>("FILTERBYPASSED", "FilterBypassed", false));
+
     // LFO
     layout.add(std::make_unique<juce::AudioParameterFloat>("LFOFREQ", "LFOFreq", juce::NormalisableRange<float> {0.0f, 20.0f, 0.1f}, 0.0f, "Hz"));
     layout.add(std::make_unique<juce::AudioParameterFloat>("LFODEPTH", "LFODepth", juce::NormalisableRange<float> {0.0f, 10000.0f, 1.0f, 0.3f}, 0.0f, ""));
@@ -353,6 +354,7 @@ void SinTAudioProcessor::setVoiceParameters()
 void SinTAudioProcessor::setFilterParameters()
 {
     // Filtro
+    auto& filterBypassed = *apvts.getRawParameterValue("FILTERBYPASSED");
     auto& filterAdsrDepth = *apvts.getRawParameterValue("FILTERADSRDEPTH");
     auto& filterMode = *apvts.getRawParameterValue("FILTERMODE");
     auto& filterCutoffFreq = *apvts.getRawParameterValue("FILTERCUTOFFFREQ");
@@ -366,7 +368,7 @@ void SinTAudioProcessor::setFilterParameters()
     {
         if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(indexVoice)))
         {
-            voice->setFilterModulationParameters(filterMode, filterCutoffFreq, filterResonance, filterAdsrDepth, lfoFreq, lfoDepth);
+            voice->setFilterModulationParameters(filterBypassed, filterMode, filterCutoffFreq, filterResonance, filterAdsrDepth, lfoFreq, lfoDepth);
         }
     }
 }

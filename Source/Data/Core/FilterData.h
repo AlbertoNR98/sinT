@@ -20,12 +20,16 @@ class FilterData : public juce::dsp::StateVariableTPTFilter<float>
 public:
     FilterData();
     void prepareToPlay(juce::dsp::ProcessSpec& spec);
-    void setParameters(const int filterMode, const float cutoffFreq, const float filterResonance);
+    void setBypassed(const bool filterBypassed);
+    bool isBypassed() { return bypassed; };
+    void setParameters(const bool bypassed, const int filterMode, const float cutoffFreq, const float filterResonance);
     void renderNextBlock(juce::AudioBuffer<float>& buffer);
     float renderNextSample(int channel, float inputSample);
     
+
     void resetAll();
 
 private:
+    bool bypassed{ false };
     void setMode(const int filterMode);
 };

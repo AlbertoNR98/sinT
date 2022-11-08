@@ -53,7 +53,7 @@ OscillatorComponent::~OscillatorComponent()
 void OscillatorComponent::paint (juce::Graphics& g)
 {
     //g.fillAll(juce::Colours::black);
-    g.fillAll(juce::Colours::cadetblue);
+    //g.fillAll(juce::Colours::cadetblue);
 
     //g.setColour(juce::Colours::white);
     g.setColour(juce::Colours::wheat);

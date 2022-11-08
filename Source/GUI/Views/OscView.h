@@ -14,6 +14,7 @@
 
 //#include "../Components/ContainerComponent.h"
 
+#include "../Assets/ColorPalette.h"
 #include "../Components/OscillatorComponent.h"
 
 //==============================================================================

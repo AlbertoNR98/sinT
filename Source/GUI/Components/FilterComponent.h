@@ -20,7 +20,7 @@
 class FilterComponent  : public juce::Component
 {
 public:
-    FilterComponent(juce::AudioProcessorValueTreeState& apvts, juce::String filterModeSelectorId, juce::String filterCutoffFreqId, juce::String filterResonanceId);
+    FilterComponent(juce::AudioProcessorValueTreeState& apvts, juce::String filterBypassedId, juce::String filterModeSelectorId, juce::String filterCutoffFreqId, juce::String filterResonanceId);
     ~FilterComponent() override;
 
     void paint (juce::Graphics&) override;
@@ -29,11 +29,13 @@ public:
 private:
     juce::ComboBox filterModeSelector;
 
+    juce::ToggleButton filterBypassedButton;
+
     juce::Slider filterCutoffFreqSlider;
     juce::Slider filterResonanceSlider;
 
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> filterBypassedButtonAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> filterModeSelectorAttachment;
-
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> filterCutoffFreqAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> filterResonanceAttachment;
 

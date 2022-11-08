@@ -19,8 +19,14 @@ void FilterData::prepareToPlay(juce::dsp::ProcessSpec& spec)
     prepare(spec);
 }
 
-void FilterData::setParameters(const int filterMode, const float cutoffFreq, const float filterResonance)
+void FilterData::setBypassed(const bool filterBypassed)
 {
+    bypassed = filterBypassed;
+}
+
+void FilterData::setParameters(const bool bypassed, const int filterMode, const float cutoffFreq, const float filterResonance)
+{
+    setBypassed(bypassed);
     setCutoffFrequency(cutoffFreq);
     setResonance(filterResonance);
     setMode(filterMode);
@@ -28,12 +34,16 @@ void FilterData::setParameters(const int filterMode, const float cutoffFreq, con
 
 void FilterData::renderNextBlock(juce::AudioBuffer<float>& buffer)
 {
+    if (isBypassed()) return;
+
     juce::dsp::AudioBlock<float> audioBlock{ buffer };
     process(juce::dsp::ProcessContextReplacing<float>{audioBlock});
 }
 
 float FilterData::renderNextSample(int channel, float inputSample)
 {
+    if (isBypassed()) return 0.0f;
+
     return processSample(channel, inputSample);
 }
 

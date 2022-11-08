@@ -123,7 +123,7 @@ void SinTVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int star
     }   
 }
 
-void SinTVoice::setFilterModulationParameters(const int filterMode, const float filterCutoffFreq, const float filterResonance, const float filterAdsrDepth, const float lfoFreq, const float lfoDepth)
+void SinTVoice::setFilterModulationParameters(const bool filterBypassed, const int filterMode, const float filterCutoffFreq, const float filterResonance, const float filterAdsrDepth, const float lfoFreq, const float lfoDepth)
 {
     // Frecuencia de corte modulada por filter ADSR
     float cutoffFreqAdsrMod = (filterAdsrDepth * filterAdsrOutput) + filterCutoffFreq;
@@ -135,7 +135,7 @@ void SinTVoice::setFilterModulationParameters(const int filterMode, const float 
         float cutoffFreqAdsrLfoMod = (lfoDepth * lfoOutput[channel]) + cutoffFreqAdsrMod;
         cutoffFreqAdsrLfoMod = std::clamp<float>(cutoffFreqAdsrLfoMod, 20.0f, 20000.0f);
         
-        filter[channel].setParameters(filterMode, cutoffFreqAdsrLfoMod, filterResonance);
+        filter[channel].setParameters(filterBypassed, filterMode, cutoffFreqAdsrLfoMod, filterResonance);
     }
 }
 

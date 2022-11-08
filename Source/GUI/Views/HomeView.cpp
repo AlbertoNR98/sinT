@@ -36,9 +36,10 @@ void HomeView::paint (juce::Graphics& g)
     //g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background    
 
     //g.fillAll(juce::Colours::cadetblue);
-    g.fillAll(juce::Colours::black);
-    g.setColour (juce::Colours::white);
-    g.setFont (140.0f);
+    g.fillAll(ColorPalette::darkgray);
+
+    g.setColour (ColorPalette::monwhite);
+    g.setFont (180.0f);
     g.drawText ("sinT", getLocalBounds(),
                 juce::Justification::centred, true);   // draw some placeholder text
 }

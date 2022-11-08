@@ -46,6 +46,12 @@
         </GROUP>
       </GROUP>
       <GROUP id="{6B4C42CC-A6E5-0991-D2E8-C1E26CB890A8}" name="GUI">
+        <GROUP id="{D1D2E4A3-C317-13AC-06E4-51C653D01C04}" name="Assets">
+          <FILE id="aXulqh" name="ColorPalette.h" compile="0" resource="0" file="Source/GUI/Assets/ColorPalette.h"/>
+          <FILE id="jkOGO6" name="CustomSliders.cpp" compile="1" resource="0"
+                file="Source/GUI/Assets/CustomSliders.cpp"/>
+          <FILE id="fJ8rxS" name="CustomSliders.h" compile="0" resource="0" file="Source/GUI/Assets/CustomSliders.h"/>
+        </GROUP>
         <GROUP id="{83A64210-9666-8E6F-54CC-782EA2432656}" name="Components">
           <GROUP id="{E6DA5DAE-778C-91E9-8DCD-DD1F5955454A}" name="Base">
             <FILE id="mcjX0V" name="ContainerComponent.cpp" compile="1" resource="0"
