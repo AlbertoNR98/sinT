@@ -18,16 +18,18 @@
 class DelayComponent  : public juce::Component
 {
 public:
-    DelayComponent(juce::AudioProcessorValueTreeState& apvts, juce::String timeMsId, juce::String feedbackId);
+    DelayComponent(juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String timeMsId, juce::String feedbackId);
     ~DelayComponent() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
+    juce::ToggleButton bypassedButton;
     juce::Slider timeMsSlider;
     juce::Slider feedbackSlider;
 
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> bypassedButtonAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> timeMsAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> feedbackAttachment;
 

@@ -276,6 +276,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>("CHORUSMIX", "ChorusMix", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
 
     // Delay
+    layout.add(std::make_unique<juce::AudioParameterBool>("DELAYBYPASSED", "DelayBypassed", false));
     layout.add(std::make_unique<juce::AudioParameterFloat>("DELAYTIMEMS", "DelayTimeMs", juce::NormalisableRange<float> {0.0f, 5000.0f, 0.01f}, 0.0f, "ms"));
     layout.add(std::make_unique<juce::AudioParameterFloat>("DELAYFEEDBACK", "DelayFeedback", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
 
@@ -392,6 +393,7 @@ void SinTAudioProcessor::setFXParameters()
     auto& chorusMix = *apvts.getRawParameterValue("CHORUSMIX");
 
     // Delay
+    auto& delayBypassed = *apvts.getRawParameterValue("DELAYBYPASSED");
     auto& delayTimeMs = *apvts.getRawParameterValue("DELAYTIMEMS");
     auto& delayFeedback = *apvts.getRawParameterValue("DELAYFEEDBACK");
 
@@ -405,7 +407,7 @@ void SinTAudioProcessor::setFXParameters()
 
     fxProcessor.setDistortionParameters(distortionBypassed, distortionDrive, distortionRange, distortionBlend);
     fxProcessor.setChorusParameters(chorusBypassed, chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
-    fxProcessor.setDelayParameters(delayTimeMs, delayFeedback);
+    fxProcessor.setDelayParameters(delayBypassed, delayTimeMs, delayFeedback);
     fxProcessor.setReverbParameters(reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel);
 }
 

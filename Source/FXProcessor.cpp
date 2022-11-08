@@ -35,9 +35,9 @@ void FXProcessor::setChorusParameters(bool bypassed, float rate, float depth, fl
     chorus.setParameters(bypassed, rate, depth, centreDelay, feedback, mix);
 }
 
-void FXProcessor::setDelayParameters(float timeMs, float feedback)
+void FXProcessor::setDelayParameters(bool bypassed, float timeMs, float feedback)
 {
-    delay.setParameters(timeMs, feedback);
+    delay.setParameters(bypassed, timeMs, feedback);
 }
 
 void FXProcessor::setReverbParameters(float roomSize, float width, float damping, float freezeMode, float dryLevel, float wetLevel)

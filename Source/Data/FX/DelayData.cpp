@@ -18,8 +18,9 @@ void DelayData::prepareToPlay(juce::dsp::ProcessSpec& spec)
     setDefaultParameters();
 }
 
-void DelayData::setParameters(float timeMs, float feedback)
+void DelayData::setParameters(bool bypassed, float timeMs, float feedback)
 {
+    setBypassed(bypassed);
     this->timeMs = timeMs;
     this->feedback = feedback;
     setDelayInMiliseconds(this->timeMs);
@@ -27,6 +28,7 @@ void DelayData::setParameters(float timeMs, float feedback)
 
 void DelayData::setDefaultParameters()
 {
+    setBypassed(false);
     delay.setMaximumDelayInSamples(sampleRate * std::ceil(maxDelayInMiliseconds / 1000.0f));
 }
 
@@ -44,7 +46,7 @@ void DelayData::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
 {
     if (isBypassed() || timeMs == 0.0f || feedback == 0.0f)
     {
-        resetAll();
+        resetAll(); // Ver si es necesario
         return;
     }
 

@@ -25,7 +25,7 @@ public:
 
     void setDistortionParameters(bool bypassed, float drive, float range, float blend);
     void setChorusParameters(bool bypassed, float rate, float depth, float centreDelay, float feedback, float mix);
-    void setDelayParameters(float timeMs, float feedback);
+    void setDelayParameters(bool bypassed, float timeMs, float feedback);
     void setReverbParameters(float roomSize, float width, float damping, float freezeMode, float dryLevel, float wetLevel);
 
     void renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock);
