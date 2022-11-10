@@ -28,6 +28,5 @@ public:
 private:
     juce::dsp::Chorus<float> chorus;
     
-    bool bypassed = true;
-
+    bool bypassed{ true };
 };

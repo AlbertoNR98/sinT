@@ -167,9 +167,9 @@ void SinTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
     fxProcessor.renderNextBlock(audioBlock);
 
     // Procesamiento de slider de ganancia de salida
-    auto& mainGainValue = *apvts.getRawParameterValue("MAINGAIN");
-    mainGain.setGainDecibels(mainGainValue);
-    mainGain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+    auto& mainGainRawValue = *apvts.getRawParameterValue(ParamsIDList::mainGain);
+    mainGainValue.setGainDecibels(mainGainRawValue);
+    mainGainValue.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
 
     // Procesamiento de medidor de ganancia de salida
     mainGainMeter.renderNextBlock(buffer);
@@ -217,77 +217,79 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
 
+    using namespace ParamsIDList;
+
     // Controles generales
-    layout.add(std::make_unique<juce::AudioParameterFloat>("MAINGAIN", "MainGain", juce::NormalisableRange<float> {-60.0f, 12.0f, 0.1f}, 0.0f, "dB"));
-    layout.add(std::make_unique<juce::AudioParameterBool>("PORTAMENTO", "Portamento", false));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(mainGain, "MainGain", juce::NormalisableRange<float> {-60.0f, 12.0f, 0.1f}, 0.0f, "dB"));
+    layout.add(std::make_unique<juce::AudioParameterBool>(portamento, "Portamento", false));
 
     // Oscilador 1
-    layout.add(std::make_unique<juce::AudioParameterBool>("OSC1BYPASSED", "Oscillator1Bypassed", false));
-    layout.add(std::make_unique<juce::AudioParameterChoice>("OSC1WF", "Oscillator1Waveform", juce::StringArray { "Sine", "Saw", "Square" }, 0));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("OSC1GAINDB", "Oscillator1Gain", juce::NormalisableRange<float> {-48.0f, 6.0f, 0.1f}, 0.0f, "dB"));
-    layout.add(std::make_unique<juce::AudioParameterInt>("OSC1PITCH", "Oscillator1Pitch", -48, 48, 0));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("OSC1FMFREQ", "Oscillator1FMFreq", juce::NormalisableRange<float> {0.0f, 999.9f, 1.0f, 0.4f}, 0.0f, "Hz"));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("OSC1FMDEPTH", "Oscillator1FMDepth", juce::NormalisableRange<float> {0.0f, 100.0f, 0.1f}, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterBool>(osc1Bypassed, "Oscillator1Bypassed", false));
+    layout.add(std::make_unique<juce::AudioParameterChoice>(osc1Waveform, "Oscillator1Waveform", juce::StringArray { "Sine", "Saw", "Square" }, 0));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(osc1Gain, "Oscillator1Gain", juce::NormalisableRange<float> {-48.0f, 6.0f, 0.1f}, 0.0f, "dB"));
+    layout.add(std::make_unique<juce::AudioParameterInt>(osc1Pitch, "Oscillator1Pitch", -48, 48, 0));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(osc1FmFreq, "Oscillator1FMFreq", juce::NormalisableRange<float> {0.0f, 999.9f, 1.0f, 0.4f}, 0.0f, "Hz"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(osc1FmDepth, "Oscillator1FMDepth", juce::NormalisableRange<float> {0.0f, 100.0f, 0.1f}, 0.0f));
 
     // Oscilador 2
-    layout.add(std::make_unique<juce::AudioParameterBool>("OSC2BYPASSED", "Oscillator2Bypassed", false));
-    layout.add(std::make_unique<juce::AudioParameterChoice>("OSC2WF", "Oscillator2Waveform", juce::StringArray{ "Sine", "Saw", "Square" }, 0));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("OSC2GAINDB", "Oscillator2Gain", juce::NormalisableRange<float> {-48.0f, 6.0f, 0.1f}, 0.0f, "dB"));
-    layout.add(std::make_unique<juce::AudioParameterInt>("OSC2PITCH", "Oscillator2Pitch", -48, 48, 0));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("OSC2FMFREQ", "Oscillator2FMFreq", juce::NormalisableRange<float> {0.0f, 999.9f, 1.0f, 0.4f}, 0.0f, "Hz"));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("OSC2FMDEPTH", "Oscillator2FMDepth", juce::NormalisableRange<float> {0.0f, 100.0f, 0.1f}, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterBool>(osc2Bypassed, "Oscillator2Bypassed", false));
+    layout.add(std::make_unique<juce::AudioParameterChoice>(osc2Waveform, "Oscillator2Waveform", juce::StringArray{ "Sine", "Saw", "Square" }, 0));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(osc2Gain, "Oscillator2Gain", juce::NormalisableRange<float> {-48.0f, 6.0f, 0.1f}, 0.0f, "dB"));
+    layout.add(std::make_unique<juce::AudioParameterInt>(osc2Pitch, "Oscillator2Pitch", -48, 48, 0));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(osc2FmFreq, "Oscillator2FMFreq", juce::NormalisableRange<float> {0.0f, 999.9f, 1.0f, 0.4f}, 0.0f, "Hz"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(osc2FmDepth, "Oscillator2FMDepth", juce::NormalisableRange<float> {0.0f, 100.0f, 0.1f}, 0.0f));
 
     // Amp ADSR
-    layout.add(std::make_unique<juce::AudioParameterFloat>("AMPADSRATTACK", "AmpADSRAttack", juce::NormalisableRange<float> {0.01f, 16.0f, 0.01f}, 0.01f, "s"));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("AMPADSRDECAY", "AmpADSRDecay", juce::NormalisableRange<float> {0.0f, 16.0f, 0.5f}, 2.25f, "s"));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("AMPADSRSUSTAIN", "AmpADSRSustain", juce::NormalisableRange<float> {0.0f, 1.0f, 0.05f}, 1.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("AMPADSRRELEASE", "AmpADSRRelease", juce::NormalisableRange<float> {0.01f, 16.0f, 0.01f}, 0.1f, "s"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(ampAdsrAttack, "AmpADSRAttack", juce::NormalisableRange<float> {0.01f, 16.0f, 0.01f}, 0.01f, "s"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(ampAdsrDecay, "AmpADSRDecay", juce::NormalisableRange<float> {0.0f, 16.0f, 0.5f}, 2.25f, "s"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(ampAdsrSustain, "AmpADSRSustain", juce::NormalisableRange<float> {0.0f, 1.0f, 0.05f}, 1.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(ampAdsrRelease, "AmpADSRRelease", juce::NormalisableRange<float> {0.01f, 16.0f, 0.01f}, 0.1f, "s"));
 
     // Filter ADSR
-    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERADSRDEPTH", "FilterADSRDepth", juce::NormalisableRange<float> {0.0f, 10000.0f, 0.1f, 0.3f}, 10000.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERADSRATTACK", "FilterADSRAttack", juce::NormalisableRange<float> {0.0f, 16.0f, 0.01f}, 0.0f, "s"));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERADSRDECAY", "FilterADSRDecay", juce::NormalisableRange<float> {0.0f, 16.0f, 0.5f}, 0.0f, "s"));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERADSRSUSTAIN", "FilterADSRSustain", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERADSRRELEASE", "FilterADSRRelease", juce::NormalisableRange<float> {0.0f, 16.0f, 0.01f}, 0.0f, "s"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(filterAdsrDepth, "FilterADSRDepth", juce::NormalisableRange<float> {0.0f, 10000.0f, 0.1f, 0.3f}, 10000.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(filterAdsrAttack, "FilterADSRAttack", juce::NormalisableRange<float> {0.0f, 16.0f, 0.01f}, 0.0f, "s"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(filterAdsrDecay, "FilterADSRDecay", juce::NormalisableRange<float> {0.0f, 16.0f, 0.5f}, 0.0f, "s"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(filterAdsrSustain, "FilterADSRSustain", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(filterAdsrRelease, "FilterADSRRelease", juce::NormalisableRange<float> {0.0f, 16.0f, 0.01f}, 0.0f, "s"));
 
     // Filtro
-    layout.add(std::make_unique<juce::AudioParameterBool>("FILTERBYPASSED", "FilterBypassed", false));
-    layout.add(std::make_unique<juce::AudioParameterChoice>("FILTERMODE", "FilterMode", juce::StringArray{ "LPF", "BPF", "HPF" }, 0));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERCUTOFFFREQ", "FilterCutoffFreq", juce::NormalisableRange<float> {20.0f, 20000.0f, 0.01f, 0.5f}, 20000.0f, "Hz"));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("FILTERRESONANCE", "FilterResonance", juce::NormalisableRange<float> {0.3f, 20.0f, 0.01f, 0.5}, 1.0f / juce::MathConstants<float>::sqrt2, ""));
+    layout.add(std::make_unique<juce::AudioParameterBool>(filterBypassed, "FilterBypassed", false));
+    layout.add(std::make_unique<juce::AudioParameterChoice>(filterMode, "FilterMode", juce::StringArray{ "LPF", "BPF", "HPF" }, 0));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(filterCutoffFreq, "FilterCutoffFreq", juce::NormalisableRange<float> {20.0f, 20000.0f, 0.01f, 0.5f}, 20000.0f, "Hz"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(filterResonance, "FilterResonance", juce::NormalisableRange<float> {0.3f, 20.0f, 0.01f, 0.5}, 1.0f / juce::MathConstants<float>::sqrt2, ""));
 
     // LFO
-    layout.add(std::make_unique<juce::AudioParameterFloat>("LFOFREQ", "LFOFreq", juce::NormalisableRange<float> {0.0f, 20.0f, 0.1f}, 0.0f, "Hz"));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("LFODEPTH", "LFODepth", juce::NormalisableRange<float> {0.0f, 10000.0f, 1.0f, 0.3f}, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(lfoFreq, "LFOFreq", juce::NormalisableRange<float> {0.0f, 20.0f, 0.1f}, 0.0f, "Hz"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(lfoDepth, "LFODepth", juce::NormalisableRange<float> {0.0f, 10000.0f, 1.0f, 0.3f}, 0.0f, ""));
 
     // FX
     // Distorsion
-    layout.add(std::make_unique<juce::AudioParameterBool>("DISTORTIONBYPASSED", "DistortionBypassed", false));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONDRIVE", "DistortionDrive", juce::NormalisableRange<float> {0.0f, 1.0f, 0.001f}, 0.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONRANGE", "DistortionRange", juce::NormalisableRange<float> {0.0f, 500.0f, 0.1f}, 0.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("DISTORTIONBLEND", "DistortionBlend", juce::NormalisableRange<float> {0.0f, 1.0f, 0.001f}, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterBool>(distortionBypassed, "DistortionBypassed", false));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(distortionDrive, "DistortionDrive", juce::NormalisableRange<float> {0.0f, 1.0f, 0.001f}, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(distortionRange, "DistortionRange", juce::NormalisableRange<float> {0.0f, 500.0f, 0.1f}, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(distortionBlend, "DistortionBlend", juce::NormalisableRange<float> {0.0f, 1.0f, 0.001f}, 0.0f, ""));
 
     // Chorus
-    layout.add(std::make_unique<juce::AudioParameterBool>("CHORUSBYPASSED", "ChorusBypassed", false));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("CHORUSRATE", "ChorusRate", juce::NormalisableRange<float> {0.0f, 100.0f, 0.1f}, 1.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("CHORUSDEPTH", "ChorusDepth", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.25f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("CHORUSCENTREDELAY", "ChorusCentreDelay", juce::NormalisableRange<float> {1.0f, 100.0f, 0.1f}, 7.0f, "ms"));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("CHORUSFEEDBACK", "ChorusFeedback", juce::NormalisableRange<float> {-1.0f, 1.0f, 0.01f}, 0.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("CHORUSMIX", "ChorusMix", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterBool>(chorusBypassed, "ChorusBypassed", false));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(chorusRate, "ChorusRate", juce::NormalisableRange<float> {0.0f, 100.0f, 0.1f}, 1.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(chorusDepth, "ChorusDepth", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.25f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(chorusCentreDelay, "ChorusCentreDelay", juce::NormalisableRange<float> {1.0f, 100.0f, 0.1f}, 7.0f, "ms"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(chorusFeedback, "ChorusFeedback", juce::NormalisableRange<float> {-1.0f, 1.0f, 0.01f}, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(chorusMix, "ChorusMix", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
 
     // Delay
-    layout.add(std::make_unique<juce::AudioParameterBool>("DELAYBYPASSED", "DelayBypassed", false));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("DELAYTIMEMS", "DelayTimeMs", juce::NormalisableRange<float> {0.0f, 5000.0f, 0.01f}, 0.0f, "ms"));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("DELAYFEEDBACK", "DelayFeedback", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterBool>(delayBypassed, "DelayBypassed", false));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(delayTimeMs, "DelayTimeMs", juce::NormalisableRange<float> {0.0f, 5000.0f, 0.01f}, 0.0f, "ms"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(delayFeedback, "DelayFeedback", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
 
     // Reverb
-    layout.add(std::make_unique<juce::AudioParameterBool>("REVERBBYPASSED", "ReverbBypassed", false));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBROOMSIZE", "ReverbRoomSize", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBWIDTH", "ReverbWidth", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 1.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBDAMPING", "ReverbDamping", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.5f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBFREEZEMODE", "ReverbFreezeMode", juce::NormalisableRange<float> {0.0f, 1.0f, 0.1f}, 0.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBDRYLEVEL", "ReverbDryLevel", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 1.0f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("REVERBWETLEVEL", "ReverbWetLevel", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterBool>(reverbBypassed, "ReverbBypassed", false));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(reverbRoomSize, "ReverbRoomSize", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(reverbWidth, "ReverbWidth", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 1.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(reverbDamping, "ReverbDamping", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.5f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(reverbFreezeMode, "ReverbFreezeMode", juce::NormalisableRange<float> {0.0f, 1.0f, 0.1f}, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(reverbDryLevel, "ReverbDryLevel", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 1.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(reverbWetLevel, "ReverbWetLevel", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
     
     return layout;
 }
@@ -306,35 +308,35 @@ void SinTAudioProcessor::setVoiceParameters()
         if (auto voice = dynamic_cast<SinTVoice*>(sinT.getVoice(indexVoice)))
         {
             // Portamento
-            auto& portamento = *apvts.getRawParameterValue("PORTAMENTO");
+            auto& portamento = *apvts.getRawParameterValue(ParamsIDList::portamento);
 
             // Amp ADSR
-            auto& ampAdsrAttack = *apvts.getRawParameterValue("AMPADSRATTACK");
-            auto& ampAdsrDecay = *apvts.getRawParameterValue("AMPADSRDECAY");
-            auto& ampAdsrSustain = *apvts.getRawParameterValue("AMPADSRSUSTAIN");
-            auto& ampAdsrRelease = *apvts.getRawParameterValue("AMPADSRRELEASE");
+            auto& ampAdsrAttack = *apvts.getRawParameterValue(ParamsIDList::ampAdsrAttack);
+            auto& ampAdsrDecay = *apvts.getRawParameterValue(ParamsIDList::ampAdsrDecay);
+            auto& ampAdsrSustain = *apvts.getRawParameterValue(ParamsIDList::ampAdsrSustain);
+            auto& ampAdsrRelease = *apvts.getRawParameterValue(ParamsIDList::ampAdsrRelease);
 
             // Filter ADSR
-            auto& filterAdsrAttack = *apvts.getRawParameterValue("FILTERADSRATTACK");
-            auto& filterAdsrDecay = *apvts.getRawParameterValue("FILTERADSRDECAY");
-            auto& filterAdsrSustain = *apvts.getRawParameterValue("FILTERADSRSUSTAIN");
-            auto& filterAdsrRelease = *apvts.getRawParameterValue("FILTERADSRRELEASE");
+            auto& filterAdsrAttack = *apvts.getRawParameterValue(ParamsIDList::filterAdsrAttack);
+            auto& filterAdsrDecay = *apvts.getRawParameterValue(ParamsIDList::filterAdsrDecay);
+            auto& filterAdsrSustain = *apvts.getRawParameterValue(ParamsIDList::filterAdsrSustain);
+            auto& filterAdsrRelease = *apvts.getRawParameterValue(ParamsIDList::filterAdsrRelease);
 
             // OSC1
-            auto& osc1Bypassed = *apvts.getRawParameterValue("OSC1BYPASSED");
-            auto& osc1WaveSelect = *apvts.getRawParameterValue("OSC1WF");
-            auto& osc1GainDecibels = *apvts.getRawParameterValue("OSC1GAINDB");
-            auto& osc1Pitch = *apvts.getRawParameterValue("OSC1PITCH");
-            auto& osc1FmFreq = *apvts.getRawParameterValue("OSC1FMFREQ");
-            auto& osc1FmDepth = *apvts.getRawParameterValue("OSC1FMDEPTH");
+            auto& osc1Bypassed = *apvts.getRawParameterValue(ParamsIDList::osc1Bypassed);
+            auto& osc1WaveSelect = *apvts.getRawParameterValue(ParamsIDList::osc1Waveform);
+            auto& osc1GainDecibels = *apvts.getRawParameterValue(ParamsIDList::osc1Gain);
+            auto& osc1Pitch = *apvts.getRawParameterValue(ParamsIDList::osc1Pitch);
+            auto& osc1FmFreq = *apvts.getRawParameterValue(ParamsIDList::osc1FmFreq);
+            auto& osc1FmDepth = *apvts.getRawParameterValue(ParamsIDList::osc1FmDepth);
 
             // OSC2
-            auto& osc2Bypassed = *apvts.getRawParameterValue("OSC2BYPASSED");
-            auto& osc2WaveSelect = *apvts.getRawParameterValue("OSC2WF");
-            auto& osc2GainDecibels = *apvts.getRawParameterValue("OSC2GAINDB");
-            auto& osc2Pitch = *apvts.getRawParameterValue("OSC2PITCH");
-            auto& osc2FmFreq = *apvts.getRawParameterValue("OSC2FMFREQ");
-            auto& osc2FmDepth = *apvts.getRawParameterValue("OSC2FMDEPTH");
+            auto& osc2Bypassed = *apvts.getRawParameterValue(ParamsIDList::osc2Bypassed);
+            auto& osc2WaveSelect = *apvts.getRawParameterValue(ParamsIDList::osc2Waveform);
+            auto& osc2GainDecibels = *apvts.getRawParameterValue(ParamsIDList::osc2Gain);
+            auto& osc2Pitch = *apvts.getRawParameterValue(ParamsIDList::osc2Pitch);
+            auto& osc2FmFreq = *apvts.getRawParameterValue(ParamsIDList::osc2FmFreq);
+            auto& osc2FmDepth = *apvts.getRawParameterValue(ParamsIDList::osc2FmDepth);
 
             // Procesamiento
             auto& osc1 = voice->getOscillator1();
@@ -358,15 +360,15 @@ void SinTAudioProcessor::setVoiceParameters()
 void SinTAudioProcessor::setFilterParameters()
 {
     // Filtro
-    auto& filterBypassed = *apvts.getRawParameterValue("FILTERBYPASSED");
-    auto& filterAdsrDepth = *apvts.getRawParameterValue("FILTERADSRDEPTH");
-    auto& filterMode = *apvts.getRawParameterValue("FILTERMODE");
-    auto& filterCutoffFreq = *apvts.getRawParameterValue("FILTERCUTOFFFREQ");
-    auto& filterResonance = *apvts.getRawParameterValue("FILTERRESONANCE");
+    auto& filterBypassed = *apvts.getRawParameterValue(ParamsIDList::filterBypassed);
+    auto& filterAdsrDepth = *apvts.getRawParameterValue(ParamsIDList::filterAdsrDepth);
+    auto& filterMode = *apvts.getRawParameterValue(ParamsIDList::filterMode);
+    auto& filterCutoffFreq = *apvts.getRawParameterValue(ParamsIDList::filterCutoffFreq);
+    auto& filterResonance = *apvts.getRawParameterValue(ParamsIDList::filterResonance);
 
     // LFO
-    auto& lfoFreq = *apvts.getRawParameterValue("LFOFREQ");
-    auto& lfoDepth = *apvts.getRawParameterValue("LFODEPTH");
+    auto& lfoFreq = *apvts.getRawParameterValue(ParamsIDList::lfoFreq);
+    auto& lfoDepth = *apvts.getRawParameterValue(ParamsIDList::lfoDepth);
 
     for (int indexVoice = 0; indexVoice < sinT.getNumVoices(); indexVoice++)
     {
@@ -380,32 +382,32 @@ void SinTAudioProcessor::setFilterParameters()
 void SinTAudioProcessor::setFXParameters()
 {
     // Distorsion
-    auto& distortionBypassed = *apvts.getRawParameterValue("DISTORTIONBYPASSED");
-    auto& distortionDrive = *apvts.getRawParameterValue("DISTORTIONDRIVE");
-    auto& distortionRange = *apvts.getRawParameterValue("DISTORTIONRANGE");
-    auto& distortionBlend = *apvts.getRawParameterValue("DISTORTIONBLEND");
+    auto& distortionBypassed = *apvts.getRawParameterValue(ParamsIDList::distortionBypassed);
+    auto& distortionDrive = *apvts.getRawParameterValue(ParamsIDList::distortionDrive);
+    auto& distortionRange = *apvts.getRawParameterValue(ParamsIDList::distortionRange);
+    auto& distortionBlend = *apvts.getRawParameterValue(ParamsIDList::distortionBlend);
 
     // Chorus
-    auto& chorusBypassed = *apvts.getRawParameterValue("CHORUSBYPASSED");
-    auto& chorusRate = *apvts.getRawParameterValue("CHORUSRATE");
-    auto& chorusDepth = *apvts.getRawParameterValue("CHORUSDEPTH");
-    auto& chorusCentreDelay = *apvts.getRawParameterValue("CHORUSCENTREDELAY");
-    auto& chorusFeedback = *apvts.getRawParameterValue("CHORUSFEEDBACK");
-    auto& chorusMix = *apvts.getRawParameterValue("CHORUSMIX");
+    auto& chorusBypassed = *apvts.getRawParameterValue(ParamsIDList::chorusBypassed);
+    auto& chorusRate = *apvts.getRawParameterValue(ParamsIDList::chorusRate);
+    auto& chorusDepth = *apvts.getRawParameterValue(ParamsIDList::chorusDepth);
+    auto& chorusCentreDelay = *apvts.getRawParameterValue(ParamsIDList::chorusCentreDelay);
+    auto& chorusFeedback = *apvts.getRawParameterValue(ParamsIDList::chorusFeedback);
+    auto& chorusMix = *apvts.getRawParameterValue(ParamsIDList::chorusMix);
 
     // Delay
-    auto& delayBypassed = *apvts.getRawParameterValue("DELAYBYPASSED");
-    auto& delayTimeMs = *apvts.getRawParameterValue("DELAYTIMEMS");
-    auto& delayFeedback = *apvts.getRawParameterValue("DELAYFEEDBACK");
+    auto& delayBypassed = *apvts.getRawParameterValue(ParamsIDList::delayBypassed);
+    auto& delayTimeMs = *apvts.getRawParameterValue(ParamsIDList::delayTimeMs);
+    auto& delayFeedback = *apvts.getRawParameterValue(ParamsIDList::delayFeedback);
 
     // Reverb
-    auto& reverbBypassed = *apvts.getRawParameterValue("REVERBBYPASSED");
-    auto& reverbRoomSize = *apvts.getRawParameterValue("REVERBROOMSIZE");
-    auto& reverbWidth = *apvts.getRawParameterValue("REVERBWIDTH");
-    auto& reverbDamping = *apvts.getRawParameterValue("REVERBDAMPING");
-    auto& reverbFreezeMode = *apvts.getRawParameterValue("REVERBFREEZEMODE");
-    auto& reverbDryLevel = *apvts.getRawParameterValue("REVERBDRYLEVEL");
-    auto& reverbWetLevel = *apvts.getRawParameterValue("REVERBWETLEVEL");
+    auto& reverbBypassed = *apvts.getRawParameterValue(ParamsIDList::reverbBypassed);
+    auto& reverbRoomSize = *apvts.getRawParameterValue(ParamsIDList::reverbRoomSize);
+    auto& reverbWidth = *apvts.getRawParameterValue(ParamsIDList::reverbWidth);
+    auto& reverbDamping = *apvts.getRawParameterValue(ParamsIDList::reverbDamping);
+    auto& reverbFreezeMode = *apvts.getRawParameterValue(ParamsIDList::reverbFreezeMode);
+    auto& reverbDryLevel = *apvts.getRawParameterValue(ParamsIDList::reverbDryLevel);
+    auto& reverbWetLevel = *apvts.getRawParameterValue(ParamsIDList::reverbWetLevel);
 
     fxProcessor.setDistortionParameters(distortionBypassed, distortionDrive, distortionRange, distortionBlend);
     fxProcessor.setChorusParameters(chorusBypassed, chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);

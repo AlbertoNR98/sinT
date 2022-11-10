@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "ParameterIdList.h"
 #include "SinTSound.h"
 #include "SinTVoice.h"
 #include "FXProcessor.h"
@@ -79,7 +80,7 @@ private:
     juce::Synthesiser sinT;
     FXProcessor fxProcessor;
     MeterData mainGainMeter;
-    juce::dsp::Gain<float> mainGain;
+    juce::dsp::Gain<float> mainGainValue;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SinTAudioProcessor)

@@ -7,6 +7,7 @@
               pluginManufacturerCode="AlNR" pluginCode="Alnr">
   <MAINGROUP id="YdDlVH" name="sinT">
     <GROUP id="{AEAE61ED-FAE3-177E-149B-190C5214B3DB}" name="Source">
+      <FILE id="DSBJlL" name="ParamsIDList.h" compile="0" resource="0" file="Source/ParamsIDList.h"/>
       <FILE id="THE7xA" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="m7sY1y" name="PluginProcessor.h" compile="0" resource="0"

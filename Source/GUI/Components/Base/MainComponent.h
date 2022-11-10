@@ -11,7 +11,8 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "../../../PluginProcessor.h"
+
+#include "../Source/PluginProcessor.h"
 
 #include "ContainerComponent.h"
 #include "NavbarComponent.h"

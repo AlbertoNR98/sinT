@@ -37,5 +37,5 @@ private:
     float maxDelayInMiliseconds{ 1000.0f };
     double sampleRate{ 44100.0f };
 
-    bool bypassed = true;
+    bool bypassed{ true };
 };

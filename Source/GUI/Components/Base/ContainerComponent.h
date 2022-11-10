@@ -12,6 +12,8 @@
 
 #include <JuceHeader.h>
 
+#include "../Source/ParameterIdList.h"
+
 #include "SidePanelHeader.h"
 #include "SidePanelList.h"
 

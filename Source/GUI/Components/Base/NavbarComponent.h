@@ -13,6 +13,8 @@
 #include <JuceHeader.h>
 
 #include "../Source/PluginProcessor.h"
+#include "../Source/ParameterIdList.h"
+
 #include "ContainerComponent.h"
 
 #include "../MeterComponent.h"

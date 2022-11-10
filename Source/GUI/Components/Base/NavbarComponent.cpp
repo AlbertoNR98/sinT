@@ -17,7 +17,7 @@ NavbarComponent::NavbarComponent(SinTAudioProcessor& audioProcessor, ContainerCo
     showSidePanel("Sidepanel", "Show Sidepanel"), 
     settingsButton("Settings", juce::Colours::transparentBlack, juce::Colours::transparentBlack, juce::Colours::transparentBlack),
     gainMeter([&]()->std::pair<float, float> { return audioProcessor.getMainGainMeterRmsValues(); }),
-    mainControl(audioProcessor.apvts, "MAINGAIN", "PORTAMENTO")
+    mainControl(audioProcessor.apvts, ParamsIDList::mainGain, ParamsIDList::portamento)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -72,8 +72,7 @@ void NavbarComponent::paint (juce::Graphics& g)
     g.drawRect(getLocalBounds(), 0);   // draw an outline around the component
 
     g.setFont(14.0f);
-    g.drawText("NavbarComponent", getLocalBounds(),
-        juce::Justification::centred, true);   // draw some placeholder text
+    g.drawText("NavbarComponent", getLocalBounds(), juce::Justification::centred, true);   // draw some placeholder text
 
     auto normal = getLookAndFeel().findColour(juce::SidePanel::dismissButtonNormalColour);
     auto over = getLookAndFeel().findColour(juce::SidePanel::dismissButtonOverColour);

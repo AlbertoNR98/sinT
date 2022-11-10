@@ -9,12 +9,8 @@
 */
 
 #include <JuceHeader.h>
-#include "ContainerComponent.h"
 
-// Actualmente, se usan variables para las View, ya que se requiere que no se reseteen los valores de los sliders una vez dejan de verse.
-// Probar a implementar lo anterior haciendo uso del APVTS. De esta forma, pueden utilizarse punteros de Views (que se pueden crear de forma dinámica) y liberar memoria cuando no se vea -> El estado de los sliders se obtendrá del APVTS, por lo que no hará falta guardarlo en otro sitio.
-// NOTA: Ver clase SinTContent -> No esta implementada del todo pero la idea era mas o menos esa.
-//==============================================================================
+#include "ContainerComponent.h"
 
 ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts) :
     valueTree(apvts)
@@ -107,10 +103,12 @@ void ContainerComponent::resized()
 
 void ContainerComponent::setView(const int selectedView)
 {
+    using namespace ParamsIDList;
+
     switch (selectedView)
     {
         case OSC_VIEW:
-            contentComponent.reset(new OscView(valueTree, "OSC1BYPASSED", "OSC1WF", "OSC1GAINDB", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH", "OSC2BYPASSED", "OSC2WF", "OSC2GAINDB", "OSC2PITCH", "OSC2FMFREQ", "OSC2FMDEPTH"));
+            contentComponent.reset(new OscView(valueTree, osc1Bypassed, osc1Waveform, osc1Gain, osc1Pitch, osc1FmFreq, osc1FmDepth, osc2Bypassed, osc2Waveform, osc2Gain, osc2Pitch, osc2FmFreq, osc2FmDepth));
             break;
         case FILTER_VIEW:
             break;
