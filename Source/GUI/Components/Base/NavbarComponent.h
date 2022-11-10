@@ -13,7 +13,7 @@
 #include <JuceHeader.h>
 
 #include "../Source/PluginProcessor.h"
-#include "../Source/ParameterIdList.h"
+#include "../Source/ParamsIDList.h"
 
 #include "ContainerComponent.h"
 

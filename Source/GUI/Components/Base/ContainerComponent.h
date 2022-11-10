@@ -12,7 +12,7 @@
 
 #include <JuceHeader.h>
 
-#include "../Source/ParameterIdList.h"
+#include "../Source/ParamsIDList.h"
 
 #include "SidePanelHeader.h"
 #include "SidePanelList.h"

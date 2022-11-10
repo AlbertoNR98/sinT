@@ -9,7 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "ParameterIdList.h"
+#include "ParamsIDList.h"
 #include "SinTSound.h"
 #include "SinTVoice.h"
 #include "FXProcessor.h"
