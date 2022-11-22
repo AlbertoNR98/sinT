@@ -13,6 +13,10 @@
 
 #include <JuceHeader.h>
 
+#include "../Assets/ColorPalette.h"
+#include "../Assets/CustomControls.h"
+#include "../Source/ParamsIDList.h"
+
 //==============================================================================
 /*
 */
@@ -32,15 +36,13 @@ private:
 
     juce::ComboBox oscWaveSelector;
 
-    juce::Slider oscGainSlider;
-    juce::Slider oscPitchSlider;
-    juce::Slider fmFreqSlider;
-    juce::Slider fmDepthSlider;
-
+    CustomSliderWithLabel oscGainSlider;
+    CustomSliderWithLabel oscPitchSlider;
+    CustomSliderWithLabel fmFreqSlider;
+    CustomSliderWithLabel fmDepthSlider;
+    
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> oscBypassedButtonAttachment;
-
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscWaveSelectorAttachment;
-
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> oscGainAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> oscPitchAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> fmFreqAttachment;

@@ -7,43 +7,42 @@
   ==============================================================================
 */
 
-#include <JuceHeader.h>
 #include "OscillatorComponent.h"
 
 //==============================================================================
-OscillatorComponent::OscillatorComponent(juce::String name, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String waveformSelectorId, juce::String oscGainId, juce::String oscPitchId, juce::String fmFreqId, juce::String fmDepthId)
+OscillatorComponent::OscillatorComponent(juce::String name, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String waveformSelectorId, juce::String oscGainId, juce::String oscPitchId, juce::String fmFreqId, juce::String fmDepthId) : 
+    oscGainSlider("Gain", "dB"),
+    oscPitchSlider("Pitch", "semitones"),
+    fmFreqSlider("FM Frequency", "Hz"),
+    fmDepthSlider("FM Depth", "")
 {
-/*
-oscName.setText(name, juce::dontSendNotification);
-oscName.setEditable(false);
-addAndMakeVisible(oscName);
-*/
     oscName = name;
 
     addAndMakeVisible(oscBypassedButton);
 
     juce::StringArray waveOptions{ "Sine", "Saw", "Square" };
     oscWaveSelector.addItemList(waveOptions, 1);
+
+    oscWaveSelector.setColour(juce::ComboBox::ColourIds::backgroundColourId, ColorPalette::darkgray);
     addAndMakeVisible(oscWaveSelector);
-
-    oscGainSlider.setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);
-    addAndMakeVisible(oscGainSlider);
-
-    oscPitchSlider.setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);
-    addAndMakeVisible(oscPitchSlider);
-
-    fmFreqSlider.setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);
-    addAndMakeVisible(fmFreqSlider);
-
-    fmDepthSlider.setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);
-    addAndMakeVisible(fmDepthSlider);
 
     oscBypassedButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(apvts, bypassedId, oscBypassedButton);
     oscWaveSelectorAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, waveformSelectorId, oscWaveSelector);
-    oscGainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, oscGainId, oscGainSlider);
-    oscPitchAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, oscPitchId, oscPitchSlider);
-    fmFreqAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmFreqId, fmFreqSlider);
-    fmDepthAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmDepthId, fmDepthSlider);
+    oscGainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, oscGainId, oscGainSlider.getSlider());
+    oscPitchAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, oscPitchId, oscPitchSlider.getSlider());
+    fmFreqAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmFreqId, fmFreqSlider.getSlider());
+    fmDepthAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmDepthId, fmDepthSlider.getSlider());
+
+    auto compBypassed = oscBypassedButton.getToggleState();
+    oscGainSlider.applyColorPalette(compBypassed);
+    oscPitchSlider.applyColorPalette(compBypassed);
+    fmFreqSlider.applyColorPalette(compBypassed);
+    fmDepthSlider.applyColorPalette(compBypassed);
+
+    addAndMakeVisible(oscGainSlider);
+    addAndMakeVisible(oscPitchSlider);
+    addAndMakeVisible(fmFreqSlider);
+    addAndMakeVisible(fmDepthSlider);
 }
 
 OscillatorComponent::~OscillatorComponent()
@@ -52,39 +51,64 @@ OscillatorComponent::~OscillatorComponent()
 
 void OscillatorComponent::paint (juce::Graphics& g)
 {
-    //g.fillAll(juce::Colours::black);
-    //g.fillAll(juce::Colours::cadetblue);
-
-    //g.setColour(juce::Colours::white);
     g.setColour(juce::Colours::wheat);
+
+    auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
+    g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
+
+    // Parte de arriba
+    auto elementsBounds = localBounds.reduced(15);
+
+    auto oscNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.55, elementsBounds.getHeight() * 0.2);
+    g.setColour(juce::Colours::wheat);
+    g.setFont(28.f);
+    g.drawFittedText(oscName, oscNameBounds, juce::Justification::centredLeft, true);
+
+    auto waveformSelectorBoundsWithoutPadding = juce::Rectangle<int>(oscNameBounds.getRight(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.3, elementsBounds.getHeight() * 0.2);
     
-    auto localBounds = getLocalBounds();
-    g.drawRoundedRectangle(localBounds.toFloat().reduced(5.0f), 5.0f, 2.0f);
+    auto paddingWaveformSelector = 15;
+    auto waveformSelectorBounds = juce::Rectangle<int>(oscNameBounds.getRight(), elementsBounds.getPosition().getY() + paddingWaveformSelector, elementsBounds.getWidth() * 0.3, (elementsBounds.getHeight() * 0.2) - (2 * paddingWaveformSelector));
 
-    auto textBounds = juce::Rectangle<int>(localBounds.getWidth(), localBounds.getHeight() / 6);
-    textBounds.setPosition(localBounds.getPosition());
-    g.setFont(24.f);
-    g.drawFittedText(oscName, textBounds, juce::Justification::centred, true);
+    auto bypassButtonBounds = juce::Rectangle<int>(waveformSelectorBounds.getRight(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.15, elementsBounds.getHeight() * 0.2);
 
+    // Sliders
+    auto oscGainSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
+    auto oscPitchSliderBounds = juce::Rectangle<int>(oscGainSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
+    auto fmFreqSliderBounds = juce::Rectangle<int>(oscPitchSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
+    auto fmDepthSliderBounds = juce::Rectangle<int>(fmFreqSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
+
+    auto compBypassed = oscBypassedButton.getToggleState();
+    oscGainSlider.applyColorPalette(compBypassed);
+    oscPitchSlider.applyColorPalette(compBypassed);
+    fmFreqSlider.applyColorPalette(compBypassed);
+    fmDepthSlider.applyColorPalette(compBypassed);
 }
 
 void OscillatorComponent::resized()
-{
-    auto elementsBounds = getLocalBounds().reduced(25);
+{    
+    auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
+    auto elementsBounds = localBounds.reduced(15);
 
-    //oscName.setBounds -> Se puede hacer si es label en lugar de string
-    //oscWaveSelector.setBounds(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() / 2, elementsBounds.getHeight() / 6);
+    auto oscNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.55, elementsBounds.getHeight() * 0.2);
 
-    //setBounds para boton de bypass
-    oscWaveSelector.setBounds(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY() + (elementsBounds.getHeight() / 6), elementsBounds.getWidth() / 2, elementsBounds.getHeight() / 6);
-    
-    //oscBypassedButton.setBounds(elementsBounds.getWidth() / 2, elementsBounds.getPosition().getY() + (elementsBounds.getHeight() / 6), elementsBounds.getWidth() / 2, elementsBounds.getHeight() / 6);
-    
-    oscBypassedButton.setBounds(0, 0, 50, 50);
-    
-    
-    oscGainSlider.setBounds(elementsBounds.getPosition().getX(), oscWaveSelector.getBottom(), elementsBounds.getWidth(), elementsBounds.getHeight() / 6);
-    oscPitchSlider.setBounds(elementsBounds.getPosition().getX(), oscGainSlider.getBottom(), elementsBounds.getWidth(), elementsBounds.getHeight() / 6);
-    fmFreqSlider.setBounds(elementsBounds.getPosition().getX(), oscPitchSlider.getBottom(), elementsBounds.getWidth(), elementsBounds.getHeight() / 6);
-    fmDepthSlider.setBounds(elementsBounds.getPosition().getX(), fmFreqSlider.getBottom(), elementsBounds.getWidth(), elementsBounds.getHeight() / 6);
+    auto paddingWaveformSelector = 15;
+    auto waveformSelectorBounds = juce::Rectangle<int>(oscNameBounds.getRight(), elementsBounds.getPosition().getY() + paddingWaveformSelector, elementsBounds.getWidth() * 0.3, (elementsBounds.getHeight() * 0.2) - (2 * paddingWaveformSelector));
+    oscWaveSelector.setBounds(waveformSelectorBounds);
+
+    auto bypassButtonBounds = juce::Rectangle<int>(waveformSelectorBounds.getRight(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.15, elementsBounds.getHeight() * 0.2);
+    oscBypassedButton.setBounds(bypassButtonBounds);
+    oscBypassedButton.setTopLeftPosition(juce::Point<int>(bypassButtonBounds.getCentre().getX(), bypassButtonBounds.getTopLeft().getY()));
+
+    // Sliders
+    auto oscGainSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
+    oscGainSlider.setBounds(oscGainSliderBounds);
+
+    auto oscPitchSliderBounds = juce::Rectangle<int>(oscGainSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
+    oscPitchSlider.setBounds(oscPitchSliderBounds);
+
+    auto fmFreqSliderBounds = juce::Rectangle<int>(oscPitchSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
+    fmFreqSlider.setBounds(fmFreqSliderBounds);
+
+    auto fmDepthSliderBounds = juce::Rectangle<int>(fmFreqSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
+    fmDepthSlider.setBounds(fmDepthSliderBounds);
 }

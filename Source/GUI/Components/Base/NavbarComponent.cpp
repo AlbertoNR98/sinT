@@ -43,7 +43,9 @@ NavbarComponent::NavbarComponent(SinTAudioProcessor& audioProcessor, ContainerCo
     p.loadPathFromData(settingsIconPathData, sizeof(settingsIconPathData));
     settingsButton.setShape(p, true, true, false);
 
+    showSidePanel.setColour(juce::TextButton::buttonColourId, juce::Colours::blueviolet);
     addAndMakeVisible(showSidePanel);
+
     addAndMakeVisible(settingsButton);
     addAndMakeVisible(gainMeter);
     addAndMakeVisible(mainControl);
