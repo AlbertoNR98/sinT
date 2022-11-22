@@ -20,6 +20,8 @@
 #include "../MeterComponent.h"
 #include "../MainControlComponent.h"
 
+#include "../../Assets/ColorPalette.h"
+
 //==============================================================================
 /*
 */

@@ -12,7 +12,7 @@
 //==============================================================================
 OscillatorComponent::OscillatorComponent(juce::String name, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String waveformSelectorId, juce::String oscGainId, juce::String oscPitchId, juce::String fmFreqId, juce::String fmDepthId) : 
     oscGainSlider("Gain", "dB"),
-    oscPitchSlider("Pitch", "semitones"),
+    oscPitchSlider("Pitch", "semitones", true, 0),
     fmFreqSlider("FM Frequency", "Hz"),
     fmDepthSlider("FM Depth", "")
 {

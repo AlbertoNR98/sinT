@@ -13,6 +13,8 @@
 
 #include <JuceHeader.h>
 
+#include "../Assets/CustomControls.h"
+
 //==============================================================================
 /*
 */
@@ -26,7 +28,8 @@ public:
     void resized() override;
 
 private:
-    juce::Slider mainGainSlider;
+    CustomSliderWithLabel mainGainSlider;
+    //juce::Slider mainGainSlider;
     juce::ToggleButton portamentoButton;
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mainGainAttachment;
