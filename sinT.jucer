@@ -115,6 +115,8 @@
                 file="Source/GUI/Components/ReverbComponent.h"/>
         </GROUP>
         <GROUP id="{C2DC3711-FC35-785F-A6EA-261550ED4961}" name="Views">
+          <FILE id="DjVXsY" name="FilterView.cpp" compile="1" resource="0" file="Source/GUI/Views/FilterView.cpp"/>
+          <FILE id="xHqJDr" name="FilterView.h" compile="0" resource="0" file="Source/GUI/Views/FilterView.h"/>
           <FILE id="h7c4NM" name="HomeView.cpp" compile="1" resource="0" file="Source/GUI/Views/HomeView.cpp"/>
           <FILE id="fnSar4" name="HomeView.h" compile="0" resource="0" file="Source/GUI/Views/HomeView.h"/>
           <FILE id="wa7Rlq" name="OscView.cpp" compile="1" resource="0" file="Source/GUI/Views/OscView.cpp"/>

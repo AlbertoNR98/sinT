@@ -19,7 +19,9 @@
 
 #include "../../Views/HomeView.h"
 #include "../../Views/OscView.h"
-//#include "../../Views/FilterView.h"  -> TO-DO
+#include "../../Views/FilterView.h"
+
+//TO-DO Resto de vistas
 
 constexpr int OSC_VIEW = 0;
 constexpr int FILTER_VIEW = 1;

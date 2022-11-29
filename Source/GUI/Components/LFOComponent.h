@@ -13,6 +13,10 @@
 
 #include <JuceHeader.h>
 
+#include "../Assets/ColorPalette.h"
+#include "../Assets/CustomControls.h"
+#include "../Source/ParamsIDList.h"
+
 //==============================================================================
 /*
 */
@@ -26,8 +30,10 @@ public:
     void resized() override;
 
 private:
-    juce::Slider lfoFreqSlider;
-    juce::Slider lfoDepthSlider;
+    juce::String lfoTitle = "Low Frequency Oscillator";
+
+    CustomSliderWithLabel lfoFreqSlider;
+    CustomSliderWithLabel lfoDepthSlider;
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> lfoFreqAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> lfoDepthAttachment;

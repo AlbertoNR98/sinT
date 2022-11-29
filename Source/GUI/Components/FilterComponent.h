@@ -12,7 +12,9 @@
 
 #pragma once
 
-#include <JuceHeader.h>
+#include "../Assets/ColorPalette.h"
+#include "../Assets/CustomControls.h"
+#include "../Source/ParamsIDList.h"
 
 //==============================================================================
 /*
@@ -27,12 +29,14 @@ public:
     void resized() override;
 
 private:
+    juce::String filterTitle = "State Variable Filter";
+
     juce::ComboBox filterModeSelector;
 
     juce::ToggleButton filterBypassedButton;
 
-    juce::Slider filterCutoffFreqSlider;
-    juce::Slider filterResonanceSlider;
+    CustomSliderWithLabel filterCutoffFreqSlider;
+    CustomSliderWithLabel filterResonanceSlider;
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> filterBypassedButtonAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> filterModeSelectorAttachment;

@@ -1,35 +1,32 @@
 /*
   ==============================================================================
 
-    OscView.cpp
-    Created: 20 Oct 2022 7:56:30pm
+    FilterView.cpp
+    Created: 29 Nov 2022 5:00:16pm
     Author:  Alberto Naranjo
 
   ==============================================================================
 */
 
 #include <JuceHeader.h>
-#include "OscView.h"
+#include "FilterView.h"
 
 //==============================================================================
-OscView::OscView(juce::AudioProcessorValueTreeState& apvts,
-    juce::String bypassedId1, juce::String waveformSelectorId1, juce::String oscGainId1, juce::String oscPitchId1, juce::String fmFreqId1, juce::String fmDepthId1,
-    juce::String bypassedId2, juce::String waveformSelectorId2, juce::String oscGainId2, juce::String oscPitchId2, juce::String fmFreqId2, juce::String fmDepthId2) :
-    osc1Component("Oscillator 1", apvts, bypassedId1, waveformSelectorId1, oscGainId1, oscPitchId1, fmFreqId1, fmDepthId1),
-    osc2Component("Oscillator 2", apvts, bypassedId2, waveformSelectorId2, oscGainId2, oscPitchId2, fmFreqId2, fmDepthId2)
+FilterView::FilterView(juce::AudioProcessorValueTreeState& apvts, 
+    juce::String filterBypassedId, juce::String filterModeSelectorId, juce::String filterCutoffFreqId, juce::String filterResonanceId, 
+    juce::String lfoFreqId, juce::String lfoDepthId) :
+    filterComponent(apvts, filterBypassedId, filterModeSelectorId, filterCutoffFreqId, filterResonanceId),
+    lfoComponent(apvts, lfoFreqId, lfoDepthId)
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
-
-    addAndMakeVisible(osc1Component);
-    addAndMakeVisible(osc2Component);
+    addAndMakeVisible(filterComponent);
+    addAndMakeVisible(lfoComponent);
 }
 
-OscView::~OscView()
+FilterView::~FilterView()
 {
 }
 
-void OscView::paint (juce::Graphics& g)
+void FilterView::paint (juce::Graphics& g)
 {
     /* This demo code just fills the component's background and
        draws some placeholder text to get you started.
@@ -81,7 +78,7 @@ void OscView::paint (juce::Graphics& g)
     //g.drawRect(osc2Bounds, 5);
 }
 
-void OscView::resized()
+void FilterView::resized()
 {
     // This method is where you should set the bounds of any child
     // components that your component contains..
@@ -98,6 +95,6 @@ void OscView::resized()
     auto osc1Bounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), (elementsBounds.getWidth() / 2) - (padding / 2), elementsBounds.getHeight());
     auto osc2Bounds = juce::Rectangle<int>(elementsBounds.getCentre().getX() + (padding / 2), elementsBounds.getPosition().getY(), (elementsBounds.getWidth() / 2) - (padding / 2), elementsBounds.getHeight());
 
-    osc1Component.setBounds(osc1Bounds);
-    osc2Component.setBounds(osc2Bounds);
+    filterComponent.setBounds(osc1Bounds);
+    lfoComponent.setBounds(osc2Bounds);
 }

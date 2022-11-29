@@ -32,7 +32,7 @@ public:
     void resized() override;
 
 private:
-    //juce::Label title = "Oscillators";
+    juce::String viewTitle = "Oscillators";
 
     OscillatorComponent osc1Component, osc2Component;
 

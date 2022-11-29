@@ -32,7 +32,7 @@ public:
 private:
     juce::String oscName;
 
-    juce::ToggleButton oscBypassedButton;
+    juce::ToggleButton filterBypassedButton;
 
     juce::ComboBox oscWaveSelector;
 

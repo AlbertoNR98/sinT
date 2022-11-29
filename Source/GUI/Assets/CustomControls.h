@@ -15,7 +15,7 @@
 class CustomSliderWithLabel : public juce::Component
 {
 public:
-    CustomSliderWithLabel(juce::String name, juce::String suffix, const bool isVertical = true, const int numDecimals = 1);
+    CustomSliderWithLabel(juce::String name, juce::String suffix = "", const bool isVertical = true, const int numDecimals = 1);
     ~CustomSliderWithLabel() override;
 
     void paint(juce::Graphics&) override;
@@ -23,9 +23,9 @@ public:
 
     juce::Slider& getSlider() { return slider; }
 
-    void applyColorPalette(const bool bypassed);
+    void applyBypassedColorPalette(const bool bypassed);
 
-    void setValueLabelFont(juce::Font& f);  // Se puede obtener de aqui el tamaño (getHeight).
+    void setValueLabelFont(juce::Font& f);  // Se puede obtener de aqui el tamaÃ±o (getHeight).
     void setNameLabelFont(juce::Font& f);
 
 private:

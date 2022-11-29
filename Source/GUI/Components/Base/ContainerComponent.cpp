@@ -111,6 +111,7 @@ void ContainerComponent::setView(const int selectedView)
             contentComponent.reset(new OscView(valueTree, osc1Bypassed, osc1Waveform, osc1Gain, osc1Pitch, osc1FmFreq, osc1FmDepth, osc2Bypassed, osc2Waveform, osc2Gain, osc2Pitch, osc2FmFreq, osc2FmDepth));
             break;
         case FILTER_VIEW:
+            contentComponent.reset(new FilterView(valueTree, filterBypassed, filterMode, filterCutoffFreq, filterResonance, lfoFreq, lfoDepth));
             break;
         case ADSR_VIEW:
             break;

@@ -255,7 +255,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     // Filtro
     layout.add(std::make_unique<juce::AudioParameterBool>(filterBypassed, "FilterBypassed", false));
     layout.add(std::make_unique<juce::AudioParameterChoice>(filterMode, "FilterMode", juce::StringArray{ "LPF", "BPF", "HPF" }, 0));
-    layout.add(std::make_unique<juce::AudioParameterFloat>(filterCutoffFreq, "FilterCutoffFreq", juce::NormalisableRange<float> {20.0f, 20000.0f, 0.01f, 0.5f}, 20000.0f, "Hz"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(filterCutoffFreq, "FilterCutoffFreq", juce::NormalisableRange<float> {20.0f, 20000.0f, 0.1f, 0.5f}, 20000.0f, "Hz"));
     layout.add(std::make_unique<juce::AudioParameterFloat>(filterResonance, "FilterResonance", juce::NormalisableRange<float> {0.3f, 20.0f, 0.01f, 0.5}, 1.0f / juce::MathConstants<float>::sqrt2, ""));
 
     // LFO

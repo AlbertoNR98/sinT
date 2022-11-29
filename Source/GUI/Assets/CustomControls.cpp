@@ -21,13 +21,11 @@ CustomSliderWithLabel::CustomSliderWithLabel(juce::String name, juce::String suf
 
     valueLabel.setFont(valueLabelFontHeight);
     valueLabel.setText(slider.getTextFromValue(slider.getValue()) + this->suffix, juce::dontSendNotification);
-    //valueLabel.setJustificationType(juce::Justification::centred);
     valueLabel.setJustificationType(juce::Justification::centredBottom);
     addAndMakeVisible(valueLabel);
 
     nameLabel.setFont(nameLabelFontHeight);
     nameLabel.setText(name, juce::dontSendNotification);
-    //nameLabel.setJustificationType(juce::Justification::centred);
     nameLabel.setJustificationType(juce::Justification::centredTop);
     addAndMakeVisible(nameLabel);
 }
@@ -108,7 +106,7 @@ void CustomSliderWithLabel::setupSlider()
     };  // Se ejecuta cuando cambia el valor del slider
 }
 
-void CustomSliderWithLabel::applyColorPalette(const bool bypassed)
+void CustomSliderWithLabel::applyBypassedColorPalette(const bool bypassed)
 {
     // Nota: Cambiar paleta de colores y cambiar color de letra de los labels
     if (bypassed)
