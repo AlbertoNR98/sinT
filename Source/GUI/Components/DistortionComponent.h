@@ -13,6 +13,10 @@
 
 #include <JuceHeader.h>
 
+#include "../Assets/ColorPalette.h"
+#include "../Assets/CustomControls.h"
+#include "../Source/ParamsIDList.h"
+
 //==============================================================================
 /*
 */
@@ -26,10 +30,12 @@ public:
     void resized() override;
 
 private:
+    juce::String name = "Distortion";
+
     juce::ToggleButton bypassedButton;
-    juce::Slider driveSlider;
-    juce::Slider rangeSlider;
-    juce::Slider blendSlider;
+    CustomSliderWithLabel driveSlider;
+    CustomSliderWithLabel rangeSlider;
+    CustomSliderWithLabel blendSlider;
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> distortionBypassedButtonAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> driveAttachment;

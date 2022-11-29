@@ -21,6 +21,7 @@
 #include "../../Views/OscView.h"
 #include "../../Views/ADSRView.h"
 #include "../../Views/FilterView.h"
+#include "../../Views/FXProcessorView.h"
 
 //TO-DO Resto de vistas
 
