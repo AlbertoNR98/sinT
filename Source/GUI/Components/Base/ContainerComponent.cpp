@@ -26,8 +26,8 @@ ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts
 
     auto sidePanelList = new SidePanelList;
     sidePanelList->addEntry("OSC");
-    sidePanelList->addEntry("FILTER");
     sidePanelList->addEntry("ADSR");
+    sidePanelList->addEntry("FILTER");
     sidePanelList->addEntry("FX");
     sidePanelList->setEntrySelectionCallback([&](int index) { listEntryClicked(index); });
     sidePanel.setContent(sidePanelList);
@@ -110,10 +110,11 @@ void ContainerComponent::setView(const int selectedView)
         case OSC_VIEW:
             contentComponent.reset(new OscView(valueTree, osc1Bypassed, osc1Waveform, osc1Gain, osc1Pitch, osc1FmFreq, osc1FmDepth, osc2Bypassed, osc2Waveform, osc2Gain, osc2Pitch, osc2FmFreq, osc2FmDepth));
             break;
+        case ADSR_VIEW:
+            contentComponent.reset(new ADSRView(valueTree, ampAdsrAttack, ampAdsrDecay, ampAdsrSustain, ampAdsrRelease, filterAdsrAttack, filterAdsrDecay, filterAdsrSustain, filterAdsrRelease));
+            break;
         case FILTER_VIEW:
             contentComponent.reset(new FilterView(valueTree, filterBypassed, filterMode, filterCutoffFreq, filterResonance, lfoFreq, lfoDepth));
-            break;
-        case ADSR_VIEW:
             break;
         case FX_VIEW:
             break;
@@ -146,11 +147,11 @@ void ContainerComponent::listEntryClicked(int index)
         case OSC_VIEW:
             setView(OSC_VIEW);
             break;
-        case FILTER_VIEW:
-            setView(FILTER_VIEW);
-            break;
         case ADSR_VIEW:
             setView(ADSR_VIEW);
+            break;
+        case FILTER_VIEW:
+            setView(FILTER_VIEW);
             break;
         case FX_VIEW:
             setView(FX_VIEW);

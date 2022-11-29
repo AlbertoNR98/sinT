@@ -38,8 +38,8 @@ private:
 
     CustomSliderWithLabel oscGainSlider;
     CustomSliderWithLabel oscPitchSlider;
-    CustomSliderWithLabel fmFreqSlider;
-    CustomSliderWithLabel fmDepthSlider;
+    CustomSliderWithLabel sustainSlider;
+    CustomSliderWithLabel releaseSlider;
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> oscBypassedButtonAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscWaveSelectorAttachment;

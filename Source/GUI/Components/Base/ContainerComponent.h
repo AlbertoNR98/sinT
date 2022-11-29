@@ -19,13 +19,14 @@
 
 #include "../../Views/HomeView.h"
 #include "../../Views/OscView.h"
+#include "../../Views/ADSRView.h"
 #include "../../Views/FilterView.h"
 
 //TO-DO Resto de vistas
 
 constexpr int OSC_VIEW = 0;
-constexpr int FILTER_VIEW = 1;
-constexpr int ADSR_VIEW = 2;
+constexpr int ADSR_VIEW = 1;
+constexpr int FILTER_VIEW = 2;
 constexpr int FX_VIEW = 3;
 constexpr int HOME_VIEW = 4;
 

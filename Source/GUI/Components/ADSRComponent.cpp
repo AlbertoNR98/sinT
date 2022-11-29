@@ -11,21 +11,28 @@
 #include "ADSRComponent.h"
 
 //==============================================================================
-ADSRComponent::ADSRComponent(juce::AudioProcessorValueTreeState& apvts, juce::String attackId, juce::String decayId, juce::String sustainId, juce::String releaseId)
+ADSRComponent::ADSRComponent(juce::String name, juce::AudioProcessorValueTreeState& apvts, juce::String attackId, juce::String decayId, juce::String sustainId, juce::String releaseId) :
+    attackSlider("Attack", "s"),
+    decaySlider("Decay", "s"),
+    sustainSlider("Sustain", "s"),
+    releaseSlider("Release", "s")
 {
-    //Attachments
-    using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
+    adsrName = name;
     
-    attackAttachment = std::make_unique<SliderAttachment>(apvts, attackId, attackSlider);
-    decayAttachment = std::make_unique<SliderAttachment>(apvts, decayId, decaySlider);
-    sustainAttachment = std::make_unique<SliderAttachment>(apvts, sustainId, sustainSlider);
-    releaseAttachment = std::make_unique<SliderAttachment>(apvts, releaseId, releaseSlider);
+    attackAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, attackId, attackSlider.getSlider());
+    decayAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, decayId, decaySlider.getSlider());
+    sustainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, sustainId, sustainSlider.getSlider());
+    releaseAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, releaseId, releaseSlider.getSlider());
 
-    // Estilo de sliders ADSR
-    setSliderVisualParams(attackSlider);
-    setSliderVisualParams(decaySlider);
-    setSliderVisualParams(sustainSlider);
-    setSliderVisualParams(releaseSlider);
+    attackSlider.applyBypassedColorPalette(false);
+    decaySlider.applyBypassedColorPalette(false);
+    sustainSlider.applyBypassedColorPalette(false);
+    releaseSlider.applyBypassedColorPalette(false);
+
+    addAndMakeVisible(attackSlider);
+    addAndMakeVisible(decaySlider);
+    addAndMakeVisible(sustainSlider);
+    addAndMakeVisible(releaseSlider);
 }
 
 ADSRComponent::~ADSRComponent()
@@ -34,32 +41,43 @@ ADSRComponent::~ADSRComponent()
 
 void ADSRComponent::paint (juce::Graphics& g)
 {
-    g.fillAll(juce::Colours::black);
+    g.setColour(juce::Colours::wheat);
+
+    auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
+    g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
+
+    // Parte de arriba
+    auto elementsBounds = localBounds.reduced(15);
+
+    auto adsrNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2);
+    g.setColour(juce::Colours::wheat);
+    g.setFont(28.f);
+    g.drawFittedText(adsrName, adsrNameBounds, juce::Justification::centred, true);
+
+    attackSlider.applyBypassedColorPalette(false);
+    decaySlider.applyBypassedColorPalette(false);
+    sustainSlider.applyBypassedColorPalette(false);
+    releaseSlider.applyBypassedColorPalette(false);
 }
 
 void ADSRComponent::resized()
 {
-    // Posicionamiento de los sliders ADSR en la GUI
-    const auto bounds = getLocalBounds().reduced(10);
-    const auto padding = 10;
+    auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
+    auto elementsBounds = localBounds.reduced(15);
 
-    const auto sliderWidth = bounds.getWidth() / 4 - padding;
-    const auto sliderHeight = bounds.getHeight();
-    const auto sliderStartX = 0;
-    const auto sliderStartY = 0;
+    auto adsrNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.55, elementsBounds.getHeight() * 0.2);
+    auto heightPadding = 15;
 
-    attackSlider.setBounds(sliderStartX, sliderStartY, sliderWidth, sliderHeight);
-    decaySlider.setBounds(attackSlider.getRight() + padding, sliderStartY, sliderWidth, sliderHeight);
-    sustainSlider.setBounds(decaySlider.getRight() + padding, sliderStartY, sliderWidth, sliderHeight);
-    releaseSlider.setBounds(sustainSlider.getRight() + padding, sliderStartY, sliderWidth, sliderHeight);
+    // Sliders
+    auto attackSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), adsrNameBounds.getBottom() + heightPadding, elementsBounds.getWidth() * 0.25, (elementsBounds.getHeight() * 0.8) - heightPadding);
+    attackSlider.setBounds(attackSliderBounds);
 
-}
+    auto decaySliderBounds = juce::Rectangle<int>(attackSliderBounds.getRight(), adsrNameBounds.getBottom() + heightPadding, elementsBounds.getWidth() * 0.25, (elementsBounds.getHeight() * 0.8) - heightPadding);
+    decaySlider.setBounds(decaySliderBounds);
 
-void ADSRComponent::setSliderVisualParams(juce::Slider& slider)
-{
-    // Estilo de slider para ADSR
-    slider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
-    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
+    auto sustainSliderBounds = juce::Rectangle<int>(decaySliderBounds.getRight(), adsrNameBounds.getBottom() + heightPadding, elementsBounds.getWidth() * 0.25, (elementsBounds.getHeight() * 0.8) - heightPadding);
+    sustainSlider.setBounds(sustainSliderBounds);
 
-    addAndMakeVisible(slider);
+    auto releaseSliderBounds = juce::Rectangle<int>(sustainSliderBounds.getRight(), adsrNameBounds.getBottom() + heightPadding, elementsBounds.getWidth() * 0.25, (elementsBounds.getHeight() * 0.8) - heightPadding);
+    releaseSlider.setBounds(releaseSliderBounds);
 }

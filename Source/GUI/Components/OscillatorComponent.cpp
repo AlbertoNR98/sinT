@@ -13,8 +13,8 @@
 OscillatorComponent::OscillatorComponent(juce::String name, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String waveformSelectorId, juce::String oscGainId, juce::String oscPitchId, juce::String fmFreqId, juce::String fmDepthId) : 
     oscGainSlider("Gain", "dB"),
     oscPitchSlider("Pitch", "semitones", true, 0),
-    fmFreqSlider("FM Frequency", "Hz"),
-    fmDepthSlider("FM Depth")
+    sustainSlider("FM Frequency", "Hz"),
+    releaseSlider("FM Depth")
 {
     oscName = name;
 
@@ -30,19 +30,19 @@ OscillatorComponent::OscillatorComponent(juce::String name, juce::AudioProcessor
     oscWaveSelectorAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, waveformSelectorId, oscWaveSelector);
     oscGainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, oscGainId, oscGainSlider.getSlider());
     oscPitchAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, oscPitchId, oscPitchSlider.getSlider());
-    fmFreqAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmFreqId, fmFreqSlider.getSlider());
-    fmDepthAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmDepthId, fmDepthSlider.getSlider());
+    fmFreqAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmFreqId, sustainSlider.getSlider());
+    fmDepthAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmDepthId, releaseSlider.getSlider());
 
     auto compBypassed = filterBypassedButton.getToggleState();
     oscGainSlider.applyBypassedColorPalette(compBypassed);
     oscPitchSlider.applyBypassedColorPalette(compBypassed);
-    fmFreqSlider.applyBypassedColorPalette(compBypassed);
-    fmDepthSlider.applyBypassedColorPalette(compBypassed);
+    sustainSlider.applyBypassedColorPalette(compBypassed);
+    releaseSlider.applyBypassedColorPalette(compBypassed);
 
     addAndMakeVisible(oscGainSlider);
     addAndMakeVisible(oscPitchSlider);
-    addAndMakeVisible(fmFreqSlider);
-    addAndMakeVisible(fmDepthSlider);
+    addAndMakeVisible(sustainSlider);
+    addAndMakeVisible(releaseSlider);
 }
 
 OscillatorComponent::~OscillatorComponent()
@@ -80,8 +80,8 @@ void OscillatorComponent::paint (juce::Graphics& g)
     auto compBypassed = filterBypassedButton.getToggleState();
     oscGainSlider.applyBypassedColorPalette(compBypassed);
     oscPitchSlider.applyBypassedColorPalette(compBypassed);
-    fmFreqSlider.applyBypassedColorPalette(compBypassed);
-    fmDepthSlider.applyBypassedColorPalette(compBypassed);
+    sustainSlider.applyBypassedColorPalette(compBypassed);
+    releaseSlider.applyBypassedColorPalette(compBypassed);
 }
 
 void OscillatorComponent::resized()
@@ -107,8 +107,8 @@ void OscillatorComponent::resized()
     oscPitchSlider.setBounds(oscPitchSliderBounds);
 
     auto fmFreqSliderBounds = juce::Rectangle<int>(oscPitchSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
-    fmFreqSlider.setBounds(fmFreqSliderBounds);
+    sustainSlider.setBounds(fmFreqSliderBounds);
 
     auto fmDepthSliderBounds = juce::Rectangle<int>(fmFreqSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
-    fmDepthSlider.setBounds(fmDepthSliderBounds);
+    releaseSlider.setBounds(fmDepthSliderBounds);
 }

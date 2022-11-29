@@ -13,32 +13,34 @@
 
 #include <JuceHeader.h>
 
+#include "../Assets/ColorPalette.h"
+#include "../Assets/CustomControls.h"
+#include "../Source/ParamsIDList.h"
+
 //==============================================================================
 /*
 */
 class ADSRComponent  : public juce::Component
 {
 public:
-    ADSRComponent(juce::AudioProcessorValueTreeState& apvts, juce::String attackId, juce::String decayId, juce::String sustainId, juce::String releaseId);
+    ADSRComponent(juce::String name, juce::AudioProcessorValueTreeState& apvts, juce::String attackId, juce::String decayId, juce::String sustainId, juce::String releaseId);
     ~ADSRComponent() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
-    void setSliderVisualParams(juce::Slider& slider);
+    juce::String adsrName;
 
-    using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
-
-    std::unique_ptr<SliderAttachment> attackAttachment;
-    std::unique_ptr<SliderAttachment> decayAttachment;
-    std::unique_ptr<SliderAttachment> sustainAttachment;
-    std::unique_ptr<SliderAttachment> releaseAttachment;
-
-    juce::Slider attackSlider;
-    juce::Slider decaySlider;
-    juce::Slider sustainSlider;
-    juce::Slider releaseSlider;
+    CustomSliderWithLabel attackSlider;
+    CustomSliderWithLabel decaySlider;
+    CustomSliderWithLabel sustainSlider;
+    CustomSliderWithLabel releaseSlider;
+    
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> attackAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> decayAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sustainAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> releaseAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ADSRComponent)
 };
