@@ -65,19 +65,18 @@ void ADSRComponent::resized()
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
     auto elementsBounds = localBounds.reduced(15);
 
-    auto adsrNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.55, elementsBounds.getHeight() * 0.2);
-    auto heightPadding = 15;
+    auto adsrNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2);
 
     // Sliders
-    auto attackSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), adsrNameBounds.getBottom() + heightPadding, elementsBounds.getWidth() * 0.25, (elementsBounds.getHeight() * 0.8) - heightPadding);
+    auto attackSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), adsrNameBounds.getBottom(), elementsBounds.getWidth() * 0.25, (elementsBounds.getHeight() * 0.8));
     attackSlider.setBounds(attackSliderBounds);
 
-    auto decaySliderBounds = juce::Rectangle<int>(attackSliderBounds.getRight(), adsrNameBounds.getBottom() + heightPadding, elementsBounds.getWidth() * 0.25, (elementsBounds.getHeight() * 0.8) - heightPadding);
+    auto decaySliderBounds = juce::Rectangle<int>(attackSliderBounds.getRight(), adsrNameBounds.getBottom(), elementsBounds.getWidth() * 0.25, (elementsBounds.getHeight() * 0.8));
     decaySlider.setBounds(decaySliderBounds);
 
-    auto sustainSliderBounds = juce::Rectangle<int>(decaySliderBounds.getRight(), adsrNameBounds.getBottom() + heightPadding, elementsBounds.getWidth() * 0.25, (elementsBounds.getHeight() * 0.8) - heightPadding);
+    auto sustainSliderBounds = juce::Rectangle<int>(decaySliderBounds.getRight(), adsrNameBounds.getBottom(), elementsBounds.getWidth() * 0.25, (elementsBounds.getHeight() * 0.8));
     sustainSlider.setBounds(sustainSliderBounds);
 
-    auto releaseSliderBounds = juce::Rectangle<int>(sustainSliderBounds.getRight(), adsrNameBounds.getBottom() + heightPadding, elementsBounds.getWidth() * 0.25, (elementsBounds.getHeight() * 0.8) - heightPadding);
+    auto releaseSliderBounds = juce::Rectangle<int>(sustainSliderBounds.getRight(), adsrNameBounds.getBottom(), elementsBounds.getWidth() * 0.25, (elementsBounds.getHeight() * 0.8));
     releaseSlider.setBounds(releaseSliderBounds);
 }

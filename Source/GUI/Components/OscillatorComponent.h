@@ -32,14 +32,14 @@ public:
 private:
     juce::String oscName;
 
-    juce::ToggleButton filterBypassedButton;
+    juce::ToggleButton oscBypassedButton;
 
     juce::ComboBox oscWaveSelector;
 
     CustomSliderWithLabel oscGainSlider;
     CustomSliderWithLabel oscPitchSlider;
-    CustomSliderWithLabel sustainSlider;
-    CustomSliderWithLabel releaseSlider;
+    CustomSliderWithLabel fmFreqSlider;
+    CustomSliderWithLabel fmDepthSlider;
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> oscBypassedButtonAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscWaveSelectorAttachment;

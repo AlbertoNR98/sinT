@@ -119,6 +119,10 @@
           <FILE id="fP7Hmc" name="ADSRView.h" compile="0" resource="0" file="Source/GUI/Views/ADSRView.h"/>
           <FILE id="DjVXsY" name="FilterView.cpp" compile="1" resource="0" file="Source/GUI/Views/FilterView.cpp"/>
           <FILE id="xHqJDr" name="FilterView.h" compile="0" resource="0" file="Source/GUI/Views/FilterView.h"/>
+          <FILE id="eYPz4T" name="FXProcessorView.cpp" compile="1" resource="0"
+                file="Source/GUI/Views/FXProcessorView.cpp"/>
+          <FILE id="dFOsCb" name="FXProcessorView.h" compile="0" resource="0"
+                file="Source/GUI/Views/FXProcessorView.h"/>
           <FILE id="h7c4NM" name="HomeView.cpp" compile="1" resource="0" file="Source/GUI/Views/HomeView.cpp"/>
           <FILE id="fnSar4" name="HomeView.h" compile="0" resource="0" file="Source/GUI/Views/HomeView.h"/>
           <FILE id="wa7Rlq" name="OscView.cpp" compile="1" resource="0" file="Source/GUI/Views/OscView.cpp"/>
