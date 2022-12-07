@@ -42,7 +42,7 @@ void FilterData::renderNextBlock(juce::AudioBuffer<float>& buffer)
 
 float FilterData::renderNextSample(int channel, float inputSample)
 {
-    if (isBypassed()) return 0.0f;
+    if (isBypassed()) return inputSample;
 
     return processSample(channel, inputSample);
 }
