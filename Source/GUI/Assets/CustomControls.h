@@ -15,7 +15,14 @@
 class CustomSliderWithLabel : public juce::Component
 {
 public:
-    CustomSliderWithLabel(juce::String name, juce::String suffix = "", const bool isVertical = true, const int numDecimals = 1);
+    enum SliderStyle
+    {
+        Vertical,
+        Horizontal,
+        HorizontalCompact
+    };
+
+    CustomSliderWithLabel(juce::String name, juce::String suffix = "", SliderStyle sliderStyle = Vertical, const int numDecimals = 1);
     ~CustomSliderWithLabel() override;
 
     void paint(juce::Graphics&) override;
@@ -29,7 +36,7 @@ public:
     void setNameLabelFont(juce::Font& f);
 
 private:
-    bool isVertical = true;
+    SliderStyle sliderStyle = Vertical;
     int numDecimals = 1;
     float valueLabelFontHeight{ 18.f }; // Parametrizar y obtener del font importado
     float nameLabelFontHeight{ 14.f };
