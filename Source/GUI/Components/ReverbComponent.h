@@ -19,15 +19,16 @@
 class ReverbComponent  : public juce::Component
 {
 public:
-    ReverbComponent(juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String roomSizeId, juce::String widthId, juce::String dampingId, juce::String freezeModeId, juce::String dryLevelId, juce::String wetLevelId);
+    ReverbComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String roomSizeId, juce::String widthId, juce::String dampingId, juce::String freezeModeId, juce::String dryLevelId, juce::String wetLevelId);
     ~ReverbComponent() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
-    juce::ToggleButton bypassedButton;
+    juce::String title = "";
 
+    juce::ToggleButton bypassedButton;
     juce::Slider roomSizeSlider;
     juce::Slider widthSlider;
     juce::Slider dampingSlider;

@@ -11,8 +11,10 @@
 #include "ReverbComponent.h"
 
 //==============================================================================
-ReverbComponent::ReverbComponent(juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String roomSizeId, juce::String widthId, juce::String dampingId, juce::String freezeModeId, juce::String dryLevelId, juce::String wetLevelId)
+ReverbComponent::ReverbComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String roomSizeId, juce::String widthId, juce::String dampingId, juce::String freezeModeId, juce::String dryLevelId, juce::String wetLevelId)
 {
+    this->title = title;
+
     addAndMakeVisible(bypassedButton);
 
     roomSizeSlider.setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);

@@ -23,14 +23,14 @@
 class DistortionComponent  : public juce::Component
 {
 public:
-    DistortionComponent(juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String driveId, juce::String rangeId, juce::String blendId);
+    DistortionComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String driveId, juce::String rangeId, juce::String blendId);
     ~DistortionComponent() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
-    juce::String name = "Distortion";
+    juce::String title = "";
 
     juce::ToggleButton bypassedButton;
     CustomSliderWithLabel driveSlider;

@@ -12,10 +12,12 @@
 #include "DelayComponent.h"
 
 //==============================================================================
-DelayComponent::DelayComponent(juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String timeMsId, juce::String feedbackId) :
+DelayComponent::DelayComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String timeMsId, juce::String feedbackId) :
     timeMsSlider("Time", "ms", false),
     feedbackSlider("Feedback", "", false)
 {
+    this->title = title;
+
     addAndMakeVisible(bypassedButton);
 
     bypassedButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(apvts, bypassedId, bypassedButton);
@@ -44,10 +46,10 @@ void DelayComponent::paint (juce::Graphics& g)
     // Parte de arriba
     auto elementsBounds = localBounds.reduced(15);
 
-    auto delayNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
+    auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2);
     //g.setColour(juce::Colours::wheat);
     g.setFont(28.f);
-    g.drawFittedText(name, delayNameBounds, juce::Justification::centred, true);
+    g.drawFittedText(title, elementsTopBounds, juce::Justification::centred, true);
 
     auto compBypassed = bypassedButton.getToggleState();
     timeMsSlider.applyBypassedColorPalette(compBypassed);

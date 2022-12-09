@@ -22,14 +22,14 @@
 class DelayComponent  : public juce::Component
 {
 public:
-    DelayComponent(juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String timeMsId, juce::String feedbackId);
+    DelayComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String timeMsId, juce::String feedbackId);
     ~DelayComponent() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
-    juce::String name = "Delay";
+    juce::String title = "";
 
     juce::ToggleButton bypassedButton;
     CustomSliderWithLabel timeMsSlider;

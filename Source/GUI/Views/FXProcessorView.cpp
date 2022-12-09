@@ -17,10 +17,10 @@ FXProcessorView::FXProcessorView(juce::AudioProcessorValueTreeState& apvts,
     juce::String chorusBypassed, juce::String chorusRate, juce::String chorusDepth, juce::String chorusCentreDelay, juce::String chorusFeedback, juce::String chorusMix,
     juce::String delayBypassed, juce::String delayTimeMs, juce::String delayFeedback,
     juce::String reverbBypassed, juce::String reverbRoomSize, juce::String reverbWidth, juce::String reverbDamping, juce::String reverbFreezeMode, juce::String reverbDryLevel, juce::String reverbWetLevel) :
-    distortionComponent(apvts, distortionBypassed, distortionDrive, distortionRange, distortionBlend),
-    chorusComponent(apvts, chorusBypassed, chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix),
-    delayComponent(apvts, delayBypassed, delayTimeMs, delayFeedback),
-    reverbComponent(apvts, reverbBypassed, reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel)
+    distortionComponent("Distortion", apvts, distortionBypassed, distortionDrive, distortionRange, distortionBlend),
+    chorusComponent("Chorus", apvts, chorusBypassed, chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix),
+    delayComponent("Delay", apvts, delayBypassed, delayTimeMs, delayFeedback),
+    reverbComponent("Reverb", apvts, reverbBypassed, reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -77,13 +77,13 @@ void FXProcessorView::resized()
     elementsBounds.setPosition(juce::Point<int>(elementsBounds.getPosition().getX(), textBounds.getBottom() + padding));
     elementsBounds.setSize(elementsBounds.getWidth(), elementsBounds.getHeight() - textBounds.getHeight() - padding);
 
-    auto distortionBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), (elementsBounds.getWidth() / 2) - (padding / 2), elementsBounds.getHeight() / 2);
-    // Chorus debajo
-    auto delayBounds = juce::Rectangle<int>(elementsBounds.getCentre().getX() + (padding / 2), elementsBounds.getPosition().getY(), (elementsBounds.getWidth() / 2) - (padding / 2), elementsBounds.getHeight() / 2);
-    // Reverb debajo
-    distortionComponent.setBounds(distortionBounds);
+    auto distortionBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), (elementsBounds.getWidth() / 2) - (padding / 2), elementsBounds.getHeight() * 0.35);
+    auto chorusBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), distortionBounds.getBottom() + padding, (elementsBounds.getWidth() / 2) - (padding / 2), elementsBounds.getHeight() * 0.65);
+    auto delayBounds = juce::Rectangle<int>(elementsBounds.getCentre().getX() + (padding / 2), elementsBounds.getPosition().getY(), (elementsBounds.getWidth() / 2) - (padding / 2), elementsBounds.getHeight() * 0.35);
+    auto reverbBounds = juce::Rectangle<int>(elementsBounds.getCentre().getX() + (padding / 2), delayBounds.getBottom() + padding, (elementsBounds.getWidth() / 2) - (padding / 2), elementsBounds.getHeight() * 0.65);
 
-    //chorus
+    distortionComponent.setBounds(distortionBounds);
+    chorusComponent.setBounds(chorusBounds);
     delayComponent.setBounds(delayBounds);
-    //reverb
+    reverbComponent.setBounds(reverbBounds);
 }
