@@ -13,6 +13,10 @@
 
 #include <JuceHeader.h>
 
+#include "../Assets/ColorPalette.h"
+#include "../Assets/CustomControls.h"
+#include "../Source/ParamsIDList.h"
+
 //==============================================================================
 /*
 */
@@ -29,12 +33,12 @@ private:
     juce::String title = "";
 
     juce::ToggleButton bypassedButton;
-    juce::Slider roomSizeSlider;
-    juce::Slider widthSlider;
-    juce::Slider dampingSlider;
-    juce::Slider freezeModeSlider;
-    juce::Slider dryLevelSlider;
-    juce::Slider wetLevelSlider;
+    CustomSliderWithLabel roomSizeSlider;
+    CustomSliderWithLabel widthSlider;
+    CustomSliderWithLabel dampingSlider;
+    CustomSliderWithLabel freezeModeSlider;
+    CustomSliderWithLabel dryLevelSlider;
+    CustomSliderWithLabel wetLevelSlider;
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> bypassedButtonAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> roomSizeAttachment;
