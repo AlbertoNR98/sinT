@@ -12,7 +12,7 @@
 
 //==============================================================================
 MainControlComponent::MainControlComponent(juce::AudioProcessorValueTreeState& apvts, juce::String mainGainId, juce::String portamentoId) :
-    mainGainSlider("Gain", "dB", false)
+    mainGainSlider("Gain", "dB", CustomSliderWithLabel::SliderStyle::HorizontalCompact)
 {
     //mainGainSlider.setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);
     addAndMakeVisible(mainGainSlider);

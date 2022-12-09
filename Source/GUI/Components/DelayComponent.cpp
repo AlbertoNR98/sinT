@@ -13,8 +13,8 @@
 
 //==============================================================================
 DelayComponent::DelayComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String timeMsId, juce::String feedbackId) :
-    timeMsSlider("Time", "ms", false),
-    feedbackSlider("Feedback", "", false)
+    timeMsSlider("Time", "ms", CustomSliderWithLabel::SliderStyle::Horizontal),
+    feedbackSlider("Feedback", "", CustomSliderWithLabel::SliderStyle::Horizontal)
 {
     this->title = title;
 
@@ -46,9 +46,13 @@ void DelayComponent::paint (juce::Graphics& g)
     // Parte de arriba
     auto elementsBounds = localBounds.reduced(15);
 
+    auto delayNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
+    //auto sliderPadding = 4;
+    //slidersBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), delayNameBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), elementsBounds.getHeight() * 0.8);
+
     auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2);
     //g.setColour(juce::Colours::wheat);
-    g.setFont(28.f);
+    g.setFont(24.f);
     g.drawFittedText(title, elementsTopBounds, juce::Justification::centred, true);
 
     auto compBypassed = bypassedButton.getToggleState();
@@ -58,8 +62,6 @@ void DelayComponent::paint (juce::Graphics& g)
 
 void DelayComponent::resized()
 {
-    auto sliderPadding = 12;
-
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
     auto elementsBounds = localBounds.reduced(15);
 
@@ -70,9 +72,12 @@ void DelayComponent::resized()
     bypassedButton.setTopLeftPosition(juce::Point<int>(bypassButtonBounds.getCentre().getX(), bypassButtonBounds.getTopLeft().getY()));
 
     // Sliders
-    auto timeMsSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), bypassButtonBounds.getBottom() + (sliderPadding / 2), elementsBounds.getWidth(), (elementsBounds.getHeight() - bypassButtonBounds.getBottom()) / 2);
+    auto sliderPadding = 4;
+    auto slidersBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), delayNameBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), elementsBounds.getHeight() * 0.8);
+
+    auto timeMsSliderBounds = juce::Rectangle<int>(slidersBounds.getPosition().getX(), slidersBounds.getPosition().getY(), slidersBounds.getWidth(), slidersBounds.getHeight()/ 2);
     timeMsSlider.setBounds(timeMsSliderBounds);
 
-    auto feedbackSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), timeMsSliderBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), (elementsBounds.getHeight() - bypassButtonBounds.getBottom()) / 2);
+    auto feedbackSliderBounds = juce::Rectangle<int>(slidersBounds.getPosition().getX(), timeMsSliderBounds.getBottom(), slidersBounds.getWidth(), slidersBounds.getHeight() / 2);
     feedbackSlider.setBounds(feedbackSliderBounds);
 }
