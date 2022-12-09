@@ -47,10 +47,10 @@ void DistortionComponent::paint (juce::Graphics& g)
     // Parte de arriba
     auto elementsBounds = localBounds.reduced(15);
 
-    auto oscNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
-    g.setColour(juce::Colours::wheat);
+    auto distortionNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
+    //g.setColour(juce::Colours::wheat);
     g.setFont(28.f);
-    g.drawFittedText(name, oscNameBounds, juce::Justification::centred, true);
+    g.drawFittedText(name, distortionNameBounds, juce::Justification::centred, true);
 
     auto compBypassed = bypassedButton.getToggleState();
     driveSlider.applyBypassedColorPalette(compBypassed);

@@ -75,9 +75,9 @@ void CustomSliderWithLabel::resized()
     } 
     else 
     {
-        valueLabel.setBounds(0, 0, localBounds.getWidth() * 0.35, localBounds.getHeight() * 0.5);
-        nameLabel.setBounds(0, localBounds.getHeight() * 0.5, localBounds.getWidth() * 0.35, localBounds.getHeight() * 0.5);
-        slider.setBounds(localBounds.getWidth() * 0.35, 0, localBounds.getWidth() * 0.65, localBounds.getHeight());
+        valueLabel.setBounds(0, 0, localBounds.getWidth() * 0.2, localBounds.getHeight() * 0.5);
+        nameLabel.setBounds(0, localBounds.getHeight() * 0.5, localBounds.getWidth() * 0.2, localBounds.getHeight() * 0.5);
+        slider.setBounds(localBounds.getWidth() * 0.2, 0, localBounds.getWidth() * 0.8, localBounds.getHeight());
     }
 }
 
@@ -99,6 +99,8 @@ void CustomSliderWithLabel::setupSlider()
 
     slider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
     slider.setNumDecimalPlacesToDisplay(numDecimals);
+    //slider.setVelocityBasedMode(true);
+    //slider.setVelocityModeParameters(); -> Hacer pruebas
 
     slider.onValueChange = [this] { 
         updateValueLabel(); 

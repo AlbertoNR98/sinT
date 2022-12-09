@@ -12,19 +12,22 @@
 #include "DelayComponent.h"
 
 //==============================================================================
-DelayComponent::DelayComponent(juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String timeMsId, juce::String feedbackId)
+DelayComponent::DelayComponent(juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String timeMsId, juce::String feedbackId) :
+    timeMsSlider("Time", "ms", false),
+    feedbackSlider("Feedback", "", false)
 {
     addAndMakeVisible(bypassedButton);
 
-    timeMsSlider.setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);
-    addAndMakeVisible(timeMsSlider);
-
-    feedbackSlider.setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);
-    addAndMakeVisible(feedbackSlider);
-
     bypassedButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(apvts, bypassedId, bypassedButton);
-    timeMsAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, timeMsId, timeMsSlider);
-    feedbackAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, feedbackId, feedbackSlider);
+    timeMsAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, timeMsId, timeMsSlider.getSlider());
+    feedbackAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, feedbackId, feedbackSlider.getSlider());
+
+    auto compBypassed = bypassedButton.getToggleState();
+    timeMsSlider.applyBypassedColorPalette(compBypassed);
+    feedbackSlider.applyBypassedColorPalette(compBypassed);
+
+    addAndMakeVisible(timeMsSlider);
+    addAndMakeVisible(feedbackSlider);
 }
 
 DelayComponent::~DelayComponent()
@@ -35,18 +38,39 @@ void DelayComponent::paint (juce::Graphics& g)
 {
     g.setColour(juce::Colours::wheat);
 
-    auto localBounds = getLocalBounds();
-    g.drawRoundedRectangle(localBounds.toFloat().reduced(5.0f), 5.0f, 2.0f);
+    auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
+    g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
 
-    auto textBounds = juce::Rectangle<int>(localBounds.getWidth(), localBounds.getHeight() / 6);
-    textBounds.setPosition(localBounds.getPosition());
-    g.setFont(24.f);
-    g.drawFittedText("Delay", textBounds, juce::Justification::centred, true);
+    // Parte de arriba
+    auto elementsBounds = localBounds.reduced(15);
+
+    auto delayNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
+    //g.setColour(juce::Colours::wheat);
+    g.setFont(28.f);
+    g.drawFittedText(name, delayNameBounds, juce::Justification::centred, true);
+
+    auto compBypassed = bypassedButton.getToggleState();
+    timeMsSlider.applyBypassedColorPalette(compBypassed);
+    feedbackSlider.applyBypassedColorPalette(compBypassed);
 }
 
 void DelayComponent::resized()
 {
-    bypassedButton.setBounds(0, 0, 50, 50);
-    timeMsSlider.setBounds(0, 50, 300, 30);
-    feedbackSlider.setBounds(0, timeMsSlider.getBottom(), 300, 30);
+    auto sliderPadding = 12;
+
+    auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
+    auto elementsBounds = localBounds.reduced(15);
+
+    auto delayNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
+
+    auto bypassButtonBounds = juce::Rectangle<int>(delayNameBounds.getRight(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.15, elementsBounds.getHeight() * 0.2);
+    bypassedButton.setBounds(bypassButtonBounds);
+    bypassedButton.setTopLeftPosition(juce::Point<int>(bypassButtonBounds.getCentre().getX(), bypassButtonBounds.getTopLeft().getY()));
+
+    // Sliders
+    auto timeMsSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), bypassButtonBounds.getBottom() + (sliderPadding / 2), elementsBounds.getWidth(), (elementsBounds.getHeight() - bypassButtonBounds.getBottom()) / 2);
+    timeMsSlider.setBounds(timeMsSliderBounds);
+
+    auto feedbackSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), timeMsSliderBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), (elementsBounds.getHeight() - bypassButtonBounds.getBottom()) / 2);
+    feedbackSlider.setBounds(feedbackSliderBounds);
 }

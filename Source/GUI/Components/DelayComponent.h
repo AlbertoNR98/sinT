@@ -12,6 +12,10 @@
 
 #include <JuceHeader.h>
 
+#include "../Assets/ColorPalette.h"
+#include "../Assets/CustomControls.h"
+#include "../Source/ParamsIDList.h"
+
 //==============================================================================
 /*
 */
@@ -25,9 +29,14 @@ public:
     void resized() override;
 
 private:
+    juce::String name = "Delay";
+
     juce::ToggleButton bypassedButton;
-    juce::Slider timeMsSlider;
-    juce::Slider feedbackSlider;
+    CustomSliderWithLabel timeMsSlider;
+    CustomSliderWithLabel feedbackSlider;
+
+    //juce::Slider timeMsSlider;
+    //juce::Slider feedbackSlider;
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> bypassedButtonAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> timeMsAttachment;
