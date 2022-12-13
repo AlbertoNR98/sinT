@@ -136,6 +136,9 @@
           <FILE id="fnSar4" name="HomeView.h" compile="0" resource="0" file="Source/GUI/Views/HomeView.h"/>
           <FILE id="wa7Rlq" name="OscView.cpp" compile="1" resource="0" file="Source/GUI/Views/OscView.cpp"/>
           <FILE id="sUC0iH" name="OscView.h" compile="0" resource="0" file="Source/GUI/Views/OscView.h"/>
+          <FILE id="KvXS3Z" name="SettingsView.cpp" compile="1" resource="0"
+                file="Source/GUI/Views/SettingsView.cpp"/>
+          <FILE id="F0qH96" name="SettingsView.h" compile="0" resource="0" file="Source/GUI/Views/SettingsView.h"/>
         </GROUP>
       </GROUP>
     </GROUP>

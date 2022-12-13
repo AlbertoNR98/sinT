@@ -26,6 +26,7 @@ public:
 
     void paintListBoxItem(int rowNumber, juce::Graphics& g, int width, int height, bool rowIsSelected) override;
     int getNumRows() override;
+    juce::ListBox& getEntries() { return m_entries; }
     void addEntry(const juce::String& entry);
     void selectedRowsChanged(int row) override;
     void setEntrySelectionCallback(std::function<void(int)> callback);

@@ -66,9 +66,11 @@ void SidePanelList::paintListBoxItem(int rowNumber, juce::Graphics& g, int width
 
     if (rowIsSelected)
     {
-        g.setColour(findColour(juce::TextEditor::highlightColourId).withAlpha(0.4f));
+        g.setColour(findColour(juce::TextEditor::highlightColourId).withAlpha(0.25f));
         g.fillRect(bounds);
-        textColour = findColour(juce::TextEditor::highlightedTextColourId);
+        //textColour = findColour(juce::TextEditor::highlightedTextColourId);
+        textColour = juce::Colours::rebeccapurple;
+        g.setFont(42.f);
     }
 
     g.setColour(textColour);

@@ -19,6 +19,7 @@
 
 #include "../../Assets/ColorPalette.h"
 #include "../../Views/HomeView.h"
+#include "../../Views/SettingsView.h"
 #include "../../Views/OscView.h"
 #include "../../Views/ADSRView.h"
 #include "../../Views/FilterView.h"
@@ -29,6 +30,7 @@ constexpr int ADSR_VIEW = 1;
 constexpr int FILTER_VIEW = 2;
 constexpr int FX_VIEW = 3;
 constexpr int HOME_VIEW = 4;
+constexpr int SETTINGS_VIEW = 5;
 
 //==============================================================================
 /*
@@ -55,6 +57,8 @@ private:
 
     bool showingSidePanel = true;
     int sidePanelWidth = 150;
+    SidePanelList* sidePanelList = new SidePanelList();
+    SidePanelHeader* sidePanelHeader = new SidePanelHeader("sinT");
     juce::SidePanel sidePanel{ "", sidePanelWidth, true, nullptr, false };
 
     std::unique_ptr<juce::Component> contentComponent;

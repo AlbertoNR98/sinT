@@ -25,10 +25,14 @@ HomeView::~HomeView()
 
 void HomeView::paint (juce::Graphics& g)
 {
-    g.setColour (ColorPalette::monwhite);
+    g.setColour(ColorPalette::monwhite);
+    auto titleTextBounds = juce::Rectangle<int>(0, 0, getLocalBounds().getWidth(), getLocalBounds().getHeight() * 0.6);
     g.setFont (180.0f);
-    g.drawText ("sinT", getLocalBounds(),
-                juce::Justification::centred, true);   // draw some placeholder text
+    g.drawText ("sinT", titleTextBounds, juce::Justification::centredBottom, true);
+
+    auto subtitleTextBounds = juce::Rectangle<int>(0, getLocalBounds().getHeight() * 0.6, getLocalBounds().getWidth(), getLocalBounds().getHeight() * 0.4);
+    g.setFont(45.0f);
+    g.drawText("Digital Synthesizer", subtitleTextBounds, juce::Justification::centredTop, true);
 }
 
 void HomeView::resized()

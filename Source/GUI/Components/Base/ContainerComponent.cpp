@@ -24,7 +24,6 @@ ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts
 
     setSize(600, 400);
 
-    auto sidePanelList = new SidePanelList;
     sidePanelList->addEntry("OSC");
     sidePanelList->addEntry("ADSR");
     sidePanelList->addEntry("FILTER");
@@ -32,10 +31,8 @@ ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts
     sidePanelList->setEntrySelectionCallback([&](int index) { listEntryClicked(index); });
     sidePanel.setContent(sidePanelList);
 
-    auto sidePanelHeader = new SidePanelHeader("Side Panel");
     sidePanelHeader->setHomeButtonClicked([&]() { homeButtonClicked(); });
     sidePanelHeader->setSettingButtonClicked([&]() { settingsButtonClicked(); });
-    //sidePanel.setTitleBarComponent(sidePanelHeader, true);
     sidePanel.setTitleBarComponent(sidePanelHeader, false);
     sidePanel.setShadowWidth(0);
 }
@@ -119,6 +116,9 @@ void ContainerComponent::setView(const int selectedView)
         case HOME_VIEW:
             contentComponent.reset(new HomeView());
             break;
+        case SETTINGS_VIEW:
+            contentComponent.reset(new SettingsView());
+            break;
         default:
             contentComponent.reset(new HomeView());
     }
@@ -129,13 +129,19 @@ void ContainerComponent::setView(const int selectedView)
 void ContainerComponent::homeButtonClicked()
 {
     if (contentComponent != nullptr)
+    {
+        sidePanelList->getEntries().deselectAllRows();
         setView(HOME_VIEW);
+    }
 }
 
 void ContainerComponent::settingsButtonClicked()
 {
     if (contentComponent != nullptr)
-        setView(HOME_VIEW);
+    {
+        sidePanelList->getEntries().deselectAllRows();
+        setView(SETTINGS_VIEW);
+    }
 }
 
 void ContainerComponent::listEntryClicked(int index)
