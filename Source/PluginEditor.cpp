@@ -43,6 +43,9 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor(SinTAudioProcessor& p)
     addAndMakeVisible(reverbComponent);
     */
 
+    auto customFontBold = juce::Typeface::createSystemTypefaceFor(BinaryData::CustomFontBold_ttf, BinaryData::CustomFontBold_ttfSize);
+    juce::LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypeface(customFontBold);
+
     addAndMakeVisible(mainComponent);
 
     setSize(1024, 544); // 600 - 32 (barra RPi OS) - 24 (barra plugin)

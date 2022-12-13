@@ -31,22 +31,16 @@ public:
     juce::Slider& getSlider() { return slider; }
 
     void applyBypassedColorPalette(const bool bypassed);
-
-    void setValueLabelFont(juce::Font& f);  // Se puede obtener de aqui el tamaño (getHeight).
-    void setNameLabelFont(juce::Font& f);
-
 private:
     SliderStyle sliderStyle = Vertical;
     int numDecimals = 1;
-    float valueLabelFontHeight{ 18.f }; // Parametrizar y obtener del font importado
+    float valueLabelFontHeight{ 18.f };
     float nameLabelFontHeight{ 14.f };
 
     void setupSlider();
-    void setupValueLabel();
-    void setupNameLabel();
+    void updateValueLabel();
 
     void updateTrackColour();   // Si se usa gradiente. Si no, no hace falta
-    void updateValueLabel();
 
     juce::Slider slider;
     juce::Label valueLabel;

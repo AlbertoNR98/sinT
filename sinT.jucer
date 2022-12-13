@@ -48,6 +48,15 @@
       </GROUP>
       <GROUP id="{6B4C42CC-A6E5-0991-D2E8-C1E26CB890A8}" name="GUI">
         <GROUP id="{D1D2E4A3-C317-13AC-06E4-51C653D01C04}" name="Assets">
+          <GROUP id="{7D195D77-1248-1057-F69F-3D2D0962C62E}" name="Fonts">
+            <FILE id="hpn46w" name="CustomFont.ttf" compile="0" resource="1" file="Source/GUI/Assets/Fonts/CustomFont.ttf"/>
+            <FILE id="Rfm8ra" name="CustomFontBold.ttf" compile="0" resource="1"
+                  file="Source/GUI/Assets/Fonts/CustomFontBold.ttf"/>
+            <FILE id="opliNC" name="CustomFontBoldItalic.ttf" compile="0" resource="1"
+                  file="Source/GUI/Assets/Fonts/CustomFontBoldItalic.ttf"/>
+            <FILE id="Cb2wYd" name="CustomFontItalic.ttf" compile="0" resource="1"
+                  file="Source/GUI/Assets/Fonts/CustomFontItalic.ttf"/>
+          </GROUP>
           <FILE id="aXulqh" name="ColorPalette.h" compile="0" resource="0" file="Source/GUI/Assets/ColorPalette.h"/>
           <FILE id="cNUpFS" name="CustomControls.cpp" compile="1" resource="0"
                 file="Source/GUI/Assets/CustomControls.cpp"/>
