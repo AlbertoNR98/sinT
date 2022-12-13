@@ -46,13 +46,6 @@ ContainerComponent::~ContainerComponent()
 
 void ContainerComponent::paint (juce::Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
     if (showingSidePanel)
     {
         contentComponent->setBounds(sidePanelWidth, 0, getWidth() - sidePanelWidth, getHeight());
@@ -62,14 +55,13 @@ void ContainerComponent::paint (juce::Graphics& g)
         contentComponent->setBounds(0, 0, getWidth(), getHeight());
     }
 
-    //g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
-    //g.fillAll(juce::Colours::cadetblue);
-    g.fillAll(juce::Colours::black);
+    g.fillAll(ColorPalette::darkgray);
 
+    /*
     g.setColour(juce::Colours::white);
     g.setFont(14.0f);
-    g.drawText("ContainerComponent", getLocalBounds(),
-        juce::Justification::centred, true);   // draw some placeholder text
+    g.drawText("ContainerComponent", getLocalBounds(), juce::Justification::centred, true);   // draw some placeholder text
+    */
 }
 
 void ContainerComponent::resized()

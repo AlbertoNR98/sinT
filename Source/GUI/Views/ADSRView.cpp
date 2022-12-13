@@ -31,8 +31,6 @@ ADSRView::~ADSRView()
 
 void ADSRView::paint (juce::Graphics& g)
 {
-    g.fillAll(ColorPalette::darkgray);
-
     g.setColour(juce::Colours::wheat);
     g.setFont(44.0f);
 

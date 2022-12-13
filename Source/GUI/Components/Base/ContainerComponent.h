@@ -17,13 +17,12 @@
 #include "SidePanelHeader.h"
 #include "SidePanelList.h"
 
+#include "../../Assets/ColorPalette.h"
 #include "../../Views/HomeView.h"
 #include "../../Views/OscView.h"
 #include "../../Views/ADSRView.h"
 #include "../../Views/FilterView.h"
 #include "../../Views/FXProcessorView.h"
-
-//TO-DO Resto de vistas
 
 constexpr int OSC_VIEW = 0;
 constexpr int ADSR_VIEW = 1;
