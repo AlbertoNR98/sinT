@@ -44,33 +44,33 @@ void CustomSliderWithLabel::paint(juce::Graphics& g)
     {
     case Vertical:
         g.setColour(juce::Colours::red);
-        g.drawRect(0, 0, getLocalBounds().getWidth(), getLocalBounds().getHeight() * 0.80);
+        g.drawRect(0, 0, getLocalBounds().getWidth(), getLocalBounds().getHeight() * 0.80); // Slider
 
         g.setColour(juce::Colours::yellow);
-        g.drawRect(0, getLocalBounds().getHeight() * 0.80, getLocalBounds().getWidth(), getLocalBounds().getHeight() * 0.10);
+        g.drawRect(0, getLocalBounds().getHeight() * 0.80, getLocalBounds().getWidth(), getLocalBounds().getHeight() * 0.10);   // Name
 
         g.setColour(juce::Colours::purple);
-        g.drawRect(0, getLocalBounds().getHeight() * 0.90, getLocalBounds().getWidth(), getLocalBounds().getHeight() * 0.10);
+        g.drawRect(0, getLocalBounds().getHeight() * 0.90, getLocalBounds().getWidth(), getLocalBounds().getHeight() * 0.10);   // Value
         break;
     case Horizontal:
         g.setColour(juce::Colours::red);
-        g.drawRect(0, 0, getLocalBounds().getWidth() * 0.2, getLocalBounds().getHeight());
+        g.drawRect(0, 0, getLocalBounds().getWidth() * 0.15, getLocalBounds().getHeight());  // Name
 
         g.setColour(juce::Colours::yellow);
-        g.drawRect(getLocalBounds().getWidth() * 0.2, 0, getLocalBounds().getWidth() * 0.15, getLocalBounds().getHeight());
+        g.drawRect(getLocalBounds().getWidth() * 0.15, 0, getLocalBounds().getWidth() * 0.2, getLocalBounds().getHeight()); // Value
 
         g.setColour(juce::Colours::purple);
-        g.drawRect(getLocalBounds().getWidth() * 0.35, 0, getLocalBounds().getWidth() * 0.65, getLocalBounds().getHeight());
+        g.drawRect(getLocalBounds().getWidth() * 0.35, 0, getLocalBounds().getWidth() * 0.65, getLocalBounds().getHeight());    // Slider
         break;
     case HorizontalCompact:
         g.setColour(juce::Colours::red);
-        g.drawRect(0, 0, getLocalBounds().getWidth() * 0.35, getLocalBounds().getHeight() * 0.5);
+        g.drawRect(0, 0, getLocalBounds().getWidth() * 0.25, getLocalBounds().getHeight() * 0.5);   // Name
 
         g.setColour(juce::Colours::yellow);
-        g.drawRect(0, getLocalBounds().getHeight() * 0.5, getLocalBounds().getWidth() * 0.35, getLocalBounds().getHeight() * 0.5);
+        g.drawRect(0, getLocalBounds().getHeight() * 0.5, getLocalBounds().getWidth() * 0.25, getLocalBounds().getHeight() * 0.5);  // Value
 
         g.setColour(juce::Colours::purple);
-        g.drawRect(getLocalBounds().getWidth() * 0.35, 0, getLocalBounds().getWidth() * 0.65, getLocalBounds().getHeight());
+        g.drawRect(getLocalBounds().getWidth() * 0.25, 0, getLocalBounds().getWidth() * 0.75, getLocalBounds().getHeight());    // Slider
         break;
     default:
         g.setColour(juce::Colours::red);
@@ -93,24 +93,24 @@ void CustomSliderWithLabel::resized()
     switch (sliderStyle)
     {
     case Vertical:
-        slider.setBounds(0, 0, localBounds.getWidth(), localBounds.getHeight() * 0.80);
-        valueLabel.setBounds(0, localBounds.getHeight() * 0.80, localBounds.getWidth(), localBounds.getHeight() * 0.10);
         nameLabel.setBounds(0, localBounds.getHeight() * 0.90, localBounds.getWidth(), localBounds.getHeight() * 0.10);
+        valueLabel.setBounds(0, localBounds.getHeight() * 0.80, localBounds.getWidth(), localBounds.getHeight() * 0.10);
+        slider.setBounds(0, 0, localBounds.getWidth(), localBounds.getHeight() * 0.80);
         break;
     case Horizontal:
-        nameLabel.setBounds(0, 0, localBounds.getWidth() * 0.2, localBounds.getHeight());
-        valueLabel.setBounds(localBounds.getWidth() * 0.2, 0, localBounds.getWidth() * 0.15, localBounds.getHeight());
+        nameLabel.setBounds(0, 0, localBounds.getWidth() * 0.15, localBounds.getHeight());
+        valueLabel.setBounds(localBounds.getWidth() * 0.15, 0, localBounds.getWidth() * 0.20, localBounds.getHeight());
         slider.setBounds(localBounds.getWidth() * 0.35, 0, localBounds.getWidth() * 0.65, localBounds.getHeight());
         break;
     case HorizontalCompact:
-        valueLabel.setBounds(0, 0, localBounds.getWidth() * 0.2, localBounds.getHeight() * 0.5);
-        nameLabel.setBounds(0, localBounds.getHeight() * 0.5, localBounds.getWidth() * 0.2, localBounds.getHeight() * 0.5);
-        slider.setBounds(localBounds.getWidth() * 0.2, 0, localBounds.getWidth() * 0.8, localBounds.getHeight());
+        nameLabel.setBounds(0, localBounds.getHeight() * 0.5, localBounds.getWidth() * 0.25, localBounds.getHeight() * 0.5);
+        valueLabel.setBounds(0, 0, localBounds.getWidth() * 0.25, localBounds.getHeight() * 0.5);
+        slider.setBounds(localBounds.getWidth() * 0.25, 0, localBounds.getWidth() * 0.75, localBounds.getHeight());
         break;
     default:
-        slider.setBounds(0, 0, localBounds.getWidth(), localBounds.getHeight() * 0.80);
-        valueLabel.setBounds(0, localBounds.getHeight() * 0.80, localBounds.getWidth(), localBounds.getHeight() * 0.10);
         nameLabel.setBounds(0, localBounds.getHeight() * 0.90, localBounds.getWidth(), localBounds.getHeight() * 0.10);
+        valueLabel.setBounds(0, localBounds.getHeight() * 0.80, localBounds.getWidth(), localBounds.getHeight() * 0.10);
+        slider.setBounds(0, 0, localBounds.getWidth(), localBounds.getHeight() * 0.80);
         break;
     }
 }

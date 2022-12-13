@@ -13,9 +13,9 @@
 
 //==============================================================================
 ChorusComponent::ChorusComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String rateId, juce::String depthId, juce::String centreDelayId, juce::String feedbackId, juce::String mixId) : 
-    rateSlider("Rate", "", CustomSliderWithLabel::SliderStyle::Horizontal),
+    rateSlider("Rate", "Hz", CustomSliderWithLabel::SliderStyle::Horizontal),
     depthSlider("Depth", "", CustomSliderWithLabel::SliderStyle::Horizontal),
-    centreDelaySlider("Centre delay", "", CustomSliderWithLabel::SliderStyle::Horizontal),
+    centreDelaySlider("Centre delay", "ms", CustomSliderWithLabel::SliderStyle::Horizontal),
     feedbackSlider("Feedback", "", CustomSliderWithLabel::SliderStyle::Horizontal),
     mixSlider("Mix", "", CustomSliderWithLabel::SliderStyle::Horizontal)
 {
