@@ -19,6 +19,7 @@ FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts, juce
 
     juce::StringArray waveOptions{ "LPF", "BPF", "HPF" };
     filterModeSelector.addItemList(waveOptions, 1);
+    filterModeSelector.setJustificationType(juce::Justification::centred);
     filterModeSelector.setColour(juce::ComboBox::ColourIds::backgroundColourId, ColorPalette::darkgray);
     addAndMakeVisible(filterModeSelector);
 

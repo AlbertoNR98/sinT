@@ -22,6 +22,7 @@ OscillatorComponent::OscillatorComponent(juce::String name, juce::AudioProcessor
 
     juce::StringArray waveOptions{ "Sine", "Saw", "Square" };
     oscWaveSelector.addItemList(waveOptions, 1);
+    oscWaveSelector.setJustificationType(juce::Justification::centred);
 
     oscWaveSelector.setColour(juce::ComboBox::ColourIds::backgroundColourId, ColorPalette::darkgray);
     addAndMakeVisible(oscWaveSelector);
