@@ -28,13 +28,19 @@ void MeterComponent::paint (juce::Graphics& g)
     rmsLevels = getRmsValues();
 
     const auto bounds = getLocalBounds();
+    const auto rectHeight = 15;
 
-    rmsMeterLeftChannel.setBounds(0, 0, bounds.getWidth(), bounds.getHeight() / 2);
-    rmsMeterRightChannel.setBounds(0, (bounds.getHeight() / 2), bounds.getWidth(), bounds.getHeight() / 2);
+    /*
+    rmsMeterLeftChannel.setBounds(0, 0, bounds.getWidth(), bounds.getHeight() / 2.f);
+    rmsMeterRightChannel.setBounds(0, (bounds.getHeight() / 2.f), bounds.getWidth(), bounds.getHeight() / 2.f);
+    */
 
-    g.setColour(juce::Colours::grey);
-    g.fillRoundedRectangle(rmsMeterLeftChannel, 5.0f);
-    g.fillRoundedRectangle(rmsMeterRightChannel, 5.0f);
+    rmsMeterLeftChannel.setBounds(0, (bounds.getHeight() * 0.25) - (rectHeight * 0.5), bounds.getWidth(), rectHeight);
+    rmsMeterRightChannel.setBounds(0, (bounds.getHeight() * 0.75) - (rectHeight * 0.5), bounds.getWidth(), rectHeight);
+
+    g.setColour(juce::Colours::black);
+    g.fillRoundedRectangle(rmsMeterLeftChannel, 10.0f);
+    g.fillRoundedRectangle(rmsMeterRightChannel, 10.0f);
 
     g.setGradientFill(leftGradient);
     const auto scaledXLeft = juce::jmap(rmsLevels.first, -60.0f, 12.0f, 0.0f, static_cast<float>(rmsMeterLeftChannel.getWidth()));
@@ -48,9 +54,15 @@ void MeterComponent::paint (juce::Graphics& g)
 void MeterComponent::resized()
 {
     const auto bounds = getLocalBounds();
+    const auto rectHeight = 15;
 
+    /*
     rmsMeterLeftChannel.setBounds(0, 0, bounds.getWidth(), bounds.getHeight() / 2);
     rmsMeterRightChannel.setBounds(0, bounds.getHeight() / 2, bounds.getWidth(), bounds.getHeight());
+    */
+
+    rmsMeterLeftChannel.setBounds(0, (bounds.getHeight() * 0.25) - (rectHeight * 0.5), bounds.getWidth(), rectHeight);
+    rmsMeterRightChannel.setBounds(0, (bounds.getHeight() * 0.75) - (rectHeight * 0.5), bounds.getWidth(), rectHeight);
 
     leftGradient = juce::ColourGradient{
         juce::Colours::green,

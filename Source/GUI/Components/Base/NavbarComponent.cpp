@@ -95,6 +95,7 @@ void NavbarComponent::resized()
     //gainMeter.setBounds(300, 0, getWidth() / 4, getHeight());  //TO-DO -> Corregir MeterComponent para que se adapte bien al Navbar
     //mainControl.setBounds(300, 0, getWidth() / 4, getHeight())
     mainControl.setBounds(300, 0, 300, getHeight());
+    gainMeter.setBounds(620, 0, 250, getHeight());
 }
 
 void NavbarComponent::buttonClicked(juce::Button* btn)
