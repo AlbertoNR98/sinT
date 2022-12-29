@@ -12,14 +12,16 @@
 
 //==============================================================================
 MainControlComponent::MainControlComponent(juce::AudioProcessorValueTreeState& apvts, juce::String mainGainId, juce::String portamentoId) :
-    mainGainSlider("Gain", "dB", CustomSliderWithLabel::SliderStyle::HorizontalCompact)
+    mainGainSlider("Gain", "dB", CustomSliderWithLabel::SliderStyle::HorizontalCompact),
+    portamentoButton("Portamento")
 {
-    //mainGainSlider.setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);
     addAndMakeVisible(mainGainSlider);
 
+    setupPortamentoButton();
     addAndMakeVisible(portamentoButton);
 
-    //mainGainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, mainGainId, mainGainSlider);
+    portamentoButton.addListener(this);
+
     mainGainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, mainGainId, mainGainSlider.getSlider());
     portamentoButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(apvts, portamentoId, portamentoButton);
 }
@@ -30,16 +32,40 @@ MainControlComponent::~MainControlComponent()
 
 void MainControlComponent::paint (juce::Graphics& g)
 {
-    //g.fillAll (juce::Colours::black);
-    //g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
-
-    g.setColour(juce::Colours::white);
-    g.drawRect(getLocalBounds());
 }
 
 void MainControlComponent::resized()
 {
     auto localBounds = getLocalBounds();
-    mainGainSlider.setBounds(0, 0, localBounds.getWidth() * 0.85, localBounds.getHeight());
-    portamentoButton.setBounds(localBounds.getWidth() * 0.85, 0, localBounds.getWidth() * 0.15, localBounds.getHeight());
+    mainGainSlider.setBounds(0, 0, localBounds.getWidth() * 0.75, localBounds.getHeight());
+    portamentoButton.setBounds(localBounds.getWidth() * 0.75, localBounds.getHeight() * 0.25, localBounds.getWidth() * 0.25, localBounds.getHeight() * 0.5);
+}
+    
+
+void MainControlComponent::setupPortamentoButton()
+{
+    portamentoButton.setClickingTogglesState(true);
+
+    portamentoButton.setColour(juce::ComboBox::outlineColourId, juce::Colour(0xff470064));  //Nota: No existe juce::TextButton::outlineColourId, pero sirve juce::ComboBox::outlineColourId
+
+    portamentoButton.setColour(juce::TextButton::buttonColourId, juce::Colour(0x00000000));
+    portamentoButton.setColour(juce::TextButton::textColourOffId, juce::Colour(0xff470064));
+
+    portamentoButton.setColour(juce::TextButton::buttonOnColourId, juce::Colour(0x00ffffff));
+    portamentoButton.setColour(juce::TextButton::textColourOnId, juce::Colour(0xff08d85a));
+    //portamentoButton.setColour(juce::TextButton::textColourOnId, juce::Colour(0xffffffff));
+}
+
+void MainControlComponent::buttonClicked(juce::Button* btn)
+{
+    if (btn == &portamentoButton)
+    {
+        if (portamentoButton.getToggleState()) {
+            portamentoButton.setColour(juce::ComboBox::outlineColourId, juce::Colour(0xff08d85a));
+            //portamentoButton.setColour(juce::ComboBox::outlineColourId, juce::Colour(0xffffffff));
+        }
+        else {
+            portamentoButton.setColour(juce::ComboBox::outlineColourId, juce::Colour(0xff470064));
+        }
+    }
 }

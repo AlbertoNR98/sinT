@@ -98,20 +98,20 @@ void ContainerComponent::setView(const int selectedView)
     {
         case OSC_VIEW:
             contentComponent.reset(new OscView(valueTree, osc1Bypassed, osc1Waveform, osc1Gain, osc1Pitch, osc1FmFreq, osc1FmDepth, 
-                osc2Bypassed, osc2Waveform, osc2Gain, osc2Pitch, osc2FmFreq, osc2FmDepth));
+                                    osc2Bypassed, osc2Waveform, osc2Gain, osc2Pitch, osc2FmFreq, osc2FmDepth));
             break;
         case ADSR_VIEW:
             contentComponent.reset(new ADSRView(valueTree, ampAdsrAttack, ampAdsrDecay, ampAdsrSustain, ampAdsrRelease, 
-                filterAdsrAttack, filterAdsrDecay, filterAdsrSustain, filterAdsrRelease));
+                                    filterAdsrAttack, filterAdsrDecay, filterAdsrSustain, filterAdsrRelease));
             break;
         case FILTER_VIEW:
             contentComponent.reset(new FilterView(valueTree, filterBypassed, filterMode, filterCutoffFreq, filterResonance, lfoFreq, lfoDepth));
             break;
         case FX_VIEW:
             contentComponent.reset(new FXProcessorView(valueTree, distortionBypassed, distortionDrive, distortionRange, distortionBlend,
-                chorusBypassed, chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix,
-                delayBypassed, delayTimeMs, delayFeedback,
-                reverbBypassed, reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel));
+                                    chorusBypassed, chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix,
+                                    delayBypassed, delayTimeMs, delayFeedback,
+                                    reverbBypassed, reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel));
             break;
         case HOME_VIEW:
             contentComponent.reset(new HomeView());
