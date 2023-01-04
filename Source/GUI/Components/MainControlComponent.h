@@ -18,7 +18,7 @@
 //==============================================================================
 /*
 */
-class MainControlComponent  : public juce::Component, public juce::Button::Listener
+class MainControlComponent  : public juce::Component
 {
 public:
     MainControlComponent(juce::AudioProcessorValueTreeState& apvts, juce::String mainGainId, juce::String portamentoId);
@@ -26,8 +26,6 @@ public:
 
     void paint (juce::Graphics&) override;
     void resized() override;
-
-    void buttonClicked(juce::Button*) override;
 
 private:
     CustomSliderWithLabel mainGainSlider;

@@ -20,8 +20,6 @@ MainControlComponent::MainControlComponent(juce::AudioProcessorValueTreeState& a
     setupPortamentoButton();
     addAndMakeVisible(portamentoButton);
 
-    portamentoButton.addListener(this);
-
     mainGainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, mainGainId, mainGainSlider.getSlider());
     portamentoButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(apvts, portamentoId, portamentoButton);
 }
@@ -46,26 +44,13 @@ void MainControlComponent::setupPortamentoButton()
 {
     portamentoButton.setClickingTogglesState(true);
 
-    portamentoButton.setColour(juce::ComboBox::outlineColourId, juce::Colour(0xff470064));  //Nota: No existe juce::TextButton::outlineColourId, pero sirve juce::ComboBox::outlineColourId
+    //portamentoButton.setColour(juce::ComboBox::outlineColourId, juce::Colour(0xff470064));  
+    portamentoButton.setColour(juce::ComboBox::outlineColourId, juce::Colours::white); //Nota: No existe juce::TextButton::outlineColourId, pero sirve juce::ComboBox::outlineColourId
 
     portamentoButton.setColour(juce::TextButton::buttonColourId, juce::Colour(0x00000000));
-    portamentoButton.setColour(juce::TextButton::textColourOffId, juce::Colour(0xff470064));
+    portamentoButton.setColour(juce::TextButton::textColourOffId, juce::Colours::white);
+    //portamentoButton.setColour(juce::TextButton::textColourOffId, juce::Colour(0xff470064));
 
-    portamentoButton.setColour(juce::TextButton::buttonOnColourId, juce::Colour(0x00ffffff));
-    portamentoButton.setColour(juce::TextButton::textColourOnId, juce::Colour(0xff08d85a));
-    //portamentoButton.setColour(juce::TextButton::textColourOnId, juce::Colour(0xffffffff));
-}
-
-void MainControlComponent::buttonClicked(juce::Button* btn)
-{
-    if (btn == &portamentoButton)
-    {
-        if (portamentoButton.getToggleState()) {
-            portamentoButton.setColour(juce::ComboBox::outlineColourId, juce::Colour(0xff08d85a));
-            //portamentoButton.setColour(juce::ComboBox::outlineColourId, juce::Colour(0xffffffff));
-        }
-        else {
-            portamentoButton.setColour(juce::ComboBox::outlineColourId, juce::Colour(0xff470064));
-        }
-    }
+    portamentoButton.setColour(juce::TextButton::buttonOnColourId, juce::Colour(0xff08d85a));   // Verde
+    portamentoButton.setColour(juce::TextButton::textColourOnId, juce::Colours::white);
 }
