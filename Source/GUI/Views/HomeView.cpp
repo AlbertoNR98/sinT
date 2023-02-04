@@ -25,7 +25,7 @@ HomeView::~HomeView()
 
 void HomeView::paint (juce::Graphics& g)
 {
-    g.setColour(ColorPalette::monwhite);
+    g.setColour(ColorPalette::monWhite);
     auto titleTextBounds = juce::Rectangle<int>(0, 0, getLocalBounds().getWidth(), getLocalBounds().getHeight() * 0.6);
     g.setFont (180.0f);
     g.drawText ("sinT", titleTextBounds, juce::Justification::centredBottom, true);

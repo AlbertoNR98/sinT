@@ -14,6 +14,7 @@
 #include "SinTVoice.h"
 #include "FXProcessor.h"
 #include "Data/Core/MeterData.h"
+#include "Data/Core/PresetManagerData.h"
 
 //==============================================================================
 /**
@@ -66,8 +67,9 @@ public:
     std::pair<float, float> getMainGainMeterRmsValues() const { return mainGainMeter.getRmsValues(); }
 
     //==============================================================================
+    PresetManagerData& getPresetManager() { return *presetManager; };
     static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
-    juce::AudioProcessorValueTreeState apvts {*this, nullptr, "Parameters", createParameterLayout()};
+    juce::AudioProcessorValueTreeState apvts;
 
 private:
     static constexpr int numVoices{ 6 };
@@ -78,6 +80,7 @@ private:
     void setFXParameters();
 
     juce::Synthesiser sinT;
+    std::unique_ptr<PresetManagerData> presetManager;
     FXProcessor fxProcessor;
     MeterData mainGainMeter;
     juce::dsp::Gain<float> mainGainValue;

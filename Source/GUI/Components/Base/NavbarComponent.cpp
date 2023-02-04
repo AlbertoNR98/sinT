@@ -17,7 +17,8 @@ NavbarComponent::NavbarComponent(SinTAudioProcessor& audioProcessor, ContainerCo
     showSidePanel("Sidepanel", "Show Sidepanel"), 
     settingsButton("Settings", juce::Colours::transparentBlack, juce::Colours::transparentBlack, juce::Colours::transparentBlack),
     gainMeter([&]()->std::pair<float, float> { return audioProcessor.getMainGainMeterRmsValues(); }),
-    mainControl(audioProcessor.apvts, ParamsIDList::mainGain, ParamsIDList::portamento)
+    mainControl(audioProcessor.apvts, ParamsIDList::mainGain, ParamsIDList::portamento),
+    presetManager(audioProcessor.getPresetManager())
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -46,9 +47,10 @@ NavbarComponent::NavbarComponent(SinTAudioProcessor& audioProcessor, ContainerCo
     showSidePanel.setColour(juce::TextButton::buttonColourId, juce::Colours::blueviolet);
     addAndMakeVisible(showSidePanel);
 
-    addAndMakeVisible(settingsButton);
+    //addAndMakeVisible(settingsButton);
     addAndMakeVisible(gainMeter);
     addAndMakeVisible(mainControl);
+    addAndMakeVisible(presetManager);
 
     showSidePanel.addListener(this);
     settingsButton.addListener(this);
@@ -91,11 +93,12 @@ void NavbarComponent::resized()
     auto settingsButtonBound = getLocalBounds().removeFromTop(30).removeFromRight(150);
     auto gainMeterBound = 0;    // TO-DO
     showSidePanel.setBounds(sidePanelButtonBound);
-    settingsButton.setBounds(settingsButtonBound);
+    //settingsButton.setBounds(settingsButtonBound);
     //gainMeter.setBounds(300, 0, getWidth() / 4, getHeight());  //TO-DO -> Corregir MeterComponent para que se adapte bien al Navbar
     //mainControl.setBounds(300, 0, getWidth() / 4, getHeight())
-    mainControl.setBounds(300, 0, 400, getHeight());
-    gainMeter.setBounds(720, 0, 150, getHeight());
+    mainControl.setBounds(150, 0, 270, getHeight());
+    gainMeter.setBounds(820, 0, 150, getHeight());
+    presetManager.setBounds(420, 0, 400, getHeight());
 }
 
 void NavbarComponent::buttonClicked(juce::Button* btn)

@@ -32,6 +32,10 @@
                 file="Source/Data/Core/OscillatorData.cpp"/>
           <FILE id="CpSsm5" name="OscillatorData.h" compile="0" resource="0"
                 file="Source/Data/Core/OscillatorData.h"/>
+          <FILE id="vzS9vE" name="PresetManagerData.cpp" compile="1" resource="0"
+                file="Source/Data/Core/PresetManagerData.cpp"/>
+          <FILE id="ZpPevb" name="PresetManagerData.h" compile="0" resource="0"
+                file="Source/Data/Core/PresetManagerData.h"/>
         </GROUP>
         <GROUP id="{4BE66EC9-BE7E-1A14-06EC-BEE4F8CD766F}" name="FX">
           <FILE id="f6l1JM" name="ChorusData.cpp" compile="1" resource="0" file="Source/Data/FX/ChorusData.cpp"/>
@@ -118,6 +122,10 @@
                 file="Source/GUI/Components/OscillatorComponent.cpp"/>
           <FILE id="KtIvA2" name="OscillatorComponent.h" compile="0" resource="0"
                 file="Source/GUI/Components/OscillatorComponent.h"/>
+          <FILE id="fbcXwO" name="PresetManagerComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/PresetManagerComponent.cpp"/>
+          <FILE id="Mi2Tjn" name="PresetManagerComponent.h" compile="0" resource="0"
+                file="Source/GUI/Components/PresetManagerComponent.h"/>
           <FILE id="tGwhq2" name="ReverbComponent.cpp" compile="1" resource="0"
                 file="Source/GUI/Components/ReverbComponent.cpp"/>
           <FILE id="rfrzXP" name="ReverbComponent.h" compile="0" resource="0"

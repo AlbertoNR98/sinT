@@ -35,8 +35,8 @@ void MainControlComponent::paint (juce::Graphics& g)
 void MainControlComponent::resized()
 {
     auto localBounds = getLocalBounds();
-    mainGainSlider.setBounds(0, 0, localBounds.getWidth() * 0.75, localBounds.getHeight());
-    portamentoButton.setBounds(localBounds.getWidth() * 0.75, localBounds.getHeight() * 0.25, localBounds.getWidth() * 0.25, localBounds.getHeight() * 0.5);
+    mainGainSlider.setBounds(0, 0, localBounds.getWidth() * 0.70, localBounds.getHeight());
+    portamentoButton.setBounds(localBounds.getWidth() * 0.70, localBounds.getHeight() * 0.30, localBounds.getWidth() * 0.30, localBounds.getHeight() * 0.5);
 }
     
 

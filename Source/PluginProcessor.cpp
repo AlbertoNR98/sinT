@@ -19,9 +19,15 @@ SinTAudioProcessor::SinTAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ),
 #endif
+    apvts(*this, nullptr, "Parameters", createParameterLayout())
 {
+    apvts.state.setProperty(PresetManagerData::presetNameProperty, "", nullptr);
+    apvts.state.setProperty("version", ProjectInfo::versionString, nullptr);
+
+    presetManager = std::make_unique<PresetManagerData>(apvts);
+
     sinT.addSound(new SinTSound());
 
     for(int i = 0; i < numVoices; i++) sinT.addVoice(new SinTVoice());
@@ -194,9 +200,10 @@ void SinTAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
 
-    // Guarda el estado de APVTS en un bloque de memoria
-    juce::MemoryOutputStream mos(destData, true);
-    apvts.state.writeToStream(mos);
+    // Guarda el estado como un XML
+    const auto actualState = apvts.copyState();
+    const auto xmlState(actualState.createXml());
+    copyXmlToBinary(*xmlState, destData);
 }
 
 void SinTAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
@@ -204,10 +211,15 @@ void SinTAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
 
-    auto tree = juce::ValueTree::readFromData(data, sizeInBytes);
-    if (tree.isValid())
+    // Carga un estado desde XML
+    const auto xmlState = getXmlFromBinary(data, sizeInBytes);
+    if (xmlState == nullptr)
+        return;
+
+    const auto newTree = juce::ValueTree::fromXml(*xmlState);
+    if (newTree.isValid())
     {
-        apvts.replaceState(tree);
+        apvts.replaceState(newTree);
         setSinTParameters();
     }
 }

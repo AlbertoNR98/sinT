@@ -19,6 +19,7 @@
 
 #include "../MeterComponent.h"
 #include "../MainControlComponent.h"
+#include "../PresetManagerComponent.h"
 
 #include "../../Assets/ColorPalette.h"
 
@@ -47,8 +48,10 @@ public:
 private:
     juce::TextButton showSidePanel;
     juce::ShapeButton settingsButton;
+
     MeterComponent gainMeter;
     MainControlComponent mainControl;
+    PresetManagerComponent presetManager;
 
     ContainerComponent& containerComponent;
 
