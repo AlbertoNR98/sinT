@@ -46,7 +46,7 @@ public:
     void buttonClicked(juce::Button*) override;
 
 private:
-    juce::TextButton showSidePanel;
+    juce::TextButton showSidePanelButton;
     juce::ShapeButton settingsButton;
 
     MeterComponent gainMeter;

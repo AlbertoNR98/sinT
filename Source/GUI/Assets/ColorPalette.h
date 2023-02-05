@@ -21,7 +21,7 @@ namespace ColorPalette
 
     const Colour betis{ 0xff009739 };
 
-    const Colour darkgray{ 0xff212526 };
+    const Colour darkgray{ 0xff151515 };
 
     const Colour monBlack{ 0xff000000 };
     const Colour monWhite{ 0xffffffff };

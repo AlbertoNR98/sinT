@@ -42,22 +42,31 @@ void PresetManagerComponent::resized()
     const auto container = getLocalBounds();
     auto bounds = container;
 
-    savePresetButton.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.2f)).reduced(4));
-    previousPresetButton.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.1f)).reduced(4));
-    presetListComboBox.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.4f)).reduced(4));
-    nextPresetButton.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.1f)).reduced(4));
+    savePresetButton.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.15f)).reduced(4));
+    previousPresetButton.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.1f)).reduced(8));
+    presetListComboBox.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.5f)).reduced(4));
+    nextPresetButton.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.1f)).reduced(8));
     deletePresetButton.setBounds(bounds.reduced(4));
 }
 
 void PresetManagerComponent::setupButton(juce::Button& button, const String& buttonText)
 {
     button.setButtonText(buttonText);
+
+    button.setColour(juce::ComboBox::outlineColourId, juce::Colours::white);
+    button.setColour(juce::TextButton::buttonColourId, juce::Colour(0x00000000));   // Transparent black
+    //button.setColour(juce::SidePanel::dismissButtonOverColour, juce::Colour(0xff08d85a));
+
     addAndMakeVisible(button);
     button.addListener(this);
 }
 
 void PresetManagerComponent::setupComboBox(juce::ComboBox& comboBox)
 {
+    comboBox.setJustificationType(juce::Justification::centred);
+    comboBox.setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colour(0x00000000));
+    comboBox.setColour(juce::ComboBox::ColourIds::outlineColourId, juce::Colours::white);
+
     comboBox.setTextWhenNoChoicesAvailable("No Preset Selected");
     comboBox.setTextWhenNothingSelected("No Preset Selected");
     addAndMakeVisible(comboBox);
@@ -67,6 +76,7 @@ void PresetManagerComponent::setupComboBox(juce::ComboBox& comboBox)
 void PresetManagerComponent::loadPresetList()
 {
     presetListComboBox.clear(dontSendNotification);
+
     const auto allPresets = presetManagerData.getAllPresets();
     const auto currentPreset = presetManagerData.getCurrentPreset();
     presetListComboBox.addItemList(allPresets, 1);

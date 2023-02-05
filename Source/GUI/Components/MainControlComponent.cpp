@@ -15,6 +15,7 @@ MainControlComponent::MainControlComponent(juce::AudioProcessorValueTreeState& a
     mainGainSlider("Gain", "dB", CustomSliderWithLabel::SliderStyle::HorizontalCompact),
     portamentoButton("Portamento")
 {
+    setupGainSlider();
     addAndMakeVisible(mainGainSlider);
 
     setupPortamentoButton();
@@ -34,11 +35,17 @@ void MainControlComponent::paint (juce::Graphics& g)
 
 void MainControlComponent::resized()
 {
-    auto localBounds = getLocalBounds();
+    const auto localBounds = getLocalBounds();
     mainGainSlider.setBounds(0, 0, localBounds.getWidth() * 0.70, localBounds.getHeight());
     portamentoButton.setBounds(localBounds.getWidth() * 0.70, localBounds.getHeight() * 0.30, localBounds.getWidth() * 0.30, localBounds.getHeight() * 0.5);
 }
     
+void MainControlComponent::setupGainSlider()
+{
+    mainGainSlider.getSlider().setColour(juce::Slider::ColourIds::backgroundColourId, juce::Colours::darkgrey);
+    mainGainSlider.getSlider().setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::cadetblue);
+    mainGainSlider.getSlider().setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::cadetblue);
+}
 
 void MainControlComponent::setupPortamentoButton()
 {

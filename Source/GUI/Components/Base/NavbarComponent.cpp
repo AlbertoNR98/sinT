@@ -14,7 +14,7 @@
 //==============================================================================
 NavbarComponent::NavbarComponent(SinTAudioProcessor& audioProcessor, ContainerComponent& c) : 
     containerComponent(c), 
-    showSidePanel("Sidepanel", "Show Sidepanel"), 
+    showSidePanelButton("-", "Show Sidepanel"), 
     settingsButton("Settings", juce::Colours::transparentBlack, juce::Colours::transparentBlack, juce::Colours::transparentBlack),
     gainMeter([&]()->std::pair<float, float> { return audioProcessor.getMainGainMeterRmsValues(); }),
     mainControl(audioProcessor.apvts, ParamsIDList::mainGain, ParamsIDList::portamento),
@@ -44,21 +44,21 @@ NavbarComponent::NavbarComponent(SinTAudioProcessor& audioProcessor, ContainerCo
     p.loadPathFromData(settingsIconPathData, sizeof(settingsIconPathData));
     settingsButton.setShape(p, true, true, false);
 
-    showSidePanel.setColour(juce::TextButton::buttonColourId, juce::Colours::blueviolet);
-    addAndMakeVisible(showSidePanel);
+    showSidePanelButton.setColour(juce::TextButton::buttonColourId, juce::Colours::blueviolet);
+    addAndMakeVisible(showSidePanelButton);
 
     //addAndMakeVisible(settingsButton);
     addAndMakeVisible(gainMeter);
     addAndMakeVisible(mainControl);
     addAndMakeVisible(presetManager);
 
-    showSidePanel.addListener(this);
+    showSidePanelButton.addListener(this);
     settingsButton.addListener(this);
 }
 
 NavbarComponent::~NavbarComponent()
 {
-    showSidePanel.removeListener(this);
+    showSidePanelButton.removeListener(this);
     settingsButton.removeListener(this);
 }
 
@@ -75,9 +75,6 @@ void NavbarComponent::paint (juce::Graphics& g)
     g.setColour(juce::Colours::white);
     g.drawRect(getLocalBounds(), 0);   // draw an outline around the component
 
-    g.setFont(14.0f);
-    g.drawText("NavbarComponent", getLocalBounds(), juce::Justification::centred, true);   // draw some placeholder text
-
     auto normal = getLookAndFeel().findColour(juce::SidePanel::dismissButtonNormalColour);
     auto over = getLookAndFeel().findColour(juce::SidePanel::dismissButtonOverColour);
     auto down = getLookAndFeel().findColour(juce::SidePanel::dismissButtonDownColour);
@@ -87,30 +84,32 @@ void NavbarComponent::paint (juce::Graphics& g)
 
 void NavbarComponent::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
-    auto sidePanelButtonBound = getLocalBounds().removeFromTop(30).removeFromLeft(150);
-    auto settingsButtonBound = getLocalBounds().removeFromTop(30).removeFromRight(150);
-    auto gainMeterBound = 0;    // TO-DO
-    showSidePanel.setBounds(sidePanelButtonBound);
-    //settingsButton.setBounds(settingsButtonBound);
-    //gainMeter.setBounds(300, 0, getWidth() / 4, getHeight());  //TO-DO -> Corregir MeterComponent para que se adapte bien al Navbar
-    //mainControl.setBounds(300, 0, getWidth() / 4, getHeight())
-    mainControl.setBounds(150, 0, 270, getHeight());
-    gainMeter.setBounds(820, 0, 150, getHeight());
-    presetManager.setBounds(420, 0, 400, getHeight());
+    const auto bounds = getLocalBounds().reduced(7);
+    const auto padding = bounds.getWidth() * 0.01;
+
+    const auto showSidePanelButtonBounds = juce::Rectangle<int>(bounds.getTopLeft().getX(), bounds.getTopLeft().getY(), bounds.getWidth() * 0.07, bounds.getHeight());
+    const auto mainControlBounds = juce::Rectangle<int>(showSidePanelButtonBounds.getRight() + padding, bounds.getTopLeft().getY(), bounds.getWidth() * 0.3, bounds.getHeight());
+    const auto presetManagerBounds = juce::Rectangle<int>(mainControlBounds.getRight() + padding, bounds.getTopLeft().getY(), bounds.getWidth() * 0.45, bounds.getHeight());
+    const auto gainMeterBounds = juce::Rectangle<int>(presetManagerBounds.getRight() + padding, bounds.getTopLeft().getY(), bounds.getWidth() * 0.15, bounds.getHeight());
+
+    showSidePanelButton.setBounds(showSidePanelButtonBounds);
+    mainControl.setBounds(mainControlBounds);
+    presetManager.setBounds(presetManagerBounds);
+    gainMeter.setBounds(gainMeterBounds);
 }
 
 void NavbarComponent::buttonClicked(juce::Button* btn)
 {
-    if (btn == &showSidePanel)
+    if (btn == &showSidePanelButton)
     {
         if (containerComponent.isShowingSidePanel())
         {
+            showSidePanelButton.setButtonText("+");
             containerComponent.getSidePanel().showOrHide(false);
         }
         else
         {
+            showSidePanelButton.setButtonText("-");
             containerComponent.getSidePanel().showOrHide(true);
         }
         containerComponent.setShowingSidePanel(!containerComponent.isShowingSidePanel());

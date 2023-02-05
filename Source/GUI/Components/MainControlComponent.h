@@ -34,6 +34,7 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mainGainAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> portamentoButtonAttachment;
 
+    void setupGainSlider();
     void setupPortamentoButton();
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainControlComponent)
