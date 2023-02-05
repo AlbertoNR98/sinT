@@ -55,7 +55,6 @@ void PresetManagerComponent::setupButton(juce::Button& button, const String& but
 
     button.setColour(juce::ComboBox::outlineColourId, juce::Colours::white);
     button.setColour(juce::TextButton::buttonColourId, juce::Colour(0x00000000));   // Transparent black
-    //button.setColour(juce::SidePanel::dismissButtonOverColour, juce::Colour(0xff08d85a));
 
     addAndMakeVisible(button);
     button.addListener(this);
@@ -87,17 +86,37 @@ void PresetManagerComponent::buttonClicked(juce::Button* button)
 {
     if (button == &savePresetButton)
     {
-        fileChooser = std::make_unique<juce::FileChooser>(
-            "Save a Preset",
-            PresetManagerData::defaultPresetDirectory,
-            "*." + PresetManagerData::presetFileExtension
+        saveDialog = std::make_unique<juce::AlertWindow>("Save a Preset",
+            "Name the Preset",
+            juce::AlertWindow::NoIcon,
+            nullptr
         );
+        saveDialog->addTextEditor("presetNameEditor", "");
+        saveDialog->addButton("Save", BtnDialogReturn::SaveButtonReturn, KeyPress(KeyPress::returnKey));
+        saveDialog->addButton("Cancel", BtnDialogReturn::CancelButtonReturn, KeyPress(KeyPress::escapeKey));
 
-        fileChooser->launchAsync(juce::FileBrowserComponent::saveMode, [&](const juce::FileChooser& chooser) {
-            const auto resultFile = chooser.getResult();
-            presetManagerData.savePreset(resultFile.getFileNameWithoutExtension());
-            loadPresetList();
-        });
+        saveDialog->enterModalState(true, ModalCallbackFunction::create([this](int btnClicked)
+            {
+                switch (btnClicked)
+                {
+                case BtnDialogReturn::SaveButtonReturn:
+                    if (presetNameIsValid(saveDialog->getTextEditorContents("presetNameEditor")))
+                    {
+                        presetManagerData.savePreset(saveDialog->getTextEditorContents("presetNameEditor"));
+                        AlertWindow::showMessageBoxAsync(AlertWindow::NoIcon, saveDialog->getTextEditorContents("presetNameEditor") + " saved as a preset.", "");
+                        loadPresetList();
+                    }
+                    else {
+                        AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon, "Name is not valid. Can't save the preset.", "");
+                    }
+                    break;
+                case BtnDialogReturn::CancelButtonReturn:
+                default:
+                    break;
+                }
+                saveDialog->exitModalState(btnClicked);
+                saveDialog->setVisible(false);
+            }));
     }
 
     if (button == &previousPresetButton)
@@ -125,4 +144,15 @@ void PresetManagerComponent::comboBoxChanged(juce::ComboBox* comboBoxChanged)
     {
         presetManagerData.loadPreset(presetListComboBox.getItemText(presetListComboBox.getSelectedItemIndex()));
     }
+}
+
+bool PresetManagerComponent::presetNameIsValid(juce::String& presetName)
+{
+    if (presetName.isEmpty()) return false;
+
+    if (presetName.containsAnyOf("# @ , ; : < > * ^ | ? / \\")) return false;
+
+    if (presetManagerData.defaultPresetDirectory.getChildFile(presetName + "." + presetManagerData.presetFileExtension).getFullPathName().length() > 255) return false;
+
+    return true;
 }

@@ -33,10 +33,16 @@ private:
 
     void buttonClicked(juce::Button* button) override;
     void comboBoxChanged(juce::ComboBox* comboBox) override;
+    bool presetNameIsValid(juce::String& presetName);
 
     juce::TextButton savePresetButton, deletePresetButton, previousPresetButton, nextPresetButton;
     juce::ComboBox presetListComboBox;
-    std::unique_ptr<juce::FileChooser> fileChooser;
+    std::unique_ptr<juce::AlertWindow> saveDialog;
+    const enum BtnDialogReturn
+    {
+        CancelButtonReturn,
+        SaveButtonReturn
+    };
 
     PresetManagerData& presetManagerData;
 

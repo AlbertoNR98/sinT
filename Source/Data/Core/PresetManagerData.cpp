@@ -11,7 +11,7 @@
 const juce::File PresetManagerData::defaultPresetDirectory {
     juce::File::getSpecialLocation(juce::File::SpecialLocationType::userHomeDirectory)
         .getChildFile(ProjectInfo::projectName)
-		.getChildFile("Presets")};	//TO-DO: Cambiar para Linux
+		.getChildFile("Presets")};
 const juce::String PresetManagerData::presetFileExtension { "presint" };
 const juce::String PresetManagerData::presetNameProperty{ "presetName" };
 
