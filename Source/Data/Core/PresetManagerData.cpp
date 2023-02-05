@@ -9,9 +9,9 @@
 #include "PresetManagerData.h"
 
 const juce::File PresetManagerData::defaultPresetDirectory {
-    juce::File::getSpecialLocation(juce::File::SpecialLocationType::userDesktopDirectory)
+    juce::File::getSpecialLocation(juce::File::SpecialLocationType::userHomeDirectory)
         .getChildFile(ProjectInfo::projectName)
-		.getChildFile("Presets")};
+		.getChildFile("Presets")};	//TO-DO: Cambiar para Linux
 const juce::String PresetManagerData::presetFileExtension { "presint" };
 const juce::String PresetManagerData::presetNameProperty{ "presetName" };
 
