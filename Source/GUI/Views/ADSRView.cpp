@@ -2,8 +2,6 @@
   ==============================================================================
 
     ADSRView.cpp
-    Created: 29 Nov 2022 6:53:19pm
-    Author:  Alberto Naranjo
 
   ==============================================================================
 */
@@ -18,9 +16,6 @@ ADSRView::ADSRView(juce::AudioProcessorValueTreeState& apvts,
     ampAdsrComponent("Amplitude ADSR", ColorPalette::miamipink, apvts, attackIdAmp, decayIdAmp, sustainIdAmp, releaseIdAmp), 
     filterAdsrComponent("Filter ADSR", ColorPalette::miamiblue, apvts, attackIdFilter, decayIdFilter, sustainIdFilter, releaseIdFilter)
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
-
     addAndMakeVisible(ampAdsrComponent);
     addAndMakeVisible(filterAdsrComponent);
 }
@@ -38,8 +33,6 @@ void ADSRView::paint (juce::Graphics& g)
 
     auto elementsBounds = getLocalBounds().reduced(padding);
     auto textBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() / 8);
-    //g.drawRoundedRectangle(textBounds.toFloat(), 10.0f, 2.0f);
-    //g.drawRect(textBounds, 5);
     g.drawFittedText(viewTitle, textBounds, juce::Justification::centred, true);
 
     elementsBounds.setPosition(juce::Point<int>(elementsBounds.getPosition().getX(), textBounds.getBottom() + padding));
@@ -48,9 +41,6 @@ void ADSRView::paint (juce::Graphics& g)
 
 void ADSRView::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
-
     auto padding = 16;
 
     auto elementsBounds = getLocalBounds().reduced(padding);

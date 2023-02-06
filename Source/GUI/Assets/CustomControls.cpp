@@ -146,18 +146,14 @@ void CustomSliderWithLabel::setupSlider()
 
     slider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
     slider.setNumDecimalPlacesToDisplay(numDecimals);
-    //slider.setVelocityBasedMode(true);
-    //slider.setVelocityModeParameters(); -> Hacer pruebas
 
     slider.onValueChange = [this] { 
         updateValueLabel(); 
-        //updateTrackColour(); 
     };  // Se ejecuta cuando cambia el valor del slider
 }
 
 void CustomSliderWithLabel::applyBypassedColorPalette(const bool bypassed)
 {
-    // Nota: Cambiar paleta de colores y cambiar color de letra de los labels
     if (bypassed)
     {
         slider.setColour(juce::Slider::ColourIds::backgroundColourId, ColorPalette::bypassgrey);

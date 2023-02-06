@@ -146,7 +146,7 @@ void PresetManagerComponent::comboBoxChanged(juce::ComboBox* comboBoxChanged)
     }
 }
 
-bool PresetManagerComponent::presetNameIsValid(juce::String& presetName)
+bool PresetManagerComponent::presetNameIsValid(const juce::String& presetName)
 {
     if (presetName.isEmpty()) return false;
 

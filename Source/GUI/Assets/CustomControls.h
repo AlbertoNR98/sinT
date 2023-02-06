@@ -40,15 +40,11 @@ private:
     void setupSlider();
     void updateValueLabel();
 
-    void updateTrackColour();   // Si se usa gradiente. Si no, no hace falta
-
     juce::Slider slider;
     juce::Label valueLabel;
     juce::Label nameLabel;
 
     juce::String suffix = "";
-
-    //juce::ColourGradient sliderTrackColourGradient;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CustomSliderWithLabel)
 };
