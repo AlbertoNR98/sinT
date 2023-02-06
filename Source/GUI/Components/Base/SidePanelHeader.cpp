@@ -57,6 +57,7 @@ SidePanelHeader::SidePanelHeader(const juce::String& titleText)
     m_settingsButton.setShape(p, true, true, false);
 
     m_titleLabel.setText(titleText, juce::NotificationType::dontSendNotification);
+    m_titleLabel.setColour(juce::Label::ColourIds::textColourId, ColorPalette::miamipink);
 
     addAndMakeVisible(m_titleLabel);
     addAndMakeVisible(m_homeButton);
@@ -76,7 +77,7 @@ void SidePanelHeader::paint (juce::Graphics& g)
        drawing code..
     */
     //g.fillAll(getLookAndFeel().findColour(juce::SidePanel::backgroundColour));   // clear the background
-    g.fillAll(juce::Colours::deeppink);
+    g.fillAll(ColorPalette::monwhite);
 
     auto normal = getLookAndFeel().findColour(juce::SidePanel::dismissButtonNormalColour);
     auto over = getLookAndFeel().findColour(juce::SidePanel::dismissButtonOverColour);

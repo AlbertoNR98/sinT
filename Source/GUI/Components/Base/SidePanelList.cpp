@@ -44,8 +44,8 @@ void SidePanelList::resized()
     // This method is where you should set the bounds of any child
     // components that your component contains..
     m_entries.setBounds(getLocalBounds());
-    m_entries.setColour(juce::ListBox::ColourIds::backgroundColourId, juce::Colours::orange);
-    m_entries.setColour(juce::ListBox::ColourIds::outlineColourId, juce::Colours::aquamarine);
+    m_entries.setColour(juce::ListBox::ColourIds::backgroundColourId, ColorPalette::miamiblue);
+    //m_entries.setColour(juce::ListBox::ColourIds::outlineColourId, juce::Colours::aquamarine);
 }
 
 void SidePanelList::paintListBoxItem(int rowNumber, juce::Graphics& g, int width, int height, bool rowIsSelected)
@@ -67,9 +67,9 @@ void SidePanelList::paintListBoxItem(int rowNumber, juce::Graphics& g, int width
     if (rowIsSelected)
     {
         g.setColour(findColour(juce::TextEditor::highlightColourId).withAlpha(0.25f));
+        //g.setColour(ColorPalette::miamipink);
         g.fillRect(bounds);
-        //textColour = findColour(juce::TextEditor::highlightedTextColourId);
-        textColour = juce::Colours::rebeccapurple;
+        textColour = ColorPalette::monwhite;
         g.setFont(42.f);
     }
 

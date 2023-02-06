@@ -11,7 +11,7 @@
 #include "ReverbComponent.h"
 
 //==============================================================================
-ReverbComponent::ReverbComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String roomSizeId, juce::String widthId, juce::String dampingId, juce::String freezeModeId, juce::String dryLevelId, juce::String wetLevelId) :
+ReverbComponent::ReverbComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String roomSizeId, juce::String widthId, juce::String dampingId, juce::String freezeModeId, juce::String dryLevelId, juce::String wetLevelId) :
     roomSizeSlider("Room size", "", CustomSliderWithLabel::SliderStyle::Horizontal),
     widthSlider("Width", "", CustomSliderWithLabel::SliderStyle::Horizontal),
     dampingSlider("Damping", "", CustomSliderWithLabel::SliderStyle::Horizontal),
@@ -20,6 +20,7 @@ ReverbComponent::ReverbComponent(juce::String title, juce::AudioProcessorValueTr
     wetLevelSlider("Wet level", "", CustomSliderWithLabel::SliderStyle::Horizontal)
 {
     this->title = title;
+    reverbBorderColour = borderColour;
 
     addAndMakeVisible(bypassedButton);
 
@@ -53,7 +54,7 @@ ReverbComponent::~ReverbComponent()
 
 void ReverbComponent::paint (juce::Graphics& g)
 {
-    g.setColour(juce::Colours::wheat);
+    g.setColour(reverbBorderColour);
 
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
@@ -63,7 +64,7 @@ void ReverbComponent::paint (juce::Graphics& g)
 
     //auto distortionNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
     auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.15);
-    //g.setColour(juce::Colours::wheat);
+    g.setColour(ColorPalette::monwhite);
     g.setFont(24.f);
     g.drawFittedText(title, elementsTopBounds, juce::Justification::centred, true);
 

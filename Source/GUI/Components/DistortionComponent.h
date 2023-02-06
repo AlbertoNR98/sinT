@@ -23,7 +23,7 @@
 class DistortionComponent  : public juce::Component
 {
 public:
-    DistortionComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String driveId, juce::String rangeId, juce::String blendId);
+    DistortionComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String driveId, juce::String rangeId, juce::String blendId);
     ~DistortionComponent() override;
 
     void paint (juce::Graphics&) override;
@@ -31,6 +31,7 @@ public:
 
 private:
     juce::String title = "";
+    juce::Colour distortionBorderColour;
 
     juce::ToggleButton bypassedButton;
     CustomSliderWithLabel driveSlider;

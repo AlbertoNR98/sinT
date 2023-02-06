@@ -160,14 +160,14 @@ void CustomSliderWithLabel::applyBypassedColorPalette(const bool bypassed)
     // Nota: Cambiar paleta de colores y cambiar color de letra de los labels
     if (bypassed)
     {
-        slider.setColour(juce::Slider::ColourIds::backgroundColourId, juce::Colours::red);
-        slider.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::green);
-        slider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::white);
+        slider.setColour(juce::Slider::ColourIds::backgroundColourId, ColorPalette::bypassgrey);
+        slider.setColour(juce::Slider::ColourIds::trackColourId, ColorPalette::bypassgrey);
+        slider.setColour(juce::Slider::ColourIds::thumbColourId, ColorPalette::bypassgrey);
     } 
     else 
     {
-        slider.setColour(juce::Slider::ColourIds::backgroundColourId, juce::Colours::darkviolet);
-        slider.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::orange);
-        slider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::cadetblue);
+        slider.setColour(juce::Slider::ColourIds::backgroundColourId, ColorPalette::miamipurple);
+        slider.setColour(juce::Slider::ColourIds::trackColourId, ColorPalette::miamipink);
+        slider.setColour(juce::Slider::ColourIds::thumbColourId, ColorPalette::miamiblue);
     }
 }

@@ -2,8 +2,6 @@
   ==============================================================================
 
     DelayComponent.h
-    Created: 25 Aug 2022 4:37:17pm
-    Author:  Alberto Naranjo
 
   ==============================================================================
 */
@@ -22,7 +20,7 @@
 class DelayComponent  : public juce::Component
 {
 public:
-    DelayComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String timeMsId, juce::String feedbackId);
+    DelayComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String timeMsId, juce::String feedbackId);
     ~DelayComponent() override;
 
     void paint (juce::Graphics&) override;
@@ -30,6 +28,7 @@ public:
 
 private:
     juce::String title = "";
+    juce::Colour delayBorderColour;
 
     juce::ToggleButton bypassedButton;
     CustomSliderWithLabel timeMsSlider;

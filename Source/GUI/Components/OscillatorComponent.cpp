@@ -10,13 +10,14 @@
 #include "OscillatorComponent.h"
 
 //==============================================================================
-OscillatorComponent::OscillatorComponent(juce::String name, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String waveformSelectorId, juce::String oscGainId, juce::String oscPitchId, juce::String fmFreqId, juce::String fmDepthId) : 
+OscillatorComponent::OscillatorComponent(juce::String name, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String waveformSelectorId, juce::String oscGainId, juce::String oscPitchId, juce::String fmFreqId, juce::String fmDepthId) : 
     oscGainSlider("Gain", "dB"),
     oscPitchSlider("Pitch", "semitones", CustomSliderWithLabel::SliderStyle::Vertical, 0),
     fmFreqSlider("FM Frequency", "Hz"),
     fmDepthSlider("FM Depth")
 {
     oscName = name;
+    oscBorderColour = borderColour;
 
     addAndMakeVisible(oscBypassedButton);
 
@@ -52,8 +53,7 @@ OscillatorComponent::~OscillatorComponent()
 
 void OscillatorComponent::paint (juce::Graphics& g)
 {
-    g.setColour(juce::Colours::wheat);
-
+    g.setColour(oscBorderColour);
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
 
@@ -61,7 +61,7 @@ void OscillatorComponent::paint (juce::Graphics& g)
     auto elementsBounds = localBounds.reduced(15);
 
     auto oscNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.55, elementsBounds.getHeight() * 0.2);
-    g.setColour(juce::Colours::wheat);
+    g.setColour(ColorPalette::monwhite);
     g.setFont(28.f);
     g.drawFittedText(oscName, oscNameBounds, juce::Justification::centredLeft, true);
 

@@ -12,7 +12,7 @@
 #include "ChorusComponent.h"
 
 //==============================================================================
-ChorusComponent::ChorusComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String rateId, juce::String depthId, juce::String centreDelayId, juce::String feedbackId, juce::String mixId) : 
+ChorusComponent::ChorusComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String rateId, juce::String depthId, juce::String centreDelayId, juce::String feedbackId, juce::String mixId) : 
     rateSlider("Rate", "Hz", CustomSliderWithLabel::SliderStyle::Horizontal),
     depthSlider("Depth", "", CustomSliderWithLabel::SliderStyle::Horizontal),
     centreDelaySlider("Centre delay", "ms", CustomSliderWithLabel::SliderStyle::Horizontal),
@@ -20,6 +20,7 @@ ChorusComponent::ChorusComponent(juce::String title, juce::AudioProcessorValueTr
     mixSlider("Mix", "", CustomSliderWithLabel::SliderStyle::Horizontal)
 {
     this->title = title;
+    chorusBorderColour = borderColour;
 
     addAndMakeVisible(bypassedButton);
 
@@ -50,7 +51,7 @@ ChorusComponent::~ChorusComponent()
 
 void ChorusComponent::paint (juce::Graphics& g)
 {
-    g.setColour(juce::Colours::wheat);
+    g.setColour(chorusBorderColour);
 
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
@@ -60,7 +61,7 @@ void ChorusComponent::paint (juce::Graphics& g)
 
     //auto distortionNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
     auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.15);
-    //g.setColour(juce::Colours::wheat);
+    g.setColour(ColorPalette::monwhite);
     g.setFont(24.f);
     g.drawFittedText(title, elementsTopBounds, juce::Justification::centred, true);
 

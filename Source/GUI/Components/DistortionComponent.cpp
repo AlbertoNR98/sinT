@@ -11,12 +11,13 @@
 #include "DistortionComponent.h"
 
 //==============================================================================
-DistortionComponent::DistortionComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String driveId, juce::String rangeId, juce::String blendId) :
+DistortionComponent::DistortionComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String driveId, juce::String rangeId, juce::String blendId) :
     driveSlider("Drive", "", CustomSliderWithLabel::SliderStyle::Horizontal),
     rangeSlider("Range", "", CustomSliderWithLabel::SliderStyle::Horizontal),
     blendSlider("Blend", "", CustomSliderWithLabel::SliderStyle::Horizontal)
 {
     this->title = title;
+    distortionBorderColour = borderColour;
 
     addAndMakeVisible(bypassedButton);
 
@@ -41,7 +42,7 @@ DistortionComponent::~DistortionComponent()
 
 void DistortionComponent::paint (juce::Graphics& g)
 {
-    g.setColour(juce::Colours::wheat);
+    g.setColour(distortionBorderColour);
 
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
@@ -59,7 +60,7 @@ void DistortionComponent::paint (juce::Graphics& g)
     //g.drawRect(elementsBounds);
 
     auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2); 
-    //g.setColour(juce::Colours::wheat);
+    g.setColour(ColorPalette::monwhite);
     g.setFont(24.f);
     g.drawFittedText(title, elementsTopBounds, juce::Justification::centred, true);
     //g.drawRect(elementsTopBounds);

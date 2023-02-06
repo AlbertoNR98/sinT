@@ -22,7 +22,7 @@
 class FilterComponent  : public juce::Component
 {
 public:
-    FilterComponent(juce::AudioProcessorValueTreeState& apvts, juce::String filterBypassedId, juce::String filterModeSelectorId, juce::String filterCutoffFreqId, juce::String filterResonanceId);
+    FilterComponent(juce::AudioProcessorValueTreeState& apvts, juce::Colour borderColour, juce::String filterBypassedId, juce::String filterModeSelectorId, juce::String filterCutoffFreqId, juce::String filterResonanceId);
     ~FilterComponent() override;
 
     void paint (juce::Graphics&) override;
@@ -30,6 +30,7 @@ public:
 
 private:
     juce::String filterTitle = "State Variable Filter";
+    juce::Colour filterBorderColour;
 
     juce::ComboBox filterModeSelector;
 

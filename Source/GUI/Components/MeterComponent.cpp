@@ -38,7 +38,7 @@ void MeterComponent::paint (juce::Graphics& g)
     rmsMeterLeftChannel.setBounds(0, (bounds.getHeight() * 0.25) - (rectHeight * 0.5), bounds.getWidth(), rectHeight);
     rmsMeterRightChannel.setBounds(0, (bounds.getHeight() * 0.75) - (rectHeight * 0.5), bounds.getWidth(), rectHeight);
 
-    g.setColour(juce::Colours::black);
+    g.setColour(ColorPalette::darkgray);
     g.fillRoundedRectangle(rmsMeterLeftChannel, 10.0f);
     g.fillRoundedRectangle(rmsMeterRightChannel, 10.0f);
 

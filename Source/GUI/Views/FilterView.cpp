@@ -15,8 +15,8 @@
 FilterView::FilterView(juce::AudioProcessorValueTreeState& apvts, 
     juce::String filterBypassedId, juce::String filterModeSelectorId, juce::String filterCutoffFreqId, juce::String filterResonanceId, 
     juce::String lfoFreqId, juce::String lfoDepthId) :
-    filterComponent(apvts, filterBypassedId, filterModeSelectorId, filterCutoffFreqId, filterResonanceId),
-    lfoComponent(apvts, lfoFreqId, lfoDepthId)
+    filterComponent(apvts, ColorPalette::miamipurple, filterBypassedId, filterModeSelectorId, filterCutoffFreqId, filterResonanceId),
+    lfoComponent(apvts, ColorPalette::miamipink, lfoFreqId, lfoDepthId)
 {
     addAndMakeVisible(filterComponent);
     addAndMakeVisible(lfoComponent);
@@ -28,7 +28,7 @@ FilterView::~FilterView()
 
 void FilterView::paint (juce::Graphics& g)
 {
-    g.setColour(juce::Colours::wheat);
+    g.setColour(ColorPalette::monwhite);
     g.setFont(44.0f);
 
     auto padding = 16;

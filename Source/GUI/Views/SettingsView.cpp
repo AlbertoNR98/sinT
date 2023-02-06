@@ -2,8 +2,6 @@
   ==============================================================================
 
     SettingsView.cpp
-    Created: 13 Dec 2022 6:58:09pm
-    Author:  Alberto Naranjo
 
   ==============================================================================
 */
@@ -24,7 +22,7 @@ SettingsView::~SettingsView()
 
 void SettingsView::paint (juce::Graphics& g)
 {
-    g.setColour(juce::Colours::wheat);
+    g.setColour(ColorPalette::monwhite);
     g.setFont(44.0f);
 
     auto padding = 16;

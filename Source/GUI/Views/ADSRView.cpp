@@ -15,8 +15,8 @@
 ADSRView::ADSRView(juce::AudioProcessorValueTreeState& apvts, 
     juce::String attackIdAmp, juce::String decayIdAmp, juce::String sustainIdAmp, juce::String releaseIdAmp, 
     juce::String attackIdFilter, juce::String decayIdFilter, juce::String sustainIdFilter, juce::String releaseIdFilter) :
-    ampAdsrComponent("Amplitude ADSR", apvts, attackIdAmp, decayIdAmp, sustainIdAmp, releaseIdAmp), 
-    filterAdsrComponent("Filter ADSR", apvts, attackIdFilter, decayIdFilter, sustainIdFilter, releaseIdFilter)
+    ampAdsrComponent("Amplitude ADSR", ColorPalette::miamipink, apvts, attackIdAmp, decayIdAmp, sustainIdAmp, releaseIdAmp), 
+    filterAdsrComponent("Filter ADSR", ColorPalette::miamiblue, apvts, attackIdFilter, decayIdFilter, sustainIdFilter, releaseIdFilter)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -31,7 +31,7 @@ ADSRView::~ADSRView()
 
 void ADSRView::paint (juce::Graphics& g)
 {
-    g.setColour(juce::Colours::wheat);
+    g.setColour(ColorPalette::monwhite);
     g.setFont(44.0f);
 
     auto padding = 16;

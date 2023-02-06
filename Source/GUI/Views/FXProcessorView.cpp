@@ -17,10 +17,10 @@ FXProcessorView::FXProcessorView(juce::AudioProcessorValueTreeState& apvts,
     juce::String chorusBypassed, juce::String chorusRate, juce::String chorusDepth, juce::String chorusCentreDelay, juce::String chorusFeedback, juce::String chorusMix,
     juce::String delayBypassed, juce::String delayTimeMs, juce::String delayFeedback,
     juce::String reverbBypassed, juce::String reverbRoomSize, juce::String reverbWidth, juce::String reverbDamping, juce::String reverbFreezeMode, juce::String reverbDryLevel, juce::String reverbWetLevel) :
-    distortionComponent("Distortion", apvts, distortionBypassed, distortionDrive, distortionRange, distortionBlend),
-    chorusComponent("Chorus", apvts, chorusBypassed, chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix),
-    delayComponent("Delay", apvts, delayBypassed, delayTimeMs, delayFeedback),
-    reverbComponent("Reverb", apvts, reverbBypassed, reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel)
+    distortionComponent("Distortion", ColorPalette::miamigreen, apvts, distortionBypassed, distortionDrive, distortionRange, distortionBlend),
+    chorusComponent("Chorus", ColorPalette::miamipink, apvts, chorusBypassed, chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix),
+    delayComponent("Delay", ColorPalette::miamipurple, apvts, delayBypassed, delayTimeMs, delayFeedback),
+    reverbComponent("Reverb", ColorPalette::miamiblue, apvts, reverbBypassed, reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -37,7 +37,7 @@ FXProcessorView::~FXProcessorView()
 
 void FXProcessorView::paint (juce::Graphics& g)
 {
-    g.setColour(juce::Colours::wheat);
+    g.setColour(ColorPalette::monwhite);
     g.setFont(44.0f);
 
     auto padding = 16;

@@ -11,10 +11,12 @@
 #include "LFOComponent.h"
 
 //==============================================================================
-LFOComponent::LFOComponent(juce::AudioProcessorValueTreeState& apvts, juce::String lfoFreqId, juce::String lfoDepthId) :
+LFOComponent::LFOComponent(juce::AudioProcessorValueTreeState& apvts, juce::Colour borderColour, juce::String lfoFreqId, juce::String lfoDepthId) :
     lfoFreqSlider("Frequency", "Hz"),
     lfoDepthSlider("Depth")
 {
+    lfoBorderColour = borderColour;
+
     lfoFreqAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, lfoFreqId, lfoFreqSlider.getSlider());
     lfoDepthAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, lfoDepthId, lfoDepthSlider.getSlider());
 
@@ -31,7 +33,7 @@ LFOComponent::~LFOComponent()
 
 void LFOComponent::paint (juce::Graphics& g)
 {
-    g.setColour(juce::Colours::wheat);
+    g.setColour(lfoBorderColour);
 
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
@@ -40,7 +42,7 @@ void LFOComponent::paint (juce::Graphics& g)
     auto elementsBounds = localBounds.reduced(15);
 
     auto lfoNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2);
-    g.setColour(juce::Colours::wheat);
+    g.setColour(ColorPalette::monwhite);
     g.setFont(28.f);
     g.drawFittedText(lfoTitle, lfoNameBounds, juce::Justification::centred, true);
 

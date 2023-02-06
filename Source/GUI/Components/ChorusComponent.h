@@ -22,7 +22,7 @@
 class ChorusComponent  : public juce::Component
 {
 public:
-    ChorusComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String rateId, juce::String depthId, juce::String centreDelayId, juce::String feedbackId, juce::String mixId);
+    ChorusComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String rateId, juce::String depthId, juce::String centreDelayId, juce::String feedbackId, juce::String mixId);
     ~ChorusComponent() override;
 
     void paint (juce::Graphics&) override;
@@ -30,6 +30,7 @@ public:
 
 private:
     juce::String title = "";
+    juce::Colour chorusBorderColour;
 
     juce::ToggleButton bypassedButton;
     CustomSliderWithLabel rateSlider;

@@ -44,7 +44,8 @@ NavbarComponent::NavbarComponent(SinTAudioProcessor& audioProcessor, ContainerCo
     p.loadPathFromData(settingsIconPathData, sizeof(settingsIconPathData));
     settingsButton.setShape(p, true, true, false);
 
-    showSidePanelButton.setColour(juce::TextButton::buttonColourId, juce::Colours::blueviolet);
+    showSidePanelButton.setColour(juce::TextButton::buttonColourId, ColorPalette::miamipurple);
+    showSidePanelButton.setColour(juce::ComboBox::outlineColourId, ColorPalette::monwhite);
     addAndMakeVisible(showSidePanelButton);
 
     //addAndMakeVisible(settingsButton);
@@ -70,7 +71,7 @@ void NavbarComponent::paint (juce::Graphics& g)
        You should replace everything in this method with your own
        drawing code..
     */
-    g.fillAll(juce::Colours::blueviolet);   // clear the background
+    g.fillAll(ColorPalette::miamipurple);   // clear the background
 
     g.setColour(juce::Colours::white);
     g.drawRect(getLocalBounds(), 0);   // draw an outline around the component

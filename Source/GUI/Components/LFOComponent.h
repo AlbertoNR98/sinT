@@ -23,7 +23,7 @@
 class LFOComponent  : public juce::Component
 {
 public:
-    LFOComponent(juce::AudioProcessorValueTreeState& apvts, juce::String lfoFreqId, juce::String lfoDepthId);
+    LFOComponent(juce::AudioProcessorValueTreeState& apvts, juce::Colour borderColour, juce::String lfoFreqId, juce::String lfoDepthId);
     ~LFOComponent() override;
 
     void paint (juce::Graphics&) override;
@@ -31,6 +31,7 @@ public:
 
 private:
     juce::String lfoTitle = "Low Frequency Oscillator";
+    juce::Colour lfoBorderColour;
 
     CustomSliderWithLabel lfoFreqSlider;
     CustomSliderWithLabel lfoDepthSlider;

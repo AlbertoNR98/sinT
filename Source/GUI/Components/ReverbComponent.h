@@ -23,7 +23,7 @@
 class ReverbComponent  : public juce::Component
 {
 public:
-    ReverbComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String roomSizeId, juce::String widthId, juce::String dampingId, juce::String freezeModeId, juce::String dryLevelId, juce::String wetLevelId);
+    ReverbComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String roomSizeId, juce::String widthId, juce::String dampingId, juce::String freezeModeId, juce::String dryLevelId, juce::String wetLevelId);
     ~ReverbComponent() override;
 
     void paint (juce::Graphics&) override;
@@ -31,6 +31,7 @@ public:
 
 private:
     juce::String title = "";
+    juce::Colour reverbBorderColour;
 
     juce::ToggleButton bypassedButton;
     CustomSliderWithLabel roomSizeSlider;

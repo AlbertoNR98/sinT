@@ -11,10 +11,11 @@
 #include "FilterComponent.h"
 
 //==============================================================================
-FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts, juce::String filterBypassedId, juce::String filterModeSelectorId, juce::String filterCutoffFreqId, juce::String filterResonanceId) :
+FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts, juce::Colour borderColour, juce::String filterBypassedId, juce::String filterModeSelectorId, juce::String filterCutoffFreqId, juce::String filterResonanceId) :
     filterCutoffFreqSlider("Cutoff", "Hz"),
     filterResonanceSlider("Resonance")
 {
+    filterBorderColour = borderColour;
     addAndMakeVisible(filterBypassedButton);
 
     juce::StringArray waveOptions{ "LPF", "BPF", "HPF" };
@@ -42,7 +43,7 @@ FilterComponent::~FilterComponent()
 
 void FilterComponent::paint (juce::Graphics& g)
 {
-    g.setColour(juce::Colours::wheat);
+    g.setColour(filterBorderColour);
 
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
@@ -51,7 +52,7 @@ void FilterComponent::paint (juce::Graphics& g)
     auto elementsBounds = localBounds.reduced(15);
 
     auto filterNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.55, elementsBounds.getHeight() * 0.2);
-    g.setColour(juce::Colours::wheat);
+    g.setColour(ColorPalette::monwhite);
     g.setFont(28.f);
     g.drawFittedText(filterTitle, filterNameBounds, juce::Justification::centredLeft, true);
 

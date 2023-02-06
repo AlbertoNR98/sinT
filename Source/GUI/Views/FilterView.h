@@ -12,8 +12,6 @@
 
 #include <JuceHeader.h>
 
-//#include "../Components/ContainerComponent.h"
-
 #include "../Assets/ColorPalette.h"
 #include "../Components/FilterComponent.h"
 #include "../Components/LFOComponent.h"

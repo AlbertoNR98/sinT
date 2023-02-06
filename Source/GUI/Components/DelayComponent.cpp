@@ -2,8 +2,6 @@
   ==============================================================================
 
     DelayComponent.cpp
-    Created: 25 Aug 2022 4:37:17pm
-    Author:  Alberto Naranjo
 
   ==============================================================================
 */
@@ -12,11 +10,12 @@
 #include "DelayComponent.h"
 
 //==============================================================================
-DelayComponent::DelayComponent(juce::String title, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String timeMsId, juce::String feedbackId) :
+DelayComponent::DelayComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String timeMsId, juce::String feedbackId) :
     timeMsSlider("Time", "ms", CustomSliderWithLabel::SliderStyle::Horizontal),
     feedbackSlider("Feedback", "", CustomSliderWithLabel::SliderStyle::Horizontal)
 {
     this->title = title;
+    delayBorderColour = borderColour;
 
     addAndMakeVisible(bypassedButton);
 
@@ -38,7 +37,7 @@ DelayComponent::~DelayComponent()
 
 void DelayComponent::paint (juce::Graphics& g)
 {
-    g.setColour(juce::Colours::wheat);
+    g.setColour(delayBorderColour);
 
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
@@ -51,7 +50,7 @@ void DelayComponent::paint (juce::Graphics& g)
     //slidersBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), delayNameBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), elementsBounds.getHeight() * 0.8);
 
     auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2);
-    //g.setColour(juce::Colours::wheat);
+    g.setColour(ColorPalette::monwhite);
     g.setFont(24.f);
     g.drawFittedText(title, elementsTopBounds, juce::Justification::centred, true);
 

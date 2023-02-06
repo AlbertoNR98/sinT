@@ -23,7 +23,7 @@
 class ADSRComponent  : public juce::Component
 {
 public:
-    ADSRComponent(juce::String name, juce::AudioProcessorValueTreeState& apvts, juce::String attackId, juce::String decayId, juce::String sustainId, juce::String releaseId);
+    ADSRComponent(juce::String name, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String attackId, juce::String decayId, juce::String sustainId, juce::String releaseId);
     ~ADSRComponent() override;
 
     void paint (juce::Graphics&) override;
@@ -31,6 +31,7 @@ public:
 
 private:
     juce::String adsrName;
+    juce::Colour adsrBorderColour;
 
     CustomSliderWithLabel attackSlider;
     CustomSliderWithLabel decaySlider;
