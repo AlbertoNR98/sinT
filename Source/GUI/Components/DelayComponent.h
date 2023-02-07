@@ -30,12 +30,9 @@ private:
     juce::String title = "";
     juce::Colour delayBorderColour;
 
-    juce::ToggleButton bypassedButton;
+    CustomBypassButton bypassedButton;
     CustomSliderWithLabel timeMsSlider;
     CustomSliderWithLabel feedbackSlider;
-
-    //juce::Slider timeMsSlider;
-    //juce::Slider feedbackSlider;
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> bypassedButtonAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> timeMsAttachment;

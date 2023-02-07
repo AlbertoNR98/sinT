@@ -49,25 +49,13 @@ void FilterComponent::paint (juce::Graphics& g)
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
 
     // Parte de arriba
-    auto elementsBounds = localBounds.reduced(15);
+    const auto boundsPadding = 16;
+    auto elementsBounds = localBounds.reduced(boundsPadding);
 
     auto filterNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.55, elementsBounds.getHeight() * 0.2);
     g.setColour(ColorPalette::monwhite);
     g.setFont(28.f);
     g.drawFittedText(filterTitle, filterNameBounds, juce::Justification::centredLeft, true);
-
-    auto filterModeSelectorBoundsWithoutPadding = juce::Rectangle<int>(filterNameBounds.getRight(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.3, elementsBounds.getHeight() * 0.2);
-
-    auto paddingFilterModeSelector = 15;
-    auto filterModeSelectorBounds = juce::Rectangle<int>(filterNameBounds.getRight(), elementsBounds.getPosition().getY() + paddingFilterModeSelector, elementsBounds.getWidth() * 0.3, (elementsBounds.getHeight() * 0.2) - (2 * paddingFilterModeSelector));
-
-    auto bypassButtonBounds = juce::Rectangle<int>(filterModeSelectorBounds.getRight(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.15, elementsBounds.getHeight() * 0.2);
-
-    /*
-    // Sliders -> Para debug
-    auto filterCutoffFreqSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.5, elementsBounds.getHeight() * 0.8);
-    auto filterResonanceSliderBounds = juce::Rectangle<int>(filterCutoffFreqSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.5, elementsBounds.getHeight() * 0.8);
-    */
 
     auto compBypassed = filterBypassedButton.getToggleState();
     filterCutoffFreqSlider.applyBypassedColorPalette(compBypassed);
@@ -77,22 +65,22 @@ void FilterComponent::paint (juce::Graphics& g)
 void FilterComponent::resized()
 {
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
-    auto elementsBounds = localBounds.reduced(15);
+    const auto boundsPadding = 16;
+    auto elementsBounds = localBounds.reduced(boundsPadding);
 
     auto filterNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.55, elementsBounds.getHeight() * 0.2);
 
     auto paddingFilterModeSelector = 15;
-    auto filterModeSelectorBounds = juce::Rectangle<int>(filterNameBounds.getRight(), elementsBounds.getPosition().getY() + paddingFilterModeSelector, elementsBounds.getWidth() * 0.3, (elementsBounds.getHeight() * 0.2) - (2 * paddingFilterModeSelector));
+    auto filterModeSelectorBounds = juce::Rectangle<int>(filterNameBounds.getRight() + paddingFilterModeSelector, elementsBounds.getPosition().getY() + paddingFilterModeSelector, elementsBounds.getWidth() * 0.25, (elementsBounds.getHeight() * 0.2) - (paddingFilterModeSelector * 2));
     filterModeSelector.setBounds(filterModeSelectorBounds);
 
-    auto bypassButtonBounds = juce::Rectangle<int>(filterModeSelectorBounds.getRight(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.15, elementsBounds.getHeight() * 0.2);
-    filterBypassedButton.setBounds(bypassButtonBounds);
-    filterBypassedButton.setTopLeftPosition(juce::Point<int>(bypassButtonBounds.getCentre().getX(), bypassButtonBounds.getTopLeft().getY()));
+    auto bypassButtonBounds = juce::Rectangle<int>(filterModeSelectorBounds.getRight() + paddingFilterModeSelector + (boundsPadding * 0.5), elementsBounds.getPosition().getY(), (elementsBounds.getWidth() * 0.2) - (paddingFilterModeSelector * 2) - (boundsPadding * 0.5), elementsBounds.getHeight() * 0.2);
+    filterBypassedButton.setBounds(bypassButtonBounds.withSizeKeepingCentre(bypassButtonBounds.getWidth(), bypassButtonBounds.getHeight() * 0.4));
 
     // Sliders
-    auto filterCutoffFreqSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.5, elementsBounds.getHeight() * 0.8);
+    auto filterCutoffFreqSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), filterNameBounds.getBottom(), elementsBounds.getWidth() * 0.5, elementsBounds.getHeight() * 0.8);
     filterCutoffFreqSlider.setBounds(filterCutoffFreqSliderBounds);
 
-    auto filterResonanceSliderBounds = juce::Rectangle<int>(filterCutoffFreqSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.5, elementsBounds.getHeight() * 0.8);
+    auto filterResonanceSliderBounds = juce::Rectangle<int>(filterCutoffFreqSliderBounds.getRight(), filterNameBounds.getBottom(), elementsBounds.getWidth() * 0.5, elementsBounds.getHeight() * 0.8);
     filterResonanceSlider.setBounds(filterResonanceSliderBounds);
 }

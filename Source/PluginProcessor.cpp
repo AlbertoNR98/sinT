@@ -291,7 +291,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
 
     // Delay
     layout.add(std::make_unique<juce::AudioParameterBool>(delayBypassed, "DelayBypassed", false));
-    layout.add(std::make_unique<juce::AudioParameterFloat>(delayTimeMs, "DelayTimeMs", juce::NormalisableRange<float> {0.0f, 4000.0f, 0.1f}, 0.0f, "ms"));
+    layout.add(std::make_unique<juce::AudioParameterFloat>(delayTimeMs, "DelayTimeMs", juce::NormalisableRange<float> {0.0f, 4000.0f, 0.1f, 0.65}, 0.0f, "ms"));
     layout.add(std::make_unique<juce::AudioParameterFloat>(delayFeedback, "DelayFeedback", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
 
     // Reverb

@@ -48,23 +48,14 @@ void DistortionComponent::paint (juce::Graphics& g)
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
 
     // Parte de arriba
-    auto elementsBounds = localBounds.reduced(15);
-
-    //g.setColour(juce::Colours::orangered);
-    auto distortionNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
-    //g.drawRect(distortionNameBounds);
-
-    //auto sliderPadding = 4;
-    // slidersBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), distortionNameBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), elementsBounds.getHeight() * 0.8);
-    //g.drawRect(slidersBounds);
-    //g.drawRect(elementsBounds);
+    const auto boundsPadding = 16;
+    auto elementsBounds = localBounds.reduced(boundsPadding);
 
     auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2); 
     g.setColour(ColorPalette::monwhite);
     g.setFont(24.f);
     g.drawFittedText(title, elementsTopBounds, juce::Justification::centred, true);
-    //g.drawRect(elementsTopBounds);
-
+  
     auto compBypassed = bypassedButton.getToggleState();
     driveSlider.applyBypassedColorPalette(compBypassed);
     rangeSlider.applyBypassedColorPalette(compBypassed);
@@ -74,17 +65,18 @@ void DistortionComponent::paint (juce::Graphics& g)
 void DistortionComponent::resized()
 {
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
-    auto elementsBounds = localBounds.reduced(15);
-
-    auto distortionNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
-
-    auto bypassButtonBounds = juce::Rectangle<int>(distortionNameBounds.getRight(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.15, elementsBounds.getHeight() * 0.2);
+    const auto boundsPadding = 16;
+    auto elementsBounds = localBounds.reduced(boundsPadding);
+    auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2);
+    
+    auto distortionNameBounds = juce::Rectangle<int>(elementsTopBounds.getPosition().getX(), elementsTopBounds.getPosition().getY(), elementsTopBounds.getWidth() * 0.85, elementsTopBounds.getHeight());
+    auto bypassButtonBounds = juce::Rectangle<int>(distortionNameBounds.getRight(), elementsTopBounds.getPosition().getY(), elementsTopBounds.getWidth() * 0.15, elementsTopBounds.getHeight());
     bypassedButton.setBounds(bypassButtonBounds);
     bypassedButton.setTopLeftPosition(juce::Point<int>(bypassButtonBounds.getCentre().getX(), bypassButtonBounds.getTopLeft().getY()));
 
     // Sliders
     auto sliderPadding = 4;
-    auto slidersBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), distortionNameBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), elementsBounds.getHeight() * 0.8);
+    auto slidersBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsTopBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), elementsBounds.getHeight() * 0.8);
 
     auto driveSliderBounds = juce::Rectangle<int>(slidersBounds.getPosition().getX(), slidersBounds.getPosition().getY(), slidersBounds.getWidth(), slidersBounds.getHeight() / 3);
     driveSlider.setBounds(driveSliderBounds);

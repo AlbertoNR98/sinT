@@ -2,8 +2,6 @@
   ==============================================================================
 
     NavbarComponent.cpp
-    Created: 20 Oct 2022 5:40:57pm
-    Author:  Alberto Naranjo
 
   ==============================================================================
 */
@@ -65,16 +63,7 @@ NavbarComponent::~NavbarComponent()
 
 void NavbarComponent::paint (juce::Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-    g.fillAll(ColorPalette::miamipurple);   // clear the background
-
-    g.setColour(juce::Colours::white);
-    g.drawRect(getLocalBounds(), 0);   // draw an outline around the component
+    g.fillAll(ColorPalette::miamipurple);
 
     auto normal = getLookAndFeel().findColour(juce::SidePanel::dismissButtonNormalColour);
     auto over = getLookAndFeel().findColour(juce::SidePanel::dismissButtonOverColour);

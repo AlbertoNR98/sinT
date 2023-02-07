@@ -10,6 +10,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+
 #include "ColorPalette.h"
 
 class CustomSliderWithLabel : public juce::Component
@@ -31,6 +32,7 @@ public:
     juce::Slider& getSlider() { return slider; }
 
     void applyBypassedColorPalette(const bool bypassed);
+
 private:
     SliderStyle sliderStyle = Vertical;
     int numDecimals = 1;
@@ -49,24 +51,15 @@ private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CustomSliderWithLabel)
 };
 
-
-//TO-DO -> ComboBox, ToggleButton y Knob personalizados
-
-class CustomToggleButton
+class CustomBypassButton : public juce::ToggleButton
 {
-    //Nota: Si solo se usa para bypass, cambiar nombre
-    
-    //SpectrumEQ -> Ver herencia y como se hizo
+public: 
+    CustomBypassButton(){ setLookAndFeel(&bypassButtonLnF); };
+    ~CustomBypassButton() { setLookAndFeel(nullptr); };
 
-    //Nota: Ver boton de sidepanel -> NavbarComponent -> Ver si compensa hacer una variante (para portamento) o si con el de bypass vale
-};
-
-class CustomComboBox
-{
-   
-};
-
-class CustomKnob
-{
-
+private:
+    class BypassButtonLnF : public juce::LookAndFeel_V4
+    {
+        void drawToggleButton(juce::Graphics& g, juce::ToggleButton& toggleButton, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
+    } bypassButtonLnF;
 };

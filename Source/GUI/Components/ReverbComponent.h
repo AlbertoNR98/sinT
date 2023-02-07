@@ -33,7 +33,7 @@ private:
     juce::String title = "";
     juce::Colour reverbBorderColour;
 
-    juce::ToggleButton bypassedButton;
+    CustomBypassButton bypassedButton;
     CustomSliderWithLabel roomSizeSlider;
     CustomSliderWithLabel widthSlider;
     CustomSliderWithLabel dampingSlider;

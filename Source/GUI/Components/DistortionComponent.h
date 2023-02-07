@@ -33,7 +33,7 @@ private:
     juce::String title = "";
     juce::Colour distortionBorderColour;
 
-    juce::ToggleButton bypassedButton;
+    CustomBypassButton bypassedButton;
     CustomSliderWithLabel driveSlider;
     CustomSliderWithLabel rangeSlider;
     CustomSliderWithLabel blendSlider;

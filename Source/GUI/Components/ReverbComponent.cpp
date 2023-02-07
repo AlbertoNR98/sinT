@@ -60,7 +60,8 @@ void ReverbComponent::paint (juce::Graphics& g)
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
 
     // Parte de arriba
-    auto elementsBounds = localBounds.reduced(15);
+    const auto boundsPadding = 16;
+    auto elementsBounds = localBounds.reduced(boundsPadding);
 
     //auto distortionNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
     auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.15);
@@ -80,17 +81,18 @@ void ReverbComponent::paint (juce::Graphics& g)
 void ReverbComponent::resized()
 {
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
-    auto elementsBounds = localBounds.reduced(15);
+    const auto boundsPadding = 16;
+    auto elementsBounds = localBounds.reduced(boundsPadding);
+    auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.15);
 
-    auto reverbNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.15);
-
-    auto bypassButtonBounds = juce::Rectangle<int>(reverbNameBounds.getRight(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.15, elementsBounds.getHeight() * 0.15);
-    bypassedButton.setBounds(bypassButtonBounds);
+    auto reverbNameBounds = juce::Rectangle<int>(elementsTopBounds.getPosition().getX(), elementsTopBounds.getPosition().getY(), elementsTopBounds.getWidth() * 0.85, elementsTopBounds.getHeight());
+    auto bypassButtonBounds = juce::Rectangle<int>(reverbNameBounds.getRight(), elementsTopBounds.getPosition().getY(), elementsTopBounds.getWidth() * 0.15, elementsTopBounds.getHeight());
+    bypassedButton.setBounds(bypassButtonBounds.withSizeKeepingCentre(bypassButtonBounds.getWidth() * 0.8, bypassButtonBounds.getHeight() * 0.8));
     bypassedButton.setTopLeftPosition(juce::Point<int>(bypassButtonBounds.getCentre().getX(), bypassButtonBounds.getTopLeft().getY()));
 
     // Sliders
     auto sliderPadding = 4;
-    auto slidersBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), reverbNameBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), elementsBounds.getHeight() * 0.85);
+    auto slidersBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsTopBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), elementsBounds.getHeight() * 0.85);
 
     auto roomSizeSliderBounds = juce::Rectangle<int>(slidersBounds.getPosition().getX(), slidersBounds.getPosition().getY(), slidersBounds.getWidth(), slidersBounds.getHeight() / 6);
     roomSizeSlider.setBounds(roomSizeSliderBounds);

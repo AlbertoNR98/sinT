@@ -149,7 +149,7 @@ void CustomSliderWithLabel::setupSlider()
 
     slider.onValueChange = [this] { 
         updateValueLabel(); 
-    };  // Se ejecuta cuando cambia el valor del slider
+    };
 }
 
 void CustomSliderWithLabel::applyBypassedColorPalette(const bool bypassed)
@@ -166,4 +166,38 @@ void CustomSliderWithLabel::applyBypassedColorPalette(const bool bypassed)
         slider.setColour(juce::Slider::ColourIds::trackColourId, ColorPalette::miamipink);
         slider.setColour(juce::Slider::ColourIds::thumbColourId, ColorPalette::miamiblue);
     }
+}
+
+void CustomBypassButton::BypassButtonLnF::drawToggleButton(juce::Graphics& g,
+    juce::ToggleButton& toggleButton,
+    bool shouldDrawButtonAsHighlighted,
+    bool shouldDrawButtonAsDown)
+{
+    auto buttonBounds = toggleButton.getLocalBounds();
+    auto buttonSize = juce::jmin(buttonBounds.getWidth(), buttonBounds.getHeight());
+    auto circleBorder = buttonBounds.withSizeKeepingCentre(buttonSize, buttonSize).toFloat();
+    buttonSize -= 6;
+
+    float angleInDegrees = 30.f;
+
+    juce::Path powerButtonShape;
+    powerButtonShape.addCentredArc(circleBorder.getCentreX(),
+        circleBorder.getCentreY(),
+        buttonSize * 0.5,
+        buttonSize * 0.5,
+        0.f,
+        degreesToRadians(angleInDegrees),
+        degreesToRadians(360.f - angleInDegrees),
+        true);
+
+    powerButtonShape.startNewSubPath(circleBorder.getCentreX(), circleBorder.getY());
+    powerButtonShape.lineTo(circleBorder.getCentre());
+
+    juce::PathStrokeType pst(2.f, juce::PathStrokeType::JointStyle::curved);
+
+    auto buttonColour = toggleButton.getToggleState() ? ColorPalette::bypassgrey : ColorPalette::monwhite;
+
+    g.setColour(buttonColour);
+    g.strokePath(powerButtonShape, pst);
+    //g.drawEllipse(circleBorder, 2.f);
 }

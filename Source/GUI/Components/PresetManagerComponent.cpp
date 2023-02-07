@@ -63,11 +63,13 @@ void PresetManagerComponent::setupButton(juce::Button& button, const String& but
 void PresetManagerComponent::setupComboBox(juce::ComboBox& comboBox)
 {
     comboBox.setJustificationType(juce::Justification::centred);
+
     comboBox.setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colour(0x00000000));
     comboBox.setColour(juce::ComboBox::ColourIds::outlineColourId, juce::Colours::white);
 
     comboBox.setTextWhenNoChoicesAvailable("No Preset Selected");
     comboBox.setTextWhenNothingSelected("No Preset Selected");
+
     addAndMakeVisible(comboBox);
     comboBox.addListener(this);
 }

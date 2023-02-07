@@ -43,11 +43,8 @@ void DelayComponent::paint (juce::Graphics& g)
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
 
     // Parte de arriba
-    auto elementsBounds = localBounds.reduced(15);
-
-    auto delayNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
-    //auto sliderPadding = 4;
-    //slidersBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), delayNameBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), elementsBounds.getHeight() * 0.8);
+    const auto boundsPadding = 16;
+    auto elementsBounds = localBounds.reduced(boundsPadding);
 
     auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2);
     g.setColour(ColorPalette::monwhite);
@@ -62,17 +59,18 @@ void DelayComponent::paint (juce::Graphics& g)
 void DelayComponent::resized()
 {
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
-    auto elementsBounds = localBounds.reduced(15);
+    const auto boundsPadding = 16;
+    auto elementsBounds = localBounds.reduced(boundsPadding);
+    auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2);
 
-    auto delayNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
-
-    auto bypassButtonBounds = juce::Rectangle<int>(delayNameBounds.getRight(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.15, elementsBounds.getHeight() * 0.2);
+    auto delayNameBounds = juce::Rectangle<int>(elementsTopBounds.getPosition().getX(), elementsTopBounds.getPosition().getY(), elementsTopBounds.getWidth() * 0.85, elementsTopBounds.getHeight());
+    auto bypassButtonBounds = juce::Rectangle<int>(delayNameBounds.getRight(), elementsTopBounds.getPosition().getY(), elementsTopBounds.getWidth() * 0.15, elementsTopBounds.getHeight());
     bypassedButton.setBounds(bypassButtonBounds);
     bypassedButton.setTopLeftPosition(juce::Point<int>(bypassButtonBounds.getCentre().getX(), bypassButtonBounds.getTopLeft().getY()));
 
     // Sliders
     auto sliderPadding = 4;
-    auto slidersBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), delayNameBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), elementsBounds.getHeight() * 0.8);
+    auto slidersBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsTopBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), elementsBounds.getHeight() * 0.8);
 
     auto timeMsSliderBounds = juce::Rectangle<int>(slidersBounds.getPosition().getX(), slidersBounds.getPosition().getY(), slidersBounds.getWidth(), slidersBounds.getHeight()/ 2);
     timeMsSlider.setBounds(timeMsSliderBounds);

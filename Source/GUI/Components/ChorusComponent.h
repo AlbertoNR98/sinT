@@ -32,7 +32,7 @@ private:
     juce::String title = "";
     juce::Colour chorusBorderColour;
 
-    juce::ToggleButton bypassedButton;
+    CustomBypassButton bypassedButton;
     CustomSliderWithLabel rateSlider;
     CustomSliderWithLabel depthSlider;
     CustomSliderWithLabel centreDelaySlider;

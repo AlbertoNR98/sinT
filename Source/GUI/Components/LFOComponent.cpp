@@ -39,7 +39,8 @@ void LFOComponent::paint (juce::Graphics& g)
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
 
     // Parte de arriba
-    auto elementsBounds = localBounds.reduced(15);
+    const auto boundsPadding = 16;
+    auto elementsBounds = localBounds.reduced(boundsPadding);
 
     auto lfoNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2);
     g.setColour(ColorPalette::monwhite);
@@ -59,7 +60,8 @@ void LFOComponent::paint (juce::Graphics& g)
 void LFOComponent::resized()
 {
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
-    auto elementsBounds = localBounds.reduced(15);
+    const auto boundsPadding = 16;
+    auto elementsBounds = localBounds.reduced(boundsPadding);
 
     auto heightPadding = 15;
     // Sliders

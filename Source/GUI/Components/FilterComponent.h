@@ -34,7 +34,7 @@ private:
 
     juce::ComboBox filterModeSelector;
 
-    juce::ToggleButton filterBypassedButton;
+    CustomBypassButton filterBypassedButton;
 
     CustomSliderWithLabel filterCutoffFreqSlider;
     CustomSliderWithLabel filterResonanceSlider;

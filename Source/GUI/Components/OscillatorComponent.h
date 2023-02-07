@@ -33,7 +33,7 @@ private:
     juce::String oscName;
     juce::Colour oscBorderColour;
 
-    juce::ToggleButton oscBypassedButton;
+    CustomBypassButton oscBypassedButton;
 
     juce::ComboBox oscWaveSelector;
 

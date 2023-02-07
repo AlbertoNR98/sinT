@@ -58,25 +58,13 @@ void OscillatorComponent::paint (juce::Graphics& g)
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
 
     // Parte de arriba
-    auto elementsBounds = localBounds.reduced(15);
+    const auto boundsPadding = 16;
+    auto elementsBounds = localBounds.reduced(boundsPadding);
 
     auto oscNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.55, elementsBounds.getHeight() * 0.2);
     g.setColour(ColorPalette::monwhite);
     g.setFont(28.f);
     g.drawFittedText(oscName, oscNameBounds, juce::Justification::centredLeft, true);
-
-    auto waveformSelectorBoundsWithoutPadding = juce::Rectangle<int>(oscNameBounds.getRight(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.3, elementsBounds.getHeight() * 0.2);
-    
-    auto paddingWaveformSelector = 15;
-    auto waveformSelectorBounds = juce::Rectangle<int>(oscNameBounds.getRight(), elementsBounds.getPosition().getY() + paddingWaveformSelector, elementsBounds.getWidth() * 0.3, (elementsBounds.getHeight() * 0.2) - (2 * paddingWaveformSelector));
-
-    auto bypassButtonBounds = juce::Rectangle<int>(waveformSelectorBounds.getRight(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.15, elementsBounds.getHeight() * 0.2);
-
-    // Sliders
-    auto oscGainSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
-    auto oscPitchSliderBounds = juce::Rectangle<int>(oscGainSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
-    auto fmFreqSliderBounds = juce::Rectangle<int>(oscPitchSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
-    auto fmDepthSliderBounds = juce::Rectangle<int>(fmFreqSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
 
     auto compBypassed = oscBypassedButton.getToggleState();
     oscGainSlider.applyBypassedColorPalette(compBypassed);
@@ -88,28 +76,29 @@ void OscillatorComponent::paint (juce::Graphics& g)
 void OscillatorComponent::resized()
 {    
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
-    auto elementsBounds = localBounds.reduced(15);
+    const auto boundsPadding = 16;
+    auto elementsBounds = localBounds.reduced(boundsPadding);
+    auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2);
 
-    auto oscNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.55, elementsBounds.getHeight() * 0.2);
+    auto oscNameBounds = juce::Rectangle<int>(elementsTopBounds.getPosition().getX(), elementsTopBounds.getPosition().getY(), elementsTopBounds.getWidth() * 0.55, elementsTopBounds.getHeight());
 
-    auto paddingWaveformSelector = 15;
-    auto waveformSelectorBounds = juce::Rectangle<int>(oscNameBounds.getRight(), elementsBounds.getPosition().getY() + paddingWaveformSelector, elementsBounds.getWidth() * 0.3, (elementsBounds.getHeight() * 0.2) - (2 * paddingWaveformSelector));
+    auto paddingWaveformSelector = 16;
+    auto waveformSelectorBounds = juce::Rectangle<int>(oscNameBounds.getRight() + paddingWaveformSelector, elementsTopBounds.getPosition().getY() + paddingWaveformSelector, elementsTopBounds.getWidth() * 0.25, elementsTopBounds.getHeight() - (paddingWaveformSelector * 2));
     oscWaveSelector.setBounds(waveformSelectorBounds);
 
-    auto bypassButtonBounds = juce::Rectangle<int>(waveformSelectorBounds.getRight(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.15, elementsBounds.getHeight() * 0.2);
-    oscBypassedButton.setBounds(bypassButtonBounds);
-    oscBypassedButton.setTopLeftPosition(juce::Point<int>(bypassButtonBounds.getCentre().getX(), bypassButtonBounds.getTopLeft().getY()));
+    auto bypassButtonBounds = juce::Rectangle<int>(waveformSelectorBounds.getRight() + paddingWaveformSelector + (boundsPadding * 0.5), elementsTopBounds.getPosition().getY(), (elementsTopBounds.getWidth() * 0.2) - (paddingWaveformSelector * 2) - (boundsPadding * 0.5), elementsTopBounds.getHeight());
+    oscBypassedButton.setBounds(bypassButtonBounds.withSizeKeepingCentre(bypassButtonBounds.getWidth(), bypassButtonBounds.getHeight() * 0.4));
 
     // Sliders
-    auto oscGainSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
+    auto oscGainSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsTopBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
     oscGainSlider.setBounds(oscGainSliderBounds);
 
-    auto oscPitchSliderBounds = juce::Rectangle<int>(oscGainSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
+    auto oscPitchSliderBounds = juce::Rectangle<int>(oscGainSliderBounds.getRight(), elementsTopBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
     oscPitchSlider.setBounds(oscPitchSliderBounds);
 
-    auto fmFreqSliderBounds = juce::Rectangle<int>(oscPitchSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
+    auto fmFreqSliderBounds = juce::Rectangle<int>(oscPitchSliderBounds.getRight(), elementsTopBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
     fmFreqSlider.setBounds(fmFreqSliderBounds);
 
-    auto fmDepthSliderBounds = juce::Rectangle<int>(fmFreqSliderBounds.getRight(), bypassButtonBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
+    auto fmDepthSliderBounds = juce::Rectangle<int>(fmFreqSliderBounds.getRight(), elementsTopBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
     fmDepthSlider.setBounds(fmDepthSliderBounds);
 }
