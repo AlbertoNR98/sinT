@@ -53,8 +53,8 @@ void PresetManagerComponent::setupButton(juce::Button& button, const String& but
 {
     button.setButtonText(buttonText);
 
-    button.setColour(juce::ComboBox::outlineColourId, juce::Colours::white);
-    button.setColour(juce::TextButton::buttonColourId, juce::Colour(0x00000000));   // Transparent black
+    button.setColour(juce::ComboBox::outlineColourId, ColorPalette::monwhite);
+    button.setColour(juce::TextButton::buttonColourId, ColorPalette::transparentblack);
 
     addAndMakeVisible(button);
     button.addListener(this);
@@ -64,8 +64,8 @@ void PresetManagerComponent::setupComboBox(juce::ComboBox& comboBox)
 {
     comboBox.setJustificationType(juce::Justification::centred);
 
-    comboBox.setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colour(0x00000000));
-    comboBox.setColour(juce::ComboBox::ColourIds::outlineColourId, juce::Colours::white);
+    comboBox.setColour(juce::ComboBox::ColourIds::backgroundColourId, ColorPalette::transparentblack);
+    comboBox.setColour(juce::ComboBox::ColourIds::outlineColourId, ColorPalette::monwhite);
 
     comboBox.setTextWhenNoChoicesAvailable("No Preset Selected");
     comboBox.setTextWhenNothingSelected("No Preset Selected");
@@ -94,14 +94,14 @@ void PresetManagerComponent::buttonClicked(juce::Button* button)
             nullptr
         );
         saveDialog->addTextEditor("presetNameEditor", "");
-        saveDialog->addButton("Save", BtnDialogReturn::SaveButtonReturn, KeyPress(KeyPress::returnKey));
+        saveDialog->addButton("Save", BtnDialogReturn::OKButtonReturn, KeyPress(KeyPress::returnKey));
         saveDialog->addButton("Cancel", BtnDialogReturn::CancelButtonReturn, KeyPress(KeyPress::escapeKey));
 
         saveDialog->enterModalState(true, ModalCallbackFunction::create([this](int btnClicked)
-            {
+        {
                 switch (btnClicked)
                 {
-                case BtnDialogReturn::SaveButtonReturn:
+                case BtnDialogReturn::OKButtonReturn:
                     if (presetNameIsValid(saveDialog->getTextEditorContents("presetNameEditor")))
                     {
                         presetManagerData.savePreset(saveDialog->getTextEditorContents("presetNameEditor"));
@@ -118,7 +118,7 @@ void PresetManagerComponent::buttonClicked(juce::Button* button)
                 }
                 saveDialog->exitModalState(btnClicked);
                 saveDialog->setVisible(false);
-            }));
+        }));
     }
 
     if (button == &previousPresetButton)
@@ -135,8 +135,29 @@ void PresetManagerComponent::buttonClicked(juce::Button* button)
 
     if (button == &deletePresetButton)
     {
-        presetManagerData.deletePreset(presetManagerData.getCurrentPreset());
-        loadPresetList();
+        deleteDialog = std::make_unique<juce::AlertWindow>("Delete preset",
+            "Are you sure?",
+            juce::AlertWindow::WarningIcon,
+            nullptr
+            );
+        deleteDialog->addButton("Delete", BtnDialogReturn::OKButtonReturn, KeyPress(KeyPress::returnKey));
+        deleteDialog->addButton("Cancel", BtnDialogReturn::CancelButtonReturn, KeyPress(KeyPress::escapeKey));
+
+        deleteDialog->enterModalState(true, ModalCallbackFunction::create([this](int btnClicked)
+        {
+                switch (btnClicked)
+                {
+                case BtnDialogReturn::OKButtonReturn:
+                    presetManagerData.deletePreset(presetManagerData.getCurrentPreset());
+                    loadPresetList();
+                    break;
+                case BtnDialogReturn::CancelButtonReturn:
+                default:
+                    break;
+                }
+        deleteDialog->exitModalState(btnClicked);
+        deleteDialog->setVisible(false);
+        }));
     }
 }
 
@@ -152,7 +173,7 @@ bool PresetManagerComponent::presetNameIsValid(const juce::String& presetName)
 {
     if (presetName.isEmpty()) return false;
 
-    if (presetName.containsAnyOf("# @ , ; : < > * ^ | ? / \\")) return false;
+    if (presetName.containsAnyOf("# @ , ; . : < > * ^ | ? / \\")) return false;
 
     if (presetManagerData.defaultPresetDirectory.getChildFile(presetName + "." + presetManagerData.presetFileExtension).getFullPathName().length() > 255) return false;
 

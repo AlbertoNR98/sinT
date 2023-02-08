@@ -37,11 +37,11 @@ private:
 
     juce::TextButton savePresetButton, deletePresetButton, previousPresetButton, nextPresetButton;
     juce::ComboBox presetListComboBox;
-    std::unique_ptr<juce::AlertWindow> saveDialog;
+    std::unique_ptr<juce::AlertWindow> saveDialog, deleteDialog;
     enum BtnDialogReturn
     {
         CancelButtonReturn,
-        SaveButtonReturn
+        OKButtonReturn
     };
 
     PresetManagerData& presetManagerData;
