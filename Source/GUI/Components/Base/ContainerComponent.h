@@ -51,7 +51,7 @@ public:
     bool isShowingSidePanel() { return showingSidePanel; }
 
 private:
-    void homeButtonClicked();
+    void aboutButtonClicked();
     void settingsButtonClicked();
     void listEntryClicked(int index);
 
@@ -60,6 +60,8 @@ private:
     SidePanelList* sidePanelList = new SidePanelList();
     SidePanelHeader* sidePanelHeader = new SidePanelHeader("sinT");
     juce::SidePanel sidePanel{ "", sidePanelWidth, true, nullptr, false };
+
+    std::unique_ptr<juce::AlertWindow> aboutDialog;
 
     std::unique_ptr<juce::Component> contentComponent;
 

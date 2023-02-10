@@ -25,17 +25,16 @@ void SettingsView::paint (juce::Graphics& g)
     g.setColour(ColorPalette::monwhite);
     g.setFont(44.0f);
 
-    auto padding = 16;
+    auto boundsPadding = 16;
 
-    auto elementsBounds = getLocalBounds().reduced(padding);
+    auto elementsBounds = getLocalBounds().reduced(boundsPadding);
     auto textBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() / 8);
-    //g.drawRoundedRectangle(textBounds.toFloat(), 10.0f, 2.0f);
-    //g.drawRect(textBounds, 5);
     g.drawFittedText(viewTitle, textBounds, juce::Justification::centred, true);
 
-    //g.setColour(juce::Colours::black);
-    elementsBounds.setPosition(juce::Point<int>(elementsBounds.getPosition().getX(), textBounds.getBottom() + padding));
-    elementsBounds.setSize(elementsBounds.getWidth(), elementsBounds.getHeight() - textBounds.getHeight() - padding);
+    g.setColour(ColorPalette::miamiblue);
+    elementsBounds.setPosition(juce::Point<int>(elementsBounds.getPosition().getX(), textBounds.getBottom() + boundsPadding));
+    elementsBounds.setSize(elementsBounds.getWidth(), elementsBounds.getHeight() - textBounds.getHeight() - boundsPadding);
+    g.drawRoundedRectangle(elementsBounds.toFloat(), 10.0f, 2.0f);
 }
 
 void SettingsView::resized()

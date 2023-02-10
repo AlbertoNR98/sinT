@@ -31,7 +31,7 @@ ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts
     sidePanelList->setEntrySelectionCallback([&](int index) { listEntryClicked(index); });
     sidePanel.setContent(sidePanelList);
 
-    sidePanelHeader->setHomeButtonClicked([&]() { homeButtonClicked(); });
+    sidePanelHeader->setAboutButtonClicked([&]() { aboutButtonClicked(); });
     sidePanelHeader->setSettingButtonClicked([&]() { settingsButtonClicked(); });
     sidePanel.setTitleBarComponent(sidePanelHeader, false);
     sidePanel.setShadowWidth(0);
@@ -126,12 +126,22 @@ void ContainerComponent::setView(const int selectedView)
     addAndMakeVisible(contentComponent.get());
 }
 
-void ContainerComponent::homeButtonClicked()
+void ContainerComponent::aboutButtonClicked()
 {
     if (contentComponent != nullptr)
     {
         sidePanelList->getEntries().deselectAllRows();
         setView(HOME_VIEW);
+        aboutDialog = std::make_unique<juce::AlertWindow>("sinT Digital Synthesiser", "Alberto Naranjo Rodríguez", juce::AlertWindow::NoIcon, nullptr);
+        aboutDialog->addButton("OK", 1, KeyPress(KeyPress::returnKey), KeyPress(KeyPress::escapeKey));
+        aboutDialog->enterModalState(true, ModalCallbackFunction::create([this](int btnClicked)
+        {
+            if (btnClicked)
+            {
+                aboutDialog->exitModalState(btnClicked);
+                aboutDialog->setVisible(false);
+            }
+        }));
     }
 }
 

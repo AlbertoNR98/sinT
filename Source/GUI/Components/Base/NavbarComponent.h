@@ -45,7 +45,6 @@ public:
 
 private:
     juce::TextButton showSidePanelButton;
-    juce::ShapeButton settingsButton;
 
     MeterComponent gainMeter;
     MainControlComponent mainControl;
