@@ -132,7 +132,7 @@ void ContainerComponent::aboutButtonClicked()
     {
         sidePanelList->getEntries().deselectAllRows();
         setView(HOME_VIEW);
-        aboutDialog = std::make_unique<juce::AlertWindow>("sinT Digital Synthesiser", "Alberto Naranjo Rodríguez", juce::AlertWindow::NoIcon, nullptr);
+        aboutDialog = std::make_unique<juce::AlertWindow>("sinT Digital Synthesizer", "Alberto Naranjo Rodríguez", juce::AlertWindow::NoIcon, this);
         aboutDialog->addButton("OK", 1, KeyPress(KeyPress::returnKey), KeyPress(KeyPress::escapeKey));
         aboutDialog->enterModalState(true, ModalCallbackFunction::create([this](int btnClicked)
         {

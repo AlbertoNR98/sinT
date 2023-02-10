@@ -10,7 +10,7 @@
 #include "SidePanelHeader.h"
 
 //==============================================================================
-SidePanelHeader::SidePanelHeader(const juce::String& titleText) : titleAboutButton(titleText)
+SidePanelHeader::SidePanelHeader(const juce::String& titleText) : titleAboutButton("")
 {
     setOpaque(true);
 
@@ -40,6 +40,9 @@ SidePanelHeader::SidePanelHeader(const juce::String& titleText) : titleAboutButt
     titleAboutButton.setColour(juce::TextButton::textColourOffId, ColorPalette::miamiblue);
     titleAboutButton.setColour(juce::ComboBox::outlineColourId, ColorPalette::transparentwhite);
 
+#if JUCE_LINUX && JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
+    addAndMakeVisible(settingsButton);
+#endif
     addAndMakeVisible(titleAboutButton);
 }
 
@@ -50,6 +53,18 @@ SidePanelHeader::~SidePanelHeader()
 void SidePanelHeader::paint (juce::Graphics& g)
 {
     g.fillAll(ColorPalette::monwhite);
+
+    auto bounds = getLocalBounds();
+    bounds.removeFromLeft(10);
+#if JUCE_LINUX && JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
+    bounds.removeFromLeft(settingsButton.getWidth() + 20).reduced(7);
+    bounds.removeFromLeft(10);
+#endif
+    bounds.removeFromRight(10);
+
+    g.setFont(28.f);
+    g.setColour(ColorPalette::miamiblue);
+    g.drawText("sinT", bounds, juce::Justification::centred, 1);
 
     auto normal = getLookAndFeel().findColour(juce::SidePanel::dismissButtonNormalColour);
     auto over = getLookAndFeel().findColour(juce::SidePanel::dismissButtonOverColour);
@@ -62,12 +77,14 @@ void SidePanelHeader::resized()
 {
     auto bounds = getLocalBounds();
     bounds.removeFromLeft(10);
-
+#if JUCE_LINUX && JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
     settingsButton.setBounds(bounds.removeFromLeft(settingsButton.getWidth() + 20).reduced(7));
     bounds.removeFromLeft(10);
-
+#endif
     bounds.removeFromRight(10);
     titleAboutButton.setBounds(bounds);
+
+    // TO-DO: Ajustar bordes de titleAboutButton en caso de que no se muestre el boton de settings -> Directivas o .isVisible()
 }
 
 void SidePanelHeader::setAboutButtonClicked(std::function<void()> callback)

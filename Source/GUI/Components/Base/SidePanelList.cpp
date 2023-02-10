@@ -21,7 +21,7 @@ SidePanelList::SidePanelList()
     addAndMakeVisible(m_entries);
     m_entries.setModel(this);
     //m_entries.setRowHeight(40);
-    m_entries.setRowHeight(108);
+    //m_entries.setRowHeight(108);
 }
 
 SidePanelList::~SidePanelList()
@@ -45,6 +45,7 @@ void SidePanelList::resized()
     // components that your component contains..
     m_entries.setBounds(getLocalBounds());
     m_entries.setColour(juce::ListBox::ColourIds::backgroundColourId, ColorPalette::airun);
+    m_entries.setRowHeight(getLocalBounds().getHeight() / 4);
     //m_entries.setColour(juce::ListBox::ColourIds::outlineColourId, juce::Colours::aquamarine);
 }
 
@@ -53,7 +54,7 @@ void SidePanelList::paintListBoxItem(int rowNumber, juce::Graphics& g, int width
     if (rowNumber < 0 || rowNumber >= getNumRows())
         return;
 
-    g.setFont(30.0f);
+    g.setFont(42.0f);
 
     juce::Rectangle<int> bounds(0, 0, width, height);
     auto textColour = findColour(juce::Label::textColourId);
@@ -70,7 +71,7 @@ void SidePanelList::paintListBoxItem(int rowNumber, juce::Graphics& g, int width
         //g.setColour(ColorPalette::miamiblue);
         g.fillRect(bounds);
         textColour = ColorPalette::monwhite;
-        g.setFont(48.f);
+        g.setFont(52.f);
     }
 
     g.setColour(textColour);
