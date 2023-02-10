@@ -22,7 +22,7 @@ ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts
     addAndMakeVisible(contentComponent.get());
     addAndMakeVisible(sidePanel);
 
-    setSize(600, 400);
+    //setSize(600, 400);
 
     sidePanelList->addEntry("OSC");
     sidePanelList->addEntry("ADSR");

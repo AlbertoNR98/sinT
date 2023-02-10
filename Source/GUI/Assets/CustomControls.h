@@ -36,8 +36,8 @@ public:
 private:
     SliderStyle sliderStyle = Vertical;
     int numDecimals = 1;
-    float valueLabelFontHeight{ 18.f };
-    float nameLabelFontHeight{ 14.f };
+    float valueLabelFontHeight{ 20.f };
+    float nameLabelFontHeight{ 16.f };
 
     void setupSlider();
     void updateValueLabel();

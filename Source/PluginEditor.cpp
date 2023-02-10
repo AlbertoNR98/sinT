@@ -51,7 +51,7 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor(SinTAudioProcessor& p)
     //setSize(1024, 544); // 600 - 32 (barra RPi OS) - 24 (barra plugin)
     setSize(1024, 600); // Kiosk Mode para RPi
 
-    setResizable(false, false);
+    //setResizable(false, false);
     //setResizeLimits(800, 600, 1600, 900);
 }
 

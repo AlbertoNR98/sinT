@@ -63,10 +63,9 @@ void DelayComponent::resized()
     auto elementsBounds = localBounds.reduced(boundsPadding);
     auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2);
 
-    auto delayNameBounds = juce::Rectangle<int>(elementsTopBounds.getPosition().getX(), elementsTopBounds.getPosition().getY(), elementsTopBounds.getWidth() * 0.85, elementsTopBounds.getHeight());
-    auto bypassButtonBounds = juce::Rectangle<int>(delayNameBounds.getRight(), elementsTopBounds.getPosition().getY(), elementsTopBounds.getWidth() * 0.15, elementsTopBounds.getHeight());
+    auto delayNameBounds = juce::Rectangle<int>(elementsTopBounds.getPosition().getX(), elementsTopBounds.getPosition().getY(), elementsTopBounds.getWidth() * 0.9, elementsTopBounds.getHeight());
+    auto bypassButtonBounds = juce::Rectangle<int>(delayNameBounds.getRight(), elementsTopBounds.getPosition().getY(), elementsTopBounds.getWidth() * 0.1, elementsTopBounds.getHeight());
     bypassedButton.setBounds(bypassButtonBounds);
-    bypassedButton.setTopLeftPosition(juce::Point<int>(bypassButtonBounds.getCentre().getX(), bypassButtonBounds.getTopLeft().getY()));
 
     // Sliders
     auto sliderPadding = 4;

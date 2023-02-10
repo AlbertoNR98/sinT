@@ -199,5 +199,6 @@ void CustomBypassButton::BypassButtonLnF::drawToggleButton(juce::Graphics& g,
 
     g.setColour(buttonColour);
     g.strokePath(powerButtonShape, pst);
+
     //g.drawEllipse(circleBorder, 2.f);
 }
