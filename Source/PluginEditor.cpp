@@ -11,9 +11,9 @@
 
 //==============================================================================
 SinTAudioProcessorEditor::SinTAudioProcessorEditor(SinTAudioProcessor& p)
-    : AudioProcessorEditor(&p), audioProcessor(p),
-
-    mainComponent(audioProcessor)
+    : AudioProcessorEditor(&p), 
+      audioProcessor(p),
+      mainComponent(audioProcessor)
     /*
       mainControlComponent(audioProcessor.apvts, "MAINGAIN", "PORTAMENTO"),
       osc1Component(audioProcessor.apvts, "OSC1WF", "OSC1GAINDB", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH"),

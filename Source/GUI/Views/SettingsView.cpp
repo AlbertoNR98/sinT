@@ -10,9 +10,10 @@
 #include "SettingsView.h"
 
 //==============================================================================
-SettingsView::SettingsView() : audioSettings(audioDeviceManager, 0, 0, 0, 2, true, false, true, false)
+SettingsView::SettingsView() : 
+    audioDeviceManager(juce::StandalonePluginHolder::getInstance()->deviceManager),
+    audioSettings(audioDeviceManager, 0, 0, 0, 2, true, false, true, false)
 {
-    audioDeviceManager.initialise(0, 2, nullptr, true);
     addAndMakeVisible(audioSettings);
 }
 
@@ -45,8 +46,8 @@ void SettingsView::resized()
 
     auto textBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() / 8);
 
-    elementsBounds.setPosition(juce::Point<int>(elementsBounds.getPosition().getX(), textBounds.getBottom() + padding));
-    elementsBounds.setSize(elementsBounds.getWidth(), elementsBounds.getHeight() - textBounds.getHeight() - padding);
+    elementsBounds.setPosition(juce::Point<int>(elementsBounds.getPosition().getX(), textBounds.getBottom() + padding * 2));
+    elementsBounds.setSize(elementsBounds.getWidth() * 0.9, elementsBounds.getHeight() - textBounds.getHeight() - padding);
 
     audioSettings.setBounds(elementsBounds);
 }

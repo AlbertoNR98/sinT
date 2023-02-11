@@ -63,7 +63,6 @@ void ReverbComponent::paint (juce::Graphics& g)
     const auto boundsPadding = 16;
     auto elementsBounds = localBounds.reduced(boundsPadding);
 
-    //auto reverbNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
     auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.15);
     g.setColour(ColorPalette::monwhite);
     g.setFont(28.f);

@@ -9,8 +9,10 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include <juce_audio_plugin_client/Standalone/juce_StandaloneFilterWindow.h>
 
 #include "../Assets/ColorPalette.h"
+
 
 //==============================================================================
 /*
@@ -27,7 +29,7 @@ public:
 private:
     juce::String viewTitle = "Audio/MIDI Settings";
 
-    AudioDeviceManager audioDeviceManager;
+    AudioDeviceManager& audioDeviceManager;
     AudioDeviceSelectorComponent audioSettings;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SettingsView)

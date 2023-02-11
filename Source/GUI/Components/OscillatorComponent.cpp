@@ -87,7 +87,7 @@ void OscillatorComponent::resized()
     oscWaveSelector.setBounds(waveformSelectorBounds);
 
     auto bypassButtonBounds = juce::Rectangle<int>(waveformSelectorBounds.getRight() + paddingWaveformSelector + (boundsPadding * 0.5), elementsTopBounds.getPosition().getY(), (elementsTopBounds.getWidth() * 0.2) - (paddingWaveformSelector * 2) - (boundsPadding * 0.5), elementsTopBounds.getHeight());
-    oscBypassedButton.setBounds(bypassButtonBounds.withSizeKeepingCentre(bypassButtonBounds.getWidth(), bypassButtonBounds.getHeight() * 0.4));
+    oscBypassedButton.setBounds(bypassButtonBounds.withSizeKeepingCentre(bypassButtonBounds.getWidth(), bypassButtonBounds.getHeight() * 0.35));
 
     // Sliders
     auto oscGainSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsTopBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);

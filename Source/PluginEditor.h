@@ -9,12 +9,9 @@
 #pragma once
 
 #include <JuceHeader.h>
+
 #include "PluginProcessor.h"
 #include "GUI/Components/Base/MainComponent.h"
-
-
-
-
 #include "GUI/Components/MainControlComponent.h"
 #include "GUI/Components/ADSRComponent.h"
 #include "GUI/Components/OscillatorComponent.h"
@@ -41,26 +38,6 @@ public:
 
 private:
     SinTAudioProcessor& audioProcessor;
-
-
-
-    /*
-    MainControlComponent mainControlComponent;
-    OscillatorComponent osc1Component;
-    OscillatorComponent osc2Component;
-    ADSRComponent ampAdsrComponent;
-    ADSRComponent filterAdsrComponent;
-    FilterComponent filterComponent;
-    LFOComponent lfoComponent;
-    DistortionComponent distortionComponent;
-    ChorusComponent chorusComponent;
-    DelayComponent delayComponent;
-    ReverbComponent reverbComponent;
-
-    MeterComponent meterComponent;
-    */
-
-
 
     MainComponent mainComponent;
     

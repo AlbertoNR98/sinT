@@ -40,7 +40,8 @@ SidePanelHeader::SidePanelHeader(const juce::String& titleText) : titleAboutButt
     titleAboutButton.setColour(juce::TextButton::textColourOffId, ColorPalette::miamiblue);
     titleAboutButton.setColour(juce::ComboBox::outlineColourId, ColorPalette::transparentwhite);
 
-#if JUCE_LINUX && JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
+//#if JUCE_LINUX && JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
+#if 1
     addAndMakeVisible(settingsButton);
 #endif
     addAndMakeVisible(titleAboutButton);
@@ -56,7 +57,8 @@ void SidePanelHeader::paint (juce::Graphics& g)
 
     auto bounds = getLocalBounds();
     bounds.removeFromLeft(10);
-#if JUCE_LINUX && JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
+//#if JUCE_LINUX && JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
+#if 1
     bounds.removeFromLeft(settingsButton.getWidth() + 20).reduced(7);
     bounds.removeFromLeft(10);
 #endif
@@ -77,14 +79,13 @@ void SidePanelHeader::resized()
 {
     auto bounds = getLocalBounds();
     bounds.removeFromLeft(10);
-#if JUCE_LINUX && JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
+//#if JUCE_LINUX && JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
+#if 1
     settingsButton.setBounds(bounds.removeFromLeft(settingsButton.getWidth() + 20).reduced(7));
     bounds.removeFromLeft(10);
 #endif
     bounds.removeFromRight(10);
     titleAboutButton.setBounds(bounds);
-
-    // TO-DO: Ajustar bordes de titleAboutButton en caso de que no se muestre el boton de settings -> Directivas o .isVisible()
 }
 
 void SidePanelHeader::setAboutButtonClicked(std::function<void()> callback)
