@@ -45,7 +45,7 @@ void SidePanelList::resized()
     // components that your component contains..
     m_entries.setBounds(getLocalBounds());
     m_entries.setColour(juce::ListBox::ColourIds::backgroundColourId, ColorPalette::airun);
-    m_entries.setRowHeight(getLocalBounds().getHeight() / 4);
+    m_entries.setRowHeight(getLocalBounds().getHeight() / m_sidePanelEntries.size());
     //m_entries.setColour(juce::ListBox::ColourIds::outlineColourId, juce::Colours::aquamarine);
 }
 

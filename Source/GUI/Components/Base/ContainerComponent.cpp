@@ -132,7 +132,8 @@ void ContainerComponent::aboutButtonClicked()
     {
         sidePanelList->getEntries().deselectAllRows();
         setView(HOME_VIEW);
-        aboutDialog = std::make_unique<juce::AlertWindow>("sinT Digital Synthesizer", "Alberto Naranjo Rodríguez", juce::AlertWindow::NoIcon, this);
+#if !JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
+        aboutDialog = std::make_unique<juce::AlertWindow>("sinT Digital Synthesizer", "Alberto Naranjo Rodríguez\ngithub.com/AlbertoNR98/sinT", juce::AlertWindow::NoIcon, this);
         aboutDialog->addButton("OK", 1, KeyPress(KeyPress::returnKey), KeyPress(KeyPress::escapeKey));
         aboutDialog->enterModalState(true, ModalCallbackFunction::create([this](int btnClicked)
         {
@@ -142,6 +143,7 @@ void ContainerComponent::aboutButtonClicked()
                 aboutDialog->setVisible(false);
             }
         }));
+#endif
     }
 }
 
