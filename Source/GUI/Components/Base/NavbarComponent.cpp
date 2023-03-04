@@ -17,7 +17,7 @@ NavbarComponent::NavbarComponent(SinTAudioProcessor& audioProcessor, ContainerCo
     mainControl(audioProcessor.apvts, ParamsIDList::mainGain, ParamsIDList::portamento),
     presetManager(audioProcessor.getPresetManager())
 {
-    showSidePanelButton.setColour(juce::TextButton::buttonColourId, ColorPalette::miamipurple);
+    showSidePanelButton.setColour(juce::TextButton::buttonColourId, ColorPalette::orthzul);
     showSidePanelButton.setColour(juce::ComboBox::outlineColourId, ColorPalette::monwhite);
     addAndMakeVisible(showSidePanelButton);
 
@@ -35,7 +35,7 @@ NavbarComponent::~NavbarComponent()
 
 void NavbarComponent::paint (juce::Graphics& g)
 {
-    g.fillAll(ColorPalette::miamipurple);
+    g.fillAll(ColorPalette::orthzul);
 }
 
 void NavbarComponent::resized()

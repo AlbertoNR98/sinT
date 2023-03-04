@@ -15,7 +15,7 @@
 FilterView::FilterView(juce::AudioProcessorValueTreeState& apvts, 
     juce::String filterBypassedId, juce::String filterModeSelectorId, juce::String filterCutoffFreqId, juce::String filterResonanceId, 
     juce::String lfoFreqId, juce::String lfoDepthId) :
-    filterComponent(apvts, ColorPalette::miamipurple, filterBypassedId, filterModeSelectorId, filterCutoffFreqId, filterResonanceId),
+    filterComponent(apvts, ColorPalette::orthzul, filterBypassedId, filterModeSelectorId, filterCutoffFreqId, filterResonanceId),
     lfoComponent(apvts, ColorPalette::miamipink, lfoFreqId, lfoDepthId)
 {
     addAndMakeVisible(filterComponent);

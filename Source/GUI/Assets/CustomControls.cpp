@@ -162,7 +162,7 @@ void CustomSliderWithLabel::applyBypassedColorPalette(const bool bypassed)
     } 
     else 
     {
-        slider.setColour(juce::Slider::ColourIds::backgroundColourId, ColorPalette::miamipurple);
+        slider.setColour(juce::Slider::ColourIds::backgroundColourId, ColorPalette::orthzul);
         slider.setColour(juce::Slider::ColourIds::trackColourId, ColorPalette::miamipink);
         slider.setColour(juce::Slider::ColourIds::thumbColourId, ColorPalette::miamiblue);
     }

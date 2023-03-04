@@ -19,7 +19,7 @@ FXProcessorView::FXProcessorView(juce::AudioProcessorValueTreeState& apvts,
     juce::String reverbBypassed, juce::String reverbRoomSize, juce::String reverbWidth, juce::String reverbDamping, juce::String reverbFreezeMode, juce::String reverbDryLevel, juce::String reverbWetLevel) :
     distortionComponent("Distortion", ColorPalette::miamigreen, apvts, distortionBypassed, distortionDrive, distortionRange, distortionBlend),
     chorusComponent("Chorus", ColorPalette::miamipink, apvts, chorusBypassed, chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix),
-    delayComponent("Delay", ColorPalette::miamipurple, apvts, delayBypassed, delayTimeMs, delayFeedback),
+    delayComponent("Delay", ColorPalette::orthzul, apvts, delayBypassed, delayTimeMs, delayFeedback),
     reverbComponent("Reverb", ColorPalette::miamiblue, apvts, reverbBypassed, reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel)
 {
     // In your constructor, you should add any child components, and

@@ -46,7 +46,6 @@ void SidePanelList::resized()
     m_entries.setBounds(getLocalBounds());
     m_entries.setColour(juce::ListBox::ColourIds::backgroundColourId, ColorPalette::airun);
     m_entries.setRowHeight(getLocalBounds().getHeight() / m_sidePanelEntries.size());
-    //m_entries.setColour(juce::ListBox::ColourIds::outlineColourId, juce::Colours::aquamarine);
 }
 
 void SidePanelList::paintListBoxItem(int rowNumber, juce::Graphics& g, int width, int height, bool rowIsSelected)

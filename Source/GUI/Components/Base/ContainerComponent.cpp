@@ -53,12 +53,6 @@ void ContainerComponent::paint (juce::Graphics& g)
     }
 
     g.fillAll(ColorPalette::darkgray);
-
-    /*
-    g.setColour(juce::Colours::white);
-    g.setFont(14.0f);
-    g.drawText("ContainerComponent", getLocalBounds(), juce::Justification::centred, true);   // draw some placeholder text
-    */
 }
 
 void ContainerComponent::resized()
@@ -85,9 +79,6 @@ void ContainerComponent::resized()
 
     //auto statusLabelBound = localBounds.removeFromTop(30).removeFromRight(150).reduced(5);
     //sidePanelStatus.setBounds(statusLabelBound);
-
-    sidePanel.setColour(juce::SidePanel::ColourIds::backgroundColour, juce::Colours::orange);
-    sidePanel.setColour(juce::SidePanel::ColourIds::titleTextColour, juce::Colours::deepskyblue);
 }
 
 void ContainerComponent::setView(const int selectedView)
@@ -133,7 +124,7 @@ void ContainerComponent::aboutButtonClicked()
         sidePanelList->getEntries().deselectAllRows();
         setView(HOME_VIEW);
 #if !JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
-        aboutDialog = std::make_unique<juce::AlertWindow>("sinT Digital Synthesizer", "Alberto Naranjo Rodríguez\ngithub.com/AlbertoNR98/sinT", juce::AlertWindow::NoIcon, this);
+        aboutDialog = std::make_unique<juce::AlertWindow>("sinT Digital Polyphonic Synthesizer", "Alberto Naranjo Rodriguez\ngithub.com/AlbertoNR98/sinT", juce::AlertWindow::NoIcon, this);
         aboutDialog->addButton("OK", 1, KeyPress(KeyPress::returnKey), KeyPress(KeyPress::escapeKey));
         aboutDialog->enterModalState(true, ModalCallbackFunction::create([this](int btnClicked)
         {
