@@ -104,12 +104,17 @@ void PresetManagerComponent::buttonClicked(juce::Button* button)
                 case BtnDialogReturn::OKButtonReturn:
                     if (presetNameIsValid(saveDialog->getTextEditorContents("presetNameEditor")))
                     {
-                        presetManagerData.savePreset(saveDialog->getTextEditorContents("presetNameEditor"));
-                        AlertWindow::showMessageBoxAsync(AlertWindow::NoIcon, saveDialog->getTextEditorContents("presetNameEditor") + " saved as a preset.", "");
+                        if (presetManagerData.savePreset(saveDialog->getTextEditorContents("presetNameEditor")))
+                        {
+                            AlertWindow::showMessageBoxAsync(AlertWindow::NoIcon, saveDialog->getTextEditorContents("presetNameEditor") + " saved as a preset", "");
+                        }
+                        else {
+                            AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon, "Failed to save preset", "Presets directory ("+presetManagerData.defaultPresetDirectory.getFullPathName() + ") is not accesible");
+                        }
                         loadPresetList();
                     }
                     else {
-                        AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon, "Name is not valid. Can't save the preset.", "");
+                        AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon, "Failed to save preset", "Name is not valid");
                     }
                     break;
                 case BtnDialogReturn::CancelButtonReturn:
@@ -148,7 +153,10 @@ void PresetManagerComponent::buttonClicked(juce::Button* button)
                 switch (btnClicked)
                 {
                 case BtnDialogReturn::OKButtonReturn:
-                    presetManagerData.deletePreset(presetManagerData.getCurrentPreset());
+                    if (!presetManagerData.deletePreset(presetManagerData.getCurrentPreset()))
+                    {
+                        AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon, "Failed to delete preset", "Presets directory is not accesible or preset does not exist");
+                    }
                     loadPresetList();
                     break;
                 case BtnDialogReturn::CancelButtonReturn:

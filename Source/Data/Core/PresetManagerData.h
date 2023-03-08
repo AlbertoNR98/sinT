@@ -15,8 +15,8 @@ class PresetManagerData : juce::ValueTree::Listener
 public:
     PresetManagerData(juce::AudioProcessorValueTreeState& apvts);
 
-    void savePreset(const juce::String& presetName);
-    void deletePreset(const juce::String& presetName);
+    bool savePreset(const juce::String& presetName);
+    bool deletePreset(const juce::String& presetName);
     void loadPreset(const juce::String& presetName);
     int loadPreviousPreset();
     int loadNextPreset();

@@ -8,10 +8,17 @@
 
 #include "PresetManagerData.h"
 
+#if JUCE_LINUX
 const juce::File PresetManagerData::defaultPresetDirectory {
-    juce::File::getSpecialLocation(juce::File::SpecialLocationType::userHomeDirectory)
+    juce::File("/etc")
         .getChildFile(ProjectInfo::projectName)
 		.getChildFile("Presets")};
+#elif JUCE_WINDOWS
+const juce::File PresetManagerData::defaultPresetDirectory{
+	juce::File::getSpecialLocation(juce::File::SpecialLocationType::userHomeDirectory)
+		.getChildFile(ProjectInfo::projectName)
+		.getChildFile("Presets") };	// Home en Windows = C:\Users\username
+#endif
 const juce::String PresetManagerData::presetFileExtension { "presint" };
 const juce::String PresetManagerData::presetNameProperty{ "presetName" };
 
@@ -28,26 +35,30 @@ PresetManagerData::PresetManagerData(juce::AudioProcessorValueTreeState& tree) :
 	currentPreset.referTo(apvts.state.getPropertyAsValue(presetNameProperty, nullptr));
 }
 
-void PresetManagerData::savePreset(const juce::String& presetName)
+bool PresetManagerData::savePreset(const juce::String& presetName)
 {
-	if (presetName.isEmpty()) return;
+	if (presetName.isEmpty()) return false;
 
 	currentPreset.setValue(presetName);
 	const auto xmlState = apvts.copyState().createXml();
 	const auto presetFile = defaultPresetDirectory.getChildFile(presetName + "." + presetFileExtension);
 
-	if (!xmlState->writeTo(presetFile)) return;
+	if (!xmlState->writeTo(presetFile)) return false;
+
+	return true;
 }
 
-void PresetManagerData::deletePreset(const juce::String& presetName)
+bool PresetManagerData::deletePreset(const juce::String& presetName)
 {
-	if (presetName.isEmpty()) return;
+	if (presetName.isEmpty()) return false;
 
 	const auto presetFile = defaultPresetDirectory.getChildFile(presetName + "." + presetFileExtension);
 
-	if (!presetFile.existsAsFile() || !presetFile.deleteFile()) return;
+	if (!presetFile.existsAsFile() || !presetFile.deleteFile()) return false;
 
 	currentPreset.setValue("");
+
+	return true;
 }
 
 void PresetManagerData::loadPreset(const juce::String& presetName)
