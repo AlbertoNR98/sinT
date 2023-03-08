@@ -25,7 +25,6 @@ void HomeView::paint (juce::Graphics& g)
     g.setFont (180.0f);
     g.drawText ("sinT", titleTextBounds, juce::Justification::centredBottom, true);
 
-#if RPI_KIOSK && JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
     auto subtitleTextBounds = juce::Rectangle<int>(0, getLocalBounds().getHeight() * 0.6, getLocalBounds().getWidth(), getLocalBounds().getHeight() * 0.15);
     g.setFont(45.0f);
     g.drawText("Digital Polyphonic Synthesizer", subtitleTextBounds, juce::Justification::centredTop, true);
@@ -37,11 +36,6 @@ void HomeView::paint (juce::Graphics& g)
     auto repoTextBounds = juce::Rectangle<int>(0, getLocalBounds().getHeight() * 0.85, getLocalBounds().getWidth(), getLocalBounds().getHeight() * 0.15);
     g.setFont(24.0f);
     g.drawText("github.com/AlbertoNR98/sinT", repoTextBounds, juce::Justification::centredTop, true);
-#else
-    auto subtitleTextBounds = juce::Rectangle<int>(0, getLocalBounds().getHeight() * 0.6, getLocalBounds().getWidth(), getLocalBounds().getHeight() * 0.4);
-    g.setFont(45.0f);
-    g.drawText("Digital Polyphonic Synthesizer", subtitleTextBounds, juce::Justification::centredTop, true);
-#endif
 }
 
 void HomeView::resized()
