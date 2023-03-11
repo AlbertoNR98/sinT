@@ -8,17 +8,10 @@
 
 #include "PresetManagerData.h"
 
-#if JUCE_LINUX
-const juce::File PresetManagerData::defaultPresetDirectory {
-    juce::File("/etc")
-        .getChildFile(ProjectInfo::projectName)
-		.getChildFile("Presets")};
-#elif JUCE_WINDOWS
 const juce::File PresetManagerData::defaultPresetDirectory{
 	juce::File::getSpecialLocation(juce::File::SpecialLocationType::userHomeDirectory)
 		.getChildFile(ProjectInfo::projectName)
-		.getChildFile("Presets") };	// Home en Windows = C:\Users\username
-#endif
+		.getChildFile("Presets") };
 const juce::String PresetManagerData::presetFileExtension { "presint" };
 const juce::String PresetManagerData::presetNameProperty{ "presetName" };
 
