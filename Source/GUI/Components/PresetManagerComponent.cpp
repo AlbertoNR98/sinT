@@ -88,12 +88,13 @@ void PresetManagerComponent::buttonClicked(juce::Button* button)
 {
     if (button == &savePresetButton)
     {
-        saveDialog = std::make_unique<juce::AlertWindow>("Save a Preset",
-            "Name the Preset",
+        saveDialog = std::make_unique<juce::AlertWindow>("Save a Preset\n\n",
+            "",
             juce::AlertWindow::NoIcon,
             nullptr
         );
-        saveDialog->addTextEditor("presetNameEditor", "");
+        saveDialog->addTextEditor("categoryNameEditor", "Category");
+        saveDialog->addTextEditor("presetNameEditor", "Name");
         saveDialog->addButton("Save", BtnDialogReturn::OKButtonReturn, KeyPress(KeyPress::returnKey));
         saveDialog->addButton("Cancel", BtnDialogReturn::CancelButtonReturn, KeyPress(KeyPress::escapeKey));
 
@@ -102,9 +103,9 @@ void PresetManagerComponent::buttonClicked(juce::Button* button)
                 switch (btnClicked)
                 {
                 case BtnDialogReturn::OKButtonReturn:
-                    if (presetNameIsValid(saveDialog->getTextEditorContents("presetNameEditor")))
+                    if (presetNameIsValid(saveDialog->getTextEditorContents("categoryNameEditor")) && presetNameIsValid(saveDialog->getTextEditorContents("presetNameEditor")))
                     {
-                        if (presetManagerData.savePreset(saveDialog->getTextEditorContents("presetNameEditor")))
+                        if (presetManagerData.savePreset(saveDialog->getTextEditorContents("categoryNameEditor") + " - " + saveDialog->getTextEditorContents("presetNameEditor")))
                         {
                             AlertWindow::showMessageBoxAsync(AlertWindow::NoIcon, saveDialog->getTextEditorContents("presetNameEditor") + " saved as a preset", "");
                         }
