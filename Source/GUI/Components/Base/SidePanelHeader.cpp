@@ -10,7 +10,7 @@
 #include "SidePanelHeader.h"
 
 //==============================================================================
-SidePanelHeader::SidePanelHeader(const juce::String& titleText) : titleAboutButton("")
+SidePanelHeader::SidePanelHeader() : titleAboutButton("")
 {
     setOpaque(true);
 

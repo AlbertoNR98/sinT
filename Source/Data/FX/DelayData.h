@@ -34,7 +34,7 @@ private:
     float timeMs{0.0};
     float feedback{0.0};
 
-    float maxDelayInMiliseconds{ 1000.0f };
+    float maxDelayInMiliseconds{ 4000.0f };
     double sampleRate{ 44100.0f };
 
     bool bypassed{ true };

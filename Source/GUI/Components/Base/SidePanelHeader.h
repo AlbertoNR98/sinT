@@ -17,7 +17,7 @@
 class SidePanelHeader  : public juce::Component
 {
 public:
-    SidePanelHeader(const juce::String& titleText);
+    SidePanelHeader();
     ~SidePanelHeader() override;
 
     void paint (juce::Graphics&) override;

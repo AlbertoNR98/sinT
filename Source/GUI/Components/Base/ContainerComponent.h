@@ -58,7 +58,7 @@ private:
     bool showingSidePanel = true;
     int sidePanelWidth = 150;
     SidePanelList* sidePanelList = new SidePanelList();
-    SidePanelHeader* sidePanelHeader = new SidePanelHeader("sinT");
+    SidePanelHeader* sidePanelHeader = new SidePanelHeader();
     juce::SidePanel sidePanel{ "", sidePanelWidth, true, nullptr, false };
 
     std::unique_ptr<juce::AlertWindow> aboutDialog;
