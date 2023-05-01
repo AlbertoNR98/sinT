@@ -2,8 +2,7 @@
   ==============================================================================
 
     OscView.cpp
-    Created: 20 Oct 2022 7:56:30pm
-    Author:  Alberto Naranjo
+    Metodos de OscView
 
   ==============================================================================
 */
@@ -18,9 +17,6 @@ OscView::OscView(juce::AudioProcessorValueTreeState& apvts,
     osc1Component("Oscillator 1", ColorPalette::miamiblue, apvts, bypassedId1, waveformSelectorId1, oscGainId1, oscPitchId1, fmFreqId1, fmDepthId1),
     osc2Component("Oscillator 2", ColorPalette::miamigreen, apvts, bypassedId2, waveformSelectorId2, oscGainId2, oscPitchId2, fmFreqId2, fmDepthId2)
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
-
     addAndMakeVisible(osc1Component);
     addAndMakeVisible(osc2Component);
 }

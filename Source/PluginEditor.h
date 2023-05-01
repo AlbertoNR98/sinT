@@ -9,8 +9,8 @@
 #pragma once
 
 #include <JuceHeader.h>
-
 #include "PluginProcessor.h"
+#include "GUI/Assets/ColorPalette.h"
 #include "GUI/Components/Base/MainComponent.h"
 #include "GUI/Components/MainControlComponent.h"
 #include "GUI/Components/ADSRComponent.h"

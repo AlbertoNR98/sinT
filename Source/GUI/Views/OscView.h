@@ -2,6 +2,8 @@
   ==============================================================================
 
     OscView.h
+    Clase OscView -> Hereda de juce::Component
+        - Vista OSC
 
   ==============================================================================
 */
@@ -9,7 +11,6 @@
 #pragma once
 
 #include <JuceHeader.h>
-
 #include "../Assets/ColorPalette.h"
 #include "../Components/OscillatorComponent.h"
 

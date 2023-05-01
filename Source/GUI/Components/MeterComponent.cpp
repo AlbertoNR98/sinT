@@ -7,14 +7,16 @@
   ==============================================================================
 */
 
-#include <JuceHeader.h>
 #include "MeterComponent.h"
 
 //==============================================================================
 MeterComponent::MeterComponent(std::function<std::pair<float, float>()>&& getRmsFunction) : getRmsValues(std::move(getRmsFunction))
 {
+    // Nota: Al constructor de meterComponent se le pasa una funcion lambda que devuelve los valores de RMS utilizando la funcion realizada para ello en audioProcessor. 
+        // MeterComponent apunta a dicha funcion.
+    
     // getRmsValues contiene a la funcion referenciada (getRmsFunction la referencia en PluginEditor)
-    // std::move transfiere el cuerpo de la funcion a la que referencia getRmsFunction hacia getRmsValues
+        // std::move transfiere el cuerpo de la funcion a la que referencia getRmsFunction hacia getRmsValues
     startTimerHz(30);
 }
 

@@ -7,7 +7,6 @@
   ==============================================================================
 */
 
-#include <JuceHeader.h>
 #include "MainControlComponent.h"
 
 //==============================================================================
@@ -51,14 +50,11 @@ void MainControlComponent::setupPortamentoButton()
 {
     portamentoButton.setClickingTogglesState(true);
 
-    //portamentoButton.setColour(juce::ComboBox::outlineColourId, juce::Colour(0xff470064));  
     portamentoButton.setColour(juce::ComboBox::outlineColourId, ColorPalette::monwhite); //Nota: No existe juce::TextButton::outlineColourId, pero sirve juce::ComboBox::outlineColourId
 
     portamentoButton.setColour(juce::TextButton::buttonColourId, ColorPalette::transparentblack);
     portamentoButton.setColour(juce::TextButton::textColourOffId, ColorPalette::monwhite);
-    //portamentoButton.setColour(juce::TextButton::textColourOffId, juce::Colour(0xff470064));
 
-    //portamentoButton.setColour(juce::TextButton::buttonOnColourId, juce::Colour(0xff08d85a));   // Verde
     portamentoButton.setColour(juce::TextButton::buttonOnColourId, ColorPalette::betis);   // Verde
     portamentoButton.setColour(juce::TextButton::textColourOnId, ColorPalette::monwhite);
 }

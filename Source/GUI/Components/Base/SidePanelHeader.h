@@ -2,6 +2,11 @@
   ==============================================================================
 
     SidePanelHeader.h
+    Clase SidePanelHeader -> Hereda de juce::Component
+        - Parte superior del panel lateral
+        - Contiene:
+            - Boton de about -> Muestra la vista HOME
+            - Boton de settings -> Muestra la vista de settings -> Solo disponible en Kiosk Mode
 
   ==============================================================================
 */

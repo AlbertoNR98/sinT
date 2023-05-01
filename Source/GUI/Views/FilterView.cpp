@@ -2,13 +2,11 @@
   ==============================================================================
 
     FilterView.cpp
-    Created: 29 Nov 2022 5:00:16pm
-    Author:  Alberto Naranjo
+    Metodos de FilterView
 
   ==============================================================================
 */
 
-#include <JuceHeader.h>
 #include "FilterView.h"
 
 //==============================================================================
@@ -35,31 +33,14 @@ void FilterView::paint (juce::Graphics& g)
 
     auto elementsBounds = getLocalBounds().reduced(padding);
     auto textBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() / 8);
-    //g.drawRoundedRectangle(textBounds.toFloat(), 10.0f, 2.0f);
-    //g.drawRect(textBounds, 5);
     g.drawFittedText(viewTitle, textBounds, juce::Justification::centred, true);
 
-    //g.setColour(juce::Colours::black);
     elementsBounds.setPosition(juce::Point<int>(elementsBounds.getPosition().getX(), textBounds.getBottom() + padding));
     elementsBounds.setSize(elementsBounds.getWidth(), elementsBounds.getHeight() - textBounds.getHeight() - padding);
-    //g.drawRect(elementsBounds, 5);
-
-    //g.setColour(juce::Colours::coral);
-    //auto osc1Bounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), (elementsBounds.getWidth() / 2) - (padding / 2), elementsBounds.getHeight());
-    //g.drawRoundedRectangle(osc1Bounds.toFloat().reduced(10.0f), 5.0f, 2.0f);
-    //g.drawRect(osc1Bounds, 5);
-
-    //g.setColour(juce::Colours::coral);
-    //auto osc2Bounds = juce::Rectangle<int>(elementsBounds.getCentre().getX() + (padding / 2), elementsBounds.getPosition().getY(), (elementsBounds.getWidth() / 2) - (padding / 2), elementsBounds.getHeight());
-    //g.drawRoundedRectangle(osc2Bounds.toFloat().reduced(10.0f), 5.0f, 2.0f);
-    //g.drawRect(osc2Bounds, 5);
 }
 
 void FilterView::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
-
     auto padding = 16;
 
     auto elementsBounds = getLocalBounds().reduced(padding);

@@ -2,6 +2,9 @@
   ==============================================================================
 
     PresetManagerComponent.h
+    Clase PresetManagerComponent -> Hereda de juce::Component
+        - Parte de la UI relacionada con los presets
+            - Controles y attachments asociados a APVTS
 
   ==============================================================================
 */
@@ -10,7 +13,6 @@
 
 #include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
-
 #include "../../Data/Core/PresetManagerData.h"
 
 //==============================================================================

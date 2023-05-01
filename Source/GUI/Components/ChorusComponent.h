@@ -2,8 +2,9 @@
   ==============================================================================
 
     ChorusComponent.h
-    Created: 6 Sep 2022 11:43:47am
-    Author:  Alberto Naranjo
+    Clase ChorusComponent -> Hereda de juce::Component
+        - Parte de la UI relacionada con el efecto chorus
+            - Controles y attachments asociados a APVTS
 
   ==============================================================================
 */
@@ -11,7 +12,6 @@
 #pragma once
 
 #include <JuceHeader.h>
-
 #include "../Assets/ColorPalette.h"
 #include "../Assets/CustomControls.h"
 #include "../Source/ParamsIDList.h"

@@ -15,18 +15,20 @@
 class DistortionData
 {
 public:
-    void setDefaultParameters();
-    void setParameters(bool bypassed, float drive, float range, float blend);
     bool isBypassed() { return bypassed; }
     void setBypassed(bool bypassValue) { bypassed = bypassValue; }
+
+    void setDefaultParameters();
+    void setParameters(bool bypassed, float drive, float range, float blend);
 
     void renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock);
     
     void resetAll();
 
 private:
+    bool bypassed{ false };
+
     float drive;
     float range;
     float blend;
-    bool bypassed = false;
 };

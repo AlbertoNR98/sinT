@@ -7,7 +7,6 @@
   ==============================================================================
 */
 
-#include <JuceHeader.h>
 #include "ReverbComponent.h"
 
 //==============================================================================
@@ -109,36 +108,4 @@ void ReverbComponent::resized()
 
     auto wetLevelSliderBounds = juce::Rectangle<int>(slidersBounds.getPosition().getX(), dryLevelSliderBounds.getBottom(), slidersBounds.getWidth(), slidersBounds.getHeight() / 6);
     wetLevelSlider.setBounds(wetLevelSliderBounds);
-
-    /*
-    auto sliderPadding = 0;
-
-    auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
-    auto elementsBounds = localBounds.reduced(15);
-
-    auto reverbNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.85, elementsBounds.getHeight() * 0.2);
-
-    auto bypassButtonBounds = juce::Rectangle<int>(reverbNameBounds.getRight(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.15, elementsBounds.getHeight() * 0.2);
-    bypassedButton.setBounds(bypassButtonBounds);
-    bypassedButton.setTopLeftPosition(juce::Point<int>(bypassButtonBounds.getCentre().getX(), bypassButtonBounds.getTopLeft().getY()));
-
-    // Sliders
-    auto roomSizeSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), bypassButtonBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), (elementsBounds.getHeight() - bypassButtonBounds.getBottom()) / 5);
-    roomSizeSlider.setBounds(roomSizeSliderBounds);
-
-    auto widthSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), roomSizeSliderBounds.getBottom() + (sliderPadding * 0.5), elementsBounds.getWidth(), (elementsBounds.getHeight() - bypassButtonBounds.getBottom()) / 5);
-    widthSlider.setBounds(widthSliderBounds);
-
-    auto dampingSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), widthSliderBounds.getBottom() + (sliderPadding * 0.5), elementsBounds.getWidth(), (elementsBounds.getHeight() - bypassButtonBounds.getBottom()) / 5);
-    dampingSlider.setBounds(dampingSliderBounds);
-
-    auto freezeModeSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), dampingSliderBounds.getBottom() + (sliderPadding * 0.5), elementsBounds.getWidth(), (elementsBounds.getHeight() - bypassButtonBounds.getBottom()) / 5);
-    freezeModeSlider.setBounds(freezeModeSliderBounds);
-
-    auto dryLevelSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), freezeModeSliderBounds.getBottom() + (sliderPadding * 0.5), elementsBounds.getWidth(), (elementsBounds.getHeight() - bypassButtonBounds.getBottom()) / 5);
-    dryLevelSlider.setBounds(dryLevelSliderBounds);
-
-    auto wetLevelSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), dryLevelSliderBounds.getBottom() + (sliderPadding * 0.5), elementsBounds.getWidth(), (elementsBounds.getHeight() - bypassButtonBounds.getBottom()) / 5);
-    wetLevelSlider.setBounds(wetLevelSliderBounds);
-    */
 }

@@ -2,27 +2,17 @@
   ==============================================================================
 
     ContainerComponent.cpp
-    Created: 20 Oct 2022 5:41:13pm
-    Author:  Alberto Naranjo
+    Metodos de ContainerComponent
 
   ==============================================================================
 */
-
-#include <JuceHeader.h>
 
 #include "ContainerComponent.h"
 
 ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts) :
     valueTree(apvts)
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
     contentComponent.reset(new HomeView());
-
-    addAndMakeVisible(contentComponent.get());
-    addAndMakeVisible(sidePanel);
-
-    //setSize(600, 400);
 
     sidePanelList->addEntry("OSC");
     sidePanelList->addEntry("ADSR");
@@ -35,6 +25,9 @@ ContainerComponent::ContainerComponent(juce::AudioProcessorValueTreeState& apvts
     sidePanelHeader->setSettingButtonClicked([&]() { settingsButtonClicked(); });
     sidePanel.setTitleBarComponent(sidePanelHeader, false);
     sidePanel.setShadowWidth(0);
+
+    addAndMakeVisible(contentComponent.get());
+    addAndMakeVisible(sidePanel);
 }
 
 ContainerComponent::~ContainerComponent()
@@ -57,9 +50,6 @@ void ContainerComponent::paint (juce::Graphics& g)
 
 void ContainerComponent::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
-
     if (showingSidePanel)
     {
         sidePanel.showOrHide(true);
@@ -76,9 +66,6 @@ void ContainerComponent::resized()
         localBounds.removeFromTop(localBounds.getHeight() / 2 - 50);
     if (localBounds.getWidth() / 2 - 50 > 5)
         localBounds.removeFromLeft(localBounds.getWidth() / 2 - 50);
-
-    //auto statusLabelBound = localBounds.removeFromTop(30).removeFromRight(150).reduced(5);
-    //sidePanelStatus.setBounds(statusLabelBound);
 }
 
 void ContainerComponent::setView(const int selectedView)

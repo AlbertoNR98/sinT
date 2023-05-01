@@ -2,11 +2,11 @@
   ==============================================================================
 
     NavbarComponent.cpp
+    Metodos de NavbarComponent
 
   ==============================================================================
 */
 
-#include <JuceHeader.h>
 #include "NavbarComponent.h"
 
 //==============================================================================
@@ -71,4 +71,3 @@ void NavbarComponent::buttonClicked(juce::Button* btn)
         containerComponent.setShowingSidePanel(!containerComponent.isShowingSidePanel());
     }
 }
-

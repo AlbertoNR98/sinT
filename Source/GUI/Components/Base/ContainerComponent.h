@@ -2,8 +2,9 @@
   ==============================================================================
 
     ContainerComponent.h
-    Created: 20 Oct 2022 5:41:13pm
-    Author:  Alberto Naranjo
+    Clase ContainerComponent -> Hereda de juce::Component
+        - Sobre este component se muestran las distintas vistas que contienen los controles de cada apartado
+        - Tambien contiene el panel lateral
 
   ==============================================================================
 */
@@ -11,12 +12,9 @@
 #pragma once
 
 #include <JuceHeader.h>
-
 #include "../Source/ParamsIDList.h"
-
 #include "SidePanelHeader.h"
 #include "SidePanelList.h"
-
 #include "../../Assets/ColorPalette.h"
 #include "../../Views/HomeView.h"
 #include "../../Views/SettingsView.h"
@@ -25,19 +23,22 @@
 #include "../../Views/FilterView.h"
 #include "../../Views/FXProcessorView.h"
 
-constexpr int OSC_VIEW = 0;
-constexpr int ADSR_VIEW = 1;
-constexpr int FILTER_VIEW = 2;
-constexpr int FX_VIEW = 3;
-constexpr int HOME_VIEW = 4;
-constexpr int SETTINGS_VIEW = 5;
-
 //==============================================================================
 /*
 */
-class ContainerComponent  : public juce::Component
+class ContainerComponent : public juce::Component
 {
 public:
+    const enum ViewSelector
+    {
+        OSC_VIEW,
+        ADSR_VIEW,
+        FILTER_VIEW,
+        FX_VIEW,
+        HOME_VIEW,
+        SETTINGS_VIEW
+    };
+
     ContainerComponent(juce::AudioProcessorValueTreeState& apvts);
     ~ContainerComponent() override;
 

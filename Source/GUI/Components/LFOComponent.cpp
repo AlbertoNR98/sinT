@@ -7,7 +7,6 @@
   ==============================================================================
 */
 
-#include <JuceHeader.h>
 #include "LFOComponent.h"
 
 //==============================================================================
@@ -49,12 +48,6 @@ void LFOComponent::paint (juce::Graphics& g)
 
     lfoFreqSlider.applyBypassedColorPalette(false);
     lfoDepthSlider.applyBypassedColorPalette(false);
-
-    /*
-    // Sliders -> Para debug
-    auto lfoFreqSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), lfoNameBounds.getBottom(), elementsBounds.getWidth() * 0.5, elementsBounds.getHeight() * 0.8);
-    auto lfoDepthSliderBounds = juce::Rectangle<int>(lfoFreqSliderBounds.getRight(), lfoNameBounds.getBottom(), elementsBounds.getWidth() * 0.5, elementsBounds.getHeight() * 0.8);
-    */
 }
 
 void LFOComponent::resized()
@@ -64,6 +57,7 @@ void LFOComponent::resized()
     auto elementsBounds = localBounds.reduced(boundsPadding);
 
     auto heightPadding = 15;
+
     // Sliders
     auto lfoFreqSliderBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), (elementsBounds.getHeight() * 0.2) + heightPadding, elementsBounds.getWidth() * 0.5, elementsBounds.getHeight() * 0.8);
     lfoFreqSlider.setBounds(lfoFreqSliderBounds);

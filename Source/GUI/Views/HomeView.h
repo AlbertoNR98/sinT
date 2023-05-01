@@ -2,8 +2,8 @@
   ==============================================================================
 
     HomeView.h
-    Created: 20 Oct 2022 5:39:57pm
-    Author:  Alberto Naranjo
+    Clase HomeView -> Hereda de juce::Component
+        - Vista HOME -> Pantalla por defecto
 
   ==============================================================================
 */
@@ -11,7 +11,6 @@
 #pragma once
 
 #include <JuceHeader.h>
-
 #include "../Assets/ColorPalette.h"
 
 //==============================================================================

@@ -12,12 +12,14 @@
 
 #include <JuceHeader.h>
 
-static constexpr int leftChannel{ 0 };
-static constexpr int rightChannel{ 1 };
-
 class MeterData
 {
 public:
+    const enum Channels
+    {
+        LeftChannel,
+        RightChannel
+    };
     void prepareToPlay(juce::dsp::ProcessSpec& spec);
     void setDefaultParameters();
 

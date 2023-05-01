@@ -12,6 +12,7 @@
 
 #pragma once
 
+#include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
 #include "../Assets/CustomControls.h"
 #include "../Source/ParamsIDList.h"

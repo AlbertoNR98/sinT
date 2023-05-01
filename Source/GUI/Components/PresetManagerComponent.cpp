@@ -2,11 +2,11 @@
   ==============================================================================
 
     PresetManagerComponent.cpp
+    Metodos de PresetManagerComponent
 
   ==============================================================================
 */
 
-#include <JuceHeader.h>
 #include "PresetManagerComponent.h"
 
 //==============================================================================
@@ -38,7 +38,6 @@ void PresetManagerComponent::paint (juce::Graphics& g)
 
 void PresetManagerComponent::resized()
 {
-    //const auto container = getLocalBounds().reduced(4);
     const auto container = getLocalBounds();
     auto bounds = container;
 

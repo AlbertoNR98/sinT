@@ -46,7 +46,7 @@ void DelayData::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
 {
     if (isBypassed() || timeMs == 0.0f || feedback == 0.0f)
     {
-        resetAll(); // Ver si es necesario
+        resetAll();
         return;
     }
 

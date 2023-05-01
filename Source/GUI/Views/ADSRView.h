@@ -2,6 +2,8 @@
   ==============================================================================
 
     ADSRView.h
+    Clase ADSRView -> Hereda de juce::Component
+        - Vista ADSR
 
   ==============================================================================
 */
@@ -9,7 +11,6 @@
 #pragma once
 
 #include <JuceHeader.h>
-
 #include "../Assets/ColorPalette.h"
 #include "../Components/ADSRComponent.h"
 

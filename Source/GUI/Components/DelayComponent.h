@@ -2,6 +2,9 @@
   ==============================================================================
 
     DelayComponent.h
+    Clase DelayComponent -> Hereda de juce::Component
+        - Parte de la UI relacionada con el efecto de delay
+            - Controles y attachments asociados a APVTS
 
   ==============================================================================
 */
@@ -9,7 +12,6 @@
 #pragma once
 
 #include <JuceHeader.h>
-
 #include "../Assets/ColorPalette.h"
 #include "../Assets/CustomControls.h"
 #include "../Source/ParamsIDList.h"

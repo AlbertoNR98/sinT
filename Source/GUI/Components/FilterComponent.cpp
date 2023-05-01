@@ -7,7 +7,6 @@
   ==============================================================================
 */
 
-#include <JuceHeader.h>
 #include "FilterComponent.h"
 
 //==============================================================================
@@ -18,8 +17,8 @@ FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts, juce
     filterBorderColour = borderColour;
     addAndMakeVisible(filterBypassedButton);
 
-    juce::StringArray waveOptions{ "LPF", "BPF", "HPF" };
-    filterModeSelector.addItemList(waveOptions, 1);
+    juce::StringArray filterModes{ "LPF", "BPF", "HPF" };
+    filterModeSelector.addItemList(filterModes, 1);
     filterModeSelector.setJustificationType(juce::Justification::centred);
     filterModeSelector.setColour(juce::ComboBox::ColourIds::backgroundColourId, ColorPalette::darkgray);
     addAndMakeVisible(filterModeSelector);

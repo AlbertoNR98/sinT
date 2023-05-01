@@ -23,11 +23,11 @@ void MeterData::setDefaultParameters()
 
 float MeterData::getRmsChannelValue(const int channel) const
 {
-    if (channel == leftChannel)
+    if (channel == LeftChannel)
     {
         return rmsLevelLeftChannel.getCurrentValue();
     }
-    else if (channel == rightChannel)
+    else if (channel == RightChannel)
     {
         return rmsLevelRightChannel.getCurrentValue();
     }

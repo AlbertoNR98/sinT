@@ -2,8 +2,8 @@
   ==============================================================================
 
     MainComponent.h
-    Created: 20 Oct 2022 5:51:21pm
-    Author:  Alberto Naranjo
+    Clase MainComponent -> Hereda de juce::Component
+        - Sobre este component se muestran la barra superior y el component que muestran el panel lateral y las vistas
 
   ==============================================================================
 */
@@ -11,11 +11,10 @@
 #pragma once
 
 #include <JuceHeader.h>
-
-#include "../Source/PluginProcessor.h"
-
 #include "ContainerComponent.h"
 #include "NavbarComponent.h"
+#include "../Source/PluginProcessor.h"
+#include "../../Assets/ColorPalette.h"
 
 //==============================================================================
 /*
@@ -23,7 +22,6 @@
 class MainComponent  : public juce::Component
 {
 public:
-    //MainComponent(juce::AudioProcessorValueTreeState& apvts);
     MainComponent(SinTAudioProcessor& audioProcessor);
     ~MainComponent() override;
 

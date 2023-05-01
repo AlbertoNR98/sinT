@@ -2,6 +2,7 @@
   ==============================================================================
 
     ColorPalette.h
+    Paleta de colores de sinT
 
   ==============================================================================
 */
@@ -28,7 +29,7 @@ namespace ColorPalette
     const Colour betis{ 0xff009739 }; // Green -> Enabled button color
     const Colour bypassgrey{ 0xff2a2a2a };  // Bypass button color
 
-    // Outline components colors
+    // Colores de los bordes de los components
     const Colour miamipink{ 0xffe97da4 };
     const Colour miamiblue{ 0xff02b7dd };
     const Colour miamigreen{ 0xff57D5B5 };

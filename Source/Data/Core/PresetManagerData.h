@@ -2,6 +2,9 @@
   ==============================================================================
 
     PresetManagerData.h
+    Clase PresetManagerData -> Hereda de juce::ValueTree::Listener
+        - Metodos relacionados con el manejo de presets
+            - Creacion, lectura, modificacion y borrado
 
   ==============================================================================
 */

@@ -2,8 +2,8 @@
   ==============================================================================
 
     FXProcessorView.h
-    Created: 29 Nov 2022 7:44:41pm
-    Author:  Alberto Naranjo
+    Clase FXProcessorView -> Hereda de juce::Component
+        - Vista FX
 
   ==============================================================================
 */
@@ -11,7 +11,6 @@
 #pragma once
 
 #include <JuceHeader.h>
-
 #include "../Assets/ColorPalette.h"
 #include "../Components/DistortionComponent.h"
 #include "../Components/ChorusComponent.h"

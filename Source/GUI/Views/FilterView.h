@@ -2,8 +2,8 @@
   ==============================================================================
 
     FilterView.h
-    Created: 29 Nov 2022 5:00:16pm
-    Author:  Alberto Naranjo
+    Clase FilterView -> Hereda de juce::Component
+        - Vista FILTER
 
   ==============================================================================
 */
@@ -11,7 +11,6 @@
 #pragma once
 
 #include <JuceHeader.h>
-
 #include "../Assets/ColorPalette.h"
 #include "../Components/FilterComponent.h"
 #include "../Components/LFOComponent.h"

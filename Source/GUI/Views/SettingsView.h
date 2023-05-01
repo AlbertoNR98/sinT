@@ -2,6 +2,8 @@
   ==============================================================================
 
     SettingsView.h
+    Clase SettingsView -> Hereda de juce::Component
+        - Vista de settings -> Disponible en Kiosk Mode
 
   ==============================================================================
 */
@@ -10,7 +12,6 @@
 
 #include <JuceHeader.h>
 #include <juce_audio_plugin_client/Standalone/juce_StandaloneFilterWindow.h>
-
 #include "../Assets/ColorPalette.h"
 
 

@@ -10,13 +10,13 @@
 #pragma once
 
 #include <JuceHeader.h>
-
 #include "ColorPalette.h"
 
+// Slider con nombre y valor
 class CustomSliderWithLabel : public juce::Component
 {
 public:
-    enum SliderStyle
+    const enum SliderStyle
     {
         Vertical,
         Horizontal,
@@ -51,6 +51,7 @@ private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CustomSliderWithLabel)
 };
 
+// Boton de bypass
 class CustomBypassButton : public juce::ToggleButton
 {
 public: 
