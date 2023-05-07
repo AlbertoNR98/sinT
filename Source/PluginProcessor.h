@@ -72,7 +72,7 @@ public:
     juce::AudioProcessorValueTreeState apvts;
 
 private:
-    static constexpr int numVoices{ 6 };
+    static constexpr int numVoices{ 16 };
 
     void setSinTParameters();
     void setVoiceParameters();
