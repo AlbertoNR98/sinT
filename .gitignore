@@ -2,3 +2,6 @@
 
 **/Builds
 **/JuceLibraryCode
+
+## Ignore InnoSetup output folder
+**/Tools/Installers/Windows/Output
