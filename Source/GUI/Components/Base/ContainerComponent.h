@@ -13,6 +13,7 @@
 
 #include <JuceHeader.h>
 #include "../Source/ParamsIDList.h"
+#include "../Source/PluginProcessor.h"
 #include "SidePanelHeader.h"
 #include "SidePanelList.h"
 #include "../../Assets/ColorPalette.h"
@@ -22,6 +23,7 @@
 #include "../../Views/ADSRView.h"
 #include "../../Views/FilterView.h"
 #include "../../Views/FXProcessorView.h"
+#include "../../Views/ScopeView.h"
 
 //==============================================================================
 /*
@@ -35,11 +37,12 @@ public:
         ADSR_VIEW,
         FILTER_VIEW,
         FX_VIEW,
+        SCOPE_VIEW,
         HOME_VIEW,
         SETTINGS_VIEW
     };
 
-    ContainerComponent(juce::AudioProcessorValueTreeState& apvts);
+    ContainerComponent(SinTAudioProcessor& audioProcessor);
     ~ContainerComponent() override;
 
     void paint (juce::Graphics&) override;
@@ -66,7 +69,7 @@ private:
 
     std::unique_ptr<juce::Component> contentComponent;
 
-    juce::AudioProcessorValueTreeState& valueTree;
+    SinTAudioProcessor& audioProcessor;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ContainerComponent)
 };

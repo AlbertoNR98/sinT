@@ -179,6 +179,9 @@ void SinTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
 
     // Procesamiento de medidor de ganancia de salida
     mainGainMeter.renderNextBlock(buffer);
+
+    // Procesamiento de scope
+    scopeDataCollector.process(buffer.getReadPointer(0), buffer.getNumSamples());
 }
 
 //==============================================================================

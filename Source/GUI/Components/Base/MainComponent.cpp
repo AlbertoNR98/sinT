@@ -10,7 +10,7 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent(SinTAudioProcessor& audioProcessor) : containerComponent(audioProcessor.apvts), navbarComponent(audioProcessor, containerComponent)
+MainComponent::MainComponent(SinTAudioProcessor& audioProcessor) : containerComponent(audioProcessor), navbarComponent(audioProcessor, containerComponent)
 {
     addAndMakeVisible(containerComponent);
     addAndMakeVisible(navbarComponent);

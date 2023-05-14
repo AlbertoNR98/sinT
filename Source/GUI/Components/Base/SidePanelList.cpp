@@ -38,7 +38,7 @@ void SidePanelList::paintListBoxItem(int rowNumber, juce::Graphics& g, int width
     if (rowNumber < 0 || rowNumber >= getNumRows())
         return;
 
-    g.setFont(42.0f);
+    g.setFont(40.0f);
 
     juce::Rectangle<int> bounds(0, 0, width, height);
     auto textColour = findColour(juce::Label::textColourId);
@@ -54,7 +54,7 @@ void SidePanelList::paintListBoxItem(int rowNumber, juce::Graphics& g, int width
         g.setColour(findColour(juce::TextEditor::highlightColourId).withAlpha(0.25f));
         g.fillRect(bounds);
         textColour = ColorPalette::monwhite;
-        g.setFont(52.f);
+        g.setFont(48.f);
     }
 
     g.setColour(textColour);

@@ -15,6 +15,7 @@
 #include "FXProcessor.h"
 #include "Data/Core/MeterData.h"
 #include "Data/Core/PresetManagerData.h"
+#include "Data/Core/ScopeData.h"
 
 //==============================================================================
 /**
@@ -71,6 +72,8 @@ public:
     static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     juce::AudioProcessorValueTreeState apvts;
 
+    AudioBufferQueue& getAudioBufferQueue() noexcept { return audioBufferQueue; };
+
 private:
     static constexpr int numVoices{ 16 };
 
@@ -84,6 +87,9 @@ private:
     FXProcessor fxProcessor;
     MeterData mainGainMeter;
     juce::dsp::Gain<float> mainGainValue;
+
+    AudioBufferQueue audioBufferQueue;
+    ScopeData scopeDataCollector{ audioBufferQueue };
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SinTAudioProcessor)

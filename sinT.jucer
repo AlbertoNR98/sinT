@@ -21,6 +21,12 @@
       <FILE id="KKMNJy" name="FXProcessor.cpp" compile="1" resource="0" file="Source/FXProcessor.cpp"/>
       <FILE id="cbar15" name="FXProcessor.h" compile="0" resource="0" file="Source/FXProcessor.h"/>
       <GROUP id="{F00686E0-508E-43CB-AE07-B2AA896F079F}" name="Data">
+        <GROUP id="{13EC410B-F8A4-C64D-E8B5-6DD4C336B52E}" name="Assets">
+          <FILE id="jPU0Dq" name="AudioBufferQueue.cpp" compile="1" resource="0"
+                file="Source/Data/Assets/AudioBufferQueue.cpp"/>
+          <FILE id="iEfV45" name="AudioBufferQueue.h" compile="0" resource="0"
+                file="Source/Data/Assets/AudioBufferQueue.h"/>
+        </GROUP>
         <GROUP id="{7235A284-2DE4-2D90-F913-C259C89FC0A4}" name="Core">
           <FILE id="tHnz5b" name="ADSRData.cpp" compile="1" resource="0" file="Source/Data/Core/ADSRData.cpp"/>
           <FILE id="iCVfTQ" name="ADSRData.h" compile="0" resource="0" file="Source/Data/Core/ADSRData.h"/>
@@ -36,6 +42,8 @@
                 file="Source/Data/Core/PresetManagerData.cpp"/>
           <FILE id="ZpPevb" name="PresetManagerData.h" compile="0" resource="0"
                 file="Source/Data/Core/PresetManagerData.h"/>
+          <FILE id="xy5n1H" name="ScopeData.cpp" compile="1" resource="0" file="Source/Data/Core/ScopeData.cpp"/>
+          <FILE id="yOG1fA" name="ScopeData.h" compile="0" resource="0" file="Source/Data/Core/ScopeData.h"/>
         </GROUP>
         <GROUP id="{4BE66EC9-BE7E-1A14-06EC-BEE4F8CD766F}" name="FX">
           <FILE id="f6l1JM" name="ChorusData.cpp" compile="1" resource="0" file="Source/Data/FX/ChorusData.cpp"/>
@@ -130,6 +138,10 @@
                 file="Source/GUI/Components/ReverbComponent.cpp"/>
           <FILE id="rfrzXP" name="ReverbComponent.h" compile="0" resource="0"
                 file="Source/GUI/Components/ReverbComponent.h"/>
+          <FILE id="laLIN3" name="ScopeComponent.cpp" compile="1" resource="0"
+                file="Source/GUI/Components/ScopeComponent.cpp"/>
+          <FILE id="wC4aNp" name="ScopeComponent.h" compile="0" resource="0"
+                file="Source/GUI/Components/ScopeComponent.h"/>
         </GROUP>
         <GROUP id="{C2DC3711-FC35-785F-A6EA-261550ED4961}" name="Views">
           <FILE id="l4JKgd" name="ADSRView.cpp" compile="1" resource="0" file="Source/GUI/Views/ADSRView.cpp"/>
@@ -144,6 +156,8 @@
           <FILE id="fnSar4" name="HomeView.h" compile="0" resource="0" file="Source/GUI/Views/HomeView.h"/>
           <FILE id="wa7Rlq" name="OscView.cpp" compile="1" resource="0" file="Source/GUI/Views/OscView.cpp"/>
           <FILE id="sUC0iH" name="OscView.h" compile="0" resource="0" file="Source/GUI/Views/OscView.h"/>
+          <FILE id="ALAVTV" name="ScopeView.cpp" compile="1" resource="0" file="Source/GUI/Views/ScopeView.cpp"/>
+          <FILE id="gj5YIP" name="ScopeView.h" compile="0" resource="0" file="Source/GUI/Views/ScopeView.h"/>
           <FILE id="KvXS3Z" name="SettingsView.cpp" compile="1" resource="0"
                 file="Source/GUI/Views/SettingsView.cpp"/>
           <FILE id="F0qH96" name="SettingsView.h" compile="0" resource="0" file="Source/GUI/Views/SettingsView.h"/>
