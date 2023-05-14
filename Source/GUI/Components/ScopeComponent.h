@@ -17,7 +17,7 @@
 //==============================================================================
 /*
 */
-class ScopeComponent  : public juce::Component, private juce::Timer
+class ScopeComponent : public juce::Component, private juce::Timer
 {
 public:
     ScopeComponent(AudioBufferQueue& queueToUse);

@@ -14,7 +14,7 @@
 ScopeComponent::ScopeComponent(AudioBufferQueue& queueToUse) : audioBufferQueue(queueToUse)
 {
     bufferToPlot.fill(0.f);
-    setFramesPerSecond(30);
+    setFramesPerSecond(60);
 }
 
 ScopeComponent::~ScopeComponent()
@@ -31,8 +31,6 @@ void ScopeComponent::setFramesPerSecond(int framesPerSecond)
 
 void ScopeComponent::paint (juce::Graphics& g)
 {
-    g.setColour(juce::Colours::white);
-
     auto area = getLocalBounds();
     auto h = area.getHeight();
     auto w = area.getWidth();
@@ -74,7 +72,6 @@ void ScopeComponent::resized()
 
 void ScopeComponent::timerCallback()
 {
-    bufferToPlot.fill(0.f);
     audioBufferQueue.pop(bufferToPlot.data());
     repaint();
 }

@@ -27,7 +27,7 @@ void AudioBufferQueue::push(const float* dataToPush, size_t numSamples)
     abstractFifoQueue.finishedWrite(size1);
 }
 
-void AudioBufferQueue::pop(float* outputData)
+void AudioBufferQueue::pop(float* poppedData)
 {
     int start1, size1, start2, size2;
     abstractFifoQueue.prepareToRead(1, start1, size1, start2, size2);
@@ -37,7 +37,7 @@ void AudioBufferQueue::pop(float* outputData)
 
     if (size1 > 0)
     {
-        juce::FloatVectorOperations::copy(outputData, buffersQueued[(size_t)start1].data(), (int)bufferSize);
+        juce::FloatVectorOperations::copy(poppedData, buffersQueued[(size_t)start1].data(), (int)bufferSize);
     }
 
     abstractFifoQueue.finishedRead(size1);

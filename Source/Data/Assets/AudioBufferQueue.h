@@ -21,7 +21,7 @@ public:
     static constexpr size_t numBuffers = 5;
 
     void push(const float* dataToPush, size_t numSamples);
-    void pop(float* outputData);
+    void pop(float* poppedData);
 
 private:
     juce::AbstractFifo abstractFifoQueue{ numBuffers };
