@@ -14,7 +14,7 @@
 ScopeComponent::ScopeComponent(AudioBufferQueue& queueToUse) : audioBufferQueue(queueToUse)
 {
     bufferToPlot.fill(0.f);
-    setFramesPerSecond(60);
+    setFramesPerSecond(30);
 }
 
 ScopeComponent::~ScopeComponent()

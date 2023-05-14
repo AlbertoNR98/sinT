@@ -29,7 +29,7 @@ public:
     void resized() override;
 
 private:
-    juce::String viewTitle = "ADSR envelopes";
+    juce::String viewTitle = "ADSR Envelopes";
 
     ADSRComponent filterAdsrComponent, ampAdsrComponent;
 

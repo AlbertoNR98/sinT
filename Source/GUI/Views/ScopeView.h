@@ -3,7 +3,7 @@
 
     ScopeView.h
     Clase ScopeView -> Hereda de juce::Component
-        - Vista SCOPE
+        - Vista SCOPE -> Visualizador de forma de onda (osciloscopio)
 
   ==============================================================================
 */
@@ -28,7 +28,7 @@ public:
     void resized() override;
 
 private:
-    juce::String viewTitle = "Wave scope";
+    juce::String viewTitle = "Waveform Visualizer";
 
     ScopeComponent scopeComponent;
 
