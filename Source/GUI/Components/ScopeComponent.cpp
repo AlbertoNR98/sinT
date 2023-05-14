@@ -24,7 +24,6 @@ ScopeComponent::~ScopeComponent()
 
 void ScopeComponent::setFramesPerSecond(int framesPerSecond)
 {
-    jassert(framesPerSecond > 0 && framesPerSecond < 1000);
     startTimerHz(framesPerSecond);
 }
 

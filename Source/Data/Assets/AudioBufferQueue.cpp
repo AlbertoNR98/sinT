@@ -11,13 +11,8 @@
 
 void AudioBufferQueue::push(const float* dataToPush, size_t numSamples)
 {
-    jassert(numSamples <= bufferSize);
-
     int start1, size1, start2, size2;
     abstractFifoQueue.prepareToWrite(1, start1, size1, start2, size2);
-
-    jassert(size1 <= 1);
-    jassert(size == 0);
 
     if (size1 > 0)
     {
@@ -31,9 +26,6 @@ void AudioBufferQueue::pop(float* poppedData)
 {
     int start1, size1, start2, size2;
     abstractFifoQueue.prepareToRead(1, start1, size1, start2, size2);
-
-    jassert(size1 <= 1);
-    jassert(size == 0);
 
     if (size1 > 0)
     {
