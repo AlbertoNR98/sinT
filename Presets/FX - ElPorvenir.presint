@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Parameters presetName="Minimalist" version="1.0.0">
+<Parameters presetName="FX - ElPorvenir" version="1.0.0">
   <PARAM id="AMPADSRATTACK" value="0.009999999776482582"/>
   <PARAM id="AMPADSRDECAY" value="0.0"/>
   <PARAM id="AMPADSRRELEASE" value="0.009999999776482582"/>

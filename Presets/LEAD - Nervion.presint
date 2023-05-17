@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Parameters presetName="Melodica1" version="1.0.0">
+<Parameters presetName="LEAD - Nervion" version="1.0.0">
   <PARAM id="AMPADSRATTACK" value="3.279999971389771"/>
   <PARAM id="AMPADSRDECAY" value="2.5"/>
   <PARAM id="AMPADSRRELEASE" value="1.139999985694885"/>

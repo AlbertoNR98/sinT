@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Parameters presetName="Bass - Bass1" version="1.0.0">
-  <PARAM id="AMPADSRATTACK" value="0.009999999776482582"/>
-  <PARAM id="AMPADSRDECAY" value="0.0"/>
-  <PARAM id="AMPADSRRELEASE" value="0.09999999403953552"/>
+<Parameters presetName="BASS - Bermejales" version="1.0.0">
+  <PARAM id="AMPADSRATTACK" value="0.04999999701976776"/>
+  <PARAM id="AMPADSRDECAY" value="0.5"/>
+  <PARAM id="AMPADSRRELEASE" value="0.2599999904632568"/>
   <PARAM id="AMPADSRSUSTAIN" value="1.0"/>
   <PARAM id="CHORUSBYPASSED" value="1.0"/>
   <PARAM id="CHORUSCENTREDELAY" value="7.0"/>
@@ -26,7 +26,7 @@
   <PARAM id="FILTERBYPASSED" value="0.0"/>
   <PARAM id="FILTERCUTOFFFREQ" value="229.1999969482422"/>
   <PARAM id="FILTERMODE" value="1.0"/>
-  <PARAM id="FILTERRESONANCE" value="15.03999996185303"/>
+  <PARAM id="FILTERRESONANCE" value="13.19999980926514"/>
   <PARAM id="LFODEPTH" value="0.0"/>
   <PARAM id="LFOFREQ" value="0.0"/>
   <PARAM id="MAINGAIN" value="0.0"/>

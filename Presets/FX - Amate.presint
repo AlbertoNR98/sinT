@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Parameters presetName="Category - Trance2" version="1.0.0">
+<Parameters presetName="FX - Amate" version="1.0.0">
   <PARAM id="AMPADSRATTACK" value="0.09999999403953552"/>
   <PARAM id="AMPADSRDECAY" value="2.5"/>
   <PARAM id="AMPADSRRELEASE" value="0.09999999403953552"/>
@@ -13,7 +13,7 @@
   <PARAM id="CHORUSRATE" value="1.0"/>
   <PARAM id="DELAYBYPASSED" value="0.0"/>
   <PARAM id="DELAYFEEDBACK" value="0.6399999856948853"/>
-  <PARAM id="DELAYTIMEMS" value="15.90000057220459"/>
+  <PARAM id="DELAYTIMEMS" value="24.89999961853027"/>
   <PARAM id="DISTORTIONBLEND" value="0.0"/>
   <PARAM id="DISTORTIONBYPASSED" value="0.0"/>
   <PARAM id="DISTORTIONDRIVE" value="0.0"/>
@@ -28,7 +28,7 @@
   <PARAM id="FILTERMODE" value="2.0"/>
   <PARAM id="FILTERRESONANCE" value="10.40999984741211"/>
   <PARAM id="LFODEPTH" value="10000.0"/>
-  <PARAM id="LFOFREQ" value="11.10000038146973"/>
+  <PARAM id="LFOFREQ" value="7.700000286102295"/>
   <PARAM id="MAINGAIN" value="0.0"/>
   <PARAM id="OSC1BYPASSED" value="0.0"/>
   <PARAM id="OSC1FMDEPTH" value="0.0"/>

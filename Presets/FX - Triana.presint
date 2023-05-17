@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Parameters presetName="FX - Ruperto" version="1.0.0">
+<Parameters presetName="FX - Triana" version="1.0.0">
   <PARAM id="AMPADSRATTACK" value="8.539999961853027"/>
   <PARAM id="AMPADSRDECAY" value="2.5"/>
   <PARAM id="AMPADSRRELEASE" value="1.609999895095825"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Parameters presetName="LEAD - Melodica3" version="1.0.0">
+<Parameters presetName="LEAD - ElPlantinar" version="1.0.0">
   <PARAM id="AMPADSRATTACK" value="0.9099999666213989"/>
   <PARAM id="AMPADSRDECAY" value="7.0"/>
   <PARAM id="AMPADSRRELEASE" value="0.5899999737739563"/>
