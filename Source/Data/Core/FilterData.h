@@ -15,7 +15,7 @@
 class FilterData : public juce::dsp::StateVariableTPTFilter<float>
 {
 public:
-    const enum FilterMode
+    enum FilterMode
     {
         LPF,
         BPF,

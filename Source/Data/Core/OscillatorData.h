@@ -18,7 +18,7 @@ static constexpr float FREQ_HRATIO{ 1.122462048 };  // 2^(2/12)
 class OscillatorData : public juce::dsp::Oscillator<float>
 {
 public:
-    const enum Waveform
+    enum Waveform
     {
         SINE_WF,
         SAW_WF,

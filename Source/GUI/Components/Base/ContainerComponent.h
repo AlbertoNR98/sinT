@@ -31,7 +31,7 @@
 class ContainerComponent : public juce::Component
 {
 public:
-    const enum ViewSelector
+    enum ViewSelector
     {
         OSC_VIEW,
         ADSR_VIEW,

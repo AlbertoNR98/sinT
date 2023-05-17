@@ -15,7 +15,7 @@
 class MeterData
 {
 public:
-    const enum Channels
+    enum Channels
     {
         LeftChannel,
         RightChannel

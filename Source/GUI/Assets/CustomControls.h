@@ -16,7 +16,7 @@
 class CustomSliderWithLabel : public juce::Component
 {
 public:
-    const enum SliderStyle
+    enum SliderStyle
     {
         Vertical,
         Horizontal,
