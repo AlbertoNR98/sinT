@@ -106,7 +106,7 @@ void PresetManagerComponent::buttonClicked(juce::Button* button)
                     {
                         if (presetManagerData.savePreset(saveDialog->getTextEditorContents("categoryNameEditor") + " - " + saveDialog->getTextEditorContents("presetNameEditor")))
                         {
-                            AlertWindow::showMessageBoxAsync(AlertWindow::NoIcon, saveDialog->getTextEditorContents("presetNameEditor") + " saved as a preset", "");
+                            AlertWindow::showMessageBoxAsync(AlertWindow::NoIcon, saveDialog->getTextEditorContents("categoryNameEditor") + " - " + saveDialog->getTextEditorContents("presetNameEditor") + " saved as a preset", "");
                         }
                         else {
                             AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon, "Failed to save preset", "Presets directory ("+presetManagerData.defaultPresetDirectory.getFullPathName() + ") is not accesible");
