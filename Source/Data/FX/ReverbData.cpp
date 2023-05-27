@@ -31,7 +31,7 @@ void ReverbData::setDefaultParameters()
     reverb.setParameters(reverbParameters);
 }
 
-void ReverbData::setParameters(bool reverbBypassed, float reverbRoomSize, float reverbWidth, float reverbDamping, float reverbFreezeMode, float reverbDryLevel, float reverbWetLevel)
+void ReverbData::setParameters(bool reverbBypassed, bool reverbFreezeMode, float reverbRoomSize, float reverbWidth, float reverbDamping, float reverbDryLevel, float reverbWetLevel)
 {
     setBypassed(reverbBypassed);
 
@@ -40,7 +40,7 @@ void ReverbData::setParameters(bool reverbBypassed, float reverbRoomSize, float 
     reverbParameters.roomSize = reverbRoomSize;
     reverbParameters.width = reverbWidth;
     reverbParameters.damping = reverbDamping;
-    reverbParameters.freezeMode = reverbFreezeMode;
+    reverbParameters.freezeMode = static_cast<float>(reverbFreezeMode);
     reverbParameters.dryLevel = reverbDryLevel;
     reverbParameters.wetLevel = reverbWetLevel;
 

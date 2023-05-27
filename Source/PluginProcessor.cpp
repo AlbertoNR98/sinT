@@ -302,7 +302,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>(reverbRoomSize, "ReverbRoomSize", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>(reverbWidth, "ReverbWidth", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 1.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>(reverbDamping, "ReverbDamping", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.5f, ""));
-    layout.add(std::make_unique<juce::AudioParameterFloat>(reverbFreezeMode, "ReverbFreezeMode", juce::NormalisableRange<float> {0.0f, 1.0f, 0.1f}, 0.0f, ""));
+    layout.add(std::make_unique<juce::AudioParameterBool>(reverbFreezeMode, "ReverbFreezeMode", false));
     layout.add(std::make_unique<juce::AudioParameterFloat>(reverbDryLevel, "ReverbDryLevel", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 1.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>(reverbWetLevel, "ReverbWetLevel", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
     
@@ -417,17 +417,17 @@ void SinTAudioProcessor::setFXParameters()
 
     // Reverb
     auto& reverbBypassed = *apvts.getRawParameterValue(ParamsIDList::reverbBypassed);
+    auto& reverbFreezeMode = *apvts.getRawParameterValue(ParamsIDList::reverbFreezeMode);
     auto& reverbRoomSize = *apvts.getRawParameterValue(ParamsIDList::reverbRoomSize);
     auto& reverbWidth = *apvts.getRawParameterValue(ParamsIDList::reverbWidth);
     auto& reverbDamping = *apvts.getRawParameterValue(ParamsIDList::reverbDamping);
-    auto& reverbFreezeMode = *apvts.getRawParameterValue(ParamsIDList::reverbFreezeMode);
     auto& reverbDryLevel = *apvts.getRawParameterValue(ParamsIDList::reverbDryLevel);
     auto& reverbWetLevel = *apvts.getRawParameterValue(ParamsIDList::reverbWetLevel);
 
     fxProcessor.setDistortionParameters(distortionBypassed, distortionDrive, distortionRange, distortionBlend);
     fxProcessor.setChorusParameters(chorusBypassed, chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
     fxProcessor.setDelayParameters(delayBypassed, delayTimeMs, delayFeedback);
-    fxProcessor.setReverbParameters(reverbBypassed, reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel);
+    fxProcessor.setReverbParameters(reverbBypassed, reverbFreezeMode, reverbRoomSize, reverbWidth, reverbDamping, reverbDryLevel, reverbWetLevel);
 }
 
 //==============================================================================

@@ -32,11 +32,6 @@ void MeterComponent::paint (juce::Graphics& g)
     const auto bounds = getLocalBounds();
     const auto rectHeight = 15;
 
-    /*
-    rmsMeterLeftChannel.setBounds(0, 0, bounds.getWidth(), bounds.getHeight() / 2.f);
-    rmsMeterRightChannel.setBounds(0, (bounds.getHeight() / 2.f), bounds.getWidth(), bounds.getHeight() / 2.f);
-    */
-
     rmsMeterLeftChannel.setBounds(0, (bounds.getHeight() * 0.25) - (rectHeight * 0.5), bounds.getWidth(), rectHeight);
     rmsMeterRightChannel.setBounds(0, (bounds.getHeight() * 0.75) - (rectHeight * 0.5), bounds.getWidth(), rectHeight);
 
@@ -57,11 +52,6 @@ void MeterComponent::resized()
 {
     const auto bounds = getLocalBounds();
     const auto rectHeight = 15;
-
-    /*
-    rmsMeterLeftChannel.setBounds(0, 0, bounds.getWidth(), bounds.getHeight() / 2);
-    rmsMeterRightChannel.setBounds(0, bounds.getHeight() / 2, bounds.getWidth(), bounds.getHeight());
-    */
 
     rmsMeterLeftChannel.setBounds(0, (bounds.getHeight() * 0.25) - (rectHeight * 0.5), bounds.getWidth(), rectHeight);
     rmsMeterRightChannel.setBounds(0, (bounds.getHeight() * 0.75) - (rectHeight * 0.5), bounds.getWidth(), rectHeight);

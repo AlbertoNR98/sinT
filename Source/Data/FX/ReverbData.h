@@ -21,7 +21,7 @@ public:
     void setBypassed(bool bypassValue) { reverb.setEnabled(!bypassValue); }
 
     void setDefaultParameters();
-    void setParameters(bool reverbBypassed, float reverbRoomSize, float reverbWidth, float reverbDamping, float reverbFreezeMode, float reverbDryLevel, float reverbWetLevel);
+    void setParameters(bool reverbBypassed, bool reverbFreezeMode, float reverbRoomSize, float reverbWidth, float reverbDamping, float reverbDryLevel, float reverbWetLevel);
 
     void renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock);
 

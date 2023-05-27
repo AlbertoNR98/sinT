@@ -33,20 +33,23 @@ private:
     juce::Colour reverbBorderColour;
 
     CustomBypassButton bypassedButton;
+    juce::TextButton freezeModeButton;
+
     CustomSliderWithLabel roomSizeSlider;
     CustomSliderWithLabel widthSlider;
     CustomSliderWithLabel dampingSlider;
-    CustomSliderWithLabel freezeModeSlider;
     CustomSliderWithLabel dryLevelSlider;
     CustomSliderWithLabel wetLevelSlider;
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> bypassedButtonAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> freezeModeButtonAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> roomSizeAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> widthAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> dampingAttachment;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> freezeModeAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> dryLevelAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> wetLevelAttachment;
+
+    void setupFreezeModeButton(bool bypassed = false);
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ReverbComponent)
 };

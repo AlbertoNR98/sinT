@@ -73,7 +73,7 @@ void DistortionComponent::resized()
     bypassedButton.setBounds(bypassButtonBounds);
 
     // Sliders
-    auto sliderPadding = 4;
+    const auto sliderPadding = 4;
     auto slidersBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsTopBounds.getBottom() + sliderPadding, elementsBounds.getWidth(), elementsBounds.getHeight() * 0.8);
 
     auto driveSliderBounds = juce::Rectangle<int>(slidersBounds.getPosition().getX(), slidersBounds.getPosition().getY(), slidersBounds.getWidth(), slidersBounds.getHeight() / 3);
