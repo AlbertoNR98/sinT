@@ -22,7 +22,8 @@ public:
     {
         SINE_WF,
         SAW_WF,
-        SQUARE_WF
+        SQUARE_WF,
+        TRI_WF
     };
 
     void prepareToPlay(juce::dsp::ProcessSpec& spec);

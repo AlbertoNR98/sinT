@@ -36,6 +36,9 @@ void OscillatorData::setWaveform(const int selectWaveform)
     case SQUARE_WF:
         initialise([](float x) { return x < 0.0f ? -1.0f : 1.0f; });
         break;
+    case TRI_WF:
+        initialise([](float x) { return std::sin(x); }, 5);
+        break;
     default:
         jassertfalse;
         break;

@@ -240,7 +240,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
 
     // Oscilador 1
     layout.add(std::make_unique<juce::AudioParameterBool>(osc1Bypassed, "Oscillator1Bypassed", false));
-    layout.add(std::make_unique<juce::AudioParameterChoice>(osc1Waveform, "Oscillator1Waveform", juce::StringArray { "Sine", "Saw", "Square" }, 0));
+    layout.add(std::make_unique<juce::AudioParameterChoice>(osc1Waveform, "Oscillator1Waveform", juce::StringArray { "Sine", "Saw", "Square", "Tri" }, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>(osc1Gain, "Oscillator1Gain", juce::NormalisableRange<float> {-48.0f, 6.0f, 0.1f}, 0.0f, "dB"));
     layout.add(std::make_unique<juce::AudioParameterInt>(osc1Pitch, "Oscillator1Pitch", -48, 48, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>(osc1FmFreq, "Oscillator1FMFreq", juce::NormalisableRange<float> {0.0f, 999.9f, 1.0f, 0.4f}, 0.0f, "Hz"));
@@ -248,7 +248,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
 
     // Oscilador 2
     layout.add(std::make_unique<juce::AudioParameterBool>(osc2Bypassed, "Oscillator2Bypassed", false));
-    layout.add(std::make_unique<juce::AudioParameterChoice>(osc2Waveform, "Oscillator2Waveform", juce::StringArray{ "Sine", "Saw", "Square" }, 0));
+    layout.add(std::make_unique<juce::AudioParameterChoice>(osc2Waveform, "Oscillator2Waveform", juce::StringArray{ "Sine", "Saw", "Square", "Tri" }, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>(osc2Gain, "Oscillator2Gain", juce::NormalisableRange<float> {-48.0f, 6.0f, 0.1f}, 0.0f, "dB"));
     layout.add(std::make_unique<juce::AudioParameterInt>(osc2Pitch, "Oscillator2Pitch", -48, 48, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>(osc2FmFreq, "Oscillator2FMFreq", juce::NormalisableRange<float> {0.0f, 999.9f, 1.0f, 0.4f}, 0.0f, "Hz"));

@@ -21,7 +21,7 @@ OscillatorComponent::OscillatorComponent(juce::String name, juce::Colour borderC
 
     addAndMakeVisible(oscBypassedButton);
 
-    juce::StringArray waveOptions{ "Sine", "Saw", "Square" };
+    juce::StringArray waveOptions{ "Sine", "Saw", "Square", "Tri" };
     oscWaveSelector.addItemList(waveOptions, 1);
     oscWaveSelector.setJustificationType(juce::Justification::centred);
 
