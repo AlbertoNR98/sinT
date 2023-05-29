@@ -23,7 +23,7 @@ public:
 
     void setDefaultParameters();
 
-    void setDistortionParameters(bool bypassed, float drive, float range, float blend);
+    void setDistortionParameters(bool bypassed, float drive, float range, float mix);
     void setChorusParameters(bool bypassed, float rate, float depth, float centreDelay, float feedback, float mix);
     void setDelayParameters(bool bypassed, float timeMs, float feedback);
     void setReverbParameters(bool bypassed, bool freezeMode, float roomSize, float width, float damping, float dryLevel, float wetLevel);

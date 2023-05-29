@@ -25,9 +25,9 @@ void FXProcessor::setDefaultParameters()
     reverb.setDefaultParameters();
 }
 
-void FXProcessor::setDistortionParameters(bool bypassed, float drive, float range, float blend)
+void FXProcessor::setDistortionParameters(bool bypassed, float drive, float range, float mix)
 {
-    distortion.setParameters(bypassed, drive, range, blend);
+    distortion.setParameters(bypassed, drive, range, mix);
 }
 
 void FXProcessor::setChorusParameters(bool bypassed, float rate, float depth, float centreDelay, float feedback, float mix)

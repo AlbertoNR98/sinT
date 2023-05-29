@@ -87,7 +87,7 @@ void ContainerComponent::setView(const int selectedView)
             contentComponent.reset(new FilterView(audioProcessor.apvts, filterBypassed, filterMode, filterCutoffFreq, filterResonance, lfoFreq, lfoDepth));
             break;
         case FX_VIEW:
-            contentComponent.reset(new FXProcessorView(audioProcessor.apvts, distortionBypassed, distortionDrive, distortionRange, distortionBlend,
+            contentComponent.reset(new FXProcessorView(audioProcessor.apvts, distortionBypassed, distortionDrive, distortionRange, distortionMix,
                                     chorusBypassed, chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix,
                                     delayBypassed, delayTimeMs, delayFeedback,
                                     reverbBypassed, reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel));

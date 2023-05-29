@@ -11,11 +11,11 @@
 
 //==============================================================================
 FXProcessorView::FXProcessorView(juce::AudioProcessorValueTreeState& apvts,
-    juce::String distortionBypassed, juce::String distortionDrive, juce::String distortionRange, juce::String distortionBlend,
+    juce::String distortionBypassed, juce::String distortionDrive, juce::String distortionRange, juce::String distortionMix,
     juce::String chorusBypassed, juce::String chorusRate, juce::String chorusDepth, juce::String chorusCentreDelay, juce::String chorusFeedback, juce::String chorusMix,
     juce::String delayBypassed, juce::String delayTimeMs, juce::String delayFeedback,
     juce::String reverbBypassed, juce::String reverbRoomSize, juce::String reverbWidth, juce::String reverbDamping, juce::String reverbFreezeMode, juce::String reverbDryLevel, juce::String reverbWetLevel) :
-    distortionComponent("Distortion", ColorPalette::miamigreen, apvts, distortionBypassed, distortionDrive, distortionRange, distortionBlend),
+    distortionComponent("Distortion", ColorPalette::miamigreen, apvts, distortionBypassed, distortionDrive, distortionRange, distortionMix),
     chorusComponent("Chorus", ColorPalette::miamipink, apvts, chorusBypassed, chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix),
     delayComponent("Delay", ColorPalette::orthzul, apvts, delayBypassed, delayTimeMs, delayFeedback),
     reverbComponent("Reverb", ColorPalette::miamiblue, apvts, reverbBypassed, reverbRoomSize, reverbWidth, reverbDamping, reverbFreezeMode, reverbDryLevel, reverbWetLevel)

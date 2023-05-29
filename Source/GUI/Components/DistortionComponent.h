@@ -22,7 +22,7 @@
 class DistortionComponent  : public juce::Component
 {
 public:
-    DistortionComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String driveId, juce::String rangeId, juce::String blendId);
+    DistortionComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String driveId, juce::String rangeId, juce::String mixId);
     ~DistortionComponent() override;
 
     void paint (juce::Graphics&) override;
@@ -35,12 +35,12 @@ private:
     CustomBypassButton bypassedButton;
     CustomSliderWithLabel driveSlider;
     CustomSliderWithLabel rangeSlider;
-    CustomSliderWithLabel blendSlider;
+    CustomSliderWithLabel mixSlider;
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> distortionBypassedButtonAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> driveAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> rangeAttachment;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> blendAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mixAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DistortionComponent)
 };

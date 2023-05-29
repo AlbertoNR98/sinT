@@ -10,10 +10,10 @@
 #include "DistortionComponent.h"
 
 //==============================================================================
-DistortionComponent::DistortionComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String driveId, juce::String rangeId, juce::String blendId) :
+DistortionComponent::DistortionComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String driveId, juce::String rangeId, juce::String mixId) :
     driveSlider("Drive", "", CustomSliderWithLabel::SliderStyle::Horizontal),
     rangeSlider("Range", "", CustomSliderWithLabel::SliderStyle::Horizontal),
-    blendSlider("Blend", "", CustomSliderWithLabel::SliderStyle::Horizontal)
+    mixSlider("Mix", "", CustomSliderWithLabel::SliderStyle::Horizontal)
 {
     this->title = title;
     distortionBorderColour = borderColour;
@@ -23,16 +23,16 @@ DistortionComponent::DistortionComponent(juce::String title, juce::Colour border
     distortionBypassedButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(apvts, bypassedId, bypassedButton);
     driveAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, driveId, driveSlider.getSlider());
     rangeAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, rangeId, rangeSlider.getSlider());
-    blendAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, blendId, blendSlider.getSlider());
+    mixAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, mixId, mixSlider.getSlider());
 
     auto compBypassed = bypassedButton.getToggleState();
     driveSlider.applyBypassedColorPalette(compBypassed);
     rangeSlider.applyBypassedColorPalette(compBypassed);
-    blendSlider.applyBypassedColorPalette(compBypassed);
+    mixSlider.applyBypassedColorPalette(compBypassed);
 
     addAndMakeVisible(driveSlider);
     addAndMakeVisible(rangeSlider);
-    addAndMakeVisible(blendSlider);
+    addAndMakeVisible(mixSlider);
 }
 
 DistortionComponent::~DistortionComponent()
@@ -58,7 +58,7 @@ void DistortionComponent::paint (juce::Graphics& g)
     auto compBypassed = bypassedButton.getToggleState();
     driveSlider.applyBypassedColorPalette(compBypassed);
     rangeSlider.applyBypassedColorPalette(compBypassed);
-    blendSlider.applyBypassedColorPalette(compBypassed);
+    mixSlider.applyBypassedColorPalette(compBypassed);
 }
 
 void DistortionComponent::resized()
@@ -82,6 +82,6 @@ void DistortionComponent::resized()
     auto rangeSliderBounds = juce::Rectangle<int>(slidersBounds.getPosition().getX(), driveSliderBounds.getBottom(), slidersBounds.getWidth(), slidersBounds.getHeight()/ 3);
     rangeSlider.setBounds(rangeSliderBounds);
 
-    auto blendSliderBounds = juce::Rectangle<int>(slidersBounds.getPosition().getX(), rangeSliderBounds.getBottom(), slidersBounds.getWidth(), slidersBounds.getHeight() / 3);
-    blendSlider.setBounds(blendSliderBounds);
+    auto mixSliderBounds = juce::Rectangle<int>(slidersBounds.getPosition().getX(), rangeSliderBounds.getBottom(), slidersBounds.getWidth(), slidersBounds.getHeight() / 3);
+    mixSlider.setBounds(mixSliderBounds);
 }

@@ -14,15 +14,15 @@ void DistortionData::setDefaultParameters()
     setBypassed(false);
     this->drive = 0.0f;
     this->range = 0.0f;
-    this->blend = 0.0f;
+    this->mix = 0.0f;
 }
 
-void DistortionData::setParameters(bool bypassed, float drive, float range, float blend)
+void DistortionData::setParameters(bool bypassed, float drive, float range, float mix)
 {
     setBypassed(bypassed);
     this->drive = drive;
     this->range = range;
-    this->blend = blend;
+    this->mix = mix;
 }
 
 void DistortionData::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
@@ -36,7 +36,7 @@ void DistortionData::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
         {
             float cleanSample = audioBlock.getSample(channel, sampleIndex);
             float distortedSample = cleanSample * drive * range;
-            distortedSample = (((2.0f / juce::MathConstants<float>::pi) * atan(distortedSample)) * blend) + (cleanSample * (1.0f - blend));
+            distortedSample = (((2.0f / juce::MathConstants<float>::pi) * atan(distortedSample)) * mix) + (cleanSample * (1.0f - mix));
             audioBlock.setSample(channel, sampleIndex, distortedSample);
         }
     }

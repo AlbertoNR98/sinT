@@ -59,7 +59,7 @@ namespace ParamsIDList
     inline constexpr auto distortionBypassed { "DISTORTIONBYPASSED" };
     inline constexpr auto distortionDrive { "DISTORTIONDRIVE" };
     inline constexpr auto distortionRange { "DISTORTIONRANGE" };
-    inline constexpr auto distortionBlend { "DISTORTIONBLEND" };
+    inline constexpr auto distortionMix { "DISTORTIONMIX" };
 
     // Chorus
     inline constexpr auto chorusBypassed { "CHORUSBYPASSED" };
