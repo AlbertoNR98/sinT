@@ -155,12 +155,14 @@ void CustomSliderWithLabel::applyBypassedColorPalette(const bool bypassed)
 {
     if (bypassed)
     {
+        valueLabel.setColour(juce::Label::ColourIds::textColourId, ColorPalette::bypassgrey);
         slider.setColour(juce::Slider::ColourIds::backgroundColourId, ColorPalette::bypassgrey);
         slider.setColour(juce::Slider::ColourIds::trackColourId, ColorPalette::bypassgrey);
         slider.setColour(juce::Slider::ColourIds::thumbColourId, ColorPalette::bypassgrey);
     } 
     else 
     {
+        valueLabel.setColour(juce::Label::ColourIds::textColourId, ColorPalette::monwhite);
         slider.setColour(juce::Slider::ColourIds::backgroundColourId, ColorPalette::orthzul);
         slider.setColour(juce::Slider::ColourIds::trackColourId, ColorPalette::miamipink);
         slider.setColour(juce::Slider::ColourIds::thumbColourId, ColorPalette::miamiblue);

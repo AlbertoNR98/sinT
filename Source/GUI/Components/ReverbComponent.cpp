@@ -122,7 +122,7 @@ void ReverbComponent::setupFreezeModeButton(bool bypassed)
     {
         freezeModeButton.setColour(juce::ComboBox::outlineColourId, ColorPalette::bypassgrey);
 
-        freezeModeButton.setColour(juce::TextButton::buttonColourId, ColorPalette::bypassgrey);
+        freezeModeButton.setColour(juce::TextButton::buttonColourId, ColorPalette::transparentblack);
         freezeModeButton.setColour(juce::TextButton::textColourOffId, ColorPalette::bypassgrey);
 
         freezeModeButton.setColour(juce::TextButton::buttonOnColourId, ColorPalette::bypassgrey);
