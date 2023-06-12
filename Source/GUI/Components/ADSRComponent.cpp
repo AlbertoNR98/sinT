@@ -13,7 +13,7 @@
 ADSRComponent::ADSRComponent(juce::String name, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String attackId, juce::String decayId, juce::String sustainId, juce::String releaseId) :
     attackSlider("Attack", "s"),
     decaySlider("Decay", "s"),
-    sustainSlider("Sustain", "s"),
+    sustainSlider("Sustain", ""),
     releaseSlider("Release", "s")
 {
     adsrName = name;

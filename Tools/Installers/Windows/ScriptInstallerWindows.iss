@@ -5,12 +5,12 @@
 #define AppPublisher "AlbertoNR98"
 #define AppURL "https://www.github.com/AlbertoNR98/sinT"
 #define AppExeName "sinT.exe"
-#define ExecutableDir "" ; Ruta donde el .exe esta ubicado antes de crear el instalador -> Ej:  C:\Users\Alberto\Desktop\sinT\Builds\VisualStudio2022\x64\Release\Standalone Plugin\sinT.exe
+#define ExecutableDir "" ; Ruta donde el .exe esta ubicado antes de crear el instalador -> Ej:  "C:\Users\Alberto\Desktop\sinT\Builds\VisualStudio2022\x64\Release\Standalone Plugin\sinT.exe"
 #define VST3PluginDir "" ; Ruta donde el VST esta ubicado antes de crear el instalador  -> Ej: "C:\Users\Alberto\Desktop\sinT\Builds\VisualStudio2022\x64\Release\VST3\sinT.vst3"
 #define PresetsDir "" ; Ruta donde se ubican los presets de fabrica -> Ej: "C:\Users\Alberto\Desktop\sinT\Presets\*"
 
 [Setup]
-AppId={{E0641DF8-F290-4BC4-87C1-7740FAE1490F}
+AppId={E0641DF8-F290-4BC4-87C1-7740FAE1490F}
 AppName={#AppName}
 AppVersion={#AppVersion}
 AppPublisher={#AppPublisher}
