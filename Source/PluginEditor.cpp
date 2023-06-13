@@ -21,13 +21,13 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor(SinTAudioProcessor& p)
     const auto customFontBold = juce::Typeface::createSystemTypefaceFor(BinaryData::CustomFontBold_ttf, BinaryData::CustomFontBold_ttfSize);
     juce::LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypeface(customFontBold);
 
-    setSize(1024, 600); //Default size
+    setSize(1024, 576); //Default size
 
     addAndMakeVisible(mainComponent);
 
 #if !JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
     setResizable(true, false);
-    setResizeLimits(1024, 600, screenArea.getWidth(), screenArea.getHeight());
+    setResizeLimits(1024, 576, screenArea.getWidth(), screenArea.getHeight());
 #endif
 }
 
@@ -38,7 +38,7 @@ SinTAudioProcessorEditor::~SinTAudioProcessorEditor()
 //==============================================================================
 void SinTAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    g.fillAll(ColorPalette::darkgray);
+    g.fillAll(ColorPalette::basegray);
 }
 
 void SinTAudioProcessorEditor::resized()

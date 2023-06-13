@@ -22,7 +22,7 @@ MainComponent::~MainComponent()
 
 void MainComponent::paint (juce::Graphics& g)
 {
-    g.fillAll(ColorPalette::darkgray);
+    g.fillAll(ColorPalette::basegray);
 }
 
 void MainComponent::resized()

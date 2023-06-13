@@ -41,7 +41,7 @@ void MainControlComponent::resized()
     
 void MainControlComponent::setupGainSlider()
 {
-    mainGainSlider.getSlider().setColour(juce::Slider::ColourIds::backgroundColourId, ColorPalette::darkgray);
+    mainGainSlider.getSlider().setColour(juce::Slider::ColourIds::backgroundColourId, ColorPalette::basegray);
     mainGainSlider.getSlider().setColour(juce::Slider::ColourIds::trackColourId, ColorPalette::miamipink);
     mainGainSlider.getSlider().setColour(juce::Slider::ColourIds::thumbColourId, ColorPalette::miamiblue);
 }

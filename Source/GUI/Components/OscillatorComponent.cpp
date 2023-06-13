@@ -25,9 +25,6 @@ OscillatorComponent::OscillatorComponent(juce::String name, juce::Colour borderC
     oscWaveSelector.addItemList(waveOptions, 1);
     oscWaveSelector.setJustificationType(juce::Justification::centred);
 
-    oscWaveSelector.setColour(juce::ComboBox::ColourIds::backgroundColourId, ColorPalette::darkgray);
-    addAndMakeVisible(oscWaveSelector);
-
     oscBypassedButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(apvts, bypassedId, oscBypassedButton);
     oscWaveSelectorAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, waveformSelectorId, oscWaveSelector);
     oscGainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, oscGainId, oscGainSlider.getSlider());
@@ -36,11 +33,13 @@ OscillatorComponent::OscillatorComponent(juce::String name, juce::Colour borderC
     fmDepthAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmDepthId, fmDepthSlider.getSlider());
 
     auto compBypassed = oscBypassedButton.getToggleState();
+    setupWaveformSelector(compBypassed);
     oscGainSlider.applyBypassedColorPalette(compBypassed);
     oscPitchSlider.applyBypassedColorPalette(compBypassed);
     fmFreqSlider.applyBypassedColorPalette(compBypassed);
     fmDepthSlider.applyBypassedColorPalette(compBypassed);
 
+    addAndMakeVisible(oscWaveSelector);
     addAndMakeVisible(oscGainSlider);
     addAndMakeVisible(oscPitchSlider);
     addAndMakeVisible(fmFreqSlider);
@@ -67,6 +66,7 @@ void OscillatorComponent::paint (juce::Graphics& g)
     g.drawFittedText(oscName, oscNameBounds, juce::Justification::centredLeft, true);
 
     auto compBypassed = oscBypassedButton.getToggleState();
+    setupWaveformSelector(compBypassed);
     oscGainSlider.applyBypassedColorPalette(compBypassed);
     oscPitchSlider.applyBypassedColorPalette(compBypassed);
     fmFreqSlider.applyBypassedColorPalette(compBypassed);
@@ -101,4 +101,22 @@ void OscillatorComponent::resized()
 
     auto fmDepthSliderBounds = juce::Rectangle<int>(fmFreqSliderBounds.getRight(), elementsTopBounds.getBottom(), elementsBounds.getWidth() * 0.25, elementsBounds.getHeight() * 0.8);
     fmDepthSlider.setBounds(fmDepthSliderBounds);
+}
+
+void OscillatorComponent::setupWaveformSelector(bool bypassed)
+{
+    if (bypassed)
+    {
+        oscWaveSelector.setColour(juce::ComboBox::ColourIds::backgroundColourId, ColorPalette::transparentwhite);
+        oscWaveSelector.setColour(juce::ComboBox::ColourIds::outlineColourId, ColorPalette::bypassgrey);
+        oscWaveSelector.setColour(juce::ComboBox::ColourIds::textColourId, ColorPalette::bypassgrey);
+        oscWaveSelector.setColour(juce::ComboBox::ColourIds::arrowColourId, ColorPalette::bypassgrey);
+    }
+    else
+    {
+        oscWaveSelector.setColour(juce::ComboBox::ColourIds::backgroundColourId, ColorPalette::transparentwhite);
+        oscWaveSelector.setColour(juce::ComboBox::ColourIds::outlineColourId, ColorPalette::monwhite);
+        oscWaveSelector.setColour(juce::ComboBox::ColourIds::textColourId, ColorPalette::monwhite);
+        oscWaveSelector.setColour(juce::ComboBox::ColourIds::arrowColourId, ColorPalette::monwhite);
+    }
 }

@@ -21,7 +21,7 @@ namespace ColorPalette
     const Colour monwhite{ 0xffffffff };
     const Colour monblack{ 0xff000000 };
 
-    const Colour darkgray{ 0xff151515 }; // Container background color
+    const Colour basegray{ 0xff151515 }; // Container background color
 
     const Colour airun{ 0xffc685ff }; // Violet -> Side panel color
     const Colour orthzul{ 0xff443a84 }; // Purple -> Navbar component
@@ -32,7 +32,7 @@ namespace ColorPalette
     // Colores de los bordes de los components
     const Colour miamipink{ 0xffe97da4 };
     const Colour miamiblue{ 0xff02b7dd };
-    const Colour miamigreen{ 0xff57D5B5 };
+    const Colour miamigreen{ 0xff57d5b5 };
 
     const Colour pmblue{ 0xff0959a4 };
     const Colour pmorange{ 0xffef7a68 };

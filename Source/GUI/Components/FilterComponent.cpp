@@ -20,8 +20,6 @@ FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts, juce
     juce::StringArray filterModes{ "LPF", "BPF", "HPF" };
     filterModeSelector.addItemList(filterModes, 1);
     filterModeSelector.setJustificationType(juce::Justification::centred);
-    filterModeSelector.setColour(juce::ComboBox::ColourIds::backgroundColourId, ColorPalette::darkgray);
-    addAndMakeVisible(filterModeSelector);
 
     filterBypassedButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(apvts, filterBypassedId, filterBypassedButton);
     filterModeSelectorAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, filterModeSelectorId, filterModeSelector);
@@ -29,9 +27,11 @@ FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts, juce
     filterResonanceAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, filterResonanceId, filterResonanceSlider.getSlider());
 
     auto compBypassed = filterBypassedButton.getToggleState();
+    setupFilterModeSelector(compBypassed);
     filterCutoffFreqSlider.applyBypassedColorPalette(compBypassed);
     filterResonanceSlider.applyBypassedColorPalette(compBypassed);
 
+    addAndMakeVisible(filterModeSelector);
     addAndMakeVisible(filterCutoffFreqSlider);
     addAndMakeVisible(filterResonanceSlider);
 }
@@ -57,6 +57,7 @@ void FilterComponent::paint (juce::Graphics& g)
     g.drawFittedText(filterTitle, filterNameBounds, juce::Justification::centredLeft, true);
 
     auto compBypassed = filterBypassedButton.getToggleState();
+    setupFilterModeSelector(compBypassed);
     filterCutoffFreqSlider.applyBypassedColorPalette(compBypassed);
     filterResonanceSlider.applyBypassedColorPalette(compBypassed);
 }
@@ -82,4 +83,22 @@ void FilterComponent::resized()
 
     auto filterResonanceSliderBounds = juce::Rectangle<int>(filterCutoffFreqSliderBounds.getRight(), filterNameBounds.getBottom(), elementsBounds.getWidth() * 0.5, elementsBounds.getHeight() * 0.8);
     filterResonanceSlider.setBounds(filterResonanceSliderBounds);
+}
+
+void FilterComponent::setupFilterModeSelector(bool bypassed)
+{
+    if (bypassed)
+    {
+        filterModeSelector.setColour(juce::ComboBox::ColourIds::backgroundColourId, ColorPalette::transparentwhite);
+        filterModeSelector.setColour(juce::ComboBox::ColourIds::outlineColourId, ColorPalette::bypassgrey);
+        filterModeSelector.setColour(juce::ComboBox::ColourIds::textColourId, ColorPalette::bypassgrey);
+        filterModeSelector.setColour(juce::ComboBox::ColourIds::arrowColourId, ColorPalette::bypassgrey);
+    }
+    else 
+    {
+        filterModeSelector.setColour(juce::ComboBox::ColourIds::backgroundColourId, ColorPalette::transparentwhite);
+        filterModeSelector.setColour(juce::ComboBox::ColourIds::outlineColourId, ColorPalette::monwhite);
+        filterModeSelector.setColour(juce::ComboBox::ColourIds::textColourId, ColorPalette::monwhite);
+        filterModeSelector.setColour(juce::ComboBox::ColourIds::arrowColourId, ColorPalette::monwhite);
+    }
 }

@@ -46,7 +46,7 @@ void ContainerComponent::paint (juce::Graphics& g)
         contentComponent->setBounds(0, 0, getWidth(), getHeight());
     }
 
-    g.fillAll(ColorPalette::darkgray);
+    g.fillAll(ColorPalette::basegray);
 }
 
 void ContainerComponent::resized()
