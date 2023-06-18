@@ -197,7 +197,7 @@
         <CONFIGURATION isDebug="0" name="Release" targetName="sinT" userNotes="Standalone and VST3"/>
         <CONFIGURATION isDebug="1" name="Debug_Kiosk" targetName="sinT" defines="JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE=1 JucePlugin_Build_VST3=0"
                        userNotes="Standalone kiosk - Disable VST3 output before"/>
-        <CONFIGURATION isDebug="0" name="Release _Kiosk" targetName="sinT" defines="JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE=1 JucePlugin_Build_VST3=0"
+        <CONFIGURATION isDebug="0" name="Release_Kiosk" targetName="sinT" defines="JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE=1 JucePlugin_Build_VST3=0"
                        userNotes="Standalone kiosk - Disable VST3 output before"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
