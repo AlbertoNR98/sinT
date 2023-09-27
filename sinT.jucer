@@ -74,6 +74,7 @@
                 file="Source/GUI/Assets/CustomControls.cpp"/>
           <FILE id="fJ8rxS" name="CustomControls.h" compile="0" resource="0"
                 file="Source/GUI/Assets/CustomControls.h"/>
+          <FILE id="UJEuTC" name="sinT_logo.png" compile="0" resource="1" file="Source/GUI/Assets/sinT_logo.png"/>
         </GROUP>
         <GROUP id="{83A64210-9666-8E6F-54CC-782EA2432656}" name="Components">
           <GROUP id="{E6DA5DAE-778C-91E9-8DCD-DD1F5955454A}" name="Base">
@@ -167,7 +168,7 @@
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
   <EXPORTFORMATS>
-    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile" bigIcon="UJEuTC" smallIcon="UJEuTC">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="sinT"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="sinT" linkTimeOptimisation="1"/>
@@ -191,7 +192,7 @@
         <MODULEPATH id="juce_gui_extra" path="../../../../JUCE/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
-    <VS2022 targetFolder="Builds/VisualStudio2022">
+    <VS2022 targetFolder="Builds/VisualStudio2022" bigIcon="UJEuTC" smallIcon="UJEuTC">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="sinT" userNotes="Standalone and VST3"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="sinT" userNotes="Standalone and VST3"/>
