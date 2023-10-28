@@ -74,6 +74,10 @@
                 file="Source/GUI/Assets/CustomControls.cpp"/>
           <FILE id="fJ8rxS" name="CustomControls.h" compile="0" resource="0"
                 file="Source/GUI/Assets/CustomControls.h"/>
+          <FILE id="qaRwGW" name="CustomLookAndFeel.cpp" compile="1" resource="0"
+                file="Source/GUI/Assets/CustomLookAndFeel.cpp"/>
+          <FILE id="QIu0fZ" name="CustomLookAndFeel.h" compile="0" resource="0"
+                file="Source/GUI/Assets/CustomLookAndFeel.h"/>
           <FILE id="UJEuTC" name="sinT_logo.png" compile="0" resource="1" file="Source/GUI/Assets/sinT_logo.png"/>
         </GROUP>
         <GROUP id="{83A64210-9666-8E6F-54CC-782EA2432656}" name="Components">

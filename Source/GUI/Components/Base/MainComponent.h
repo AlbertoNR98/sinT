@@ -15,6 +15,7 @@
 #include "NavbarComponent.h"
 #include "../Source/PluginProcessor.h"
 #include "../../Assets/ColorPalette.h"
+#include "../../Assets/CustomLookAndFeel.h"
 
 //==============================================================================
 /*
@@ -31,6 +32,8 @@ public:
 private:
     NavbarComponent navbarComponent;
     ContainerComponent containerComponent;
+
+    CustomLookAndFeel lnf;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };
