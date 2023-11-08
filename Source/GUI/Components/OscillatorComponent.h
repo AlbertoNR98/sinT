@@ -2,9 +2,9 @@
   ==============================================================================
 
     OscillatorComponent.h
-    Clase OscillatorComponent -> Hereda de juce::Component
-        - Parte de la UI relacionada con los osciladores
-            - Controles y attachments asociados a APVTS
+    OscillatorComponent class -> Inherits from juce::Component
+        - Part of the UI related to the oscillators
+            - Controls and attachments associated with APVTS
 
   ==============================================================================
 */
@@ -19,7 +19,7 @@
 //==============================================================================
 /*
 */
-class OscillatorComponent  : public juce::Component
+class OscillatorComponent : public juce::Component
 {
 public:
     OscillatorComponent(juce::String name, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String waveformSelectorId, juce::String oscGainId, juce::String oscPitchId, juce::String fmFreqId, juce::String fmDepthId);

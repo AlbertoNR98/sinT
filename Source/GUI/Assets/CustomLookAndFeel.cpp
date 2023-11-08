@@ -130,7 +130,7 @@ void CustomLookAndFeel::drawPopupMenuItem(Graphics& g, const Rectangle<int>& are
             g.fillPath(p);
         }
 
-        g.drawFittedText(text, r, Justification::centred, 1);
+        g.drawFittedText(text, r.reduced(5), Justification::centred, 1);
 
         if (shortcutKeyText.isNotEmpty())
         {
@@ -186,6 +186,4 @@ void CustomLookAndFeel::drawLabel(Graphics& g, Label& label)
     {
         g.setColour(label.findColour(Label::outlineColourId));
     }
-
-    g.drawRect(label.getLocalBounds());
 }

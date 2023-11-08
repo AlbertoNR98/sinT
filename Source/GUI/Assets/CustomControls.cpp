@@ -9,7 +9,7 @@
 #include "CustomControls.h"
 
 //==============================================================================
-CustomSliderWithLabel::CustomSliderWithLabel(juce::String name, juce::String suffix, SliderStyle sliderStyle, const int numDecimals)
+CustomSliderWithLabel::CustomSliderWithLabel(juce::String name, juce::String suffix, SliderStyle sliderStyle, const int numDecimals) : cslValueLabelLnF(0.8f), cslNameLabelLnF(0.55f)
 {
     this->sliderStyle = sliderStyle;
     this->numDecimals = numDecimals;
@@ -29,12 +29,14 @@ CustomSliderWithLabel::CustomSliderWithLabel(juce::String name, juce::String suf
 
 CustomSliderWithLabel::~CustomSliderWithLabel()
 {
+    valueLabel.setLookAndFeel(nullptr);
+    nameLabel.setLookAndFeel(nullptr);
 }
 
 void CustomSliderWithLabel::paint(juce::Graphics& g)
 {  
     /*
-    // Para debug
+    // Uncomment to debug
 
     g.setColour(juce::Colours::green);
     g.drawRect(getLocalBounds());
@@ -121,7 +123,11 @@ void CustomSliderWithLabel::updateValueLabel()
 
 void CustomSliderWithLabel::setupSlider()
 {
-    switch (sliderStyle) {
+    valueLabel.setLookAndFeel(&cslValueLabelLnF);
+    nameLabel.setLookAndFeel(&cslNameLabelLnF);
+
+    switch (sliderStyle)
+    {
     case Vertical:
         slider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
         valueLabel.setJustificationType(juce::Justification::centredBottom);
@@ -169,6 +175,52 @@ void CustomSliderWithLabel::applyBypassedColorPalette(const bool bypassed)
     }
 }
 
+// CustomSliderWithLabel LnF methods
+void CustomSliderWithLabel::CustomSliderWithLabelLnF::drawLabel(juce::Graphics& g, juce::Label& label)
+{
+    g.fillAll(label.findColour(Label::backgroundColourId));
+
+    if (!label.isBeingEdited())
+    {
+        auto alpha = label.isEnabled() ? 1.0f : 0.5f;
+        auto textArea = getLabelBorderSize(label).subtractedFrom(label.getLocalBounds());
+
+        auto fontSize = textArea.getHeight() * fontLabelHeightRatio;
+        Font font(fontSize);
+
+        const int stringLength = font.getStringWidth(label.getText());
+        const int textAreaWidth = textArea.getWidth();
+
+        if (stringLength > textAreaWidth)
+        {
+            float scaleFactor = static_cast<float>(textAreaWidth) / static_cast<float>(stringLength);
+            fontSize *= scaleFactor;
+
+            if (label.getFont().getHeight() > fontSize)
+            {
+                font.setHeight(label.getFont().getHeight());
+            }
+            else {
+                font.setHeight(fontSize);
+            }
+        }
+
+        g.setColour(label.findColour(Label::textColourId).withMultipliedAlpha(alpha));
+        g.setFont(font);
+
+        g.drawFittedText(label.getText(), textArea, label.getJustificationType(),
+            jmax(1, (int)((float)textArea.getHeight() / font.getHeight())),
+            label.getMinimumHorizontalScale());
+
+        g.setColour(label.findColour(Label::outlineColourId).withMultipliedAlpha(alpha));
+    }
+    else if (label.isEnabled())
+    {
+        g.setColour(label.findColour(Label::outlineColourId));
+    }
+}
+
+// CustomBypassButton LnF methods
 void CustomBypassButton::BypassButtonLnF::drawToggleButton(juce::Graphics& g,
     juce::ToggleButton& toggleButton,
     bool shouldDrawButtonAsHighlighted,
@@ -194,7 +246,7 @@ void CustomBypassButton::BypassButtonLnF::drawToggleButton(juce::Graphics& g,
     powerButtonShape.startNewSubPath(circleBorder.getCentreX(), circleBorder.getY());
     powerButtonShape.lineTo(circleBorder.getCentre());
 
-    juce::PathStrokeType pst(2.f, juce::PathStrokeType::JointStyle::curved);
+    juce::PathStrokeType pst(2.5f, juce::PathStrokeType::JointStyle::curved);
 
     auto buttonColour = toggleButton.getToggleState() ? ColorPalette::bypassgrey : ColorPalette::monwhite;
 
