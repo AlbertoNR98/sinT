@@ -2,9 +2,9 @@
   ==============================================================================
 
     FilterComponent.h
-    Clase FilterComponent -> Hereda de juce::Component
-        - Parte de la UI relacionada con el filtro
-            - Controles y attachments asociados a APVTS
+    FilterComponent class -> Inherits from juce::Component
+        - Part of the UI related to the filter
+            - Controls and attachments associated with APVTS
 
 
   ==============================================================================
@@ -20,7 +20,7 @@
 //==============================================================================
 /*
 */
-class FilterComponent  : public juce::Component
+class FilterComponent : public juce::Component
 {
 public:
     FilterComponent(juce::AudioProcessorValueTreeState& apvts, juce::Colour borderColour, juce::String filterBypassedId, juce::String filterModeSelectorId, juce::String filterCutoffFreqId, juce::String filterResonanceId);

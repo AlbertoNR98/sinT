@@ -2,7 +2,7 @@
   ==============================================================================
 
     OscillatorComponent.cpp
-    Metodos de OscillatorComponent
+    OscillatorComponent methods
 
   ==============================================================================
 */
@@ -56,14 +56,14 @@ void OscillatorComponent::paint (juce::Graphics& g)
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
 
-    // Parte de arriba
+    // Top section
     const auto boundsPadding = 16;
     auto elementsBounds = localBounds.reduced(boundsPadding);
 
     auto oscNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.55, elementsBounds.getHeight() * 0.2);
     g.setColour(ColorPalette::monwhite);
     g.setFont(28.f);
-    g.drawFittedText(oscName, oscNameBounds, juce::Justification::centredLeft, true);
+    g.drawFittedText(oscName, oscNameBounds, juce::Justification::centred, true);
 
     auto compBypassed = oscBypassedButton.getToggleState();
     setupWaveformSelector(compBypassed);
