@@ -14,13 +14,14 @@
 #include <JuceHeader.h>
 
 #include "../Assets/ColorPalette.h"
+#include "../Assets/CustomLookAndFeel.h"
 #include "../Assets/CustomControls.h"
 #include "../Source/ParamsIDList.h"
 
 //==============================================================================
 /*
 */
-class ADSRComponent  : public juce::Component
+class ADSRComponent : public juce::Component, virtual CustomLookAndFeel
 {
 public:
     ADSRComponent(juce::String name, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String attackId, juce::String decayId, juce::String sustainId, juce::String releaseId);

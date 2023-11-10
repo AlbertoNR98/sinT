@@ -5,7 +5,7 @@
               pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
               cppLanguageStandard="17" pluginManufacturer="AlbertoNR" companyName="AlbertoNR"
               pluginManufacturerCode="AlNR" pluginCode="Alnr" companyWebsite="https://github.com/AlbertoNR98/sinT"
-              version="1.0.1prev">
+              version="1.1prev">
   <MAINGROUP id="YdDlVH" name="sinT">
     <GROUP id="{AEAE61ED-FAE3-177E-149B-190C5214B3DB}" name="Source">
       <FILE id="DSBJlL" name="ParamsIDList.h" compile="0" resource="0" file="Source/ParamsIDList.h"/>

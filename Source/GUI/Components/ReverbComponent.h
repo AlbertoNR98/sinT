@@ -13,13 +13,14 @@
 
 #include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
+#include "../Assets/CustomLookAndFeel.h"
 #include "../Assets/CustomControls.h"
 #include "../Source/ParamsIDList.h"
 
 //==============================================================================
 /*
 */
-class ReverbComponent  : public juce::Component
+class ReverbComponent : public juce::Component, virtual CustomLookAndFeel
 {
 public:
     ReverbComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String roomSizeId, juce::String widthId, juce::String dampingId, juce::String freezeModeId, juce::String dryLevelId, juce::String wetLevelId);

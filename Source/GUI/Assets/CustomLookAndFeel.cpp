@@ -187,3 +187,33 @@ void CustomLookAndFeel::drawLabel(Graphics& g, Label& label)
         g.setColour(label.findColour(Label::outlineColourId));
     }
 }
+
+void CustomLookAndFeel::drawTitle(juce::Graphics& g, const juce::String& text, 
+    juce::Rectangle<int> textArea, const juce::Justification justification, const float minFontSize, const float proportion)
+{
+    auto fontSize = textArea.getHeight() * proportion;
+    Font font(fontSize);
+
+    const int stringLength = font.getStringWidth(text);
+    const int textAreaWidth = textArea.getWidth();
+
+    if (stringLength > textAreaWidth)
+    {
+        float scaleFactor = static_cast<float>(textAreaWidth) / static_cast<float>(stringLength);
+        fontSize *= scaleFactor;
+
+        if (minFontSize > fontSize)
+        {
+            font.setHeight(minFontSize);
+        }
+        else {
+            font.setHeight(fontSize);
+        }
+    }
+
+    g.setFont(font);
+
+    g.drawFittedText(text, textArea, justification,
+        jmax(1, (int)((float)textArea.getHeight() / font.getHeight())),
+        0.f);
+}

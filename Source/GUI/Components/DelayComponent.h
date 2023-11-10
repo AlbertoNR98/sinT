@@ -13,13 +13,14 @@
 
 #include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
+#include "../Assets/CustomLookAndFeel.h"
 #include "../Assets/CustomControls.h"
 #include "../Source/ParamsIDList.h"
 
 //==============================================================================
 /*
 */
-class DelayComponent  : public juce::Component
+class DelayComponent : public juce::Component, virtual CustomLookAndFeel
 {
 public:
     DelayComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String timeMsId, juce::String feedbackId);
@@ -39,6 +40,8 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> bypassedButtonAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> timeMsAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> feedbackAttachment;
+
+    juce::LookAndFeel* lnf;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayComponent)
 };

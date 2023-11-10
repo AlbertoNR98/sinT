@@ -33,17 +33,15 @@ FXProcessorView::~FXProcessorView()
 void FXProcessorView::paint (juce::Graphics& g)
 {
     g.setColour(ColorPalette::monwhite);
-    g.setFont(44.0f);
 
     auto padding = 16;
 
     auto elementsBounds = getLocalBounds().reduced(padding);
     auto textBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() / 8);
-    g.drawFittedText(viewTitle, textBounds, juce::Justification::centred, true);
+    drawTitle(g, viewTitle, textBounds, juce::Justification::centred, 44.0f, 0.75f);
 
     elementsBounds.setPosition(juce::Point<int>(elementsBounds.getPosition().getX(), textBounds.getBottom() + padding));
     elementsBounds.setSize(elementsBounds.getWidth(), elementsBounds.getHeight() - textBounds.getHeight() - padding);
-
 }
 
 void FXProcessorView::resized()

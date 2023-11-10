@@ -15,12 +15,13 @@
 #include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
 #include "../Assets/CustomControls.h"
+#include "../Assets/CustomLookAndFeel.h"
 #include "../Source/ParamsIDList.h"
 
 //==============================================================================
 /*
 */
-class FilterComponent : public juce::Component
+class FilterComponent : public juce::Component, virtual CustomLookAndFeel
 {
 public:
     FilterComponent(juce::AudioProcessorValueTreeState& apvts, juce::Colour borderColour, juce::String filterBypassedId, juce::String filterModeSelectorId, juce::String filterCutoffFreqId, juce::String filterResonanceId);

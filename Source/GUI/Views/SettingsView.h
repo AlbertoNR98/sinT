@@ -13,12 +13,13 @@
 #include <JuceHeader.h>
 #include <juce_audio_plugin_client/Standalone/juce_StandaloneFilterWindow.h>
 #include "../Assets/ColorPalette.h"
+#include "../Assets/CustomLookAndFeel.h"
 
 
 //==============================================================================
 /*
 */
-class SettingsView  : public juce::Component
+class SettingsView : public juce::Component, virtual CustomLookAndFeel
 {
 public:
     SettingsView();

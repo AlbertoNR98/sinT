@@ -35,6 +35,9 @@ public:
 
     virtual void drawLabel(Graphics& g, Label& label) override;
 
+    void drawTitle(juce::Graphics& g, const juce::String& text, juce::Rectangle<int> textArea,
+        const juce::Justification justification, const float minFontSize, const float proportion);  // Extension of LnF (not overrided)
+
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CustomLookAndFeel)
 };

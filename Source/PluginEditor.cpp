@@ -17,6 +17,8 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor(SinTAudioProcessor& p)
 {
     const Rectangle<int> screenArea = Desktop::getInstance().getDisplays().getPrimaryDisplay()->userArea;
 
+    setLookAndFeel(&lnf);
+
     // Font
     const auto customFontBold = juce::Typeface::createSystemTypefaceFor(BinaryData::CustomFontBold_ttf, BinaryData::CustomFontBold_ttfSize);
     juce::LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypeface(customFontBold);
@@ -33,6 +35,7 @@ SinTAudioProcessorEditor::SinTAudioProcessorEditor(SinTAudioProcessor& p)
 
 SinTAudioProcessorEditor::~SinTAudioProcessorEditor()
 {
+    setLookAndFeel(nullptr);
 }
 
 //==============================================================================

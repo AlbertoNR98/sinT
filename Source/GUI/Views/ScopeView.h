@@ -12,13 +12,14 @@
 
 #include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
+#include "../Assets/CustomLookAndFeel.h"
 #include "../Source/PluginProcessor.h"
 #include "../Components/ScopeComponent.h"
 
 //==============================================================================
 /*
 */
-class ScopeView  : public juce::Component
+class ScopeView : public juce::Component, virtual CustomLookAndFeel
 {
 public:
     ScopeView(SinTAudioProcessor& audioProcessor);

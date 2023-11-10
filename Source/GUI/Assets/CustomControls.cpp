@@ -9,7 +9,7 @@
 #include "CustomControls.h"
 
 //==============================================================================
-CustomSliderWithLabel::CustomSliderWithLabel(juce::String name, juce::String suffix, SliderStyle sliderStyle, const int numDecimals) : cslValueLabelLnF(0.8f), cslNameLabelLnF(0.55f)
+CustomSliderWithLabel::CustomSliderWithLabel(juce::String name, juce::String suffix, SliderStyle sliderStyle, const int numDecimals) : cslValueLabelLnF(0.75f), cslNameLabelLnF(0.55f)
 {
     this->sliderStyle = sliderStyle;
     this->numDecimals = numDecimals;
