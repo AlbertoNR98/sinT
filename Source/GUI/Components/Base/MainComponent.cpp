@@ -10,17 +10,16 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent(SinTAudioProcessor& audioProcessor) : containerComponent(audioProcessor), navbarComponent(audioProcessor, containerComponent)
+MainComponent::MainComponent(SinTAudioProcessor& audioProcessor)
+    : containerComponent(audioProcessor),
+      navbarComponent(audioProcessor, containerComponent)
 {
-    setLookAndFeel(&lnf);
-
     addAndMakeVisible(containerComponent);
     addAndMakeVisible(navbarComponent);
 }
 
 MainComponent::~MainComponent()
 {
-    setLookAndFeel(nullptr);
 }
 
 void MainComponent::paint (juce::Graphics& g)

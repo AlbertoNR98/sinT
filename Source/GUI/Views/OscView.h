@@ -12,12 +12,13 @@
 
 #include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
+#include "../Assets/CustomLookAndFeel.h"
 #include "../Components/OscillatorComponent.h"
 
 //==============================================================================
 /*
 */
-class OscView  : public juce::Component
+class OscView : public juce::Component, virtual CustomLookAndFeel
 {
 public:
     OscView(juce::AudioProcessorValueTreeState& apvts, 

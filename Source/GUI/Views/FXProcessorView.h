@@ -12,6 +12,7 @@
 
 #include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
+#include "../Assets/CustomLookAndFeel.h"
 #include "../Components/DistortionComponent.h"
 #include "../Components/ChorusComponent.h"
 #include "../Components/DelayComponent.h"
@@ -20,7 +21,7 @@
 //==============================================================================
 /*
 */
-class FXProcessorView  : public juce::Component
+class FXProcessorView : public juce::Component, virtual CustomLookAndFeel
 {
 public:
     FXProcessorView(juce::AudioProcessorValueTreeState& apvts,

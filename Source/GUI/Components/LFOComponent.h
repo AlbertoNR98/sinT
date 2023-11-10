@@ -14,12 +14,13 @@
 #include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
 #include "../Assets/CustomControls.h"
+#include "../Assets/CustomLookAndFeel.h"
 #include "../Source/ParamsIDList.h"
 
 //==============================================================================
 /*
 */
-class LFOComponent  : public juce::Component
+class LFOComponent  : public juce::Component, virtual CustomLookAndFeel
 {
 public:
     LFOComponent(juce::AudioProcessorValueTreeState& apvts, juce::Colour borderColour, juce::String lfoFreqId, juce::String lfoDepthId);

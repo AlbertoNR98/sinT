@@ -52,8 +52,7 @@ void DistortionComponent::paint (juce::Graphics& g)
 
     auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2); 
     g.setColour(ColorPalette::monwhite);
-    g.setFont(24.f);
-    g.drawFittedText(title, elementsTopBounds, juce::Justification::centred, true);
+    drawTitle(g, title, elementsTopBounds, juce::Justification::centred, 24.f, 1.f);
   
     auto compBypassed = bypassedButton.getToggleState();
     driveSlider.applyBypassedColorPalette(compBypassed);

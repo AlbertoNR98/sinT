@@ -12,12 +12,13 @@
 
 #include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
+#include "../Assets/CustomLookAndFeel.h"
 #include "../Components/ADSRComponent.h"
 
 //==============================================================================
 /*
 */
-class ADSRView  : public juce::Component
+class ADSRView : public juce::Component, virtual CustomLookAndFeel
 {
 public:
     ADSRView(juce::AudioProcessorValueTreeState& apvts,

@@ -54,14 +54,13 @@ void ChorusComponent::paint (juce::Graphics& g)
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
     g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
 
-    // Parte de arriba
+    // Top
     const auto boundsPadding = 16;
     auto elementsBounds = localBounds.reduced(boundsPadding);
 
     auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.15);
     g.setColour(ColorPalette::monwhite);
-    g.setFont(28.f);
-    g.drawFittedText(title, elementsTopBounds, juce::Justification::centred, true);
+    drawTitle(g, title, elementsTopBounds, juce::Justification::centred, 28.f, 0.85f);
 
     auto compBypassed = bypassedButton.getToggleState();
     rateSlider.applyBypassedColorPalette(compBypassed);

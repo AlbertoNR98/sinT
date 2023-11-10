@@ -66,8 +66,7 @@ void ReverbComponent::paint (juce::Graphics& g)
 
     auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.15);
     g.setColour(ColorPalette::monwhite);
-    g.setFont(28.f);
-    g.drawFittedText(title, elementsTopBounds, juce::Justification::centred, true);
+    drawTitle(g, title, elementsTopBounds, juce::Justification::centred, 28.f, 0.85f);
 
     auto compBypassed = bypassedButton.getToggleState();
     setupFreezeModeButton(compBypassed);

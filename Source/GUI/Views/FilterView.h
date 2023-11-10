@@ -12,13 +12,14 @@
 
 #include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
+#include "../Assets/CustomLookAndFeel.h"
 #include "../Components/FilterComponent.h"
 #include "../Components/LFOComponent.h"
 
 //==============================================================================
 /*
 */
-class FilterView  : public juce::Component
+class FilterView : public juce::Component, virtual CustomLookAndFeel
 {
 public:
     FilterView(juce::AudioProcessorValueTreeState& apvts, 

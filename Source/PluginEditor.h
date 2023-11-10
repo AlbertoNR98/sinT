@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "GUI/Assets/ColorPalette.h"
+#include "GUI/Assets/CustomLookAndFeel.h"
 #include "GUI/Components/Base/MainComponent.h"
 #include "GUI/Components/MainControlComponent.h"
 #include "GUI/Components/ADSRComponent.h"
@@ -24,9 +25,7 @@
 #include "GUI/Components/MeterComponent.h"
 
 //==============================================================================
-/**
-*/
-class SinTAudioProcessorEditor  : public juce::AudioProcessorEditor
+class SinTAudioProcessorEditor : public juce::AudioProcessorEditor
 {
 public:
     SinTAudioProcessorEditor (SinTAudioProcessor&);
@@ -38,7 +37,8 @@ public:
 
 private:
     SinTAudioProcessor& audioProcessor;
-
+    
+    CustomLookAndFeel lnf;
     MainComponent mainComponent;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SinTAudioProcessorEditor)

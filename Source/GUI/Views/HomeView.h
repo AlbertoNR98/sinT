@@ -12,11 +12,12 @@
 
 #include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
+#include "../Assets/CustomLookAndFeel.h"
 
 //==============================================================================
 /*
 */
-class HomeView  : public juce::Component
+class HomeView : public juce::Component, virtual CustomLookAndFeel
 {
 public:
     HomeView();

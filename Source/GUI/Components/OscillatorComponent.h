@@ -14,12 +14,13 @@
 #include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
 #include "../Assets/CustomControls.h"
+#include "../Assets/CustomLookAndFeel.h"
 #include "../Source/ParamsIDList.h"
 
 //==============================================================================
 /*
 */
-class OscillatorComponent : public juce::Component
+class OscillatorComponent : public juce::Component, virtual CustomLookAndFeel
 {
 public:
     OscillatorComponent(juce::String name, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String waveformSelectorId, juce::String oscGainId, juce::String oscPitchId, juce::String fmFreqId, juce::String fmDepthId);

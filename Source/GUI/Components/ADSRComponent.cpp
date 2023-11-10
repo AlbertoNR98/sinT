@@ -52,8 +52,7 @@ void ADSRComponent::paint (juce::Graphics& g)
 
     auto adsrNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2);
     g.setColour(ColorPalette::monwhite);
-    g.setFont(28.f);
-    g.drawFittedText(adsrName, adsrNameBounds, juce::Justification::centred, true);
+    drawTitle(g, adsrName, adsrNameBounds, juce::Justification::centred, 28.f, 0.4f);
 
     attackSlider.applyBypassedColorPalette(false);
     decaySlider.applyBypassedColorPalette(false);

@@ -13,13 +13,14 @@
 
 #include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
+#include "../Assets/CustomLookAndFeel.h"
 #include "../Assets/CustomControls.h"
 #include "../Source/ParamsIDList.h"
 
 //==============================================================================
 /*
 */
-class DistortionComponent  : public juce::Component
+class DistortionComponent : public juce::Component, virtual CustomLookAndFeel
 {
 public:
     DistortionComponent(juce::String title, juce::Colour borderColour, juce::AudioProcessorValueTreeState& apvts, juce::String bypassedId, juce::String driveId, juce::String rangeId, juce::String mixId);

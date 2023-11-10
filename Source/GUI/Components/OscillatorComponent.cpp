@@ -62,8 +62,7 @@ void OscillatorComponent::paint (juce::Graphics& g)
 
     auto oscNameBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth() * 0.55, elementsBounds.getHeight() * 0.2);
     g.setColour(ColorPalette::monwhite);
-    g.setFont(28.f);
-    g.drawFittedText(oscName, oscNameBounds, juce::Justification::centred, true);
+    drawTitle(g, oscName, oscNameBounds, juce::Justification::centred, 28.f, 0.4f);
 
     auto compBypassed = oscBypassedButton.getToggleState();
     setupWaveformSelector(compBypassed);
