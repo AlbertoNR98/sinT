@@ -41,6 +41,7 @@ SidePanelHeader::SidePanelHeader() : titleAboutButton("")
     titleAboutButton.setColour(juce::ComboBox::outlineColourId, ColorPalette::transparentwhite);
 
 #if JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
+    settingsButton.setColours(ColorPalette::miamiblue, ColorPalette::miamiblue.withAlpha(0.6f), ColorPalette::miamiblue.withAlpha(0.6f));
     addAndMakeVisible(settingsButton);
 #endif
     addAndMakeVisible(titleAboutButton);
@@ -65,12 +66,6 @@ void SidePanelHeader::paint (juce::Graphics& g)
     g.setFont(28.f);
     g.setColour(ColorPalette::miamiblue);
     g.drawText("sinT", bounds, juce::Justification::centred, 1);
-
-    auto normal = getLookAndFeel().findColour(juce::SidePanel::dismissButtonNormalColour);
-    auto over = getLookAndFeel().findColour(juce::SidePanel::dismissButtonOverColour);
-    auto down = getLookAndFeel().findColour(juce::SidePanel::dismissButtonDownColour);
-
-    settingsButton.setColours(normal, over, down);
 }
 
 void SidePanelHeader::resized()
