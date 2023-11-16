@@ -48,7 +48,7 @@ void DelayComponent::paint (juce::Graphics& g)
 
     auto elementsTopBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() * 0.2);
     g.setColour(ColorPalette::monwhite);
-    drawTitle(g, title, elementsTopBounds, juce::Justification::centred, 24.f, 1.f);
+    drawTitle(g, title, elementsTopBounds, juce::Justification::centred, 26.f, 1.f);
 
     auto compBypassed = bypassedButton.getToggleState();
     timeMsSlider.applyBypassedColorPalette(compBypassed);
