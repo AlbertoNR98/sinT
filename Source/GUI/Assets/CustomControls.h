@@ -54,8 +54,8 @@ private:
     public:
         CustomSliderWithLabelLnF(float ratio = 0.5) { fontLabelHeightRatio = ratio; }
 
-        float getfontLabelHeightRatio() { return fontLabelHeightRatio; }
-        void setfontLabelHeightRatio(float ratio) { if (ratio >= 0.f && ratio <= 1.f) fontLabelHeightRatio = ratio; }
+        float getFontLabelHeightRatio() { return fontLabelHeightRatio; }
+        void setFontLabelHeightRatio(float ratio) { if (ratio >= 0.f && ratio <= 1.f) fontLabelHeightRatio = ratio; }
 
         virtual void drawLabel(juce::Graphics& g, juce::Label& label) override;
 

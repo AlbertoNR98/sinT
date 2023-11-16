@@ -102,6 +102,9 @@ void CustomSliderWithLabel::resized()
         nameLabel.setBounds(0, 0, localBounds.getWidth() * 0.15, localBounds.getHeight());
         valueLabel.setBounds(localBounds.getWidth() * 0.15, 0, localBounds.getWidth() * 0.20, localBounds.getHeight());
         slider.setBounds(localBounds.getWidth() * 0.35, 0, localBounds.getWidth() * 0.65, localBounds.getHeight());
+ 
+        cslNameLabelLnF.setFontLabelHeightRatio(0.7f);
+
         break;
     case HorizontalCompact:
         nameLabel.setBounds(0, localBounds.getHeight() * 0.5, localBounds.getWidth() * 0.25, localBounds.getHeight() * 0.5);
