@@ -181,7 +181,7 @@ bool PresetManagerComponent::presetNameIsValid(const juce::String& presetName)
 {
     if (presetName.isEmpty()) return false;
 
-    if (presetName.containsAnyOf("# @ , ; . : < > * ^ | ? / \\")) return false;
+    if (presetName.containsAnyOf("# @ , ; . : < > * ^ | - ? / \\")) return false;
 
     if (presetManagerData.defaultPresetDirectory.getChildFile(presetName + "." + presetManagerData.presetFileExtension).getFullPathName().length() > 255) return false;
 
