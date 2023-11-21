@@ -12,9 +12,11 @@
 
 //==============================================================================
 ScopeView::ScopeView(SinTAudioProcessor& audioProcessor) :
-    scopeComponent(audioProcessor.getAudioBufferQueue())
+    leftScopeComponent("Left", audioProcessor.getAudioBufferQueue(0)),
+    rightScopeComponent("Right", audioProcessor.getAudioBufferQueue(1))
 {
-    addAndMakeVisible(scopeComponent);
+    addAndMakeVisible(leftScopeComponent);
+    addAndMakeVisible(rightScopeComponent);
 }
 
 ScopeView::~ScopeView()
@@ -46,7 +48,14 @@ void ScopeView::resized()
     auto textBounds = juce::Rectangle<int>(elementsBounds.getPosition().getX(), elementsBounds.getPosition().getY(), elementsBounds.getWidth(), elementsBounds.getHeight() / 8);
 
     elementsBounds.setPosition(juce::Point<int>(elementsBounds.getPosition().getX(), textBounds.getBottom() + padding));
-    elementsBounds.setSize(elementsBounds.getWidth(), elementsBounds.getHeight() - textBounds.getHeight() - padding);
+    elementsBounds.setSize(elementsBounds.getWidth(), (elementsBounds.getHeight() - textBounds.getHeight() - padding));
 
-    scopeComponent.setBounds(elementsBounds);
+
+    auto leftScopeBounds = elementsBounds;
+    leftScopeBounds.setSize(elementsBounds.getWidth(), (elementsBounds.getHeight() / 2 ) - padding / 2);
+    leftScopeComponent.setBounds(leftScopeBounds);
+
+    auto rightScopeBounds = elementsBounds;
+    rightScopeBounds.setTop(leftScopeBounds.getBottom() + padding);
+    rightScopeComponent.setBounds(rightScopeBounds);
 }

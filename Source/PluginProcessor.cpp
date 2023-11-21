@@ -181,7 +181,8 @@ void SinTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
     mainGainMeter.renderNextBlock(buffer);
 
     // Procesamiento de scope
-    scopeDataCollector.process(buffer.getReadPointer(0), buffer.getNumSamples());
+    scopeDataLeftChannelCollector.process(buffer.getReadPointer(0), buffer.getNumSamples());
+    scopeDataRightChannelCollector.process(buffer.getReadPointer(1), buffer.getNumSamples());
 }
 
 //==============================================================================
@@ -307,6 +308,21 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>(reverbWetLevel, "ReverbWetLevel", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
     
     return layout;
+}
+
+AudioBufferQueue& SinTAudioProcessor::getAudioBufferQueue(const int channelNumber) noexcept
+{
+    switch (channelNumber) 
+    {
+    case 0:
+        return leftChannelAudioBufferQueue;
+        break;
+    case 1:
+        return rightChannelAudioBufferQueue;
+        break;
+    default:
+        return leftChannelAudioBufferQueue;
+    }
 }
 
 void SinTAudioProcessor::setSinTParameters()

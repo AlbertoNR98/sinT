@@ -11,8 +11,9 @@
 #include "ScopeComponent.h"
 
 //==============================================================================
-ScopeComponent::ScopeComponent(AudioBufferQueue& queueToUse) : audioBufferQueue(queueToUse)
+ScopeComponent::ScopeComponent(juce::String channelName, AudioBufferQueue& queueToUse) : audioBufferQueue(queueToUse)
 {
+    this->channelName = channelName;
     bufferToPlot.fill(0.f);
     setFramesPerSecond(30);
 }
@@ -34,9 +35,15 @@ void ScopeComponent::paint (juce::Graphics& g)
     auto h = area.getHeight();
     auto w = area.getWidth();
 
-    auto scopeRect = juce::Rectangle<int>{ 0, 0, w, h };
+    auto scopeArea = juce::Rectangle<int>{ 0, 0, w, h };
 
-    plot(bufferToPlot.data(), bufferToPlot.size(), g, scopeRect, 0.5, h / 2);
+    auto channelNameArea = scopeArea;
+    channelNameArea.setSize(scopeArea.getWidth() * 0.1f, scopeArea.getHeight() * 0.15f);
+
+    g.setColour(ColorPalette::monwhite.withAlpha(0.4f));
+    drawTitle(g, channelName, channelNameArea, juce::Justification::centredBottom, 16.0f, 0.75f);
+
+    plot(bufferToPlot.data(), bufferToPlot.size(), g, scopeArea, 0.5, h / 2);
 }
 
 
