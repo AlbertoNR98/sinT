@@ -31,7 +31,7 @@ public:
 private:
     juce::String viewTitle = "Waveform Visualizer";
 
-    ScopeComponent scopeComponent;
+    ScopeComponent leftScopeComponent, rightScopeComponent;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ScopeView)
 };

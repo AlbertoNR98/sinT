@@ -72,7 +72,7 @@ public:
     static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     juce::AudioProcessorValueTreeState apvts;
 
-    AudioBufferQueue& getAudioBufferQueue() noexcept { return audioBufferQueue; };
+    AudioBufferQueue& getAudioBufferQueue(const int channelNumber) noexcept;
 
 private:
     static constexpr int numVoices{ 16 };
@@ -88,8 +88,9 @@ private:
     MeterData mainGainMeter;
     juce::dsp::Gain<float> mainGainValue;
 
-    AudioBufferQueue audioBufferQueue;
-    ScopeData scopeDataCollector{ audioBufferQueue };
+    AudioBufferQueue leftChannelAudioBufferQueue, rightChannelAudioBufferQueue;
+    ScopeData scopeDataLeftChannelCollector{ leftChannelAudioBufferQueue };
+    ScopeData scopeDataRightChannelCollector{ rightChannelAudioBufferQueue };
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SinTAudioProcessor)

@@ -12,15 +12,16 @@
 
 #include <JuceHeader.h>
 #include "../Assets/ColorPalette.h"
+#include "../Assets/CustomLookAndFeel.h"
 #include "../../Data/Core/ScopeData.h"
 
 //==============================================================================
 /*
 */
-class ScopeComponent : public juce::Component, private juce::Timer
+class ScopeComponent : public juce::Component, virtual CustomLookAndFeel, private juce::Timer
 {
 public:
-    ScopeComponent(AudioBufferQueue& queueToUse);
+    ScopeComponent(juce::String channelName, AudioBufferQueue& queueToUse);
     ~ScopeComponent() override;
 
     void paint (juce::Graphics&) override;
@@ -38,6 +39,8 @@ public:
     void timerCallback() override;
 
 private:
+    juce::String channelName;
+
     AudioBufferQueue& audioBufferQueue;
     std::array<float, AudioBufferQueue::bufferSize> bufferToPlot;
 
