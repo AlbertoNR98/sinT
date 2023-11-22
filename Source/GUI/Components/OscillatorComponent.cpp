@@ -54,7 +54,7 @@ void OscillatorComponent::paint (juce::Graphics& g)
 {
     g.setColour(oscBorderColour);
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
-    g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
+    g.drawRoundedRectangle(localBounds, 6.0f, 3.5f);
 
     // Top section
     const auto boundsPadding = 16;

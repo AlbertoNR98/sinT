@@ -36,7 +36,7 @@ void ScopeView::paint (juce::Graphics& g)
     g.setColour(ColorPalette::miamiblue);
     elementsBounds.setPosition(juce::Point<int>(elementsBounds.getPosition().getX(), textBounds.getBottom() + boundsPadding));
     elementsBounds.setSize(elementsBounds.getWidth(), elementsBounds.getHeight() - textBounds.getHeight() - boundsPadding);
-    g.drawRoundedRectangle(elementsBounds.toFloat(), 10.0f, 2.0f);
+    g.drawRoundedRectangle(elementsBounds.toFloat(), 6.0f, 3.5f);
 }
 
 void ScopeView::resized()
