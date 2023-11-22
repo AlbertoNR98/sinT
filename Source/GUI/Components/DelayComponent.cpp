@@ -40,7 +40,7 @@ void DelayComponent::paint (juce::Graphics& g)
     g.setColour(delayBorderColour);
 
     auto localBounds = getLocalBounds().toFloat().reduced(5.0f);
-    g.drawRoundedRectangle(localBounds, 5.0f, 2.0f);
+    g.drawRoundedRectangle(localBounds, 6.0f, 3.5f);
 
     // Parte de arriba
     const auto boundsPadding = 16;
