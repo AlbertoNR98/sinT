@@ -33,7 +33,6 @@ PresetManagerComponent::~PresetManagerComponent()
 
 void PresetManagerComponent::paint (juce::Graphics& g)
 {
-
 }
 
 void PresetManagerComponent::resized()
@@ -92,37 +91,48 @@ void PresetManagerComponent::buttonClicked(juce::Button* button)
             juce::AlertWindow::NoIcon,
             nullptr
         );
-        saveDialog->addTextEditor("categoryNameEditor", "Category");
-        saveDialog->addTextEditor("presetNameEditor", "Name");
+
+        saveDialog->addTextEditor("categoryNameEditor", "");
+        saveDialog->getTextEditor("categoryNameEditor")->setTextToShowWhenEmpty("Category", ColorPalette::monwhite.withAlpha(0.7f));
+        saveDialog->addTextEditor("presetNameEditor", "");
+        saveDialog->getTextEditor("presetNameEditor")->setTextToShowWhenEmpty("Name", ColorPalette::monwhite.withAlpha(0.7f));
+
         saveDialog->addButton("Save", BtnDialogReturn::OKButtonReturn, KeyPress(KeyPress::returnKey));
         saveDialog->addButton("Cancel", BtnDialogReturn::CancelButtonReturn, KeyPress(KeyPress::escapeKey));
 
         saveDialog->enterModalState(true, ModalCallbackFunction::create([this](int btnClicked)
         {
-                switch (btnClicked)
+            switch (btnClicked)
+            {
+            case BtnDialogReturn::OKButtonReturn:
+                if (presetNameIsValid(saveDialog->getTextEditorContents("categoryNameEditor")) && presetNameIsValid(saveDialog->getTextEditorContents("presetNameEditor")))
                 {
-                case BtnDialogReturn::OKButtonReturn:
-                    if (presetNameIsValid(saveDialog->getTextEditorContents("categoryNameEditor")) && presetNameIsValid(saveDialog->getTextEditorContents("presetNameEditor")))
+                    if (presetManagerData.savePreset(saveDialog->getTextEditorContents("categoryNameEditor") + " - " + saveDialog->getTextEditorContents("presetNameEditor")))
                     {
-                        if (presetManagerData.savePreset(saveDialog->getTextEditorContents("categoryNameEditor") + " - " + saveDialog->getTextEditorContents("presetNameEditor")))
-                        {
-                            AlertWindow::showMessageBoxAsync(AlertWindow::NoIcon, saveDialog->getTextEditorContents("categoryNameEditor") + " - " + saveDialog->getTextEditorContents("presetNameEditor") + " saved as a preset", "");
-                        }
-                        else {
-                            AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon, "Failed to save preset", "Presets directory ("+presetManagerData.defaultPresetDirectory.getFullPathName() + ") is not accesible");
-                        }
-                        loadPresetList();
+                        setColour(AlertWindow::ColourIds::backgroundColourId, ColorPalette::basegray);
+                        
+                        AlertWindow::showMessageBoxAsync(AlertWindow::NoIcon,
+                            saveDialog->getTextEditorContents("categoryNameEditor") + " - " + saveDialog->getTextEditorContents("presetNameEditor") + " saved as a preset", 
+                                "",
+                                "",
+                                nullptr);
                     }
                     else {
-                        AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon, "Failed to save preset", "Name is not valid");
+                        AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon, "Failed to save preset", "Presets directory (" + presetManagerData.defaultPresetDirectory.getFullPathName() + ") is not accesible");
                     }
-                    break;
-                case BtnDialogReturn::CancelButtonReturn:
-                default:
-                    break;
+                    loadPresetList();
                 }
-                saveDialog->exitModalState(btnClicked);
-                saveDialog->setVisible(false);
+                else {
+                    AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon, "Failed to save preset", "Name is not valid");
+                }
+                break;
+            case BtnDialogReturn::CancelButtonReturn:
+            default:
+                break;
+            }
+
+            saveDialog->exitModalState(btnClicked);
+            saveDialog->setVisible(false);
         }));
     }
 
@@ -145,24 +155,26 @@ void PresetManagerComponent::buttonClicked(juce::Button* button)
             juce::AlertWindow::WarningIcon,
             nullptr
             );
+
         deleteDialog->addButton("Delete", BtnDialogReturn::OKButtonReturn, KeyPress(KeyPress::returnKey));
         deleteDialog->addButton("Cancel", BtnDialogReturn::CancelButtonReturn, KeyPress(KeyPress::escapeKey));
 
         deleteDialog->enterModalState(true, ModalCallbackFunction::create([this](int btnClicked)
         {
-                switch (btnClicked)
+            switch (btnClicked)
+            {
+            case BtnDialogReturn::OKButtonReturn:
+                if (!presetManagerData.deletePreset(presetManagerData.getCurrentPreset()))
                 {
-                case BtnDialogReturn::OKButtonReturn:
-                    if (!presetManagerData.deletePreset(presetManagerData.getCurrentPreset()))
-                    {
-                        AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon, "Failed to delete preset", "Presets directory is not accesible or preset does not exist");
-                    }
-                    loadPresetList();
-                    break;
-                case BtnDialogReturn::CancelButtonReturn:
-                default:
-                    break;
+                    AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon, "Failed to delete preset", "Presets directory is not accesible or preset does not exist");
                 }
+                loadPresetList();
+                break;
+            case BtnDialogReturn::CancelButtonReturn:
+            default:
+                break;
+            }
+
         deleteDialog->exitModalState(btnClicked);
         deleteDialog->setVisible(false);
         }));
