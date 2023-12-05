@@ -12,6 +12,7 @@
 //==============================================================================
 HomeView::HomeView()
 {
+    sinTLogoImage = juce::ImageCache::getFromMemory(BinaryData::sinT_logo_png, BinaryData::sinT_logo_pngSize);
 }
 
 HomeView::~HomeView()
@@ -35,6 +36,10 @@ void HomeView::paint (juce::Graphics& g)
     versionText += ProjectInfo::versionString;
     const char* pluginVersion = versionText.c_str();
     drawTitle(g, pluginVersion, versionTextBounds, juce::Justification::centredTop, 24.0f, 0.35f);
+
+    auto sinTLogoBounds = juce::Rectangle<float>(getLocalBounds().getWidth() * 0.85, getLocalBounds().getHeight() * 0.85, 
+                                                getLocalBounds().getWidth() * 0.15, getLocalBounds().getHeight() * 0.1);
+    g.drawImage(sinTLogoImage, sinTLogoBounds, juce::RectanglePlacement::centred);
 }
 
 void HomeView::resized()
