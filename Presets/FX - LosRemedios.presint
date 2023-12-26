@@ -11,7 +11,7 @@
   <PARAM id="CHORUSFEEDBACK" value="0.0"/>
   <PARAM id="CHORUSMIX" value="0.0"/>
   <PARAM id="CHORUSRATE" value="1.0"/>
-  <PARAM id="DELAYBYPASSED" value="0.0"/>
+  <PARAM id="DELAYBYPASSED" value="1.0"/>
   <PARAM id="DELAYFEEDBACK" value="0.0"/>
   <PARAM id="DELAYTIMEMS" value="0.0"/>
   <PARAM id="DISTORTIONMIX" value="0.0"/>
@@ -25,7 +25,7 @@
   <PARAM id="FILTERADSRSUSTAIN" value="0.0"/>
   <PARAM id="FILTERBYPASSED" value="1.0"/>
   <PARAM id="FILTERCUTOFFFREQ" value="20000.0"/>
-  <PARAM id="FILTERMODE" value="2.0"/>
+  <PARAM id="FILTERMODE" value="0.0"/>
   <PARAM id="FILTERRESONANCE" value="0.7100000381469727"/>
   <PARAM id="LFODEPTH" value="0.0"/>
   <PARAM id="LFOFREQ" value="0.0"/>
@@ -47,7 +47,7 @@
   <PARAM id="REVERBDAMPING" value="0.0"/>
   <PARAM id="REVERBDRYLEVEL" value="1.0"/>
   <PARAM id="REVERBFREEZEMODE" value="0.0"/>
-  <PARAM id="REVERBROOMSIZE" value="0.0"/>
+  <PARAM id="REVERBROOMSIZE" value="0.04999999701976776"/>
   <PARAM id="REVERBWETLEVEL" value="0.3299999833106995"/>
-  <PARAM id="REVERBWIDTH" value="0.0"/>
+  <PARAM id="REVERBWIDTH" value="0.04999999701976776"/>
 </Parameters>

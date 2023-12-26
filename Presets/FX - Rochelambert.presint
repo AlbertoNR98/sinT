@@ -5,7 +5,7 @@
   <PARAM id="AMPADSRDECAY" value="2.5"/>
   <PARAM id="AMPADSRRELEASE" value="0.09999999403953552"/>
   <PARAM id="AMPADSRSUSTAIN" value="1.0"/>
-  <PARAM id="CHORUSBYPASSED" value="0.0"/>
+  <PARAM id="CHORUSBYPASSED" value="1.0"/>
   <PARAM id="CHORUSCENTREDELAY" value="7.0"/>
   <PARAM id="CHORUSDEPTH" value="0.25"/>
   <PARAM id="CHORUSFEEDBACK" value="0.0"/>
@@ -15,7 +15,7 @@
   <PARAM id="DELAYFEEDBACK" value="0.85999995470047"/>
   <PARAM id="DELAYTIMEMS" value="125.7000045776367"/>
   <PARAM id="DISTORTIONMIX" value="0.0"/>
-  <PARAM id="DISTORTIONBYPASSED" value="0.0"/>
+  <PARAM id="DISTORTIONBYPASSED" value="1.0"/>
   <PARAM id="DISTORTIONDRIVE" value="0.0"/>
   <PARAM id="DISTORTIONRANGE" value="0.0"/>
   <PARAM id="FILTERADSRATTACK" value="0.0"/>
@@ -23,10 +23,10 @@
   <PARAM id="FILTERADSRDEPTH" value="10000.0"/>
   <PARAM id="FILTERADSRRELEASE" value="0.0"/>
   <PARAM id="FILTERADSRSUSTAIN" value="0.0"/>
-  <PARAM id="FILTERBYPASSED" value="0.0"/>
+  <PARAM id="FILTERBYPASSED" value="1.0"/>
   <PARAM id="FILTERCUTOFFFREQ" value="20000.0"/>
   <PARAM id="FILTERMODE" value="0.0"/>
-  <PARAM id="FILTERRESONANCE" value="0.300000011920929"/>
+  <PARAM id="FILTERRESONANCE" value="0.7100000381469727"/>
   <PARAM id="LFODEPTH" value="0.0"/>
   <PARAM id="LFOFREQ" value="0.0"/>
   <PARAM id="MAINGAIN" value="0.0"/>

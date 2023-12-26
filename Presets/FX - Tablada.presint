@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Parameters presetName="LEAD - Tablada" version="1.0.0">
+<Parameters presetName="FX - Tablada" version="1.0.0">
   <PARAM id="AMPADSRATTACK" value="0.009999999776482582"/>
   <PARAM id="AMPADSRDECAY" value="2.5"/>
   <PARAM id="AMPADSRRELEASE" value="0.09999999403953552"/>
@@ -23,7 +23,7 @@
   <PARAM id="FILTERADSRDEPTH" value="10000.0"/>
   <PARAM id="FILTERADSRRELEASE" value="0.0"/>
   <PARAM id="FILTERADSRSUSTAIN" value="0.0"/>
-  <PARAM id="FILTERBYPASSED" value="0.0"/>
+  <PARAM id="FILTERBYPASSED" value="1.0"/>
   <PARAM id="FILTERCUTOFFFREQ" value="20000.0"/>
   <PARAM id="FILTERMODE" value="0.0"/>
   <PARAM id="FILTERRESONANCE" value="0.7100000381469727"/>

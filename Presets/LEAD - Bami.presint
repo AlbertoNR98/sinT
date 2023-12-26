@@ -9,7 +9,7 @@
   <PARAM id="CHORUSCENTREDELAY" value="7.0"/>
   <PARAM id="CHORUSDEPTH" value="0.25"/>
   <PARAM id="CHORUSFEEDBACK" value="0.0"/>
-  <PARAM id="CHORUSMIX" value="0.4599999785423279"/>
+  <PARAM id="CHORUSMIX" value="0.0"/>
   <PARAM id="CHORUSRATE" value="1.0"/>
   <PARAM id="DELAYBYPASSED" value="0.0"/>
   <PARAM id="DELAYFEEDBACK" value="0.8100000023841858"/>
@@ -23,7 +23,7 @@
   <PARAM id="FILTERADSRDEPTH" value="10000.0"/>
   <PARAM id="FILTERADSRRELEASE" value="0.0"/>
   <PARAM id="FILTERADSRSUSTAIN" value="0.0"/>
-  <PARAM id="FILTERBYPASSED" value="0.0"/>
+  <PARAM id="FILTERBYPASSED" value="1.0"/>
   <PARAM id="FILTERCUTOFFFREQ" value="20000.0"/>
   <PARAM id="FILTERMODE" value="0.0"/>
   <PARAM id="FILTERRESONANCE" value="0.7100000381469727"/>

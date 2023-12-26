@@ -26,20 +26,20 @@
   <PARAM id="FILTERBYPASSED" value="0.0"/>
   <PARAM id="FILTERCUTOFFFREQ" value="895.2999877929688"/>
   <PARAM id="FILTERMODE" value="0.0"/>
-  <PARAM id="FILTERRESONANCE" value="1.829999923706055"/>
-  <PARAM id="LFODEPTH" value="41.0"/>
+  <PARAM id="FILTERRESONANCE" value="2.849999904632568"/>
+  <PARAM id="LFODEPTH" value="129.0"/>
   <PARAM id="LFOFREQ" value="1.200000047683716"/>
   <PARAM id="MAINGAIN" value="0.0"/>
   <PARAM id="OSC1BYPASSED" value="0.0"/>
   <PARAM id="OSC1FMDEPTH" value="0.0"/>
   <PARAM id="OSC1FMFREQ" value="0.0"/>
-  <PARAM id="OSC1GAINDB" value="-0.7999992370605469"/>
+  <PARAM id="OSC1GAINDB" value="-6.0"/>
   <PARAM id="OSC1PITCH" value="-12.0"/>
   <PARAM id="OSC1WF" value="1.0"/>
   <PARAM id="OSC2BYPASSED" value="0.0"/>
   <PARAM id="OSC2FMDEPTH" value="0.0"/>
   <PARAM id="OSC2FMFREQ" value="0.0"/>
-  <PARAM id="OSC2GAINDB" value="0.0"/>
+  <PARAM id="OSC2GAINDB" value="-5.200000762939453"/>
   <PARAM id="OSC2PITCH" value="-24.0"/>
   <PARAM id="OSC2WF" value="1.0"/>
   <PARAM id="PORTAMENTO" value="0.0"/>
@@ -48,6 +48,6 @@
   <PARAM id="REVERBDRYLEVEL" value="1.0"/>
   <PARAM id="REVERBFREEZEMODE" value="0.0"/>
   <PARAM id="REVERBROOMSIZE" value="0.5299999713897705"/>
-  <PARAM id="REVERBWETLEVEL" value="0.6899999976158142"/>
+  <PARAM id="REVERBWETLEVEL" value="0.199999988079071"/>
   <PARAM id="REVERBWIDTH" value="1.0"/>
 </Parameters>
