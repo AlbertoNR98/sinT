@@ -11,7 +11,7 @@
   <PARAM id="CHORUSFEEDBACK" value="0.0"/>
   <PARAM id="CHORUSMIX" value="0.0"/>
   <PARAM id="CHORUSRATE" value="1.0"/>
-  <PARAM id="DELAYBYPASSED" value="0.0"/>
+  <PARAM id="DELAYBYPASSED" value="1.0"/>
   <PARAM id="DELAYFEEDBACK" value="0.0"/>
   <PARAM id="DELAYTIMEMS" value="0.0"/>
   <PARAM id="DISTORTIONMIX" value="0.0"/>

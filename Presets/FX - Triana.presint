@@ -11,11 +11,11 @@
   <PARAM id="CHORUSFEEDBACK" value="0.0"/>
   <PARAM id="CHORUSMIX" value="0.4699999988079071"/>
   <PARAM id="CHORUSRATE" value="0.0"/>
-  <PARAM id="DELAYBYPASSED" value="0.0"/>
+  <PARAM id="DELAYBYPASSED" value="1.0"/>
   <PARAM id="DELAYFEEDBACK" value="0.0"/>
   <PARAM id="DELAYTIMEMS" value="0.0"/>
   <PARAM id="DISTORTIONMIX" value="0.0"/>
-  <PARAM id="DISTORTIONBYPASSED" value="0.0"/>
+  <PARAM id="DISTORTIONBYPASSED" value="1.0"/>
   <PARAM id="DISTORTIONDRIVE" value="0.0"/>
   <PARAM id="DISTORTIONRANGE" value="0.0"/>
   <PARAM id="FILTERADSRATTACK" value="4.579999923706055"/>

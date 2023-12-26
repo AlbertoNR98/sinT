@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Parameters presetName="BASS - Bermejales" version="1.0.0">
-  <PARAM id="AMPADSRATTACK" value="0.04999999701976776"/>
+  <PARAM id="AMPADSRATTACK" value="0.009999999776482582"/>
   <PARAM id="AMPADSRDECAY" value="0.5"/>
-  <PARAM id="AMPADSRRELEASE" value="0.2599999904632568"/>
+  <PARAM id="AMPADSRRELEASE" value="0.2000000029802322"/>
   <PARAM id="AMPADSRSUSTAIN" value="1.0"/>
-  <PARAM id="CHORUSBYPASSED" value="1.0"/>
+  <PARAM id="CHORUSBYPASSED" value="0.0"/>
   <PARAM id="CHORUSCENTREDELAY" value="7.0"/>
-  <PARAM id="CHORUSDEPTH" value="0.25"/>
-  <PARAM id="CHORUSFEEDBACK" value="0.0"/>
-  <PARAM id="CHORUSMIX" value="0.0"/>
-  <PARAM id="CHORUSRATE" value="1.0"/>
+  <PARAM id="CHORUSDEPTH" value="0.3400000035762787"/>
+  <PARAM id="CHORUSFEEDBACK" value="0.1899999380111694"/>
+  <PARAM id="CHORUSMIX" value="0.07000000029802322"/>
+  <PARAM id="CHORUSRATE" value="21.20000076293945"/>
   <PARAM id="DELAYBYPASSED" value="1.0"/>
   <PARAM id="DELAYFEEDBACK" value="0.0"/>
   <PARAM id="DELAYTIMEMS" value="0.0"/>
   <PARAM id="DISTORTIONMIX" value="0.5600000023841858"/>
   <PARAM id="DISTORTIONBYPASSED" value="0.0"/>
-  <PARAM id="DISTORTIONDRIVE" value="0.1299999952316284"/>
+  <PARAM id="DISTORTIONDRIVE" value="0.119999997317791"/>
   <PARAM id="DISTORTIONRANGE" value="78.30000305175781"/>
-  <PARAM id="FILTERADSRATTACK" value="0.0"/>
+  <PARAM id="FILTERADSRATTACK" value="5.21999979019165"/>
   <PARAM id="FILTERADSRDECAY" value="0.0"/>
   <PARAM id="FILTERADSRDEPTH" value="10000.0"/>
   <PARAM id="FILTERADSRRELEASE" value="0.0"/>
-  <PARAM id="FILTERADSRSUSTAIN" value="0.0"/>
+  <PARAM id="FILTERADSRSUSTAIN" value="1.0"/>
   <PARAM id="FILTERBYPASSED" value="0.0"/>
-  <PARAM id="FILTERCUTOFFFREQ" value="229.1999969482422"/>
-  <PARAM id="FILTERMODE" value="1.0"/>
-  <PARAM id="FILTERRESONANCE" value="13.19999980926514"/>
+  <PARAM id="FILTERCUTOFFFREQ" value="213.9000091552734"/>
+  <PARAM id="FILTERMODE" value="0.0"/>
+  <PARAM id="FILTERRESONANCE" value="5.180000305175781"/>
   <PARAM id="LFODEPTH" value="0.0"/>
   <PARAM id="LFOFREQ" value="0.0"/>
   <PARAM id="MAINGAIN" value="0.0"/>
   <PARAM id="OSC1BYPASSED" value="0.0"/>
   <PARAM id="OSC1FMDEPTH" value="0.0"/>
   <PARAM id="OSC1FMFREQ" value="0.0"/>
-  <PARAM id="OSC1GAINDB" value="-10.29999923706055"/>
+  <PARAM id="OSC1GAINDB" value="-7.0"/>
   <PARAM id="OSC1PITCH" value="-24.0"/>
   <PARAM id="OSC1WF" value="1.0"/>
   <PARAM id="OSC2BYPASSED" value="0.0"/>
   <PARAM id="OSC2FMDEPTH" value="0.0"/>
   <PARAM id="OSC2FMFREQ" value="0.0"/>
-  <PARAM id="OSC2GAINDB" value="0.0"/>
+  <PARAM id="OSC2GAINDB" value="1.700000762939453"/>
   <PARAM id="OSC2PITCH" value="-24.0"/>
   <PARAM id="OSC2WF" value="2.0"/>
   <PARAM id="PORTAMENTO" value="0.0"/>

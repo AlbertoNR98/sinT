@@ -37,7 +37,7 @@
   <PARAM id="OSC1PITCH" value="0.0"/>
   <PARAM id="OSC1WF" value="2.0"/>
   <PARAM id="OSC2BYPASSED" value="0.0"/>
-  <PARAM id="OSC2FMDEPTH" value="57.20000076293945"/>
+  <PARAM id="OSC2FMDEPTH" value="0.0"/>
   <PARAM id="OSC2FMFREQ" value="0.0"/>
   <PARAM id="OSC2GAINDB" value="0.0"/>
   <PARAM id="OSC2PITCH" value="-24.0"/>
