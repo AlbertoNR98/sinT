@@ -248,7 +248,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>(osc1FmDepth, "Oscillator1FMDepth", juce::NormalisableRange<float> {0.0f, 100.0f, 0.1f}, 0.0f));
 
     // Oscilador 2
-    layout.add(std::make_unique<juce::AudioParameterBool>(osc2Bypassed, "Oscillator2Bypassed", false));
+    layout.add(std::make_unique<juce::AudioParameterBool>(osc2Bypassed, "Oscillator2Bypassed", true));
     layout.add(std::make_unique<juce::AudioParameterChoice>(osc2Waveform, "Oscillator2Waveform", juce::StringArray{ "Sine", "Saw", "Square", "Tri" }, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>(osc2Gain, "Oscillator2Gain", juce::NormalisableRange<float> {-48.0f, 6.0f, 0.1f}, 0.0f, "dB"));
     layout.add(std::make_unique<juce::AudioParameterInt>(osc2Pitch, "Oscillator2Pitch", -48, 48, 0));
@@ -269,7 +269,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>(filterAdsrRelease, "FilterADSRRelease", juce::NormalisableRange<float> {0.0f, 16.0f, 0.01f, 0.5f}, 0.0f, "s"));
 
     // Filtro
-    layout.add(std::make_unique<juce::AudioParameterBool>(filterBypassed, "FilterBypassed", false));
+    layout.add(std::make_unique<juce::AudioParameterBool>(filterBypassed, "FilterBypassed", true));
     layout.add(std::make_unique<juce::AudioParameterChoice>(filterMode, "FilterMode", juce::StringArray{ "LPF", "BPF", "HPF" }, 0));
     layout.add(std::make_unique<juce::AudioParameterFloat>(filterCutoffFreq, "FilterCutoffFreq", juce::NormalisableRange<float> {20.0f, 20000.0f, 0.1f, 0.5f}, 20000.0f, "Hz"));
     layout.add(std::make_unique<juce::AudioParameterFloat>(filterResonance, "FilterResonance", juce::NormalisableRange<float> {0.3f, 20.0f, 0.01f, 0.5}, 1.0f / juce::MathConstants<float>::sqrt2, ""));
@@ -280,13 +280,13 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
 
     // FX
     // Distorsion
-    layout.add(std::make_unique<juce::AudioParameterBool>(distortionBypassed, "DistortionBypassed", false));
+    layout.add(std::make_unique<juce::AudioParameterBool>(distortionBypassed, "DistortionBypassed", true));
     layout.add(std::make_unique<juce::AudioParameterFloat>(distortionDrive, "DistortionDrive", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>(distortionRange, "DistortionRange", juce::NormalisableRange<float> {0.0f, 500.0f, 0.1f}, 0.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>(distortionMix, "DistortionMix", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
 
     // Chorus
-    layout.add(std::make_unique<juce::AudioParameterBool>(chorusBypassed, "ChorusBypassed", false));
+    layout.add(std::make_unique<juce::AudioParameterBool>(chorusBypassed, "ChorusBypassed", true));
     layout.add(std::make_unique<juce::AudioParameterFloat>(chorusRate, "ChorusRate", juce::NormalisableRange<float> {0.0f, 100.0f, 0.1f}, 1.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>(chorusDepth, "ChorusDepth", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.25f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>(chorusCentreDelay, "ChorusCentreDelay", juce::NormalisableRange<float> {1.0f, 100.0f, 0.1f}, 7.0f, "ms"));
@@ -294,12 +294,12 @@ juce::AudioProcessorValueTreeState::ParameterLayout SinTAudioProcessor::createPa
     layout.add(std::make_unique<juce::AudioParameterFloat>(chorusMix, "ChorusMix", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
 
     // Delay
-    layout.add(std::make_unique<juce::AudioParameterBool>(delayBypassed, "DelayBypassed", false));
+    layout.add(std::make_unique<juce::AudioParameterBool>(delayBypassed, "DelayBypassed", true));
     layout.add(std::make_unique<juce::AudioParameterFloat>(delayTimeMs, "DelayTimeMs", juce::NormalisableRange<float> {0.0f, 4000.0f, 0.1f, 0.65}, 0.0f, "ms"));
     layout.add(std::make_unique<juce::AudioParameterFloat>(delayFeedback, "DelayFeedback", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
 
     // Reverb
-    layout.add(std::make_unique<juce::AudioParameterBool>(reverbBypassed, "ReverbBypassed", false));
+    layout.add(std::make_unique<juce::AudioParameterBool>(reverbBypassed, "ReverbBypassed", true));
     layout.add(std::make_unique<juce::AudioParameterFloat>(reverbRoomSize, "ReverbRoomSize", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>(reverbWidth, "ReverbWidth", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 1.0f, ""));
     layout.add(std::make_unique<juce::AudioParameterFloat>(reverbDamping, "ReverbDamping", juce::NormalisableRange<float> {0.0f, 1.0f, 0.01f}, 0.5f, ""));
